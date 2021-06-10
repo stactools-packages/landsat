@@ -1,0 +1,6 @@
+name: stactools-landsat
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - gdal

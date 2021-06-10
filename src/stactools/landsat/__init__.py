@@ -9,3 +9,6 @@ def register_plugin(registry):
     from stactools.landsat import commands
 
     registry.register_subcommand(commands.create_landsat_command)
+
+
+__version__ = '0.1.6'

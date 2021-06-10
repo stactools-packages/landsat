@@ -1,0 +1,7 @@
+FROM stactools-landsat:latest
+
+RUN conda install -c conda-forge pandoc
+
+COPY . /src/stactools-landsat
+RUN pip install -r /src/stactools-landsat/requirements-dev.txt
+WORKDIR /src/stactools-landsat
