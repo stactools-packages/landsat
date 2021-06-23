@@ -123,7 +123,7 @@
             "eo:bands": [
                 0
             ],
-            "href": "tests/data-files/landsat/LC08_L2SR_081119_20200101_20200823_02_T2_SR_B2_small.TIF"
+            "href": "tests/data-files/LC08_L2SR_081119_20200101_20200823_02_T2_SR_B2_small.TIF"
         },
         "SR_B2.TIF": {
             "title": "Blue Band (B2)",

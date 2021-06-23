@@ -6,16 +6,16 @@ from stactools.core.projection import reproject_geom
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.mtl_metadata import MtlMetadata
 
-from tests.utils import TestData
+from tests import test_data
 
 
 class AngMetadataTest(unittest.TestCase):
     def test_parses(self):
-        ang_path = TestData.get_path(
-            'data-files/landsat/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt'
+        ang_path = test_data.get_path(
+            'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt'
         )
-        ang_path = TestData.get_path(
-            'data-files/landsat/assets3/LC08_L2SP_008059_20191201_20200825_02_T1_ANG.txt'
+        ang_path = test_data.get_path(
+            'data-files/assets3/LC08_L2SP_008059_20191201_20200825_02_T1_ANG.txt'
         )
 
         ang_metadata = AngMetadata.from_file(ang_path)

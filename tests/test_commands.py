@@ -5,14 +5,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import pystac
+from pystac.extensions.projection import ProjectionExtension
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.utils import (_parse_date, stac_api_to_stac,
                                      transform_mtl_to_stac,
                                      transform_stac_to_stac)
+from stactools.testing import CliTestCase
 
-from tests.utils import CliTestCase, TestData
+from tests import test_data
 
-TEST_FOLDER = Path(TestData.get_path("data-files/landsat"))
+TEST_FOLDER = Path(test_data.get_path("data-files"))
 ALL_EXAMPLES = [
     "LC08_L2SR_081119_20200101_20200823_02_T2_SR_stac.json",
     "LC08_L2SP_030034_20201111_20201212_02_T1_SR_stac.json",
@@ -87,7 +89,7 @@ class LandsatTest(CliTestCase):
         This is not fully implemented, so it fails"""
         item = transform_mtl_to_stac(self.landsat_mtl)
         # We expect failure until it is fully implemented
-        with self.assertRaises(pystac.validation.STACValidationError):
+        with self.assertRaises(pystac.STACValidationError):
             item.validate()
 
     def test_date_parse(self):
@@ -117,4 +119,5 @@ class LandsatTest(CliTestCase):
             output_stac_file = os.path.join(
                 tmp_dir, "LC08_L2SR_081119_20200101_20200823_02_T2.json")
             item = pystac.Item.from_file(output_stac_file)
-            self.assertEqual(item.ext.projection.epsg, 3031)
+            projection = ProjectionExtension.ext(item)
+            self.assertEqual(projection.epsg, 3031)
