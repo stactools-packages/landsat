@@ -60,6 +60,9 @@ class CreateItemTest(CliTestCase):
                     # the landsat schema lists "collection" as a required
                     # property.
                     item.collection_id = "landsat-8-c2-l2"
+                    item.links.append(
+                        pystac.Link(rel="collection",
+                                    target="http://example.com"))
                     item.validate()
 
                     bands_seen = set()
@@ -90,6 +93,8 @@ class CreateItemTest(CliTestCase):
             # This is a hack to get validation working, since v1.1.0 of the
             # landsat schema lists "collection" as a required property.
             item.collection_id = "landsat-8-c2-l2"
+            item.links.append(
+                pystac.Link(rel="collection", target="http://example.com"))
             item.validate()
 
             return item
