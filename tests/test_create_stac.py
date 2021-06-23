@@ -1,9 +1,10 @@
 import os
 from tempfile import TemporaryDirectory
-from typing import cast
 
 import pystac
 from pystac.utils import is_absolute_href
+from pystac.extensions.eo import EOExtension
+from pystac.extensions.projection import ProjectionExtension
 from shapely.geometry import box, shape, mapping
 import rasterio
 
@@ -11,8 +12,9 @@ from stactools.core.projection import reproject_geom
 from stactools.landsat.assets import SR_ASSET_DEFS, THERMAL_ASSET_DEFS
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.constants import (L8_SR_BANDS, L8_SP_BANDS)
-from tests.utils import CliTestCase
-from tests.landsat.data import TEST_MTL_PATHS
+from stactools.testing import CliTestCase
+
+from tests.data import TEST_MTL_PATHS
 
 
 class CreateItemTest(CliTestCase):
@@ -23,11 +25,12 @@ class CreateItemTest(CliTestCase):
         def check_proj_bbox(item, tif_bounds):
             bbox = item.bbox
             bbox_shp = box(*bbox)
-            proj_bbox = item.ext.projection.bbox
+            projection = ProjectionExtension.ext(item)
+            proj_bbox = projection.bbox
             self.assertEqual(proj_bbox, list(tif_bounds))
             proj_bbox_shp = box(*proj_bbox)
             reproj_bbox_shp = shape(
-                reproject_geom(f"epsg:{item.ext.projection.epsg}", "epsg:4326",
+                reproject_geom(f"epsg:{projection.epsg}", "epsg:4326",
                                mapping(proj_bbox_shp)))
 
             self.assertLess((reproj_bbox_shp - bbox_shp).area,
@@ -52,16 +55,24 @@ class CreateItemTest(CliTestCase):
                     self.assertEqual(len(jsons), 1)
                     fname = jsons[0]
 
-                    item = pystac.read_file(os.path.join(tmp_dir, fname))
+                    item = pystac.Item.from_file(os.path.join(tmp_dir, fname))
+                    # This is a hack to get validation working, since v1.1.0 of
+                    # the landsat schema lists "collection" as a required
+                    # property.
+                    item.collection_id = "landsat-8-c2-l2"
+                    item.links.append(
+                        pystac.Link(rel="collection",
+                                    target="http://example.com"))
                     item.validate()
 
                     bands_seen = set()
 
                     for asset in item.assets.values():
                         self.assertTrue(is_absolute_href(asset.href))
-                        bands = item.ext.eo.get_bands(asset)
-                        if bands is not None:
-                            bands_seen |= set(b.name for b in bands)
+                        eo = EOExtension.ext(asset)
+
+                        if eo.bands is not None:
+                            bands_seen |= set(b.name for b in eo.bands)
 
                     if item.properties['landsat:processing_level'] == 'L2SP':
                         self.assertEqual(
@@ -78,8 +89,12 @@ class CreateItemTest(CliTestCase):
             self.assertEqual(len(jsons), 1)
 
             fname = jsons[0]
-            item = cast(pystac.Item,
-                        pystac.read_file(os.path.join(output_dir, fname)))
+            item = pystac.Item.from_file(os.path.join(output_dir, fname))
+            # This is a hack to get validation working, since v1.1.0 of the
+            # landsat schema lists "collection" as a required property.
+            item.collection_id = "landsat-8-c2-l2"
+            item.links.append(
+                pystac.Link(rel="collection", target="http://example.com"))
             item.validate()
 
             return item

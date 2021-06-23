@@ -5,13 +5,13 @@ from shapely.geometry import mapping, shape, box
 from stactools.core.projection import reproject_geom
 from stactools.landsat.mtl_metadata import MtlMetadata
 
-from tests.utils import TestData
+from tests import test_data
 
 
 class MtlMetadataTest(unittest.TestCase):
     def test_parses_xml_utm(self):
-        mtl_path = TestData.get_path(
-            'data-files/landsat/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml'
+        mtl_path = test_data.get_path(
+            'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml'
         )
 
         mtl_metadata = MtlMetadata.from_file(mtl_path)
@@ -52,8 +52,8 @@ class MtlMetadataTest(unittest.TestCase):
         self.assertEqual(sun_elevation, 40.0015903)
 
     def test_parses_xml_ps(self):
-        mtl_path = TestData.get_path(
-            'data-files/landsat/assets2/LC08_L2SR_099120_20191129_20201016_02_T2_MTL.xml'
+        mtl_path = test_data.get_path(
+            'data-files/assets2/LC08_L2SR_099120_20191129_20201016_02_T2_MTL.xml'
         )
         mtl_metadata = MtlMetadata.from_file(mtl_path)
 
