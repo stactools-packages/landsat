@@ -68,7 +68,7 @@ def create_stac_item(
     # landsat8
     item.stac_extensions.append(L8_EXTENSION_SCHEMA)
     item.properties.update(**mtl_metadata.additional_metadata)
-    item.properties['landsat8:scene_id'] = ang_metadata.scene_id
+    item.properties['landsat:scene_id'] = ang_metadata.scene_id
 
     # -- Add assets
 
