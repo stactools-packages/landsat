@@ -1,6 +1,5 @@
 import os
 from tempfile import TemporaryDirectory
-from typing import cast
 
 import pystac
 from pystac.utils import is_absolute_href
@@ -56,16 +55,11 @@ class CreateItemTest(CliTestCase):
                     self.assertEqual(len(jsons), 1)
                     fname = jsons[0]
 
-                    item = pystac.read_file(os.path.join(tmp_dir, fname))
+                    item = pystac.Item.from_file(os.path.join(tmp_dir, fname))
                     # This is a hack to get validation working, since v1.1.0 of
                     # the landsat schema lists "collection" as a required
                     # property.
-                    dummy_collection = pystac.Collection(
-                        id="dummy",
-                        description="just to make the schema validate",
-                        extent=None,
-                        href="http://example.com/collection.json")
-                    dummy_collection.add_item(item)
+                    item.collection_id = "landsat-8-c2-l2"
                     item.validate()
 
                     bands_seen = set()
@@ -92,16 +86,10 @@ class CreateItemTest(CliTestCase):
             self.assertEqual(len(jsons), 1)
 
             fname = jsons[0]
-            item = cast(pystac.Item,
-                        pystac.read_file(os.path.join(output_dir, fname)))
+            item = pystac.Item.from_file(os.path.join(output_dir, fname))
             # This is a hack to get validation working, since v1.1.0 of the
             # landsat schema lists "collection" as a required property.
-            dummy_collection = pystac.Collection(
-                id="dummy",
-                description="just to make the schema validate",
-                extent=None,
-                href="http://example.com/collection.json")
-            dummy_collection.add_item(item)
+            item.collection_id = "landsat-8-c2-l2"
             item.validate()
 
             return item
