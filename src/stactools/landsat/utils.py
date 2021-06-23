@@ -9,6 +9,8 @@ import rasterio
 from rasterio import RasterioIOError
 from shapely.geometry import box, mapping, shape
 
+from stactools.landsat.constants import OLD_L8_EXTENSION_SCHEMA, L8_EXTENSION_SCHEMA
+
 
 def _parse_date(in_date: str) -> datetime.datetime:
     """
@@ -147,6 +149,12 @@ def transform_stac_to_stac(item: Item,
         name.replace(".TIF", ""): asset
         for name, asset in item.assets.items()
     }
+
+    try:
+        index = item.stac_extensions.index(OLD_L8_EXTENSION_SCHEMA)
+        item.stac_extensions[index] = L8_EXTENSION_SCHEMA
+    except ValueError:
+        pass
 
     return item
 
