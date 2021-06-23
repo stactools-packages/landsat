@@ -36,7 +36,7 @@ class CreateItemTest(CliTestCase):
             self.assertLess((reproj_bbox_shp - bbox_shp).area,
                             0.0001 * reproj_bbox_shp.area)
 
-        for mtl_path in TEST_MTL_PATHS:
+        for item_id, mtl_path in TEST_MTL_PATHS.items():
             with self.subTest(mtl_path):
                 base_path = "_".join(mtl_path.split("_")[:-1])
                 tif_path = f"{base_path}_SR_B3.TIF"
@@ -64,6 +64,7 @@ class CreateItemTest(CliTestCase):
                         pystac.Link(rel="collection",
                                     target="http://example.com"))
                     item.validate()
+                    self.assertEqual(item.id, item_id)
 
                     bands_seen = set()
 
@@ -99,7 +100,7 @@ class CreateItemTest(CliTestCase):
 
             return item
 
-        for mtl_path in TEST_MTL_PATHS:
+        for mtl_path in TEST_MTL_PATHS.values():
             with self.subTest(mtl_path):
                 with TemporaryDirectory() as tmp_dir:
                     create_dir = os.path.join(tmp_dir, 'create')
