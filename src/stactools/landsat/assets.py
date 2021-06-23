@@ -246,7 +246,7 @@ ST_CDIST_ASSET_DEF = AssetDef(
     is_thermal=True)
 
 ST_DRAD_ASSET_DEF = AssetDef(
-    href_suffix="ST_DRAD.tif",
+    href_suffix="ST_DRAD.TIF",
     key="ST_DRAD",
     title="Downwelled Radiance Band",
     description=("Landsat Collection 2 Level-2 Downwelled "
