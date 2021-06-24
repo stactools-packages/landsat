@@ -39,7 +39,19 @@ class MtlMetadata:
 
     @property
     def scene_id(self) -> str:
-        return self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
+        product_id = self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
+        # Remove the processing date, as products IDs
+        # that only vary by processing date represent the
+        # same scene
+        # See "Section 5 - Product Packaging" at
+        # https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1619_Landsat8-C2-L2-ScienceProductGuide-v2.pdf  # noqa
+
+        # ID format: LXSS_LLLL_PPPRRR_YYYYMMDD_yyyymmdd_CX_TX
+        # remove yyyymmdd
+        id_parts = product_id.split('_')
+        id_parts = '_'.join(id_parts[:4] + id_parts[-2:])
+
+        return id_parts
 
     @property
     def processing_level(self) -> str:
