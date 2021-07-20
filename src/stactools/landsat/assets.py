@@ -59,16 +59,16 @@ class AssetDef:
         # common_metadata
 
         if self.gsd is not None:
-            item.common_metadata.set_gsd(self.gsd, asset)
+            item.common_metadata.gsd = self.gsd
         else:
             if self.is_sr or self.is_qa:
-                sr_grd = mtl_metadata.sr_gsd
-                if item.common_metadata.gsd != sr_grd:
-                    item.common_metadata.set_gsd(sr_grd, asset)
+                sr_gsd = mtl_metadata.sr_gsd
+                if item.common_metadata.gsd != sr_gsd:
+                    pystac.CommonMetadata(asset).gsd = sr_gsd
             if self.is_thermal:
-                thermal_grd = mtl_metadata.thermal_gsd
-                if item.common_metadata.gsd != thermal_grd:
-                    item.common_metadata.set_gsd(thermal_grd, asset)
+                thermal_gsd = mtl_metadata.thermal_gsd
+                if item.common_metadata.gsd != thermal_gsd:
+                    pystac.CommonMetadata(asset).gsd = thermal_gsd
 
         # eo
         if self.bands:
