@@ -27,6 +27,7 @@ class CreateItemTest(CliTestCase):
             bbox_shp = box(*bbox)
             projection = ProjectionExtension.ext(item)
             proj_bbox = projection.bbox
+            assert proj_bbox is not None
             self.assertEqual(proj_bbox, list(tif_bounds))
             proj_bbox_shp = box(*proj_bbox)
             reproj_bbox_shp = shape(
