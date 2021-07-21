@@ -59,7 +59,7 @@ class AssetDef:
         # common_metadata
 
         if self.gsd is not None:
-            item.common_metadata.gsd = self.gsd
+            pystac.CommonMetadata(asset).gsd = self.gsd
         else:
             if self.is_sr or self.is_qa:
                 sr_gsd = mtl_metadata.sr_gsd
