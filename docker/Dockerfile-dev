@@ -4,4 +4,8 @@ RUN conda install -c conda-forge pandoc
 
 COPY . /src/stactools-landsat
 RUN pip install -r /src/stactools-landsat/requirements-dev.txt
+
+# Set the PYTHONPATH to run locally mounted source
+ENV PYTHONPATH=/src/stactools-landsat/src:$PYTHONPATH
+
 WORKDIR /src/stactools-landsat
