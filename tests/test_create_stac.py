@@ -9,7 +9,7 @@ from shapely.geometry import box, shape, mapping
 import rasterio
 
 from stactools.core.projection import reproject_geom
-from stactools.landsat.assets import SR_ASSET_DEFS, THERMAL_ASSET_DEFS
+from stactools.landsat.assets import SR_ASSET_DEFS, ST_B10_ASSET_DEF, THERMAL_ASSET_DEFS
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.constants import (L8_SR_BANDS, L8_SP_BANDS)
 from stactools.testing import CliTestCase
@@ -67,6 +67,19 @@ class CreateItemTest(CliTestCase):
                     item.validate()
                     self.assertEqual(item.id, item_id)
 
+                    # Ensure gsd is not set on the Item,
+                    # as it's set on the asset level
+
+                    # Ensure gsd is correctly set for band 10
+                    if ST_B10_ASSET_DEF.key in item.assets:
+                        self.assertIn(
+                            'gsd',
+                            item.assets[ST_B10_ASSET_DEF.key].extra_fields)
+                        self.assertEqual(
+                            item.assets[
+                                ST_B10_ASSET_DEF.key].extra_fields['gsd'],
+                            100.0)
+
                     bands_seen = set()
 
                     for asset in item.assets.values():
@@ -75,6 +88,9 @@ class CreateItemTest(CliTestCase):
 
                         if eo.bands is not None:
                             bands_seen |= set(b.name for b in eo.bands)
+
+                            # Ensure gsd is set
+                            self.assertIn('gsd', asset.extra_fields)
 
                     if item.properties['landsat:processing_level'] == 'L2SP':
                         self.assertEqual(
