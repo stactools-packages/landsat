@@ -118,7 +118,7 @@ def transform_stac_to_stac(item: Item,
         obtained_transform = None
         crs = None
         for asset in item.assets.values():
-            if "geotiff" in asset.media_type:
+            if asset.media_type is not None and "geotiff" in asset.media_type:
                 # retrieve shape, transform and crs from the first geotiff file among the assets
                 if not obtained_shape:
                     try:
