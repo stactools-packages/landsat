@@ -9,6 +9,7 @@ from tests import test_data
 
 
 class MtlMetadataTest(unittest.TestCase):
+
     def test_parses_xml_utm(self):
         mtl_path = test_data.get_path(
             'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml'
