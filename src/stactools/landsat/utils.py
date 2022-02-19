@@ -1,15 +1,16 @@
 import datetime
 
 import dateutil.parser
+import rasterio
 from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
-import rasterio
 from rasterio import RasterioIOError
 from shapely.geometry import box, mapping, shape
 
-from stactools.landsat.constants import OLD_L8_EXTENSION_SCHEMA, L8_EXTENSION_SCHEMA
+from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
+                                         OLD_L8_EXTENSION_SCHEMA)
 
 
 def _parse_date(in_date: str) -> datetime.datetime:

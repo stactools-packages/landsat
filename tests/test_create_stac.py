@@ -2,18 +2,18 @@ import os
 from tempfile import TemporaryDirectory
 
 import pystac
-from pystac.utils import is_absolute_href
+import rasterio
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
-from shapely.geometry import box, shape, mapping
-import rasterio
-
+from pystac.utils import is_absolute_href
+from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_geom
-from stactools.landsat.assets import SR_ASSET_DEFS, ST_B10_ASSET_DEF, THERMAL_ASSET_DEFS
-from stactools.landsat.commands import create_landsat_command
-from stactools.landsat.constants import (L8_SR_BANDS, L8_SP_BANDS)
 from stactools.testing import CliTestCase
 
+from stactools.landsat.assets import (SR_ASSET_DEFS, ST_B10_ASSET_DEF,
+                                      THERMAL_ASSET_DEFS)
+from stactools.landsat.commands import create_landsat_command
+from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
 from tests.data import TEST_MTL_PATHS
 
 

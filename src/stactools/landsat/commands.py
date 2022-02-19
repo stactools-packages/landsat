@@ -3,8 +3,8 @@ import os
 import click
 import pystac
 
-from stactools.landsat.utils import transform_stac_to_stac
 from stactools.landsat.stac import create_stac_item
+from stactools.landsat.utils import transform_stac_to_stac
 
 
 def create_landsat_command(cli):

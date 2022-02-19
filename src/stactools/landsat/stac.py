@@ -4,14 +4,14 @@ import pystac
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
-
 from stactools.core.io import ReadHrefModifier
+
+from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.assets import (ANG_ASSET_DEF, COMMON_ASSET_DEFS,
                                       SR_ASSET_DEFS, THERMAL_ASSET_DEFS)
 from stactools.landsat.constants import (L8_EXTENSION_SCHEMA, L8_INSTRUMENTS,
                                          L8_ITEM_DESCRIPTION, L8_PLATFORM)
 from stactools.landsat.mtl_metadata import MtlMetadata
-from stactools.landsat.ang_metadata import AngMetadata
 
 
 def create_stac_item(

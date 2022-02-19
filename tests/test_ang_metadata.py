@@ -1,11 +1,10 @@
 import unittest
 
-from shapely.geometry import mapping, shape, box
-
+from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_geom
+
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.mtl_metadata import MtlMetadata
-
 from tests import test_data
 
 
