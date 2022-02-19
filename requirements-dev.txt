@@ -1,7 +1,8 @@
 codespell
-coverage
 flake8
 pylint
+pytest
+pytest-cov
 sphinx
 sphinx-autobuild
 sphinx-click
