@@ -1,11 +1,17 @@
-FROM stactools-landsat:latest
+ARG STACTOOLS_VERSION=latest
+FROM ghcr.io/stac-utils/stactools:${STACTOOLS_VERSION}-dev
 
-RUN conda install -c conda-forge pandoc
+ARG DOCKER_NAMESPACE_PACKAGE_DIR
+ARG DOCKER_WORKDIR
+ENV PYTHON_VERSION=3.9
+WORKDIR $DOCKER_WORKDIR
 
-COPY . /src/stactools-landsat
-RUN pip install -r /src/stactools-landsat/requirements-dev.txt
+# For caching purposes, install dependencies but remove the actual package
+COPY pyproject.toml requirements-dev.txt setup.cfg ./
+COPY src/$DOCKER_NAMESPACE_PACKAGE_DIR/__init__.py src/$DOCKER_NAMESPACE_PACKAGE_DIR/
+RUN pip install -r requirements-dev.txt \
+    && pip install . \
+    && rm -r /opt/conda/lib/python$PYTHON_VERSION/site-packages/$DOCKER_NAMESPACE_PACKAGE_DIR
 
-# Set the PYTHONPATH to run locally mounted source
-ENV PYTHONPATH=/src/stactools-landsat/src:$PYTHONPATH
-
-WORKDIR /src/stactools-landsat
+COPY . ./
+RUN pip install -e .
