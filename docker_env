@@ -1,0 +1,7 @@
+DOCKER_REGISTRY=ghcr.io
+DOCKER_ORG=stactools-packages
+DOCKER_REPO=landsat
+DOCKER_TAG=local
+DOCKER_TAG_DEV=local-dev
+DOCKER_WORKDIR=/opt/stactools-landsat
+DOCKER_NAMESPACE_PACKAGE_DIR=stactools/landsat

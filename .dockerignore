@@ -1,0 +1,10 @@
+.git
+.github
+.gitignore
+.pytest_cache
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+docker_env
+README.md
+var/
