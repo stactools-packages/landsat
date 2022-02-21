@@ -1,4 +1,3 @@
-import datetime
 import json
 import os.path
 from pathlib import Path
@@ -7,8 +6,7 @@ from tempfile import TemporaryDirectory
 import pystac
 from pystac.extensions.projection import ProjectionExtension
 from stactools.landsat.commands import create_landsat_command
-from stactools.landsat.utils import (_parse_date, stac_api_to_stac,
-                                     transform_mtl_to_stac,
+from stactools.landsat.utils import (stac_api_to_stac,
                                      transform_stac_to_stac)
 from stactools.testing import CliTestCase
 
@@ -83,24 +81,6 @@ class LandsatTest(CliTestCase):
         """Convert a URI of a STAC 0.7.0 document to a STAC 1.0.0.beta.2 document"""
         item = stac_api_to_stac(self.landsat_stac_files[0])
         item.validate()
-
-    def test_transform_mtl(self):
-        """Convert a JSON MTL to a STAC 1.0.0.beta.2.
-        This is not fully implemented, so it fails"""
-        item = transform_mtl_to_stac(self.landsat_mtl)
-        # We expect failure until it is fully implemented
-        with self.assertRaises(pystac.STACValidationError):
-            item.validate()
-
-    def test_date_parse(self):
-        """Can we parse a simple date string?"""
-        string = "2020-01-01T23:08:52.6773140Z"
-        target_datetime = datetime.datetime(2020, 1, 1, 23, 8, 52, 677314,
-                                            datetime.timezone.utc)
-
-        parsed_datetime = _parse_date(string)
-
-        assert target_datetime == parsed_datetime
 
     def test_converts(self):
         """Test the actual CLI application"""

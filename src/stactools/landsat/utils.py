@@ -1,74 +1,11 @@
-import datetime
-
-import dateutil.parser
 from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
 import rasterio
 from rasterio import RasterioIOError
-from shapely.geometry import box, mapping, shape
 
 from stactools.landsat.constants import OLD_L8_EXTENSION_SCHEMA, L8_EXTENSION_SCHEMA
-
-
-def _parse_date(in_date: str) -> datetime.datetime:
-    """
-    Try to parse a date and return it as a datetime object with no timezone
-    """
-    parsed_date = dateutil.parser.parse(in_date)
-    return parsed_date.replace(tzinfo=datetime.timezone.utc)
-
-
-def transform_mtl_to_stac(metadata: dict) -> Item:
-    """
-    Handle USGS MTL as a dict and return a STAC item.
-
-    NOT IMPLEMENTED
-
-    Issues include:
-        - There's no reference to UTM Zone or any other CRS info in the MTL
-        - There's no absolute file path or reference to a URI to find data.
-    """
-    LANDSAT_METADATA = metadata["LANDSAT_METADATA_FILE"]
-    product = LANDSAT_METADATA["PRODUCT_CONTENTS"]
-    projection = LANDSAT_METADATA["PROJECTION_ATTRIBUTES"]
-    image = LANDSAT_METADATA["IMAGE_ATTRIBUTES"]
-    proessing_record = LANDSAT_METADATA["LEVEL2_PROCESSING_RECORD"]
-
-    scene_id = product["LANDSAT_PRODUCT_ID"]
-
-    xmin, xmax = float(projection["CORNER_LL_LON_PRODUCT"]), float(
-        projection["CORNER_UR_LON_PRODUCT"])
-    ymin, ymax = float(projection["CORNER_LL_LAT_PRODUCT"]), float(
-        projection["CORNER_UR_LAT_PRODUCT"])
-    geom = mapping(box(xmin, ymin, xmax, ymax))
-    bounds = shape(geom).bounds
-
-    # Like: "2020-01-01" for date and  "23:08:52.6773140Z" for time
-    acquired_date = _parse_date(
-        f"{image['DATE_ACQUIRED']}T{image['SCENE_CENTER_TIME']}")
-    created = _parse_date(proessing_record["DATE_PRODUCT_GENERATED"])
-
-    item = Item(id=scene_id,
-                geometry=geom,
-                bbox=bounds,
-                datetime=acquired_date,
-                properties={})
-
-    # Common metadata
-    item.common_metadata.created = created
-    item.common_metadata.platform = image["SPACECRAFT_ID"]
-    item.common_metadata.instruments = [
-        i.lower() for i in image["SENSOR_ID"].split("_")
-    ]
-
-    # TODO: implement these three extensions
-    EOExtension.add_to(item)
-    ViewExtension.add_to(item)
-    ProjectionExtension.add_to(item)
-
-    return item
 
 
 def transform_stac_to_stac(item: Item,
