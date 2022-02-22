@@ -18,10 +18,12 @@ from tests.data import TEST_MTL_PATHS
 
 
 class CreateItemTest(CliTestCase):
+
     def create_subcommand_functions(self):
         return [create_landsat_command]
 
     def test_create_item(self):
+
         def check_proj_bbox(item, tif_bounds):
             bbox = item.bbox
             bbox_shp = box(*bbox)
@@ -102,6 +104,7 @@ class CreateItemTest(CliTestCase):
                     check_proj_bbox(item, tif_bounds)
 
     def test_convert_and_create_agree(self):
+
         def get_item(output_dir: str) -> pystac.Item:
             jsons = [p for p in os.listdir(output_dir) if p.endswith('.json')]
             self.assertEqual(len(jsons), 1)

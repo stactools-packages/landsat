@@ -13,6 +13,7 @@ class AssetDef:
 
     If no explicit key is given, the key is the file suffix.
     """
+
     def __init__(self,
                  href_suffix: str,
                  media_type: str,

@@ -6,8 +6,7 @@ from tempfile import TemporaryDirectory
 import pystac
 from pystac.extensions.projection import ProjectionExtension
 from stactools.landsat.commands import create_landsat_command
-from stactools.landsat.utils import (stac_api_to_stac,
-                                     transform_stac_to_stac)
+from stactools.landsat.utils import (stac_api_to_stac, transform_stac_to_stac)
 from stactools.testing import CliTestCase
 
 from tests import test_data
@@ -23,6 +22,7 @@ ALL_EXAMPLES = [
 
 
 class LandsatTest(CliTestCase):
+
     def create_subcommand_functions(self):
         return [create_landsat_command]
 
