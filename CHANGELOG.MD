@@ -6,18 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
+### Updated
 
-- Nothing.
+- Repo brought up to date with the current stactools-packages template contents as of 2022-02-18.
+- Edits to existing source and test code as part of the update were limited to:
+    - Format changes imparted by the `isort`, `yapf`, `flake8`, and `EditorConfig`
+    - A few minor changes to address `mypy` complaints in `utils.py` and `mtl_metadata.py`
 
-### Deprecated
+## [0.2.0] - 2021-07-20
 
-- Nothing.
+### Changed
 
-### Removed
+- Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+[0.2.0]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.0>
