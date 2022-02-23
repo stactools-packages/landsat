@@ -19,4 +19,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
+[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.0..main>
 [0.2.0]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.0>

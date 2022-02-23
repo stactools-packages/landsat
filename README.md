@@ -24,7 +24,7 @@ Create STAC Items for Landsat 8 Collection 2 Level 2 data.
 To create the example STAC `Item`:
 
 ```bash
-$ stac landsat create-item "/tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml" "examples/item/LC08_L2SP_005009_20150710_02_T2.json"
+$ stac landsat create-item "tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml" "examples/item/LC08_L2SP_005009_20150710_02_T2.json"
 ```
 
 Use `stac landsat --help` to see all subcommands and options.
