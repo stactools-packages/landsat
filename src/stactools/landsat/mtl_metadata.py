@@ -68,10 +68,15 @@ class MtlMetadata:
     def epsg(self) -> int:
         utm_zone = self._root.find_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
         if utm_zone:
-            bbox = self.bbox
+            # The projection transforms in the COGs provided by the USGS are
+            # always for UTM North zones (see the negative PROJECTION_Y values
+            # in the metadata files for southern hemisphere scenes, or directly
+            # examine the transform from a southern hemisphere scene COG). The
+            # EPSG codes should therefore always be UTM north zones (326XX,
+            # where XX is the UTM zone number). For more detail, see
+            # https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
             utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
-            center_lat = (bbox[1] + bbox[3]) / 2.0
-            return int(f"{326 if center_lat > 0 else 327}{utm_zone}")
+            return int(f"326{utm_zone}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,

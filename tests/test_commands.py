@@ -25,6 +25,7 @@ ALL_EXAMPLES = [
 
 
 class LandsatTest(CliTestCase):
+
     def create_subcommand_functions(self):
         return [create_landsat_command]
 

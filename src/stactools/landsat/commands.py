@@ -11,6 +11,7 @@ def create_landsat_command(cli):
     """Creates a command group for working
     with Landsat metadata from USGS' Collection 2
     """
+
     @cli.group(
         'landsat',
         short_help=("Commands for working with Landsat Collection 2 metadata.")

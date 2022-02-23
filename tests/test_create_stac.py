@@ -18,10 +18,12 @@ from tests.data import TEST_MTL_PATHS
 
 
 class CreateItemTest(CliTestCase):
+
     def create_subcommand_functions(self):
         return [create_landsat_command]
 
     def test_create_item(self):
+
         def check_proj_bbox(item, tif_bounds):
             bbox = item.bbox
             bbox_shp = box(*bbox)
@@ -101,7 +103,12 @@ class CreateItemTest(CliTestCase):
 
                     check_proj_bbox(item, tif_bounds)
 
+                    # UTM south zones should not be used
+                    self.assertTrue(
+                        "327" not in str(item.properties["proj:epsg"]))
+
     def test_convert_and_create_agree(self):
+
         def get_item(output_dir: str) -> pystac.Item:
             jsons = [p for p in os.listdir(output_dir) if p.endswith('.json')]
             self.assertEqual(len(jsons), 1)
@@ -157,6 +164,10 @@ class CreateItemTest(CliTestCase):
                             'landsat:processing_level'] == 'L2SP':
                         for asset_def in THERMAL_ASSET_DEFS:
                             self.assertIn(asset_def.key, created_item.assets)
+
+                    # UTM south zones should not be used
+                    self.assertTrue(
+                        "327" not in str(created_item.properties["proj:epsg"]))
 
                     # TODO: Resolve disagreements between convert and create.
                     # This might best be informed by USGS's own STAC 1.0.* items

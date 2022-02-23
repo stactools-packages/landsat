@@ -10,6 +10,7 @@ from tests import test_data
 
 
 class AngMetadataTest(unittest.TestCase):
+
     def test_parses(self):
         ang_path = test_data.get_path(
             'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt'

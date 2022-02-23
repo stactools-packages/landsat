@@ -13,5 +13,8 @@ TEST_MTL_PATHS = {
         'data-files/assets3/LC08_L2SP_008059_20191201_20200825_02_T1_MTL.xml'),
     'LC08_L2SP_017036_20130419_02_T2':
     test_data.get_path(
-        'data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml')
+        'data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml'),
+    'LC08_L2SP_001070_20190114_02_T2':
+    test_data.get_path(
+        'data-files/assets5/LC08_L2SP_001070_20190114_20200830_02_T2_MTL.xml')
 }
