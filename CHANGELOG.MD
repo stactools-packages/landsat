@@ -9,9 +9,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Updated
 
 - Repo brought up to date with the current stactools-packages template contents as of 2022-02-18.
-- Edits to existing source and test code as part of the update were limited to:
-    - Format changes imparted by the `isort`, `yapf`, `flake8`, and `EditorConfig`
-    - A few minor changes to address `mypy` complaints in `utils.py` and `mtl_metadata.py`
 
 ## [0.2.0] - 2021-07-20
 
