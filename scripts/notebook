@@ -9,7 +9,7 @@ fi
 function usage() {
     echo -n \
         "Usage: $(basename "$0")
-Install requirements for all packages and development.
+Launches a Jupyter notebook.
 "
 }
 
@@ -17,9 +17,8 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
-        export PIP_NO_BINARY=rasterio
-        python -m pip install --upgrade pip
-        pip install .
-        pip install -r requirements-dev.txt
+        jupyter notebook \
+            --ip=0.0.0.0 \
+            --port=8888
     fi
 fi

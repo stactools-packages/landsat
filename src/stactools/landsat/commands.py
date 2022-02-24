@@ -3,14 +3,15 @@ import os
 import click
 import pystac
 
-from stactools.landsat.utils import transform_stac_to_stac
 from stactools.landsat.stac import create_stac_item
+from stactools.landsat.utils import transform_stac_to_stac
 
 
 def create_landsat_command(cli):
     """Creates a command group for working
     with Landsat metadata from USGS' Collection 2
     """
+
     @cli.group(
         'landsat',
         short_help=("Commands for working with Landsat Collection 2 metadata.")

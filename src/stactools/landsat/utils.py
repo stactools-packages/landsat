@@ -1,15 +1,16 @@
 import datetime
 
 import dateutil.parser
+import rasterio
 from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
-import rasterio
 from rasterio import RasterioIOError
 from shapely.geometry import box, mapping, shape
 
-from stactools.landsat.constants import OLD_L8_EXTENSION_SCHEMA, L8_EXTENSION_SCHEMA
+from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
+                                         OLD_L8_EXTENSION_SCHEMA)
 
 
 def _parse_date(in_date: str) -> datetime.datetime:
@@ -117,7 +118,7 @@ def transform_stac_to_stac(item: Item,
         obtained_transform = None
         crs = None
         for asset in item.assets.values():
-            if "geotiff" in asset.media_type:
+            if asset.media_type is not None and "geotiff" in asset.media_type:
                 # retrieve shape, transform and crs from the first geotiff file among the assets
                 if not obtained_shape:
                     try:

@@ -1,13 +1,12 @@
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from pystac.utils import str_to_datetime
 from pyproj import Geod
-
-from stactools.core.utils import map_opt
-from stactools.core.projection import transform_from_bbox
+from pystac.utils import str_to_datetime
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
+from stactools.core.projection import transform_from_bbox
+from stactools.core.utils import map_opt
 
 
 class MTLError(Exception):
@@ -49,9 +48,9 @@ class MtlMetadata:
         # ID format: LXSS_LLLL_PPPRRR_YYYYMMDD_yyyymmdd_CX_TX
         # remove yyyymmdd
         id_parts = product_id.split('_')
-        id_parts = '_'.join(id_parts[:4] + id_parts[-2:])
+        id = '_'.join(id_parts[:4] + id_parts[-2:])
 
-        return id_parts
+        return id
 
     @property
     def processing_level(self) -> str:

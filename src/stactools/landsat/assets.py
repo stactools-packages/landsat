@@ -4,7 +4,7 @@ import pystac
 from pystac.extensions.eo import Band, EOExtension
 from pystac.extensions.projection import ProjectionExtension
 
-from stactools.landsat.constants import (L8_SR_BANDS, L8_SP_BANDS)
+from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
 from stactools.landsat.mtl_metadata import MtlMetadata
 
 
@@ -13,6 +13,7 @@ class AssetDef:
 
     If no explicit key is given, the key is the file suffix.
     """
+
     def __init__(self,
                  href_suffix: str,
                  media_type: str,

@@ -2,26 +2,28 @@ import os
 from tempfile import TemporaryDirectory
 
 import pystac
-from pystac.utils import is_absolute_href
+import rasterio
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
-from shapely.geometry import box, shape, mapping
-import rasterio
-
+from pystac.utils import is_absolute_href
+from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_geom
-from stactools.landsat.assets import SR_ASSET_DEFS, ST_B10_ASSET_DEF, THERMAL_ASSET_DEFS
-from stactools.landsat.commands import create_landsat_command
-from stactools.landsat.constants import (L8_SR_BANDS, L8_SP_BANDS)
 from stactools.testing import CliTestCase
 
+from stactools.landsat.assets import (SR_ASSET_DEFS, ST_B10_ASSET_DEF,
+                                      THERMAL_ASSET_DEFS)
+from stactools.landsat.commands import create_landsat_command
+from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
 from tests.data import TEST_MTL_PATHS
 
 
 class CreateItemTest(CliTestCase):
+
     def create_subcommand_functions(self):
         return [create_landsat_command]
 
     def test_create_item(self):
+
         def check_proj_bbox(item, tif_bounds):
             bbox = item.bbox
             bbox_shp = box(*bbox)
@@ -102,6 +104,7 @@ class CreateItemTest(CliTestCase):
                     check_proj_bbox(item, tif_bounds)
 
     def test_convert_and_create_agree(self):
+
         def get_item(output_dir: str) -> pystac.Item:
             jsons = [p for p in os.listdir(output_dir) if p.endswith('.json')]
             self.assertEqual(len(jsons), 1)

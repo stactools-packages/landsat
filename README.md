@@ -1,15 +1,30 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/stactools-packages/landsat/main?filepath=docs/installation_and_basic_usage.ipynb)
+
 # stactools-landsat
 
-Template repostitory for [stactools](https://github.com/stac-utils/stactools) packages.
+- Name: landsat
+- Package: `stactools.landsat`
+- Dataset homepage: https://landsat.gsfc.nasa.gov/
+- STAC extensions used:
+  - [proj](https://github.com/stac-extensions/projection/)
+  - [eo](https://github.com/stac-extensions/eo)
+  - [view](https://github.com/stac-extensions/view)
+  - [landsat](https://landsat.usgs.gov/stac/landsat-extension/v1.1.0/schema.json)
 
-## How to use
+Create STAC Items for Landsat 8 Collection 2 Level 2 data.
 
-1. Clone this repository and name it `stactools-{NAME}`, where `NAME` is your package name.
-   This name should be short, memorable, and a valid Python package name (i.e. it shouldn't start with a number, etc).
-2. Update `setup.cfg` with your package name, description, and such.
-3. Rename `src/stactools.landsat` to `src/stactools/{NAME}`.
-4. Rewrite this README to provide information about how to use your package.
-5. Update the LICENSE with your company's information (or whomever holds the copyright).
-6. Update the environment name in `environment.yml`.
-7. Update the environment variables in `.github/workflows/release.yml` to the appropriate values to publish for your organization.
-8. Update all scripts in the `docker` directory to refer to `stactools-{NAME}` and `stactools-{NAME}-dev`.
+## Examples
+
+### STAC objects
+
+- [Item](examples/item/LC08_L2SP_005009_20150710_02_T2.json)
+
+### Command-line usage
+
+To create the example STAC `Item`:
+
+```bash
+$ stac landsat create-item "tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml" "examples/item/LC08_L2SP_005009_20150710_02_T2.json"
+```
+
+Use `stac landsat --help` to see all subcommands and options.

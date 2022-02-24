@@ -1,14 +1,14 @@
 import unittest
 
-from shapely.geometry import mapping, shape, box
-
+from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_geom
-from stactools.landsat.mtl_metadata import MtlMetadata
 
+from stactools.landsat.mtl_metadata import MtlMetadata
 from tests import test_data
 
 
 class MtlMetadataTest(unittest.TestCase):
+
     def test_parses_xml_utm(self):
         mtl_path = test_data.get_path(
             'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml'

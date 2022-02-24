@@ -6,6 +6,8 @@ if [[ -n "${STACTOOLS_DEBUG}" ]]; then
     set -x
 fi
 
+source docker_env
+
 function usage() {
     echo -n \
         "Usage: $(basename "$0")
@@ -17,6 +19,6 @@ will be reflected in the execution.
 
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     docker run --rm -it \
-        -v `pwd`:/src/stactools-landsat \
-        stactools-landsat:latest "${@}"
+        -v `pwd`:$DOCKER_WORKDIR \
+        $DOCKER_REGISTRY/$DOCKER_ORG/$DOCKER_REPO:$DOCKER_TAG "${@}"
 fi
