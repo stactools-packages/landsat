@@ -15,3 +15,12 @@ TEST_MTL_PATHS = {
     test_data.get_path(
         'data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml')
 }
+
+TEST_GEOMETRY_PATHS = {
+    "stac_in_storage":
+    test_data.get_path(
+        "data-files/assets2/LC08_L2SR_099120_20191129_20201016_02_T2_MTL.xml"),
+    "stac_not_in_storage":
+    test_data.get_path(
+        "data-files/assets5/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml")
+}
