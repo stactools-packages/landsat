@@ -7,6 +7,9 @@ OLD_L8_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/schem
 L8_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.0/schema.json"
 L8_ITEM_DESCRIPTION = "Landsat Collection 2 Level-2 Surface Reflectance Product"
 
+USGS_STAC_API = "https://landsatlook.usgs.gov/stac-server"
+USGS_C2L2_SR = "landsat-c2l2-sr"
+
 L8_SR_BANDS = {
     "SR_B1":
     Band({
