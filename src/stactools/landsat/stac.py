@@ -19,15 +19,22 @@ from stactools.landsat.mtl_metadata import MtlMetadata
 
 def create_stac_item(
         mtl_xml_href: str,
-        use_usgs_stac: bool = False,
+        use_usgs_geometry: bool = False,
         read_href_modifier: Optional[ReadHrefModifier] = None) -> pystac.Item:
-    """Creates a Landsat 8 C2 L2 STAC Item.
+    """Creates a Landsat 8 C2 L2 STAC Item. Reads data from a single scene of
+    Landsat Collection 2 Level-2 Product data. Uses the MTL XML HREF as the
+    basis for other files; assumes that all files are co-located in a directory
+    or blob prefix.
 
-    Reads data from a single scene of
-    Landsat Collection 2 Level-2 Surface Reflectance Product data.
-
-    Uses the MTL XML HREF as the bases for other files; assumes that all
-    files are co-located in a directory or blob prefix.
+    Args
+        mtl_xml_href (str): href to a Landsat scene XML metadata file
+        use_usgs_geometry (bool): Option to use the geometry from a USGS STAC
+            file that is stored alongside the XML metadata file or pulled from
+            the USGS STAC API
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify the storage href (e.g. to add a token to a url)
+    Returns:
+        pystac.Item
     """
     base_href = '_'.join(mtl_xml_href.split('_')[:-1])  # Remove the _MTL.txt
 
@@ -38,7 +45,7 @@ def create_stac_item(
 
     scene_datetime = mtl_metadata.scene_datetime
 
-    if use_usgs_stac:
+    if use_usgs_geometry:
         geometry = get_usgs_geometry(base_href, mtl_metadata.product_id,
                                      read_href_modifier)
     else:

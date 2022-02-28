@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Updated
+### Feature
+
+- Option to use geometry from the corresponding USGS STAC Item in lieu of computation from the ANG metadata.
+
+### Update
 
 - Repo brought up to date with the current stactools-packages template contents as of 2022-02-18.
 

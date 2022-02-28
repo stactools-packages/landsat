@@ -31,8 +31,13 @@ def create_landsat_command(cli):
     @click.option("--mtl", required=True, help="HREF to an MTL file.")
     @click.option("--output",
                   required=True,
-                  help="HREF of diretory in which to write the item.")
-    def create_item_cmd(level: str, mtl: str, output: str):
+                  help="HREF of directory in which to write the item.")
+    @click.option("--usgs_geometry",
+                  default=False,
+                  show_default=True,
+                  help="Use USGS STAC Item geometry")
+    def create_item_cmd(level: str, mtl: str, output: str,
+                        usgs_geometry: bool):
         """Creates a STAC Item for a Landsat 8 C2 Level-2 scene's products.
 
         All asset paths are based on the MTL path, as all assets are assumed to
@@ -42,7 +47,8 @@ def create_landsat_command(cli):
             raise click.BadOptionUsage("level",
                                        "Only level-2 currently implemented.")
 
-        item = create_stac_item(mtl_xml_href=mtl)
+        item = create_stac_item(mtl_xml_href=mtl,
+                                use_usgs_geometry=usgs_geometry)
         item.set_self_href(os.path.join(output, f'{item.id}.json'))
         item.save_object()
 

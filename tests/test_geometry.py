@@ -21,7 +21,7 @@ class GeometryTest(unittest.TestCase):
                              [70.70487567768816, -80.24577066106241]]]
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_stac=True)
+        item = create_stac_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.geometry["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
@@ -42,7 +42,7 @@ class GeometryTest(unittest.TestCase):
                              [-124.27364628436257, 48.508467268961375]]]
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_stac=True)
+        item = create_stac_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.geometry["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
@@ -64,7 +64,7 @@ class GeometryTest(unittest.TestCase):
                              [77.41721421, -81.41837295]]]
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_stac=False)
+        item = create_stac_item(mtl_xml_href, use_usgs_geometry=False)
         item_coords = item.geometry["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
