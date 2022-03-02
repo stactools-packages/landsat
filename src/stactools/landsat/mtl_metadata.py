@@ -37,6 +37,10 @@ class MtlMetadata:
         return int(self._get_text(xpath))
 
     @property
+    def product_id(self) -> str:
+        return self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
+
+    @property
     def scene_id(self) -> str:
         product_id = self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
         # Remove the processing date, as products IDs

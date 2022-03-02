@@ -15,4 +15,5 @@ sphinxcontrib-napoleon
 types-click
 types-pytz
 types-python-dateutil
+vcrpy
 yapf
