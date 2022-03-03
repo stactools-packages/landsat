@@ -1,0 +1,26 @@
+{
+  "B1": {
+    "name": "B1",
+    "common_name": "green",
+    "center_wavelength": 0.55,
+    "full_width_half_max": 0.1
+  },
+  "B2": {
+    "name": "B2",
+    "common_name": "red",
+    "center_wavelength": 0.65,
+    "full_width_half_max": 0.1
+  },
+  "B3": {
+    "name": "B3",
+    "common_name": "nir08",
+    "center_wavelength": 0.75,
+    "full_width_half_max": 0.1
+  },
+  "B4": {
+    "name": "B4",
+    "common_name": "nir09",
+    "center_wavelength": 0.95,
+    "full_width_half_max": 0.3
+  }
+}

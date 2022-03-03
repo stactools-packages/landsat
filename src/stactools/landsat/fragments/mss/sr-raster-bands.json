@@ -1,0 +1,30 @@
+{
+  "QA_PIXEL": {
+    "data_type": "uint16",
+    "unit": "bit index"
+  },
+  "QA_RADSAT": {
+    "data_type": "uint16",
+    "unit": "bit index"
+  },
+  "B1": {
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "B2": {
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "B3": {
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "B4": {
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  }
+}

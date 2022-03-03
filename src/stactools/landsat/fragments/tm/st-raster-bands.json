@@ -1,0 +1,57 @@
+{
+  "ST_B6": {
+    "data_type": "uint16",
+    "nodata": 0,
+    "unit": "kelvin",
+    "scale": 0.00341802,
+    "offset": 149.0
+  },
+  "ST_ATRAN": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "unitless",
+    "scale": 0.0001
+  },
+  "ST_CDIST": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "kilometer",
+    "scale": 0.01
+  },
+  "ST_DRAD": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "watt/steradian/square_meter/micrometer",
+    "scale": 0.001
+  },
+  "ST_URAD": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "watt/steradian/square_meter/micrometer",
+    "scale": 0.001
+  },
+  "ST_TRAD": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "watt/steradian/square_meter/micrometer",
+    "scale": 0.001
+  },
+  "ST_EMIS": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "emissivity coefficient",
+    "scale": 0.0001
+  },
+  "ST_EMSD": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "emissivity coefficient",
+    "scale": 0.0001
+  },
+  "ST_QA": {
+    "data_type": "int16",
+    "nodata": -9999,
+    "unit": "kelvin",
+    "scale": 0.01
+  }
+}

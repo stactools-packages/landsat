@@ -1,0 +1,273 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "LM01_L1GS_001010_19720908_02_T2",
+  "properties": {
+    "platform": "landsat-1",
+    "instruments": [
+      "mss"
+    ],
+    "created": "2022-03-03T20:31:29.689260Z",
+    "gsd": 60,
+    "description": "Landsat Collection 2 Level-1 Data Product",
+    "eo:cloud_cover": 43.0,
+    "view:off_nadir": 0,
+    "view:sun_elevation": 24.87312023,
+    "view:sun_azimuth": 172.41815593,
+    "proj:epsg": 32625,
+    "proj:shape": [
+      4214,
+      4296
+    ],
+    "proj:transform": [
+      60.0,
+      0.0,
+      358830.0,
+      0.0,
+      -60.0,
+      7953510.0
+    ],
+    "sci:doi": "10.5066/P9AF14YV",
+    "landsat:cloud_cover_land": 46.0,
+    "landsat:wrs_type": "1",
+    "landsat:wrs_path": "001",
+    "landsat:wrs_row": "010",
+    "landsat:collection_category": "T2",
+    "landsat:collection_number": "02",
+    "landsat:scene_id": "LM10010101972252XXX01",
+    "landsat:correction": "L1GS",
+    "datetime": "1972-09-08T13:43:34.091000Z"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -34.342777359690906,
+          71.6736886240419
+        ],
+        [
+          -36.70080544861747,
+          70.18448226408043
+        ],
+        [
+          -32.42683403196701,
+          69.42483853001222
+        ],
+        [
+          -29.841815210171347,
+          70.85738280018273
+        ],
+        [
+          -34.342777359690906,
+          71.6736886240419
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9AF14YV"
+    },
+    {
+      "rel": "alternate",
+      "href": "https://landsatlook.usgs.gov/stac-browser/collection02/level-1/standard/mss/1972/001/010/LM01_L1GS_001010_19720908_20200909_02_T2",
+      "type": "text/html",
+      "title": "USGS stac-browser page"
+    }
+  ],
+  "assets": {
+    "thumbnail": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_thumb_small.jpeg",
+      "type": "image/jpeg",
+      "title": "Thumbnail image",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "reduced_resolution_browse": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_thumb_large.jpeg",
+      "type": "image/jpeg",
+      "title": "Reduced resolution browse image",
+      "roles": [
+        "overview"
+      ]
+    },
+    "MTL.json": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.json",
+      "type": "application/json",
+      "title": "Product Metadata File (json)",
+      "description": "Collection 2 Level-1 Product Metadata File (json)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "MTL.txt": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.txt",
+      "type": "text/plain",
+      "title": "Product Metadata File (txt)",
+      "description": "Collection 2 Level-1 Product Metadata File (txt)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "MTL.xml": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml",
+      "type": "application/xml",
+      "title": "Product Metadata File (xml)",
+      "description": "Collection 2 Level-1 Product Metadata File (xml)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "QA_PIXEL": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "cloud"
+      ]
+    },
+    "QA_RADSAT": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_QA_RADSAT.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "saturation"
+      ]
+    },
+    "B4": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Green Band (B4)",
+      "description": "Collection 2 Level-1 Green Band (B4) Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "name": "B4",
+          "common_name": "green",
+          "center_wavelength": 0.55,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.95591,
+          "offset": -18.55591
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "B5": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Red Band (B5)",
+      "description": "Collection 2 Level-1 Red Band (B5) Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "name": "B5",
+          "common_name": "red",
+          "center_wavelength": 0.65,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.64843,
+          "offset": -0.74843
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "B6": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B6.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.8 (B6)",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.7 (B6) Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "name": "B6",
+          "common_name": "nir08",
+          "center_wavelength": 0.75,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.65236,
+          "offset": -0.75236
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "B7": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B7.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.9 (B7)",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B7) Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "name": "B7",
+          "common_name": "nir09",
+          "center_wavelength": 0.95,
+          "full_width_half_max": 0.3
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.60866,
+          "offset": -0.60866
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -37.01805350426969,
+    69.37813163170388,
+    -29.679836196002512,
+    71.65367836829611
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+  ]
+}

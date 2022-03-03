@@ -1,4 +1,47 @@
+from enum import Enum
+from typing import Any, Dict
+
 from pystac.extensions.eo import Band
+
+
+class Sensor(Enum):
+    MSS = "M"
+    TM = "T"
+    ETM = "E"
+    OLI_TIRS = "C"
+
+
+LANDSAT_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+USGS_API = "https://landsatlook.usgs.gov/stac-server"
+USGS_BROWSER_C2 = "https://landsatlook.usgs.gov/stac-browser/collection02"
+USGS_C2L1 = "landsat-c2l1"
+USGS_C2L2_SR = "landsat-c2l2-sr"
+
+SENSORS: Dict[str, Any] = {
+    "MSS": {
+        "instruments": ["mss"],
+        "doi": "10.5066/P9AF14YV",
+        "reflective_gsd": 60
+    },
+    "TM": {
+        "instruments": ["tm"],
+        "doi": "10.5066/P9IAXOVV",
+        "reflective_gsd": 30,
+        "thermal_gsd": 120
+    },
+    "ETM": {
+        "instruments": ["etm"],
+        "doi": "10.5066/P9C7I13B",
+        "reflective_gsd": 30,
+        "thermal_gsd": 60
+    },
+    "OLI_TIRS": {
+        "instruments": ["oli", "tirs"],
+        "doi": "10.5066/P9OGBGM6",
+        "reflective_gsd": 30,
+        "thermal_gsd": 100
+    }
+}
 
 L8_PLATFORM = "landsat-8"
 L8_INSTRUMENTS = ["oli", "tirs"]
@@ -6,9 +49,6 @@ L8_INSTRUMENTS = ["oli", "tirs"]
 OLD_L8_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/schema.json"
 L8_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.0/schema.json"
 L8_ITEM_DESCRIPTION = "Landsat Collection 2 Level-2 Surface Reflectance Product"
-
-USGS_STAC_API = "https://landsatlook.usgs.gov/stac-server"
-USGS_C2L2_SR = "landsat-c2l2-sr"
 
 L8_SR_BANDS = {
     "SR_B1":

@@ -1,0 +1,408 @@
+{
+    "type": "Feature",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json",
+        "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/alternate-assets/v1.1.0/schema.json",
+        "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
+    ],
+    "id": "LT04_L2SP_002026_19830110_20200918_02_T1_ST",
+    "description": "Landsat Collection 2 Level-2 Surface Temperature Product",
+    "bbox": [
+        -54.832447078795774,
+        47.889771295111935,
+        -51.718867851908016,
+        49.821493141847654
+    ],
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    -54.226939515711834,
+                    49.821493141847654
+                ],
+                [
+                    -54.832447078795774,
+                    48.24918657186607
+                ],
+                [
+                    -52.39444909021588,
+                    47.889771295111935
+                ],
+                [
+                    -51.718867851908016,
+                    49.45404347029966
+                ],
+                [
+                    -54.226939515711834,
+                    49.821493141847654
+                ]
+            ]
+        ]
+    },
+    "properties": {
+        "datetime": "1983-01-10T13:52:14.171013Z",
+        "eo:cloud_cover": 7.0,
+        "view:sun_azimuth": 154.05548755,
+        "view:sun_elevation": 15.13135888,
+        "platform": "LANDSAT_4",
+        "instruments": [
+            "TM"
+        ],
+        "view:off_nadir": 0,
+        "landsat:cloud_cover_land": 1.0,
+        "landsat:wrs_type": "2",
+        "landsat:wrs_path": "002",
+        "landsat:wrs_row": "026",
+        "landsat:scene_id": "LT40020261983010XXX03",
+        "landsat:collection_category": "T1",
+        "landsat:collection_number": "02",
+        "landsat:correction": "L2SP",
+        "proj:epsg": 32622,
+        "proj:shape": [
+            7431,
+            8121
+        ],
+        "proj:transform": [
+            30.0,
+            0.0,
+            210285.0,
+            0.0,
+            -30.0,
+            5525415.0
+        ]
+    },
+    "assets": {
+        "thumbnail": {
+            "title": "Thumbnail image",
+            "type": "image/jpeg",
+            "roles": [
+                "thumbnail"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_thumb_small.jpeg",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_thumb_small.jpeg"
+                }
+            },
+            "file:checksum": "1340733ca28b19f80390c47ef0b7e456accc998f445947f5b95e03509363b22860c29b36563f5c5530fb6e61e2a10a0ffd2d616c4822288cae398ce8a47ea5494c1b"
+        },
+        "reduced_resolution_browse": {
+            "title": "Reduced resolution browse image",
+            "type": "image/jpeg",
+            "roles": [
+                "overview"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_thumb_large.jpeg",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_thumb_large.jpeg"
+                }
+            },
+            "file:checksum": "1340fc0826897104a269975b74a0503e27cb0786ae7f1cef9a594cf655f3e524911cb04ce50874fe66c16547e8e0b054a0ebd98c5cc073ec5a524e39df693eb7f4b2"
+        },
+        "index": {
+            "title": "HTML index page",
+            "type": "text/html",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/stac-browser/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1"
+        },
+        "lwir": {
+            "title": "Surface Temperature Band (B6)",
+            "description": "Landsat Collection 2 Level-2 Surface Temperature Band (B6) Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data",
+                "temperature"
+            ],
+            "eo:bands": [
+                {
+                    "name": "B6",
+                    "common_name": "lwir",
+                    "gsd": 120,
+                    "center_wavelength": 11.45
+                }
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_B6.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_B6.TIF"
+                }
+            },
+            "file:checksum": "1340f799e5f6cf1291d59813fcf485df5b853c4dbdfd492a652acfe9a4ad5fcf60e35e9d8f209ce5799b6bdb40ae11b768411c061fc0a5c4a1ccd8de6ddaef9e5b11"
+        },
+        "ATRAN": {
+            "title": "Atmospheric Transmittance Band",
+            "description": "Landsat Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_ATRAN.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_ATRAN.TIF"
+                }
+            },
+            "file:checksum": "13402556387c689bc375af3c69d6839de781e28f58af95d838ae6b731e97b5e90426666bc5dc50e175e3c4f6552fd5eb2f6f8e78f8a652af8fbf4a9902698920e587"
+        },
+        "CDIST": {
+            "title": "Cloud Distance Band",
+            "description": "Landsat Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_CDIST.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_CDIST.TIF"
+                }
+            },
+            "file:checksum": "13406958db5c8efeebce4056833e27242f53c89a5842d8ecc7cf80edd5f57ae4ba0e3077784cf56b0b2203203a4755f005ec8111bd86c8176a47909559a4164e5b2e"
+        },
+        "DRAD": {
+            "title": "Downwelled Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_DRAD.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_DRAD.TIF"
+                }
+            },
+            "file:checksum": "13408206d24ac91cdecbec6ffe677568886e5d1496438039c2df5afa43847c0365cf98a10bdbaa3532e1ab35c952b0861d818d316ff1c7805b6d56c82c1daf3c716c"
+        },
+        "URAD": {
+            "title": "Upwelled Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_URAD.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_URAD.TIF"
+                }
+            },
+            "file:checksum": "1340d04fedfb5a6f8f73cfea554d9a27f783bdde6fca206aa60299155f0205890128bd73a2abfd732524f6bffb0e13ae2eba352c4a0f152f76feee385bde5fc73b9d"
+        },
+        "TRAD": {
+            "title": "Thermal Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_TRAD.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_TRAD.TIF"
+                }
+            },
+            "file:checksum": "1340c5f4daed1c2707d9a8ce7e977736a0e1c365fe44f01310201bb91b07f8dfe3755f0c4675589dc95e036731663a084bb45df17ce5a083c12d4f9d08d2be8b23ae"
+        },
+        "EMIS": {
+            "title": "Emissivity Band",
+            "description": "Landsat Collection 2 Level-2 Emissivity Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMIS.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMIS.TIF"
+                }
+            },
+            "file:checksum": "1340cc74e93d6bbe90e961a8b093b82466c4033037b1e784d16ed03fe3eb4c51bdb3e0c7f6fd3cd704ecfbc8a1fb36c4239743aa94cbf60d0f42545f345bd590c7af"
+        },
+        "EMSD": {
+            "title": "Emissivity Standard Deviation Band",
+            "description": "Landsat Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMSD.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMSD.TIF"
+                }
+            },
+            "file:checksum": "134050a5dcc424b83cdd4fb523d54600d463102ca145abaecc00c2c56d679a4200032e847ba197c492b5df81b9b7870cd3451985999e1cfa0dd1274b837f722c6540"
+        },
+        "QA": {
+            "title": "Surface Temperature Quality Assessment Band",
+            "description": "Landsat Collection 2 Level-2 Surface Temperature Band Surface Temperature Product",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_QA.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ST_QA.TIF"
+                }
+            },
+            "file:checksum": "134010f98896121a6a7dfd0eabbbbc7ac4641b569a10016b5373c7833920d723a32846f004ead402a69dedaace3befe1173573931b8d818a22d5861c32516c0fcb74"
+        },
+        "ANG.txt": {
+            "title": "Angle Coefficients File",
+            "description": "Collection 2 Level-2 Angle Coefficients File (ANG)",
+            "type": "text/plain",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ANG.txt",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_ANG.txt"
+                }
+            },
+            "file:checksum": "13403373797a357842adad70bf0c45aa7558c6f3627256114d874c92f8d8cfb280258837798aadbdb8530f03caa2977c7786650fcd6a6514fa86c21dc94d06cd8174"
+        },
+        "MTL.txt": {
+            "title": "Product Metadata File",
+            "description": "Collection 2 Level-2 Product Metadata File (MTL)",
+            "type": "text/plain",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.txt",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.txt"
+                }
+            },
+            "file:checksum": "13404b3073d824a35391df9f2d805b5576cc77d19c8496b6996433af23c16d17967ef187fad40a1bd67606fa47684a909e8dde9e9667f281e404a6090e5cd3829196"
+        },
+        "MTL.xml": {
+            "title": "Product Metadata File (xml)",
+            "description": "Collection 2 Level-1 Product Metadata File (xml)",
+            "type": "application/xml",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.xml",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.xml"
+                }
+            },
+            "file:checksum": "1340f9d2ebe5da286d2bcd6338e098c12ffe85f3f773e8f7e56020d5f6e2e7dae1409cfbc7137f80b160e08a01de2676e58c7d1eda2f5aafae365d979cb47cb3fb70"
+        },
+        "MTL.json": {
+            "title": "Product Metadata File (json)",
+            "description": "Collection 2 Level-2 Product Metadata File (json)",
+            "type": "application/json",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.json",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.json"
+                }
+            },
+            "file:checksum": "13405429da0f7f2f43518b28f6bb5df1676b849134008d182cd6fa247f0d6adde35d2d750674ea80859bdce9ee01ff501e03282ade9f3496f6d87e2ab44dcb16ca96"
+        },
+        "qa_pixel": {
+            "title": "Pixel Quality Assessment Band",
+            "description": "Collection 2 Level-2 Pixel Quality Assessment Band Surface Temperature",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "cloud",
+                "cloud-shadow",
+                "snow-ice",
+                "water-mask"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_QA_PIXEL.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_QA_PIXEL.TIF"
+                }
+            },
+            "file:checksum": "13402377f4b78a7d366bcd15d51bc2c3c78ed9accfebaf67d054498882a71aa452273642e8a8b3a9a70df65b4efd72bf4ca1969886249b059b5220bd47e054ea41dd"
+        },
+        "qa_radsat": {
+            "title": "Radiometric Saturation Quality Assessment Band",
+            "description": "Collection 2 Level-2 Radiometric Saturation Quality Assessment Band Surface Temperature",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "saturation"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_QA_RADSAT.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1/LT04_L2SP_002026_19830110_20200918_02_T1_QA_RADSAT.TIF"
+                }
+            },
+            "file:checksum": "1340f9ea65e2cde48b3fc72bcd05839fc18ed2d8303a45488e4558b672bbd8647579d4bcb516ae94ea67b114e80670c82f544525124288c9e577e6162859b14bf617"
+        }
+    },
+    "links": [
+        {
+            "rel": "root",
+            "href": "https://landsatlook.usgs.gov/data/catalog.json"
+        },
+        {
+            "rel": "parent",
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/catalog.json"
+        },
+        {
+            "rel": "collection",
+            "href": "https://landsatlook.usgs.gov/data/collection02/landsat-c2l2-st.json"
+        },
+        {
+            "rel": "self",
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/tm/1983/002/026/LT04_L2SP_002026_19830110_20200918_02_T1//LT04_L2SP_002026_19830110_20200918_02_T1_ST_stac.json"
+        }
+    ],
+    "collection": "landsat-c2l2-st"
+}
