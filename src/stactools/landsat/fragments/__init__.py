@@ -8,20 +8,38 @@ from stactools.landsat.constants import Sensor
 
 
 class Fragments:
+    """Class for accessing asset and extension data."""
 
     def __init__(self, sensor: Sensor, satellite: int, base_href: str,
                  level1_radiance: Dict[str, Dict[str, float]]):
+        """Initialize a new group of fragments for the provided Sensor."""
         self._sensor = sensor
         self._satellite = satellite
         self.base_href = base_href
         self.level1_radiance = level1_radiance
 
     def common_assets(self) -> Dict[str, Any]:
+        """Loads common-assets.json.
+
+        Converts the loaded dicts to STAC Assets.
+
+        Returns:
+            Dict[str, Asset]: Dict of Assets keys and Assets.
+        """
         asset_dicts = self._load("common-assets.json", "common")
         assets = self._convert_assets(asset_dicts)
         return assets
 
     def sr_assets(self) -> Dict[str, Any]:
+        """Loads the sr-assets.json for the given sensor.
+
+        If MSS, updates the band numbers depending on the given satellite number
+        (satellites 1-3 use bands 4-7, satellites 4-5 use bands 1-4). Converts
+        the loaded dicts to STAC Assets.
+
+        Returns:
+            Dict[str, Asset]: Dict of Assets keys and Assets.
+        """
         asset_dicts = self._load("sr-assets.json")
         if self._satellite < 4:
             asset_dicts = self._update_mss_num(asset_dicts)
@@ -29,12 +47,29 @@ class Fragments:
         return assets
 
     def sr_eo_bands(self) -> Dict[str, Any]:
+        """Loads the sr-eo-bands.json for the given sensor.
+
+        If MSS, updates the band numbers depending on the given satellite number
+        (satellites 1-3 use bands 4-7, satellites 4-5 use bands 1-4).
+
+        Returns:
+            Dict[str, Dict]: Dict of Assets keys and EO Extension dicts.
+        """
         eo = self._load("sr-eo-bands.json")
         if self._satellite < 4:
             eo = self._update_mss_num(eo)
         return eo
 
     def sr_raster_bands(self) -> Dict[str, Any]:
+        """Loads the sr-raster-bands.json for the given sensor.
+
+        If MSS, updates the band numbers depending on the given satellite number
+        (satellites 1-3 use bands 4-7, satellites 4-5 use bands 1-4). If MSS,
+        adds scale and offset informationt.
+
+        Returns:
+            Dict[str, Dict]: Dict of Assets keys and Raster Extension dicts.
+        """
         raster = self._load("sr-raster-bands.json")
         if self._satellite < 4:
             raster = self._update_mss_num(raster)
@@ -43,15 +78,32 @@ class Fragments:
         return raster
 
     def st_assets(self) -> Dict[str, Any]:
+        """Loads the st-assets.json for the given sensor.
+
+        Converts the loaded dicts to STAC Assets.
+
+        Returns:
+            Dict[str, Asset]: Dict of Assets keys and Assets.
+        """
         asset_dicts = self._load("st-assets.json")
         assets = self._convert_assets(asset_dicts)
         return assets
 
     def st_eo_bands(self) -> Dict[str, Any]:
+        """Loads the st-eo-bands.json for the given sensor.
+
+        Returns:
+            Dict[str, Dict]: Dict of Assets keys and EO Extension dicts.
+        """
         eo = self._load("st-eo-bands.json")
         return eo
 
     def st_raster_bands(self) -> Dict[str, Any]:
+        """Loads the st-raster-bands.json for the given sensor.
+
+        Returns:
+            Dict[str, Dict]: Dict of Assets keys and Raster Extension dicts.
+        """
         raster = self._load("st-raster-bands.json")
         return raster
 

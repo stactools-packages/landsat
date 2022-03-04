@@ -39,10 +39,12 @@ class MtlMetadata:
 
     @property
     def satellite_num(self) -> int:
+        """Return the Landsat satellite number."""
         return int(self.product_id[2:4])
 
     @property
     def product_id(self) -> str:
+        """Return the Landsat product ID."""
         return self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
 
     @property
@@ -62,6 +64,7 @@ class MtlMetadata:
 
     @property
     def scene_id(self) -> str:
+        """"Return the Landsat scene ID."""
         return self._get_text("LEVEL1_PROCESSING_RECORD/LANDSAT_SCENE_ID")
 
     @property
@@ -115,6 +118,7 @@ class MtlMetadata:
 
     @property
     def bbox(self) -> List[float]:
+        # Might be cleaner to transfrom the proj bbox to WGS84.
         lons = [
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UL_LON_PRODUCT"),
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UR_LON_PRODUCT"),
@@ -193,7 +197,7 @@ class MtlMetadata:
 
     @property
     def thermal_shape(self) -> Optional[List[int]]:
-        """Shape for thermal bands (Bands 10–11).
+        """Shape for thermal bands.
 
         None if thermal bands not present.
         Used for proj:shape. In [row, col] order"""
@@ -249,8 +253,14 @@ class MtlMetadata:
 
     @property
     def sun_azimuth(self) -> float:
-        # Sun Azimuth in landsat metadata is -180 to 180 from north, west being
-        # negative. In STAC, it's 0 to 360 clockwise from north.
+        """Returns the sun azimuth in STAC form.
+
+        Converts from Landsat metadata form (-180 to 180 from north, west being
+        negative) to STAC form (0 to 360 clockwise from north).
+
+        Returns:
+            float: Sun azimuth, 0 to 360 clockwise from north.
+        """
         azimuth = self._get_float("IMAGE_ATTRIBUTES/SUN_AZIMUTH")
         if azimuth < 0.0:
             azimuth += 360
@@ -314,9 +324,14 @@ class MtlMetadata:
 
     @property
     def level1_radiance(self) -> Dict[str, Any]:
-        """Scale (mult) and offset (add) values for generating TOA radiance from
-        Level-1 DNs. This is relevant to the MSS data, which is only processed
-        to Level-1.
+        """Gets the scale (mult) and offset (add) values for generating TOA
+        radiance from Level-1 DNs.
+
+        This is relevant to MSS data, which is only processed to Level-1.
+
+        Returns:
+            Dict[str, Any]: Dict of scale and offset dicts, keyed by band
+                number.
         """
         node = self._root.find_or_throw("LEVEL1_RADIOMETRIC_RESCALING",
                                         self._xml_error)
