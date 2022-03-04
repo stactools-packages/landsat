@@ -1,13 +1,15 @@
 import logging
 from datetime import datetime, timezone
+from sqlite3 import adapt
 from typing import Any, Dict, Optional
 
-from pystac import Item, Link
+from pystac import Item, Link, Collection
 from pystac.extensions.eo import Band, EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
+from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac_client import Client
 from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
@@ -20,8 +22,8 @@ from stactools.landsat.constants import (L8_EXTENSION_SCHEMA, L8_INSTRUMENTS,
                                          L8_ITEM_DESCRIPTION, L8_PLATFORM,
                                          LANDSAT_EXTENSION_SCHEMA, SENSORS,
                                          USGS_API, USGS_BROWSER_C2, USGS_C2L1,
-                                         USGS_C2L2_SR, Sensor)
-from stactools.landsat.fragments import Fragments
+                                         USGS_C2L2_SR, COLLECTION_IDS, Sensor)
+from stactools.landsat.fragments import Fragments, CollectionFragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 
 logger = logging.getLogger(__name__)
@@ -226,6 +228,42 @@ def create_stac_item(
                     media_type="text/html"))
 
     return item
+
+
+def create_collection(collection_id: str) -> Collection:
+    """Creates a STAC Collection for Landsat Collection 2 Level-1 or Level-2
+    data.
+
+    Args:
+        collection_id (str): ID of the STAC Collection. Must be one of
+            "landsat-c2-l1" or "landsat-c2-l2".
+    Returns:
+        Collection: The created STAC Collection.
+    """
+    ## TODO: Get the View Extension in here somehow
+    if collection_id not in COLLECTION_IDS:
+        raise ValueError(f"Invalid collection id: {collection_id}")
+
+    fragment = CollectionFragments(collection_id).collection()
+
+    collection = Collection(id=collection_id,
+                            title=fragment["title"],
+                            description=fragment["description"],
+                            license=fragment["license"],
+                            keywords=fragment["keywords"],
+                            providers=fragment["providers"],
+                            extent=fragment["extent"],
+                            summaries=fragment["summaries"])
+    collection.add_links(fragment["links"])
+
+    item_assets = ItemAssetsExtension(collection)
+    item_assets.item_assets = fragment["item_assets"]
+
+    ItemAssetsExtension.add_to(collection)
+    EOExtension.add_to(collection)
+    ViewExtension.add_to(collection)
+
+    return collection
 
 
 def get_usgs_geometry(

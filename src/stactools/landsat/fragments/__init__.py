@@ -2,9 +2,50 @@ import json
 from typing import Any, Dict, Optional
 
 import pkg_resources
-from pystac import Asset, MediaType
+from pystac import Asset, MediaType, Extent, Provider, Link, Summaries
+from pystac.extensions.item_assets import AssetDefinition
 
 from stactools.landsat.constants import Sensor
+
+
+class CollectionFragments:
+    """Class for accessing collection data."""
+
+    def __init__(self, collection_id: str):
+        """Initialize a new group of fragments for the provided Sensor."""
+        self._id = collection_id
+
+    def collection(self) -> Dict[str, Any]:
+        """Loads the collection.json for the given collection id.
+
+        Converts some elements to pystac object.
+
+        Returns:
+            Dict[str, Any]: Dict from parsed JSON with some converted fields.
+        """
+        data = self._load()
+        data["extent"] = Extent.from_dict(data["extent"])
+        data["providers"] = [
+            Provider.from_dict(provider) for provider in data["providers"]
+        ]
+        data["links"] = [Link.from_dict(link) for link in data["links"]]
+        data["summaries"] = Summaries(data["summaries"])
+
+        item_assets = {}
+        for key, value in data["item_assets"].items():
+            item_assets[key] = AssetDefinition(value)
+        data["item_assets"] = item_assets
+
+        return data
+
+    def _load(self) -> Any:
+        try:
+            with pkg_resources.resource_stream(
+                    "stactools.landsat.fragments",
+                    f"collections/{self._id}.json") as stream:
+                return json.load(stream)
+        except FileNotFoundError as e:
+            raise e
 
 
 class Fragments:

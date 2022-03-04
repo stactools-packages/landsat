@@ -16,6 +16,7 @@ USGS_API = "https://landsatlook.usgs.gov/stac-server"
 USGS_BROWSER_C2 = "https://landsatlook.usgs.gov/stac-browser/collection02"
 USGS_C2L1 = "landsat-c2l1"
 USGS_C2L2_SR = "landsat-c2l2-sr"
+COLLECTION_IDS = ["landsat-c2-l1", "landsat-c2-l2"]
 
 SENSORS: Dict[str, Any] = {
     "MSS": {
