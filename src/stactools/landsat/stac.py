@@ -141,7 +141,7 @@ def create_stac_item(
             item.common_metadata.description = "Landsat Collection 2 Level-2 Science Product"
 
         fragments = Fragments(sensor, satellite, base_href,
-                              mtl_metadata.level1_radiance)
+                                mtl_metadata.level1_radiance)
 
         # Common assets
         assets = fragments.common_assets()
@@ -168,7 +168,7 @@ def create_stac_item(
             raster_band = raster_bands.get(key, None)
             if raster_band is not None:
                 optical_raster = RasterExtension.ext(asset,
-                                                     add_if_missing=True)
+                                                        add_if_missing=True)
                 optical_raster.bands = [RasterBand.create(**raster_band)]
 
         # Thermal assets (only exist if optical exist)
@@ -185,7 +185,7 @@ def create_stac_item(
                 raster_band = raster_bands.get(key, None)
                 if raster_band is not None:
                     thermal_raster = RasterExtension.ext(asset,
-                                                         add_if_missing=True)
+                                                            add_if_missing=True)
                     thermal_raster.bands = [RasterBand.create(**raster_band)]
                 if key.startswith("ST_B"):
                     asset.common_metadata.gsd = SENSORS[
@@ -221,9 +221,9 @@ def create_stac_item(
             f"/{mtl_metadata.product_id}")
         item.add_link(
             Link(rel="alternate",
-                 target=usgs_item_page,
-                 title="USGS stac-browser page",
-                 media_type="text/html"))
+                    target=usgs_item_page,
+                    title="USGS stac-browser page",
+                    media_type="text/html"))
 
     return item
 
