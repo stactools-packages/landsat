@@ -1,28 +1,32 @@
 {
-  "QA_PIXEL": {
+  "qa_pixel": {
     "data_type": "uint16",
     "unit": "bit index"
   },
-  "QA_RADSAT": {
+  "qa_radsat": {
     "data_type": "uint16",
     "unit": "bit index"
   },
-  "B1": {
+  "green": {
+    "name": "B1",
     "data_type": "uint8",
     "nodata": 0,
     "unit": "watt/steradian/square_meter/micrometer"
   },
-  "B2": {
+  "red": {
+    "name": "B2",
     "data_type": "uint8",
     "nodata": 0,
     "unit": "watt/steradian/square_meter/micrometer"
   },
-  "B3": {
+  "nir08": {
+    "name": "B3",
     "data_type": "uint8",
     "nodata": 0,
     "unit": "watt/steradian/square_meter/micrometer"
   },
-  "B4": {
+  "nir09": {
+    "name": "B4",
     "data_type": "uint8",
     "nodata": 0,
     "unit": "watt/steradian/square_meter/micrometer"

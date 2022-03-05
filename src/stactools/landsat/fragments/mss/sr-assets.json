@@ -1,33 +1,37 @@
 {
-  "QA_PIXEL": {
+  "qa_pixel": {
     "title": "Pixel Quality Assessment Band",
     "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
     "roles": ["cloud"]
   },
-  "QA_RADSAT": {
+  "qa_radsat": {
     "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
     "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
     "roles": ["saturation"]
   },
-  "B1": {
+  "green": {
     "title": "Green Band (B1)",
     "description": "Collection 2 Level-1 Green Band (B1) Top of Atmosphere Radiance",
-    "roles": ["data"]
+    "roles": ["data"],
+    "href_suffix": "B1.TIF"
   },
-  "B2": {
+  "red": {
     "title": "Red Band (B2)",
     "description": "Collection 2 Level-1 Red Band (B2) Top of Atmosphere Radiance",
-    "roles": ["data"]
+    "roles": ["data"],
+    "href_suffix": "B2.TIF"
   },
-  "B3": {
+  "nir08": {
     "title": "Near Infrared Band 0.8 (B3)",
     "description": "Collection 2 Level-1 Near Infrared Band 0.7 (B3) Top of Atmosphere Radiance",
-    "roles": ["data"]
+    "roles": ["data"],
+    "href_suffix": "B3.TIF"
   },
-  "B4": {
+  "nir09": {
     "title": "Near Infrared Band 0.9 (B4)",
     "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B4) Top of Atmosphere Radiance",
-    "roles": ["data"]
+    "roles": ["data"],
+    "href_suffix": "B4.TIF"
   }
 }
 

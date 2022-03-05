@@ -11,28 +11,28 @@
     "roles": ["overview"],
     "href_suffix": "thumb_large.jpeg"
   },
-  "MTL.json": {
+  "mtl.json": {
     "type": "JSON",
     "title": "Product Metadata File (json)",
     "description": "Collection 2 Level-X Product Metadata File (json)",
     "roles": ["metadata"],
     "href_suffix": "MTL.json"
   },
-  "MTL.txt": {
+  "mtl.txt": {
     "type": "TEXT",
     "title": "Product Metadata File (txt)",
     "description": "Collection 2 Level-X Product Metadata File (txt)",
     "roles": ["metadata"],
     "href_suffix": "MTL.txt"
   },
-  "MTL.xml": {
+  "mtl.xml": {
     "type": "XML",
     "title": "Product Metadata File (xml)",
     "description": "Collection 2 Level-X Product Metadata File (xml)",
     "roles": ["metadata"],
     "href_suffix": "MTL.xml"
   },
-  "ANG": {
+  "ang": {
     "type": "TEXT",
     "title": "Angle Coefficients File",
     "description": "Collection 2 Level-1 Angle Coefficients File (ANG)",

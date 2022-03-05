@@ -1,36 +1,34 @@
 import logging
 from datetime import datetime, timezone
-from sqlite3 import adapt
-from typing import Any, Dict, Optional
+from typing import Optional
 
-from pystac import Item, Link, Collection
+from pystac import Collection, Item, Link
 from pystac.extensions.eo import Band, EOExtension
+from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
-from pystac.extensions.item_assets import ItemAssetsExtension
-from pystac_client import Client
 from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
-from stactools.core.utils import href_exists
 
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.assets import (ANG_ASSET_DEF, COMMON_ASSET_DEFS,
                                       SR_ASSET_DEFS, THERMAL_ASSET_DEFS)
-from stactools.landsat.constants import (L8_EXTENSION_SCHEMA, L8_INSTRUMENTS,
-                                         L8_ITEM_DESCRIPTION, L8_PLATFORM,
-                                         LANDSAT_EXTENSION_SCHEMA, SENSORS,
-                                         USGS_API, USGS_BROWSER_C2, USGS_C2L1,
-                                         USGS_C2L2_SR, COLLECTION_IDS, Sensor)
-from stactools.landsat.fragments import Fragments, CollectionFragments
+from stactools.landsat.constants import (COLLECTION_IDS, L8_EXTENSION_SCHEMA,
+                                         L8_INSTRUMENTS, L8_ITEM_DESCRIPTION,
+                                         L8_PLATFORM, LANDSAT_EXTENSION_SCHEMA,
+                                         SENSORS, USGS_BROWSER_C2, Sensor)
+from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
+from stactools.landsat.utils import get_usgs_geometry
 
 logger = logging.getLogger(__name__)
 
 
 def create_stac_item(
         mtl_xml_href: str,
+        legacy_l8: bool = True,
         use_usgs_geometry: bool = False,
         read_href_modifier: Optional[ReadHrefModifier] = None) -> Item:
     """Creates a STAC Item for Landsat 1-5 Collection 2 Level-1 or Landsat
@@ -38,9 +36,10 @@ def create_stac_item(
 
     Args:
         mtl_xml_href (str): An href to an MTL XML metadata file.
-        use_usgs_geometry (bool): Option to use the geometry from a USGS STAC
-            file that is stored alongside the XML metadata file or pulled from
-            the USGS STAC API.
+        legacy_l8 (bool): Use the legacy (old) method for a Landsat 8 STAC Item.
+        use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
+            stored alongside the XML metadata file or pulled from the USGS STAC
+            API.
         read_href_modifier (Callable[[str], str]): An optional function to
             modify the MTL and USGS STAC hrefs (e.g. to add a token to a url).
     Returns:
@@ -48,9 +47,13 @@ def create_stac_item(
     """
     base_href = '_'.join(mtl_xml_href.split('_')[:-1])  # Remove the _MTL.txt
 
-    mtl_metadata = MtlMetadata.from_file(mtl_xml_href, read_href_modifier)
+    mtl_metadata = MtlMetadata.from_file(mtl_xml_href,
+                                         read_href_modifier,
+                                         legacy_l8=legacy_l8)
 
     sensor = Sensor(mtl_metadata.item_id[1])
+    satellite = int(mtl_metadata.item_id[2:4])
+    level = int(mtl_metadata.item_id[6])
 
     if use_usgs_geometry:
         geometry = get_usgs_geometry(base_href, sensor,
@@ -75,7 +78,7 @@ def create_stac_item(
                 datetime=mtl_metadata.scene_datetime,
                 properties={})
 
-    if sensor is Sensor.OLI_TIRS:
+    if satellite == 8 and legacy_l8:
         item.common_metadata.platform = L8_PLATFORM
         item.common_metadata.instruments = L8_INSTRUMENTS
         item.common_metadata.description = L8_ITEM_DESCRIPTION
@@ -117,7 +120,7 @@ def create_stac_item(
         # -- Add links
         # NOTE: This link is incorrect. Leads to a dead "page". The last
         # component needs to have the processing time in it (replace item_id
-        # with product_id to fix). May warrant a GitHub issue.
+        # with product_id to fix).
         usgs_item_page = (f"{USGS_BROWSER_C2}/level-2/standard/oli-tirs"
                           f"/{mtl_metadata.scene_datetime.year}"
                           f"/{mtl_metadata.wrs_path}/{mtl_metadata.wrs_row}"
@@ -130,9 +133,6 @@ def create_stac_item(
                  media_type="text/html"))
 
     else:
-        satellite = int(mtl_metadata.item_id[2:4])
-        level = int(mtl_metadata.item_id[6])
-
         item.common_metadata.platform = f"landsat-{satellite}"
         item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]
         item.common_metadata.created = datetime.now(tz=timezone.utc)
@@ -143,7 +143,7 @@ def create_stac_item(
             item.common_metadata.description = "Landsat Collection 2 Level-2 Science Product"
 
         fragments = Fragments(sensor, satellite, base_href,
-                                mtl_metadata.level1_radiance)
+                              mtl_metadata.level1_radiance)
 
         # Common assets
         assets = fragments.common_assets()
@@ -152,7 +152,7 @@ def create_stac_item(
             if sensor is Sensor.MSS and key.startswith("ANG"):
                 continue
             # MTL files are specific to the processing level
-            if key.startswith("MTL"):
+            if key.startswith("mtl"):
                 asset.description = asset.description.replace(
                     "Level-X", f"Level-{level}")
             item.add_asset(key, asset)
@@ -170,7 +170,7 @@ def create_stac_item(
             raster_band = raster_bands.get(key, None)
             if raster_band is not None:
                 optical_raster = RasterExtension.ext(asset,
-                                                        add_if_missing=True)
+                                                     add_if_missing=True)
                 optical_raster.bands = [RasterBand.create(**raster_band)]
 
         # Thermal assets (only exist if optical exist)
@@ -187,9 +187,9 @@ def create_stac_item(
                 raster_band = raster_bands.get(key, None)
                 if raster_band is not None:
                     thermal_raster = RasterExtension.ext(asset,
-                                                            add_if_missing=True)
+                                                         add_if_missing=True)
                     thermal_raster.bands = [RasterBand.create(**raster_band)]
-                if key.startswith("ST_B"):
+                if key.startswith("st_lwir"):
                     asset.common_metadata.gsd = SENSORS[
                         sensor.name]["thermal_gsd"]
 
@@ -223,9 +223,9 @@ def create_stac_item(
             f"/{mtl_metadata.product_id}")
         item.add_link(
             Link(rel="alternate",
-                    target=usgs_item_page,
-                    title="USGS stac-browser page",
-                    media_type="text/html"))
+                 target=usgs_item_page,
+                 title="USGS stac-browser page",
+                 media_type="text/html"))
 
     return item
 
@@ -240,7 +240,6 @@ def create_collection(collection_id: str) -> Collection:
     Returns:
         Collection: The created STAC Collection.
     """
-    ## TODO: Get the View Extension in here somehow
     if collection_id not in COLLECTION_IDS:
         raise ValueError(f"Invalid collection id: {collection_id}")
 
@@ -264,55 +263,3 @@ def create_collection(collection_id: str) -> Collection:
     ViewExtension.add_to(collection)
 
     return collection
-
-
-def get_usgs_geometry(
-    base_href: str,
-    sensor: Sensor,
-    product_id: str,
-    read_href_modifier: Optional[ReadHrefModifier] = None
-) -> Optional[Dict[str, Any]]:
-    """Attempts to get scene geometry from a USGS STAC Item.
-
-    Args:
-        base_href (str): Base href to a STAC storage location
-        sensor (Sensor): Enum of MSS, TM, ETM, or OLI-TIRS
-        product_id (str): Scene product id from mtl metadata
-        read_href_modifier (Callable[[str], str]): An optional function to
-            modify the storage href (e.g. to add a token to a url)
-    Returns:
-        Optional[Dict[str, Any]]: Either a GeoJSON geometry or None
-    """
-    # Check data storage first
-    if sensor is Sensor.MSS:
-        stac_href = f"{base_href}_stac.json"
-    else:
-        stac_href = f"{base_href}_SR_stac.json"
-
-    if read_href_modifier is not None:
-        stac_href = read_href_modifier(stac_href)
-
-    if href_exists(stac_href):
-        item = Item.from_file(stac_href)
-    else:
-        item = None
-
-    # If not found, check the USGS STAC API
-    if item is None:
-        if sensor is Sensor.MSS:
-            collection = USGS_C2L1
-        else:
-            collection = USGS_C2L2_SR
-            product_id = f"{product_id}_SR"
-
-        catalog = Client.open(USGS_API)
-        search = catalog.search(collections=[collection], ids=[product_id])
-        if search.matched() == 1:
-            item = next(search.get_items())
-        else:
-            item = None
-
-    if item is not None:
-        return item.geometry
-    else:
-        return None

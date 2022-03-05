@@ -1,0 +1,194 @@
+{
+  "id": "landsat-c2-l2",
+  "title": "Landsat Collection 2 Level-2",
+  "description": "The Landsat program provides a comprehensive, continuous archive of the Earth's surface. Landsat Collection 2 Level-2 data products consist of atmospherically corrected surface reflectance and surface temperature image data. This dataset contains global Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.",
+  "license": "proprietary",
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+      "title": "Public Domain"
+    }
+  ],
+  "keywords": ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"],
+  "providers": [
+    {
+      "name": "NASA",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://landsat.gsfc.nasa.gov/"
+    },
+    {
+      "name": "USGS",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor"
+      ],
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data"
+    },
+    {
+      "name": "Microsoft",
+      "roles": [
+        "host"
+      ],
+      "url": "https://planetarycomputer.microsoft.com"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1982-08-22T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "summaries": {
+    "platform": ["landsat-4", "landsat-5", "landsat-7", "landsat-8", "landsat-9"],
+    "instruments": ["tm", "etm", "oli", "tirs"],
+    "gsd": [30, 60, 100, 120],
+    "view:off_nadir": {
+      "minimum": 0,
+      "maximum": 15
+    }
+  },
+
+
+
+
+
+
+
+
+  "item_assets": {
+    "thumbnail": {
+      "type": "image/jpeg",
+      "title": "Thumbnail image",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "reduced_resolution_browse": {
+      "type": "image/jpeg",
+      "title": "Reduced resolution browse image",
+      "roles": [
+        "overview"
+      ]
+    },
+    "mtl.json": {
+      "type": "application/json",
+      "title": "Product Metadata File (json)",
+      "description": "Collection 2 Level-1 Product Metadata File (json)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.txt": {
+      "type": "text/plain",
+      "title": "Product Metadata File (txt)",
+      "description": "Collection 2 Level-1 Product Metadata File (txt)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.xml": {
+      "type": "application/xml",
+      "title": "Product Metadata File (xml)",
+      "description": "Collection 2 Level-1 Product Metadata File (xml)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "qa_pixel": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+      "roles": [
+        "cloud"
+      ]
+    },
+    "qa_radsat": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "roles": [
+        "saturation"
+      ]
+    },
+    "green": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Green Band",
+      "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "common_name": "green",
+          "center_wavelength": 0.55,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "red": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Red Band",
+      "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "common_name": "red",
+          "center_wavelength": 0.65,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "nir08": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.8",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "common_name": "nir08",
+          "center_wavelength": 0.75,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "nir09": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.9",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
+      "eo:bands": [
+        {
+          "common_name": "nir09",
+          "center_wavelength": 0.95,
+          "full_width_half_max": 0.3
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  }
+}
+

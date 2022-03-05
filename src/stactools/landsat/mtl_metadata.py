@@ -20,9 +20,13 @@ class MtlMetadata:
     References https://github.com/sat-utils/sat-stac-landsat/blob/f2263485043a827b4153aecc12f45a3d1363e9e2/satstac/landsat/main.py#L157
     """  # noqa
 
-    def __init__(self, root: XmlElement, href: Optional[str] = None):
+    def __init__(self,
+                 root: XmlElement,
+                 href: Optional[str] = None,
+                 legacy_l8: bool = True):
         self._root = root
         self.href = href
+        self.legacy_l8 = legacy_l8
 
     def _xml_error(self, item: str) -> MTLError:
         return MTLError(f"Cannot find {item} in MTL metadata" +
@@ -82,24 +86,19 @@ class MtlMetadata:
     def epsg(self) -> int:
         utm_zone = self._root.find_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
         if utm_zone:
-            # NOTE: This logic is retained to keep current STAC Item content for
-            # Landsat 8-9 consistent. If the STAC format for Landsat 8-9 is ever
-            # updated, this logic should be deleted.
-            if self.satellite_num > 7:
+            if self.satellite_num == 8 and self.legacy_l8:
+                # Keep current STAC Item content consistent for Landsat 8
                 bbox = self.bbox
                 utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
                 center_lat = (bbox[1] + bbox[3]) / 2.0
                 return int(f"{326 if center_lat > 0 else 327}{utm_zone}")
-
-            # The projection transforms in the COGs provided by the USGS are
-            # always for UTM North zones (see the negative PROJECTION_Y values
-            # in the metadata files for southern hemisphere scenes, or directly
-            # examine the transform from a southern hemisphere scene COG). The
-            # EPSG codes should therefore always be UTM north zones (326XX,
-            # where XX is the UTM zone number). For more detail, see
-            # https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
-            utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
-            return int(f"326{utm_zone}")
+            else:
+                # The projection transforms in the COGs provided by the USGS are
+                # always for UTM North zones. The EPSG codes should therefore
+                # be UTM north zones (326XX, where XX is the UTM zone number).
+                # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
+                utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
+                return int(f"326{utm_zone}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,
@@ -223,13 +222,6 @@ class MtlMetadata:
 
     @property
     def sr_gsd(self) -> float:
-        # This was set to pull the "GRID_CELL_SIZE_THERMAL" values, which seemed
-        # incorrect. However, since this is actually the grid cell size, and not
-        # the sensor view gsd, the sr_gsd and thermal_gsd should always be equal
-        # and thus no downstream effects. However, MSS MTL data does not contain
-        # thermal information, so this failed when used for MSS data. Therefore,
-        # it was updated to "GRID_CELL_SIZE_REFLECTIVE", which would seem to be
-        # the correct value anyway.
         return self._get_float(
             "LEVEL1_PROJECTION_PARAMETERS/GRID_CELL_SIZE_REFLECTIVE")
 
@@ -272,26 +264,24 @@ class MtlMetadata:
 
     @property
     def off_nadir(self) -> Optional[float]:
-        # NOTE: This logic is retained to keep current STAC Item content for
-        # Landsat 8-9 consistent. If the STAC format for Landsat 8-9 is ever
-        # updated, this logic should be deleted.
-        if self.satellite_num > 7:
+        if self.satellite_num == 8 and self.legacy_l8:
+            # Keep current STAC Item content consistent for Landsat 8
             if self._get_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "NADIR":
                 return 0
             else:
                 return None
-
-        # NADIR_OFFNADIR and ROLL_ANGLE xml entries do not exist prior to
-        # landsat 8. Therefore, we perform a soft check for NADIR_OFFNADIR. If
-        # it exists and is equal to "OFFNADIR", then a non-zero ROLL_ANGLE
-        # exists. We force this ROLL_ANGLE to be positive to conform with the
-        # stactools View Geometry extension. We return 0 otherwise since
-        # off-nadir views are only an option on Landsat 8-9.
-        if self._root.find_text(
-                "IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "OFFNADIR":
-            return abs(self._get_float("IMAGE_ATTRIBUTES/ROLL_ANGLE"))
         else:
-            return 0
+            # NADIR_OFFNADIR and ROLL_ANGLE xml entries do not exist prior to
+            # landsat 8. Therefore, we perform a soft check for NADIR_OFFNADIR.
+            # If exists and is equal to "OFFNADIR", then a non-zero ROLL_ANGLE
+            # exists. We force this ROLL_ANGLE to be positive to conform with
+            # the stac View Geometry extension. We return 0 otherwise since
+            # off-nadir views are only an option on Landsat 8-9.
+            if self._root.find_text(
+                    "IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "OFFNADIR":
+                return abs(self._get_float("IMAGE_ATTRIBUTES/ROLL_ANGLE"))
+            else:
+                return 0
 
     @property
     def wrs_path(self) -> str:
@@ -338,16 +328,18 @@ class MtlMetadata:
         mult_add: Dict[str, Any] = defaultdict(dict)
         for item in node.element:
             if item.tag.startswith("RADIANCE_MULT_BAND"):
-                band = item.tag.split("_")[-1]
+                band = f'B{item.tag.split("_")[-1]}'
                 mult_add[band]["mult"] = float(str(item.text))
             elif item.tag.startswith("RADIANCE_ADD_BAND"):
-                band = item.tag.split("_")[-1]
+                band = f'B{item.tag.split("_")[-1]}'
                 mult_add[band]["add"] = float(str(item.text))
         return mult_add
 
     @classmethod
     def from_file(cls,
-                  href,
-                  read_href_modifier: Optional[ReadHrefModifier] = None
-                  ) -> "MtlMetadata":
-        return cls(XmlElement.from_file(href, read_href_modifier), href=href)
+                  href: str,
+                  read_href_modifier: Optional[ReadHrefModifier] = None,
+                  legacy_l8: bool = True) -> "MtlMetadata":
+        return cls(XmlElement.from_file(href, read_href_modifier),
+                   href=href,
+                   legacy_l8=legacy_l8)

@@ -2,7 +2,7 @@ import json
 from typing import Any, Dict, Optional
 
 import pkg_resources
-from pystac import Asset, MediaType, Extent, Provider, Link, Summaries
+from pystac import Asset, Extent, Link, MediaType, Provider, Summaries
 from pystac.extensions.item_assets import AssetDefinition
 
 from stactools.landsat.constants import Sensor
@@ -158,10 +158,14 @@ class Fragments:
 
     def _update_mss_raster(self, mss_raster_dict: Dict[str,
                                                        Any]) -> Dict[str, Any]:
-        for key, value in self.level1_radiance.items():
-            mss_key = f"B{key}"
-            mss_raster_dict[mss_key]["scale"] = value["mult"]
-            mss_raster_dict[mss_key]["offset"] = value["add"]
+        for key, value in mss_raster_dict.items():
+            rad_key = value.pop("name", None)
+            if rad_key:
+                mss_raster_dict[key]["scale"] = self.level1_radiance[rad_key][
+                    "mult"]
+                mss_raster_dict[key]["offset"] = self.level1_radiance[rad_key][
+                    "add"]
+
         return mss_raster_dict
 
     def _convert_assets(self, asset_dicts: Dict[str, Any]) -> dict[str, Asset]:
@@ -177,8 +181,7 @@ class Fragments:
             if href_suffix is not None:
                 asset_dict["href"] = f"{self.base_href}_{href_suffix}"
             else:
-                asset_dict["href"] = f"{self.base_href}_{key}.TIF"
-
+                asset_dict["href"] = f"{self.base_href}_{key.upper()}.TIF"
             assets[key] = Asset.from_dict(asset_dict)
 
         return assets

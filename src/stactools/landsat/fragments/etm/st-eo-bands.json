@@ -1,5 +1,5 @@
 {
-  "ST_B6": {
+  "st_lwir": {
     "name": "ST_B6",
     "common_name": "lwir",
     "center_wavelength": 11.45,

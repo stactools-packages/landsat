@@ -1,60 +1,60 @@
 {
-  "QA_PIXEL": {
+  "qa_pixel": {
     "data_type": "uint16",
     "unit": "bit index"
   },
-  "QA_RADSAT": {
+  "qa_radsat": {
     "data_type": "uint16",
     "unit": "bit index"
   },
-  "SR_B1": {
+  "sr_blue": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_B2": {
+  "sr_green": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_B3": {
+  "sr_red": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_B4": {
+  "sr_nir08": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_B5": {
+  "sr_swir16": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_B7": {
+  "sr_swir22": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "SR_ATMOS_OPACITY": {
+  "sr_atmos_opacity": {
     "data_type": "int16",
     "nodata": -9999,
     "scale": 0.001
   },
-  "SR_CLOUD_QA": {
+  "sr_cloud_qa": {
     "data_type": "uint8",
     "unit": "bit index"
   }

@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-03T20:31:29.689260Z",
+    "created": "2022-03-05T11:13:05.241997Z",
     "gsd": 60,
     "description": "Landsat Collection 2 Level-1 Data Product",
     "eo:cloud_cover": 43.0,
@@ -94,7 +94,7 @@
         "overview"
       ]
     },
-    "MTL.json": {
+    "mtl.json": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.json",
       "type": "application/json",
       "title": "Product Metadata File (json)",
@@ -103,7 +103,7 @@
         "metadata"
       ]
     },
-    "MTL.txt": {
+    "mtl.txt": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.txt",
       "type": "text/plain",
       "title": "Product Metadata File (txt)",
@@ -112,7 +112,7 @@
         "metadata"
       ]
     },
-    "MTL.xml": {
+    "mtl.xml": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml",
       "type": "application/xml",
       "title": "Product Metadata File (xml)",
@@ -121,7 +121,16 @@
         "metadata"
       ]
     },
-    "QA_PIXEL": {
+    "ang": {
+      "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_ANG.txt",
+      "type": "text/plain",
+      "title": "Angle Coefficients File",
+      "description": "Collection 2 Level-1 Angle Coefficients File (ANG)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "qa_pixel": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Pixel Quality Assessment Band",
@@ -136,7 +145,7 @@
         "cloud"
       ]
     },
-    "QA_RADSAT": {
+    "qa_radsat": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_QA_RADSAT.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
@@ -151,7 +160,7 @@
         "saturation"
       ]
     },
-    "B4": {
+    "green": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band (B4)",
@@ -177,7 +186,7 @@
         "data"
       ]
     },
-    "B5": {
+    "red": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band (B5)",
@@ -203,7 +212,7 @@
         "data"
       ]
     },
-    "B6": {
+    "nir08": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B6.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8 (B6)",
@@ -229,7 +238,7 @@
         "data"
       ]
     },
-    "B7": {
+    "nir09": {
       "href": "../../../tests/data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_B7.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.9 (B7)",

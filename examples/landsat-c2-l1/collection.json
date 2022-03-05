@@ -6,7 +6,7 @@
   "links": [
     {
       "rel": "root",
-      "href": "./landsat-c2-l1.json",
+      "href": "./collection.json",
       "type": "application/json",
       "title": "Landsat Collection 2 Level-1"
     },
@@ -14,6 +14,31 @@
       "rel": "license",
       "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
       "title": "Public Domain"
+    },
+    {
+      "rel": "item",
+      "href": "./LM01_L1GS_001010_19720908_02_T2/LM01_L1GS_001010_19720908_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM02_L1GS_001004_19750411_02_T2/LM02_L1GS_001004_19750411_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM03_L1GS_001001_19780510_02_T2/LM03_L1GS_001001_19780510_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM04_L1GS_001001_19830527_02_T2/LM04_L1GS_001001_19830527_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM05_L1GS_001001_19850524_02_T2/LM05_L1GS_001001_19850524_02_T2.json",
+      "type": "application/json"
     }
   ],
   "stac_extensions": [
@@ -36,7 +61,7 @@
         "overview"
       ]
     },
-    "MTL.json": {
+    "mtl.json": {
       "type": "application/json",
       "title": "Product Metadata File (json)",
       "description": "Collection 2 Level-1 Product Metadata File (json)",
@@ -44,7 +69,7 @@
         "metadata"
       ]
     },
-    "MTL.txt": {
+    "mtl.txt": {
       "type": "text/plain",
       "title": "Product Metadata File (txt)",
       "description": "Collection 2 Level-1 Product Metadata File (txt)",
@@ -52,7 +77,7 @@
         "metadata"
       ]
     },
-    "MTL.xml": {
+    "mtl.xml": {
       "type": "application/xml",
       "title": "Product Metadata File (xml)",
       "description": "Collection 2 Level-1 Product Metadata File (xml)",
@@ -60,7 +85,7 @@
         "metadata"
       ]
     },
-    "QA_PIXEL": {
+    "qa_pixel": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Pixel Quality Assessment Band",
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
@@ -68,7 +93,7 @@
         "cloud"
       ]
     },
-    "QA_RADSAT": {
+    "qa_radsat": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
       "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
@@ -76,13 +101,12 @@
         "saturation"
       ]
     },
-    "B4": {
+    "green": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Green Band (B4)",
-      "description": "Collection 2 Level-1 Green Band (B4) Top of Atmosphere Radiance",
+      "title": "Green Band",
+      "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
       "eo:bands": [
         {
-          "name": "B4",
           "common_name": "green",
           "center_wavelength": 0.55,
           "full_width_half_max": 0.1
@@ -92,13 +116,12 @@
         "data"
       ]
     },
-    "B5": {
+    "red": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Red Band (B5)",
-      "description": "Collection 2 Level-1 Red Band (B5) Top of Atmosphere Radiance",
+      "title": "Red Band",
+      "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
       "eo:bands": [
         {
-          "name": "B5",
           "common_name": "red",
           "center_wavelength": 0.65,
           "full_width_half_max": 0.1
@@ -108,13 +131,12 @@
         "data"
       ]
     },
-    "B6": {
+    "nir08": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near Infrared Band 0.8 (B6)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.7 (B6) Top of Atmosphere Radiance",
+      "title": "Near Infrared Band 0.8",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
       "eo:bands": [
         {
-          "name": "B6",
           "common_name": "nir08",
           "center_wavelength": 0.75,
           "full_width_half_max": 0.1
@@ -124,13 +146,12 @@
         "data"
       ]
     },
-    "B7": {
+    "nir09": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near Infrared Band 0.9 (B7)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B7) Top of Atmosphere Radiance",
+      "title": "Near Infrared Band 0.9",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
       "eo:bands": [
         {
-          "name": "B7",
           "common_name": "nir09",
           "center_wavelength": 0.95,
           "full_width_half_max": 0.3

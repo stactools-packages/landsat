@@ -7,7 +7,7 @@
     "instruments": [
       "tm"
     ],
-    "created": "2022-03-03T20:31:32.520951Z",
+    "created": "2022-03-05T11:13:07.436709Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2 Science Product",
     "eo:cloud_cover": 7.0,
@@ -94,7 +94,7 @@
         "overview"
       ]
     },
-    "MTL.json": {
+    "mtl.json": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.json",
       "type": "application/json",
       "title": "Product Metadata File (json)",
@@ -103,7 +103,7 @@
         "metadata"
       ]
     },
-    "MTL.txt": {
+    "mtl.txt": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.txt",
       "type": "text/plain",
       "title": "Product Metadata File (txt)",
@@ -112,7 +112,7 @@
         "metadata"
       ]
     },
-    "MTL.xml": {
+    "mtl.xml": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.xml",
       "type": "application/xml",
       "title": "Product Metadata File (xml)",
@@ -121,7 +121,7 @@
         "metadata"
       ]
     },
-    "ANG": {
+    "ang": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ANG.txt",
       "type": "text/plain",
       "title": "Angle Coefficients File",
@@ -130,7 +130,7 @@
         "metadata"
       ]
     },
-    "QA_PIXEL": {
+    "qa_pixel": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Pixel Quality Assessment Band",
@@ -148,7 +148,7 @@
         "water-mask"
       ]
     },
-    "QA_RADSAT": {
+    "qa_radsat": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_QA_RADSAT.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
@@ -163,7 +163,7 @@
         "saturation"
       ]
     },
-    "SR_B1": {
+    "sr_blue": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B1.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Blue Band (B1)",
@@ -189,7 +189,7 @@
         "reflectance"
       ]
     },
-    "SR_B2": {
+    "sr_green": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B2.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band (B2)",
@@ -215,7 +215,7 @@
         "reflectance"
       ]
     },
-    "SR_B3": {
+    "sr_red": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B3.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band (B3)",
@@ -241,7 +241,7 @@
         "reflectance"
       ]
     },
-    "SR_B4": {
+    "sr_nir08": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8 (B4)",
@@ -267,7 +267,7 @@
         "reflectance"
       ]
     },
-    "SR_B5": {
+    "sr_swir16": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 1.6 (B5)",
@@ -293,7 +293,7 @@
         "reflectance"
       ]
     },
-    "SR_B7": {
+    "sr_swir22": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B7.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 2.2 (B7)",
@@ -319,7 +319,7 @@
         "reflectance"
       ]
     },
-    "SR_ATMOS_OPACITY": {
+    "sr_atmos_opacity": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_ATMOS_OPACITY.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Opacity Band",
@@ -335,7 +335,7 @@
         "data"
       ]
     },
-    "SR_CLOUD_QA": {
+    "sr_cloud_qa": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_CLOUD_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Quality Assessment Band",
@@ -353,8 +353,8 @@
         "water-mask"
       ]
     },
-    "ST_B6": {
-      "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_B6.TIF",
+    "st_lwir": {
+      "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_SR_B6.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Band (B6)",
       "description": "Collection 2 Level-2 Thermal Infrared Band (B6) Surface Temperature",
@@ -380,7 +380,7 @@
         "temperature"
       ]
     },
-    "ST_ATRAN": {
+    "st_atran": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_ATRAN.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Transmittance Band",
@@ -397,7 +397,7 @@
         "data"
       ]
     },
-    "ST_CDIST": {
+    "st_cdist": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_CDIST.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Distance Band",
@@ -414,7 +414,7 @@
         "data"
       ]
     },
-    "ST_DRAD": {
+    "st_drad": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_DRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Downwelled Radiance Band",
@@ -431,7 +431,7 @@
         "data"
       ]
     },
-    "ST_URAD": {
+    "st_urad": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_URAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Upwelled Radiance Band",
@@ -448,7 +448,7 @@
         "data"
       ]
     },
-    "ST_TRAD": {
+    "st_trad": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_TRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Thermal Radiance Band",
@@ -465,7 +465,7 @@
         "data"
       ]
     },
-    "ST_EMIS": {
+    "st_emis": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMIS.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Band",
@@ -482,7 +482,7 @@
         "data"
       ]
     },
-    "ST_EMSD": {
+    "st_emsd": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_EMSD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Standard Deviation Band",
@@ -499,7 +499,7 @@
         "data"
       ]
     },
-    "ST_QA": {
+    "st_qa": {
       "href": "../../../tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_ST_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Quality Assessment Band",

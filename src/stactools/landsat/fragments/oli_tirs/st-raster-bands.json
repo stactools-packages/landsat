@@ -1,54 +1,54 @@
 {
-  "ST_B10": {
+  "st_lwir11": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "kelvin",
     "scale": 0.00341802,
     "offset": 149.0
   },
-  "ST_ATRAN": {
+  "st_atran": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "unitless",
     "scale": 0.0001
   },
-  "ST_CDIST": {
+  "st_cdist": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "kilometer",
     "scale": 0.01
   },
-  "ST_DRAD": {
+  "st_drad": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "watt/steradian/square_meter/micrometer",
     "scale": 0.001
   },
-  "ST_URAD": {
+  "st_urad": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "watt/steradian/square_meter/micrometer",
     "scale": 0.001
   },
-  "ST_TRAD": {
+  "st_trad": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "watt/steradian/square_meter/micrometer",
     "scale": 0.001
   },
-  "ST_EMIS": {
+  "st_emis": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "emissivity coefficient",
     "scale": 0.0001
   },
-  "ST_EMSD": {
+  "st_emsd": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "emissivity coefficient",
     "scale": 0.0001
   },
-  "ST_QA": {
+  "st_qa": {
     "data_type": "int16",
     "nodata": -9999,
     "unit": "kelvin",

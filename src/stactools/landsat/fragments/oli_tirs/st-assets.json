@@ -1,45 +1,46 @@
 {
-  "ST_B10": {
-    "title": "Surface Temperature Band (B6)",
-    "description": "Collection 2 Level-2 Thermal Infrared Band (B6) Surface Temperature",
-    "roles": ["temperature"]
+  "st_lwir11": {
+    "title": "Surface Temperature Band (B10)",
+    "description": "Collection 2 Level-2 Thermal Infrared Band (B10) Surface Temperature",
+    "roles": ["temperature"],
+    "href_suffix": "SR_B10.TIF"
   },
-  "ST_ATRAN": {
+  "st_atran": {
     "title": "Atmospheric Transmittance Band",
     "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_CDIST": {
+  "st_cdist": {
     "title": "Cloud Distance Band",
     "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_DRAD": {
+  "st_drad": {
     "title": "Downwelled Radiance Band",
     "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_URAD": {
+  "st_urad": {
     "title": "Upwelled Radiance Band",
     "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_TRAD": {
+  "st_trad": {
     "title": "Thermal Radiance Band",
     "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_EMIS": {
+  "st_emis": {
     "title": "Emissivity Band",
     "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_EMSD": {
+  "st_emsd": {
     "title": "Emissivity Standard Deviation Band",
     "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
     "roles": ["data"]
   },
-  "ST_QA": {
+  "st_qa": {
     "title": "Surface Temperature Quality Assessment Band",
     "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",
     "roles": ["data"]
