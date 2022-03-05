@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "landsat-c2-l1",
   "stac_version": "1.0.0",
-  "description": "The Landsat program provides a comprehensive, continuous archive of the Earth's surface. Landsat Collection 2 Level-1 data products consist of quantized and calibrated scaled Digital Numbers (DN) representing the multispectral image data. This dataset represents the global archive of Level-1 data acquired by the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.",
+  "description": "The Landsat program provides a comprehensive, continuous archive of the Earth's surface. Landsat Collection 2 Level-1 data products consist of quantized and calibrated scaled Digital Numbers (DN) representing the multispectral image data. This dataset contains global Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.",
   "links": [
     {
       "rel": "root",
@@ -42,9 +42,7 @@
     }
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/view/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json"
   ],
   "item_assets": {
     "thumbnail": {
@@ -177,7 +175,7 @@
     "temporal": {
       "interval": [
         [
-          "1982-08-22T00:00:00Z",
+          "1972-07-01T00:00:00Z",
           "2013-01-06T23:23:59Z"
         ]
       ]

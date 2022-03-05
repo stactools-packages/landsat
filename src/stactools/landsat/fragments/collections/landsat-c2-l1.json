@@ -65,21 +65,21 @@
   },
   "item_assets": {
     "thumbnail": {
-      "type": "image/jpeg",
+      "type": "JPEG",
       "title": "Thumbnail image",
       "roles": [
         "thumbnail"
       ]
     },
     "reduced_resolution_browse": {
-      "type": "image/jpeg",
+      "type": "JPEG",
       "title": "Reduced resolution browse image",
       "roles": [
         "overview"
       ]
     },
     "mtl.json": {
-      "type": "application/json",
+      "type": "JSON",
       "title": "Product Metadata File (json)",
       "description": "Collection 2 Level-1 Product Metadata File (json)",
       "roles": [
@@ -87,7 +87,7 @@
       ]
     },
     "mtl.txt": {
-      "type": "text/plain",
+      "type": "TEXT",
       "title": "Product Metadata File (txt)",
       "description": "Collection 2 Level-1 Product Metadata File (txt)",
       "roles": [
@@ -95,7 +95,7 @@
       ]
     },
     "mtl.xml": {
-      "type": "application/xml",
+      "type": "XML",
       "title": "Product Metadata File (xml)",
       "description": "Collection 2 Level-1 Product Metadata File (xml)",
       "roles": [
@@ -103,7 +103,7 @@
       ]
     },
     "qa_pixel": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Pixel Quality Assessment Band",
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
       "roles": [
@@ -111,7 +111,7 @@
       ]
     },
     "qa_radsat": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
       "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
       "roles": [
@@ -119,7 +119,7 @@
       ]
     },
     "green": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Green Band",
       "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
       "eo:bands": [
@@ -134,7 +134,7 @@
       ]
     },
     "red": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Red Band",
       "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
       "eo:bands": [
@@ -149,7 +149,7 @@
       ]
     },
     "nir08": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Near Infrared Band 0.8",
       "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
       "eo:bands": [
@@ -164,7 +164,7 @@
       ]
     },
     "nir09": {
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "type": "COG",
       "title": "Near Infrared Band 0.9",
       "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
       "eo:bands": [

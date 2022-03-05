@@ -26,8 +26,8 @@
     "landsat:wrs_row": "009",
     "landsat:collection_category": "T2",
     "landsat:collection_number": "02",
-    "landsat:processing_level": "L2SP",
     "landsat:scene_id": "LC80050092015191LGN01",
+    "landsat:processing_level": "L2SP",
     "datetime": "2015-07-10T14:34:35.978399Z"
   },
   "geometry": {
@@ -76,11 +76,11 @@
       "type": "image/jpeg",
       "title": "Reduced resolution browse image"
     },
-    "ANG": {
-      "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt",
-      "type": "text/plain",
-      "title": "Angle Coefficients File",
-      "description": "Collection 2 Level-1 Angle Coefficients File (ANG)"
+    "MTL.json": {
+      "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.json",
+      "type": "application/json",
+      "title": "Product Metadata File (json)",
+      "description": "Collection 2 Level-1 Product Metadata File (json)"
     },
     "MTL.txt": {
       "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.txt",
@@ -94,11 +94,11 @@
       "title": "Product Metadata File (xml)",
       "description": "Collection 2 Level-1 Product Metadata File (xml)"
     },
-    "MTL.json": {
-      "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.json",
-      "type": "application/json",
-      "title": "Product Metadata File (json)",
-      "description": "Collection 2 Level-1 Product Metadata File (json)"
+    "ANG": {
+      "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt",
+      "type": "text/plain",
+      "title": "Angle Coefficients File",
+      "description": "Collection 2 Level-1 Angle Coefficients File (ANG)"
     },
     "QA_PIXEL": {
       "href": "../../../tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_QA_PIXEL.TIF",

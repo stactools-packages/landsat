@@ -29,10 +29,12 @@ def create_landsat_command(cli: Group) -> Command:
                   default="level-2",
                   show_default=True,
                   help="Product level to process. Deprecated.")
-    @click.option("--mtl",
+    @click.option("-m",
+                  "--mtl",
                   required=True,
                   help="HREF to the source MTL metadata xml file.")
-    @click.option("--output",
+    @click.option("-o",
+                  "--output",
                   required=True,
                   help="HREF of directory in which to write the item.")
     @click.option("-u",
@@ -51,8 +53,9 @@ def create_landsat_command(cli: Group) -> Command:
         Creates a STAC Item for a Landsat Collection 2 scene based on metadata
         from a Landsat MTL xml file.
 
-        The following Landsat processing Levels and
-        sensors are supported:
+        \b
+        The following Landsat Collection 2 processing Levels and sensors are
+        supported:
             Level-1
                 - Landsat 1-5 Multi Spectral Scanner (MSS)
             Level-2
@@ -86,34 +89,47 @@ def create_landsat_command(cli: Group) -> Command:
         "create-collection",
         short_help="Creates a STAC Collection with contents defined by hrefs "
         "in a text file.")
-    @click.argument("INFILE")
-    @click.argument("OUTDIR")
-    @click.argument("ID",
-                    type=click.Choice(['landsat-c2-l1', 'landsat-c2-l2'],
-                                      case_sensitive=True))
-    @click.option("--usgs_geometry",
-                  default=False,
+    @click.option("-f",
+                  "--file_list",
+                  required=True,
+                  help="Text file of HREFs to Landsat scene XML MTL metadata "
+                  "files.")
+    @click.option("-o",
+                  "--output",
+                  required=True,
+                  help="HREF of directory in which to write the collection.")
+    @click.option("-i",
+                  "--id",
+                  type=click.Choice(['landsat-c2-l1', 'landsat-c2-l2'],
+                                    case_sensitive=True),
+                  required=True,
+                  help="Landsat collection type. Choice of 'landsat-c2-l1' "
+                  "'landsat-c2-l2'")
+    @click.option("-u",
+                  "--usgs_geometry",
+                  default=True,
                   show_default=True,
                   help="Use USGS STAC Item geometry")
-    def create_collection_cmd(infile: str, outdir: str, id: str,
+    def create_collection_cmd(file_list: str, output: str, id: str,
                               usgs_geometry: bool) -> None:
-        """Creates a STAC Collection for Items defined by the hrefs in INFILE.
+        """\b
+        Creates a STAC Collection for Items defined by the hrefs in file_list.
 
         \b
         Args:
-            infile (str): Text file containing one href per line. The hrefs
+            file_list (str): Text file containing one href per line. The hrefs
                 should point to XML MTL metadata files.
-            outdir (str): Directory that will contain the collection.
+            output (str): Directory that will contain the collection.
             id (str): Choice of 'landsat-c2-l1' or 'landsat-c2-l2'.
             usgs_geometry (bool): Use the geometry from a USGS STAC Item that
                 resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
         """
-        with open(infile) as file:
+        with open(file_list) as file:
             hrefs = [line.strip() for line in file.readlines()]
 
         collection = create_collection(id)
-        collection.set_self_href(os.path.join(outdir, "collection.json"))
+        collection.set_self_href(os.path.join(output, "collection.json"))
         collection.catalog_type = CatalogType.SELF_CONTAINED
         for href in hrefs:
             item = create_stac_item(href,

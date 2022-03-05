@@ -48,7 +48,7 @@ class CreateItemTest(CliTestCase):
                 with TemporaryDirectory() as tmp_dir:
                     cmd = [
                         'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', tmp_dir
+                        '--output', tmp_dir, '--legacy_l8', True
                     ]
                     self.run_command(cmd)
 
@@ -132,7 +132,7 @@ class CreateItemTest(CliTestCase):
 
                     create_cmd = [
                         'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', create_dir
+                        '--output', create_dir, '--legacy_l8', True
                     ]
                     self.run_command(create_cmd)
 

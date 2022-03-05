@@ -32,8 +32,10 @@ class CollectionFragments:
         data["summaries"] = Summaries(data["summaries"])
 
         item_assets = {}
-        for key, value in data["item_assets"].items():
-            item_assets[key] = AssetDefinition(value)
+        for key, asset_dict in data["item_assets"].items():
+            media_type = asset_dict.get("type")
+            asset_dict["type"] = MediaType[media_type]
+            item_assets[key] = AssetDefinition(asset_dict)
         data["item_assets"] = item_assets
 
         return data
