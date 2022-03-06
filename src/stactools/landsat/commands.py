@@ -44,7 +44,7 @@ def create_landsat_command(cli: Group) -> Command:
                   help="Use USGS STAC Item geometry")
     @click.option("-l",
                   "--legacy_l8",
-                  default=False,
+                  default=True,
                   show_default=True,
                   help="Create deprecated Landsat 8 STAC Item")
     def create_item_cmd(level: str, mtl: str, output: str, usgs_geometry: bool,
