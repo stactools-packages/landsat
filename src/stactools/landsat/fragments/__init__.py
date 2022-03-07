@@ -170,7 +170,7 @@ class Fragments:
 
         return mss_raster_dict
 
-    def _convert_assets(self, asset_dicts: Dict[str, Any]) -> dict[str, Asset]:
+    def _convert_assets(self, asset_dicts: Dict[str, Any]) -> Dict[str, Asset]:
         assets = {}
         for key, asset_dict in asset_dicts.items():
             media_type = asset_dict.pop("type", None)
