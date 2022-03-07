@@ -39,7 +39,7 @@ def create_landsat_command(cli: Group) -> Command:
                   help="HREF of directory in which to write the item.")
     @click.option("-u",
                   "--usgs_geometry",
-                  default=True,
+                  default=False,
                   show_default=True,
                   help="Use USGS STAC Item geometry")
     @click.option("-l",

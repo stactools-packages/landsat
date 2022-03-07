@@ -14,6 +14,8 @@ from stactools.landsat.assets import (SR_ASSET_DEFS, ST_B10_ASSET_DEF,
                                       THERMAL_ASSET_DEFS)
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
+from stactools.landsat.stac import create_stac_item
+from tests import test_data
 from tests.data import TEST_MTL_PATHS
 
 
@@ -174,3 +176,52 @@ class CreateItemTest(CliTestCase):
                     #     msg=
                     #     f"{set(converted_item.assets.keys()) - set(created_item.assets.keys())}"
                     # )
+
+
+def test_nonlegacyl8_item() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False)
+    item_dict = item.to_dict()
+
+    # nonlegacy uses v1.1.1 landsat extension
+    ext = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+    assert ext in item.stac_extensions
+
+    # nonlegacy handles non-zero roll
+    assert item_dict["properties"]["view:off_nadir"] != 0
+
+    # nonlegacy has doi link
+    assert len(item.get_links("cite-as")) == 1
+
+    # nonlegacy usgs browser link includes processing date
+    usgs_browser_link = item.get_links("alternate")[0].href
+    endpoint = os.path.basename(usgs_browser_link)
+    assert len(endpoint) == 40
+
+
+def test_read_href_modifier() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+
+    did_it = False
+
+    def read_href_modifier(href: str) -> str:
+        nonlocal did_it
+        did_it = True
+        return href
+
+    _ = create_stac_item(mtl_path,
+                         legacy_l8=False,
+                         read_href_modifier=read_href_modifier)
+    assert did_it
+
+
+def test_southern_hemisphere_epsg() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    # northern hemisphere UTM zone for southern hemisphere scene
+    assert item_dict["properties"]["proj:epsg"] == 32617
