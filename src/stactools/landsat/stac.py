@@ -137,10 +137,7 @@ def create_stac_item(
         item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]
         item.common_metadata.created = datetime.now(tz=timezone.utc)
         item.common_metadata.gsd = SENSORS[sensor.name]["reflective_gsd"]
-        if level == 1:
-            item.common_metadata.description = "Landsat Collection 2 Level-1 Data Product"
-        elif level == 2:
-            item.common_metadata.description = "Landsat Collection 2 Level-2 Science Product"
+        item.common_metadata.description = f"Landsat Collection 2 Level-{level}"
 
         fragments = Fragments(sensor, satellite, base_href,
                               mtl_metadata.level1_radiance)
