@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict, Optional
 
 import pkg_resources
+from pystac.utils import make_absolute_href
 from pystac import Asset, Extent, Link, MediaType, Provider, Summaries
 from pystac.extensions.item_assets import AssetDefinition
 
@@ -181,9 +182,10 @@ class Fragments:
 
             href_suffix = asset_dict.pop('href_suffix', None)
             if href_suffix is not None:
-                asset_dict["href"] = f"{self.base_href}_{href_suffix}"
+                href = f"{self.base_href}_{href_suffix}"
             else:
-                asset_dict["href"] = f"{self.base_href}_{key.upper()}.TIF"
+                href = f"{self.base_href}_{key.upper()}.TIF"
+            asset_dict["href"] = make_absolute_href(href)
             assets[key] = Asset.from_dict(asset_dict)
 
         return assets

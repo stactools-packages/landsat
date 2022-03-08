@@ -81,6 +81,7 @@ def create_landsat_command(cli: Group) -> Command:
                                 use_usgs_geometry=usgs_geometry,
                                 legacy_l8=legacy_l8)
         item.set_self_href(os.path.join(output, f'{item.id}.json'))
+        item.make_asset_hrefs_relative()
         item.save_object()
 
     @landsat.command(
@@ -133,8 +134,8 @@ def create_landsat_command(cli: Group) -> Command:
                                     use_usgs_geometry=usgs_geometry,
                                     legacy_l8=False)
             collection.add_item(item)
-        collection.validate_all()
         collection.make_all_asset_hrefs_relative()
+        collection.validate_all()
         collection.save()
 
     @landsat.command(
