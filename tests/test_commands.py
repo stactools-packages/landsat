@@ -130,7 +130,7 @@ class LandsatTest(CliTestCase):
 
         with TemporaryDirectory() as temp_dir:
             cmd = (f"landsat create-item --mtl {infile} --output {temp_dir} "
-                   f"--usgs_geometry True --legacy_l8 False")
+                   f"--usgs_geometry")
             self.run_command(cmd)
             item_path = os.path.join(temp_dir,
                                      "LC08_L2SP_017036_20130419_02_T2.json")

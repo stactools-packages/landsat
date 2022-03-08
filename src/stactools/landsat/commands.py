@@ -9,7 +9,7 @@ from stactools.landsat.utils import transform_stac_to_stac
 
 
 def create_landsat_command(cli: Group) -> Command:
-    """Creates a command group for commands working with the USGS' Landsat
+    """Creates a command group for commands working with the USGS's Landsat
     Collection 2 metadata.
     """
 
@@ -23,12 +23,6 @@ def create_landsat_command(cli: Group) -> Command:
     @landsat.command(
         "create-item",
         short_help="Creates a STAC Item from Collection 2 scene metadata.")
-    @click.option("--level",
-                  type=click.Choice(['level-1', 'level-2'],
-                                    case_sensitive=False),
-                  default="level-2",
-                  show_default=True,
-                  help="Product level to process. Deprecated.")
     @click.option("-m",
                   "--mtl",
                   required=True,
@@ -39,14 +33,18 @@ def create_landsat_command(cli: Group) -> Command:
                   help="HREF of directory in which to write the item.")
     @click.option("-u",
                   "--usgs_geometry",
-                  default=False,
-                  show_default=True,
+                  is_flag=True,
                   help="Use USGS STAC Item geometry")
     @click.option("-l",
                   "--legacy_l8",
-                  default=True,
+                  is_flag=True,
+                  help="Create legacy Landsat 8 STAC Item")
+    @click.option("--level",
+                  type=click.Choice(['level-1', 'level-2'],
+                                    case_sensitive=False),
+                  default="level-2",
                   show_default=True,
-                  help="Create deprecated Landsat 8 STAC Item")
+                  help="Product level to process. Unused.")
     def create_item_cmd(level: str, mtl: str, output: str, usgs_geometry: bool,
                         legacy_l8) -> None:
         """\b
@@ -69,15 +67,15 @@ def create_landsat_command(cli: Group) -> Command:
 
         \b
         Args:
-            level (str): Choice of 'level-1' or 'level-2'. This is deprecated
-                and has no effect.
             mtl (str): HREF to the source MTL metadata xml file
             output (str): Directory that will contain the STAC Item
-            usgs_geometry (bool): Use the geometry from a USGS STAC Item that
+            usgs_geometry: Flag to use the geometry from a USGS STAC Item that
                 resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
-            legacy_l8 (bool): Use the legacy (deprecated) method for creating a
-                Landsat 8 STAC Item.
+            legacy_l8: Flag to use the legacy method for creating a Landsat 8
+                STAC Item.
+            level (str): Choice of 'level-1' or 'level-2'. This is not used
+                and has no effect.
         """
         item = create_stac_item(mtl_xml_href=mtl,
                                 use_usgs_geometry=usgs_geometry,
@@ -107,8 +105,7 @@ def create_landsat_command(cli: Group) -> Command:
                   "'landsat-c2-l2'")
     @click.option("-u",
                   "--usgs_geometry",
-                  default=True,
-                  show_default=True,
+                  is_flag=True,
                   help="Use USGS STAC Item geometry")
     def create_collection_cmd(file_list: str, output: str, id: str,
                               usgs_geometry: bool) -> None:
@@ -121,7 +118,7 @@ def create_landsat_command(cli: Group) -> Command:
                 should point to XML MTL metadata files.
             output (str): Directory that will contain the collection.
             id (str): Choice of 'landsat-c2-l1' or 'landsat-c2-l2'.
-            usgs_geometry (bool): Use the geometry from a USGS STAC Item that
+            usgs_geometry: Flag to use the geometry from a USGS STAC Item that
                 resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
         """
@@ -160,7 +157,7 @@ def create_landsat_command(cli: Group) -> Command:
         Args:
             stac (str): href to the source STAC file
             dst (str): Directory that will contain the STAC Item
-            enable_proj (flag): Include the proj extension in the created STAC
+            enable_proj: Flag to include the proj extension in the created STAC
                 Item
         """
         in_item = Item.from_file(stac)
