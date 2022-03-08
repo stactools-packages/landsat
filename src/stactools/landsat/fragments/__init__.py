@@ -2,9 +2,9 @@ import json
 from typing import Any, Dict, Optional
 
 import pkg_resources
-from pystac.utils import make_absolute_href
 from pystac import Asset, Extent, Link, MediaType, Provider, Summaries
 from pystac.extensions.item_assets import AssetDefinition
+from pystac.utils import make_absolute_href
 
 from stactools.landsat.constants import Sensor
 
