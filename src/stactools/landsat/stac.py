@@ -2,7 +2,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Optional
 
-from pystac import Collection, Item, Link
+from pystac import Collection, Item, Link, MediaType
 from pystac.extensions.eo import Band, EOExtension
 from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
@@ -18,7 +18,9 @@ from stactools.landsat.assets import (ANG_ASSET_DEF, COMMON_ASSET_DEFS,
 from stactools.landsat.constants import (COLLECTION_IDS, L8_EXTENSION_SCHEMA,
                                          L8_INSTRUMENTS, L8_ITEM_DESCRIPTION,
                                          L8_PLATFORM, LANDSAT_EXTENSION_SCHEMA,
-                                         SENSORS, USGS_BROWSER_C2, Sensor)
+                                         SENSORS, USGS_API, USGS_BROWSER_C2,
+                                         USGS_C2L1, USGS_C2L2_SR, USGS_C2L2_ST,
+                                         Sensor)
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import get_usgs_geometry
@@ -54,6 +56,7 @@ def create_stac_item(
     sensor = Sensor(mtl_metadata.item_id[1])
     satellite = int(mtl_metadata.item_id[2:4])
     level = int(mtl_metadata.item_id[6])
+    correction = mtl_metadata.item_id[7:9]
 
     if use_usgs_geometry:
         geometry = get_usgs_geometry(base_href, sensor,
@@ -211,18 +214,28 @@ def create_stac_item(
         item.properties["landsat:correction"] = item.properties.pop(
             "landsat:processing_level")
 
-        # Link to USGS STAC browser for this item
-        instrument = "-".join(i for i in SENSORS[sensor.name]["instruments"])
-        usgs_item_page = (
-            f"{USGS_BROWSER_C2}/level-{level}/standard/{instrument}"
-            f"/{mtl_metadata.scene_datetime.year}"
-            f"/{mtl_metadata.wrs_path}/{mtl_metadata.wrs_row}"
-            f"/{mtl_metadata.product_id}")
-        item.add_link(
-            Link(rel="alternate",
-                 target=usgs_item_page,
-                 title="USGS stac-browser page",
-                 media_type="text/html"))
+        via_links = []
+        if level == 1:
+            via_links.append(
+                f"{USGS_API}/collections/{USGS_C2L1}/items/{mtl_metadata.product_id}"
+            )
+        elif level == 2 and correction == "SP":
+            via_links.append(
+                f"{USGS_API}/collections/{USGS_C2L2_SR}/items/{mtl_metadata.product_id}_SR"
+            )
+            via_links.append(
+                f"{USGS_API}/collections/{USGS_C2L2_ST}/items/{mtl_metadata.product_id}_ST"
+            )
+        elif level == 2 and correction == "SR":
+            via_links.append(
+                f"{USGS_API}/collections/{USGS_C2L2_SR}/items/{mtl_metadata.product_id}_SR"
+            )
+        for via_link in via_links:
+            item.add_link(
+                Link(rel="via",
+                     target=via_link,
+                     title="USGS STAC Item",
+                     media_type=MediaType.JSON))
 
     return item
 

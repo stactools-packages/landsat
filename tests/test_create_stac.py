@@ -194,10 +194,9 @@ def test_nonlegacyl8_item() -> None:
     # nonlegacy has doi link
     assert len(item.get_links("cite-as")) == 1
 
-    # nonlegacy usgs browser link includes processing date
-    usgs_browser_link = item.get_links("alternate")[0].href
-    endpoint = os.path.basename(usgs_browser_link)
-    assert len(endpoint) == 40
+    # nonlegacy has via link(s) to usgs stac-server
+    usgs_stac_links = item.get_links(rel="via")
+    assert len(usgs_stac_links) > 0
 
 
 def test_read_href_modifier() -> None:
