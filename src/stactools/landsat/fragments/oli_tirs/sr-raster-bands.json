@@ -10,49 +10,42 @@
     "coastal": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "blue": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "green": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "red": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "nir08": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "swir16": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },
     "swir22": {
         "data_type": "uint16",
         "nodata": 0,
-        "unit": "",
         "scale": 0.0000275,
         "offset": -0.2
     },

@@ -9,7 +9,6 @@
     "atran": {
         "data_type": "int16",
         "nodata": -9999,
-        "unit": "",
         "scale": 0.0001
     },
     "cdist": {
