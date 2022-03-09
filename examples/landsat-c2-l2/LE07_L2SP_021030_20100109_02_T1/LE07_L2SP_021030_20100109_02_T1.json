@@ -7,7 +7,7 @@
     "instruments": [
       "etm"
     ],
-    "created": "2022-03-09T15:13:21.016631Z",
+    "created": "2022-03-09T15:23:34.133753Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 8.0,

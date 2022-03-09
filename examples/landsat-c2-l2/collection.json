@@ -131,9 +131,7 @@
       "description": "Collection 2 Level-2 Coastal/Aerosol Band Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "coastal",
-          "center_wavelength": 0.44,
-          "full_width_half_max": 0.02
+          "common_name": "coastal"
         }
       ],
       "roles": [
@@ -146,9 +144,7 @@
       "description": "Collection 2 Level-2 Blue Band Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "blue",
-          "center_wavelength": 0.48,
-          "full_width_half_max": 0.06
+          "common_name": "blue"
         }
       ],
       "roles": [
@@ -161,9 +157,7 @@
       "description": "Collection 2 Level-2 Green Band Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "green",
-          "center_wavelength": 0.56,
-          "full_width_half_max": 0.06
+          "common_name": "green"
         }
       ],
       "roles": [
@@ -176,9 +170,7 @@
       "description": "Collection 2 Level-2 Red Band Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "red",
-          "center_wavelength": 0.65,
-          "full_width_half_max": 0.04
+          "common_name": "red"
         }
       ],
       "roles": [
@@ -191,9 +183,7 @@
       "description": "Collection 2 Level-2 Near Infrared Band 0.8 Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "nir08",
-          "center_wavelength": 0.86,
-          "full_width_half_max": 0.03
+          "common_name": "nir08"
         }
       ],
       "roles": [
@@ -206,9 +196,7 @@
       "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "swir16",
-          "center_wavelength": 1.6,
-          "full_width_half_max": 0.08
+          "common_name": "swir16"
         }
       ],
       "roles": [
@@ -221,9 +209,7 @@
       "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 Surface Reflectance",
       "eo:bands": [
         {
-          "common_name": "swir22",
-          "center_wavelength": 2.2,
-          "full_width_half_max": 0.2
+          "common_name": "swir22"
         }
       ],
       "roles": [
@@ -264,9 +250,7 @@
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
       "eo:bands": [
         {
-          "common_name": "lwir11",
-          "center_wavelength": 10.9,
-          "full_width_half_max": 0.6
+          "common_name": "lwir11"
         }
       ],
       "gsd": 100,
@@ -280,9 +264,7 @@
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
       "eo:bands": [
         {
-          "common_name": "lwir",
-          "center_wavelength": 11.45,
-          "full_width_half_max": 2.1
+          "common_name": "lwir"
         }
       ],
       "gsd": 120,
