@@ -48,11 +48,13 @@
   "atmos_opacity": {
     "title": "Atmospheric Opacity Band",
     "description": "Collection 2 Level-2 Atmospheric Opacity Band Surface Reflectance Product",
-    "roles": ["data"]
+    "roles": ["data"],
+    "href_suffix": "SR_ATMOS_OPACITY.TIF"
   },
   "cloud_qa": {
     "title": "Cloud Quality Assessment Band",
     "description": "Collection 2 Level-2 Cloud Quality Assessment Band Surface Reflectance Product",
-    "roles": ["cloud", "cloud-shadow", "snow-ice", "water-mask"]
+    "roles": ["cloud", "cloud-shadow", "snow-ice", "water-mask"],
+    "href_suffix": "SR_CLOUD_QA.TIF"
   }
 }

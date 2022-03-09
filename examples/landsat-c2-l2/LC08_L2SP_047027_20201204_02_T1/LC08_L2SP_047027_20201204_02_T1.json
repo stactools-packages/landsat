@@ -8,7 +8,7 @@
       "oli",
       "tirs"
     ],
-    "created": "2022-03-09T15:23:34.136765Z",
+    "created": "2022-03-09T20:45:05.036764Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 1.55,
@@ -151,7 +151,7 @@
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ANG.txt",
       "type": "text/plain",
       "title": "Angle Coefficients File",
-      "description": "Collection 2 Level-1 Angle Coefficients File (ANG)",
+      "description": "Collection 2 Level-1 Angle Coefficients File",
       "roles": [
         "metadata"
       ]
@@ -164,6 +164,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "unit": "bit index"
         }
       ],
@@ -182,6 +183,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "unit": "bit index"
         }
       ],
@@ -206,6 +208,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -231,6 +234,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -256,6 +260,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -281,6 +286,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -306,6 +312,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -331,6 +338,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -356,6 +364,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -365,7 +374,7 @@
       ]
     },
     "qa_aerosol": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_QA_AEROSOL.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_QA_AEROSOL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Aerosol Quality Assessment Band",
       "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
@@ -373,6 +382,7 @@
         {
           "nodata": 1,
           "data_type": "uint8",
+          "spatial_resolution": 30,
           "unit": "bit index"
         }
       ],
@@ -382,7 +392,7 @@
       ]
     },
     "lwir11": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B10.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_B10.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Band (B10)",
       "description": "Collection 2 Level-2 Thermal Infrared Band (B10) Surface Temperature",
@@ -398,17 +408,19 @@
         {
           "nodata": 0,
           "data_type": "uint16",
+          "spatial_resolution": 30,
           "unit": "kelvin",
           "scale": 0.00341802,
           "offset": 149.0
         }
       ],
+      "gsd": 100,
       "roles": [
         "temperature"
       ]
     },
     "atran": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ATRAN.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_ATRAN.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Transmittance Band",
       "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
@@ -416,6 +428,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "scale": 0.0001
         }
       ],
@@ -424,7 +437,7 @@
       ]
     },
     "cdist": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_CDIST.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_CDIST.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Distance Band",
       "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
@@ -432,6 +445,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "kilometer",
           "scale": 0.01
         }
@@ -441,7 +455,7 @@
       ]
     },
     "drad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_DRAD.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_DRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Downwelled Radiance Band",
       "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
@@ -449,6 +463,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.001
         }
@@ -458,7 +473,7 @@
       ]
     },
     "urad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_URAD.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_URAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Upwelled Radiance Band",
       "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
@@ -466,6 +481,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.001
         }
@@ -475,7 +491,7 @@
       ]
     },
     "trad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_TRAD.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_TRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Thermal Radiance Band",
       "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
@@ -483,6 +499,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.001
         }
@@ -492,7 +509,7 @@
       ]
     },
     "emis": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_EMIS.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_EMIS.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Band",
       "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
@@ -500,6 +517,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "emissivity coefficient",
           "scale": 0.0001
         }
@@ -509,7 +527,7 @@
       ]
     },
     "emsd": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_EMSD.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_EMSD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Standard Deviation Band",
       "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
@@ -517,6 +535,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "emissivity coefficient",
           "scale": 0.0001
         }
@@ -526,7 +545,7 @@
       ]
     },
     "qa": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_QA.TIF",
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Quality Assessment Band",
       "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",
@@ -534,6 +553,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
+          "spatial_resolution": 30,
           "unit": "kelvin",
           "scale": 0.01
         }

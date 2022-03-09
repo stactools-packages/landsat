@@ -149,7 +149,7 @@ def create_stac_item(
         assets = fragments.common_assets()
         for key, asset in assets.items():
             # MSS data does not have an angle file
-            if sensor is Sensor.MSS and key.startswith("ANG"):
+            if sensor is Sensor.MSS and key.startswith("ang"):
                 continue
             # MTL files are specific to the processing level
             if key.startswith("mtl"):
@@ -189,7 +189,7 @@ def create_stac_item(
                     thermal_raster = RasterExtension.ext(asset,
                                                          add_if_missing=True)
                     thermal_raster.bands = [RasterBand.create(**raster_band)]
-                if key.startswith("st_lwir"):
+                if key.startswith("lwir"):
                     asset.common_metadata.gsd = SENSORS[
                         sensor.name]["thermal_gsd"]
 

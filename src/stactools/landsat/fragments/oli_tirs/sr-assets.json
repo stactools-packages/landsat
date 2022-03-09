@@ -54,6 +54,7 @@
   "qa_aerosol": {
     "title": "Aerosol Quality Assessment Band",
     "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
-    "roles": ["data-mask", "water-mask"]
+    "roles": ["data-mask", "water-mask"],
+    "href_suffix": "SR_QA_AEROSOL.TIF"
   }
 }

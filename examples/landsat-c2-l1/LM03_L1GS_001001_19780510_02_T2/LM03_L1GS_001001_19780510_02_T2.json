@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-09T15:13:13.938251Z",
+    "created": "2022-03-09T20:44:53.850631Z",
     "gsd": 60,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 58.0,
@@ -140,15 +140,6 @@
         "metadata"
       ]
     },
-    "ang": {
-      "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_ANG.txt",
-      "type": "text/plain",
-      "title": "Angle Coefficients File",
-      "description": "Collection 2 Level-1 Angle Coefficients File (ANG)",
-      "roles": [
-        "metadata"
-      ]
-    },
     "qa_pixel": {
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -157,6 +148,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "spatial_resolution": 60,
           "unit": "bit index"
         }
       ],
@@ -172,6 +164,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "spatial_resolution": 60,
           "unit": "bit index"
         }
       ],
@@ -196,6 +189,7 @@
         {
           "nodata": 0,
           "data_type": "uint8",
+          "spatial_resolution": 60,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 1.0827,
           "offset": -6.48268
@@ -222,6 +216,7 @@
         {
           "nodata": 0,
           "data_type": "uint8",
+          "spatial_resolution": 60,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.72559,
           "offset": 0.97441
@@ -248,6 +243,7 @@
         {
           "nodata": 0,
           "data_type": "uint8",
+          "spatial_resolution": 60,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.62756,
           "offset": 2.57244
@@ -274,6 +270,7 @@
         {
           "nodata": 0,
           "data_type": "uint8",
+          "spatial_resolution": 60,
           "unit": "watt/steradian/square_meter/micrometer",
           "scale": 0.50787,
           "offset": 0.19213

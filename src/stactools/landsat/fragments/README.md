@@ -1,6 +1,6 @@
 # Fragments
 
-Fragments are JSON files that contain constant values that are included in generated STAC items. Some JSON files also contain information that is used to generate STAC Items, but not directly included. The following fragment types/files exist:
+Fragments are JSON files that contain constant values that are included in generated STAC items. Some JSON files also contain information that is used to generate STAC Items, but is not included in the STAC Item. The following fragment types/files exist:
 
 - `landsat-c2-l1` or `-l2`: Collection data
 - `common-assets.json`: Asset data that is common to all Landsat data products.
