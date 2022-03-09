@@ -24,7 +24,7 @@ SENSORS: Dict[str, Any] = {
         "instruments": ["mss"],
         "doi": "10.5066/P9AF14YV",
         "doi_title": "Landsat 1-5 MSS Collection 2 Level 1",
-        "reflective_gsd": 60
+        "reflective_gsd": 79
     },
     "TM": {
         "instruments": ["tm"],
