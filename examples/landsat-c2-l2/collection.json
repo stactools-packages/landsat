@@ -11,6 +11,21 @@
       "title": "Landsat Collection 2 Level-2"
     },
     {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9IAXOVV",
+      "title": "Landsat 4-5 TM Collection 2 Level-2"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9C7I13B",
+      "title": "Landsat 7 ETM+ Collection 2 Level-2"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9OGBGM6",
+      "title": "Landsat 8-9 OLI/TIRS Collection 2 Level-2"
+    },
+    {
       "rel": "license",
       "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
       "title": "Public Domain"
@@ -418,22 +433,10 @@
       100,
       120
     ],
-    "links": [
-      {
-        "rel": "cite-as",
-        "href": "https://doi.org/10.5066/P9IAXOVV",
-        "title": "Landsat 4-5 TM Collection 2 Level-2"
-      },
-      {
-        "rel": "cite-as",
-        "href": "https://doi.org/10.5066/P9C7I13B",
-        "title": "Landsat 7 ETM+ Collection 2 Level-2"
-      },
-      {
-        "rel": "cite-as",
-        "href": "https://doi.org/10.5066/P9OGBGM6",
-        "title": "Landsat 8-9 OLI/TIRS Collection 2 Level-2"
-      }
+    "sci:doi": [
+      "10.5066/P9IAXOVV",
+      "10.5066/P9C7I13B",
+      "10.5066/P9OGBGM6"
     ],
     "view:off_nadir": {
       "minimum": 0,
