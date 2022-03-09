@@ -232,6 +232,13 @@
     ],
     "view:off_nadir": [
       0
+    ],
+    "links": [
+      {
+        "rel": "cite-as",
+        "href": "https://doi.org/10.5066/P9AF14YV",
+        "title": "Landsat 1-5 MSS Collection 2 Level 1"
+      }
     ]
   }
 }

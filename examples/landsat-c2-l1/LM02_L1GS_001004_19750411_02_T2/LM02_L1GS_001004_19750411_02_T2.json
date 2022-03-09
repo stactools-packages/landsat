@@ -7,9 +7,9 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-08T11:06:45.908542Z",
+    "created": "2022-03-09T14:07:40.536575Z",
     "gsd": 60,
-    "description": "Landsat Collection 2 Level-1 Data Product",
+    "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 100.0,
     "view:off_nadir": 0,
     "view:sun_elevation": 20.56808495,
@@ -27,15 +27,15 @@
       -60.0,
       8735730.0
     ],
-    "sci:doi": "10.5066/P9AF14YV",
     "landsat:cloud_cover_land": 100.0,
     "landsat:wrs_type": "1",
     "landsat:wrs_path": "001",
     "landsat:wrs_row": "004",
     "landsat:collection_category": "T2",
     "landsat:collection_number": "02",
-    "landsat:scene_id": "LM20010041975101AAA02",
     "landsat:correction": "L1GS",
+    "landsat:scene_id": "LM20010041975101AAA02",
+    "sci:doi": "10.5066/P9AF14YV",
     "datetime": "1975-04-11T13:29:55.002000Z"
   },
   "geometry": {
@@ -68,13 +68,14 @@
   "links": [
     {
       "rel": "cite-as",
-      "href": "https://doi.org/10.5066/P9AF14YV"
+      "href": "https://doi.org/10.5066/P9AF14YV",
+      "title": "Landsat 1-5 MSS Collection 2 Level 1"
     },
     {
-      "rel": "alternate",
-      "href": "https://landsatlook.usgs.gov/stac-browser/collection02/level-1/standard/mss/1975/001/004/LM02_L1GS_001004_19750411_20200908_02_T2",
-      "type": "text/html",
-      "title": "USGS stac-browser page"
+      "rel": "via",
+      "href": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l1/items/LM02_L1GS_001004_19750411_20200908_02_T2",
+      "type": "application/json",
+      "title": "USGS STAC Item"
     },
     {
       "rel": "root",
@@ -294,8 +295,8 @@
     "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/view/v1.0.0/schema.json",
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+    "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
   ],
   "collection": "landsat-c2-l1"
 }
