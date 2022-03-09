@@ -23,23 +23,27 @@ SENSORS: Dict[str, Any] = {
     "MSS": {
         "instruments": ["mss"],
         "doi": "10.5066/P9AF14YV",
+        "doi_title": "Landsat 1-5 MSS Collection 2 Level 1",
         "reflective_gsd": 60
     },
     "TM": {
         "instruments": ["tm"],
         "doi": "10.5066/P9IAXOVV",
+        "doi_title": "Landsat 4-5 TM Collection 2 Level-2",
         "reflective_gsd": 30,
         "thermal_gsd": 120
     },
     "ETM": {
         "instruments": ["etm"],
         "doi": "10.5066/P9C7I13B",
+        "doi_title": "Landsat 7 ETM+ Collection 2 Level-2",
         "reflective_gsd": 30,
         "thermal_gsd": 60
     },
     "OLI_TIRS": {
         "instruments": ["oli", "tirs"],
         "doi": "10.5066/P9OGBGM6",
+        "doi_title": "Landsat 8-9 OLI/TIRS Collection 2 Level-2",
         "reflective_gsd": 30,
         "thermal_gsd": 100
     }

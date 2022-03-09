@@ -206,11 +206,13 @@ def create_stac_item(
         projection.shape = mtl_metadata.sr_shape
         projection.transform = mtl_metadata.sr_transform
 
-        scientific = ScientificExtension.ext(item, add_if_missing=True)
-        scientific.doi = SENSORS[sensor.name]["doi"]
-
         item.stac_extensions.append(LANDSAT_EXTENSION_SCHEMA)
         item.properties.update(**mtl_metadata.landsat_metadata)
+
+        scientific = ScientificExtension.ext(item, add_if_missing=True)
+        scientific.doi = SENSORS[sensor.name]["doi"]
+        doi_link = item.get_single_link("cite-as")
+        doi_link.title = SENSORS[sensor.name]["doi_title"]  # type: ignore
 
         via_links = []
         if level == 1:
