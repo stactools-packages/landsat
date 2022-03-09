@@ -211,8 +211,6 @@ def create_stac_item(
 
         item.stac_extensions.append(LANDSAT_EXTENSION_SCHEMA)
         item.properties.update(**mtl_metadata.landsat_metadata)
-        item.properties["landsat:correction"] = item.properties.pop(
-            "landsat:processing_level")
 
         via_links = []
         if level == 1:

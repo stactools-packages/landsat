@@ -293,7 +293,7 @@ class MtlMetadata:
 
     @property
     def landsat_metadata(self) -> Dict[str, Any]:
-        return {
+        landsat_meta = {
             "landsat:cloud_cover_land":
             self._get_float("IMAGE_ATTRIBUTES/CLOUD_COVER_LAND"),
             "landsat:wrs_type":
@@ -306,11 +306,15 @@ class MtlMetadata:
             self._get_text("PRODUCT_CONTENTS/COLLECTION_CATEGORY"),
             "landsat:collection_number":
             self._get_text("PRODUCT_CONTENTS/COLLECTION_NUMBER"),
-            "landsat:processing_level":
+            "landsat:correction":
             self.processing_level,
             "landsat:scene_id":
             self.scene_id
         }
+        if self.satellite_num == 8 and self.legacy_l8:
+            landsat_meta["landsat:processing_level"] = landsat_meta.pop(
+                "landsat:correction")
+        return landsat_meta
 
     @property
     def level1_radiance(self) -> Dict[str, Any]:
