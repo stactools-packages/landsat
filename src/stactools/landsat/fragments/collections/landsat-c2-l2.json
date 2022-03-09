@@ -149,7 +149,7 @@
         "saturation"
       ]
     },
-    "sr_coastal": {
+    "coastal": {
       "type": "COG",
       "title": "Coastal/Aerosol Band",
       "description": "Collection 2 Level-2 Coastal/Aerosol Band Surface Reflectance",
@@ -164,7 +164,7 @@
         "reflectance"
       ]
     },
-    "sr_blue": {
+    "blue": {
       "type": "COG",
       "title": "Blue Band",
       "description": "Collection 2 Level-2 Blue Band Surface Reflectance",
@@ -179,7 +179,7 @@
         "reflectance"
       ]
     },
-    "sr_green": {
+    "green": {
       "type": "COG",
       "title": "Green Band",
       "description": "Collection 2 Level-2 Green Band Surface Reflectance",
@@ -194,7 +194,7 @@
         "reflectance"
       ]
     },
-    "sr_red": {
+    "red": {
       "type": "COG",
       "title": "Red Band",
       "description": "Collection 2 Level-2 Red Band Surface Reflectance",
@@ -209,7 +209,7 @@
         "reflectance"
       ]
     },
-    "sr_nir08": {
+    "nir08": {
       "type": "COG",
       "title": "Near Infrared Band 0.8",
       "description": "Collection 2 Level-2 Near Infrared Band 0.8 Surface Reflectance",
@@ -224,7 +224,7 @@
         "reflectance"
       ]
     },
-    "sr_swir16": {
+    "swir16": {
       "type": "COG",
       "title": "Short-wave Infrared Band 1.6",
       "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 Surface Reflectance",
@@ -239,7 +239,7 @@
         "reflectance"
       ]
     },
-    "sr_swir22": {
+    "swir22": {
       "type": "COG",
       "title": "Short-wave Infrared Band 2.2",
       "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 Surface Reflectance",
@@ -254,7 +254,7 @@
         "reflectance"
       ]
     },
-    "sr_atmos_opacity": {
+    "atmos_opacity": {
       "type": "COG",
       "title": "Atmospheric Opacity Band",
       "description": "Collection 2 Level-2 Atmospheric Opacity Band Surface Reflectance Product",
@@ -262,7 +262,7 @@
         "data"
       ]
     },
-    "sr_cloud_qa": {
+    "cloud_qa": {
       "type": "COG",
       "title": "Cloud Quality Assessment Band",
       "description": "Collection 2 Level-2 Cloud Quality Assessment Band Surface Reflectance Product",
@@ -273,7 +273,7 @@
         "water-mask"
       ]
     },
-    "sr_qa_aerosol": {
+    "qa_aerosol": {
       "type": "COG",
       "title": "Aerosol Quality Assessment Band",
       "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
@@ -282,7 +282,7 @@
         "water-mask"
       ]
     },
-    "st_lwir11": {
+    "lwir11": {
       "type": "COG",
       "title": "Surface Temperature Band",
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
@@ -298,7 +298,7 @@
         "temperature"
       ]
     },
-    "st_lwir": {
+    "lwir": {
       "type": "COG",
       "title": "Surface Temperature Band",
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
@@ -314,7 +314,7 @@
         "temperature"
       ]
     },
-    "st_atran": {
+    "atran": {
       "type": "COG",
       "title": "Atmospheric Transmittance Band",
       "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
@@ -322,7 +322,7 @@
         "data"
       ]
     },
-    "st_cdist": {
+    "cdist": {
       "type": "COG",
       "title": "Cloud Distance Band",
       "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
@@ -330,7 +330,7 @@
         "data"
       ]
     },
-    "st_drad": {
+    "drad": {
       "type": "COG",
       "title": "Downwelled Radiance Band",
       "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
@@ -338,7 +338,7 @@
         "data"
       ]
     },
-    "st_urad": {
+    "urad": {
       "type": "COG",
       "title": "Upwelled Radiance Band",
       "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
@@ -346,7 +346,7 @@
         "data"
       ]
     },
-    "st_trad": {
+    "trad": {
       "type": "COG",
       "title": "Thermal Radiance Band",
       "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
@@ -354,7 +354,7 @@
         "data"
       ]
     },
-    "st_emis": {
+    "emis": {
       "type": "COG",
       "title": "Emissivity Band",
       "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
@@ -362,7 +362,7 @@
         "data"
       ]
     },
-    "st_emsd": {
+    "emsd": {
       "type": "COG",
       "title": "Emissivity Standard Deviation Band",
       "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
@@ -370,7 +370,7 @@
         "data"
       ]
     },
-    "st_qa": {
+    "qa": {
       "type": "COG",
       "title": "Surface Temperature Quality Assessment Band",
       "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",

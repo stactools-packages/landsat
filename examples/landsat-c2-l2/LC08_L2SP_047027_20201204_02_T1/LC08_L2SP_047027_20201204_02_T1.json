@@ -8,7 +8,7 @@
       "oli",
       "tirs"
     ],
-    "created": "2022-03-09T14:26:27.506310Z",
+    "created": "2022-03-09T14:41:24.658885Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 1.55,
@@ -189,7 +189,7 @@
         "saturation"
       ]
     },
-    "sr_coastal": {
+    "coastal": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B1.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Coastal/Aerosol Band (B1)",
@@ -215,7 +215,7 @@
         "reflectance"
       ]
     },
-    "sr_blue": {
+    "blue": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B2.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Blue Band (B2)",
@@ -241,7 +241,7 @@
         "reflectance"
       ]
     },
-    "sr_green": {
+    "green": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B3.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band (B3)",
@@ -267,7 +267,7 @@
         "reflectance"
       ]
     },
-    "sr_red": {
+    "red": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band (B4)",
@@ -293,7 +293,7 @@
         "reflectance"
       ]
     },
-    "sr_nir08": {
+    "nir08": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8 (B5)",
@@ -319,7 +319,7 @@
         "reflectance"
       ]
     },
-    "sr_swir16": {
+    "swir16": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B6.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 1.6 (B6)",
@@ -345,7 +345,7 @@
         "reflectance"
       ]
     },
-    "sr_swir22": {
+    "swir22": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B7.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 2.2 (B7)",
@@ -371,8 +371,8 @@
         "reflectance"
       ]
     },
-    "sr_qa_aerosol": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_QA_AEROSOL.TIF",
+    "qa_aerosol": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_QA_AEROSOL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Aerosol Quality Assessment Band",
       "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
@@ -388,7 +388,7 @@
         "water-mask"
       ]
     },
-    "st_lwir11": {
+    "lwir11": {
       "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_SR_B10.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Band (B10)",
@@ -410,13 +410,12 @@
           "offset": 149.0
         }
       ],
-      "gsd": 100,
       "roles": [
         "temperature"
       ]
     },
-    "st_atran": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_ATRAN.TIF",
+    "atran": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ATRAN.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Transmittance Band",
       "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
@@ -432,8 +431,8 @@
         "data"
       ]
     },
-    "st_cdist": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_CDIST.TIF",
+    "cdist": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_CDIST.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Distance Band",
       "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
@@ -449,8 +448,8 @@
         "data"
       ]
     },
-    "st_drad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_DRAD.TIF",
+    "drad": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_DRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Downwelled Radiance Band",
       "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
@@ -466,8 +465,8 @@
         "data"
       ]
     },
-    "st_urad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_URAD.TIF",
+    "urad": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_URAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Upwelled Radiance Band",
       "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
@@ -483,8 +482,8 @@
         "data"
       ]
     },
-    "st_trad": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_TRAD.TIF",
+    "trad": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_TRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Thermal Radiance Band",
       "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
@@ -500,8 +499,8 @@
         "data"
       ]
     },
-    "st_emis": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_EMIS.TIF",
+    "emis": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_EMIS.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Band",
       "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
@@ -517,8 +516,8 @@
         "data"
       ]
     },
-    "st_emsd": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_EMSD.TIF",
+    "emsd": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_EMSD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Standard Deviation Band",
       "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
@@ -534,8 +533,8 @@
         "data"
       ]
     },
-    "st_qa": {
-      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_ST_QA.TIF",
+    "qa": {
+      "href": "../../../tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Quality Assessment Band",
       "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",

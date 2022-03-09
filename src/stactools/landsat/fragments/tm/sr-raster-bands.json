@@ -7,54 +7,54 @@
     "data_type": "uint16",
     "unit": "bit index"
   },
-  "sr_blue": {
+  "blue": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_green": {
+  "green": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_red": {
+  "red": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_nir08": {
+  "nir08": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_swir16": {
+  "swir16": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_swir22": {
+  "swir22": {
     "data_type": "uint16",
     "nodata": 0,
     "unit": "unitless",
     "scale": 0.0000275,
     "offset": -0.2
   },
-  "sr_atmos_opacity": {
+  "atmos_opacity": {
     "data_type": "int16",
     "nodata": -9999,
     "scale": 0.001
   },
-  "sr_cloud_qa": {
+  "cloud_qa": {
     "data_type": "uint8",
     "unit": "bit index"
   }

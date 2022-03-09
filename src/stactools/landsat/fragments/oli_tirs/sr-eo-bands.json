@@ -1,41 +1,41 @@
 {
-  "sr_coastal": {
+  "coastal": {
     "name": "SR_B1",
     "common_name": "coastal",
     "center_wavelength": 0.44,
     "full_width_half_max": 0.02
     },
-  "sr_blue": {
+  "blue": {
       "name": "SR_B2",
       "common_name": "blue",
       "center_wavelength": 0.48,
       "full_width_half_max": 0.06
     },
-  "sr_green": {
+  "green": {
       "name": "SR_B3",
       "common_name": "green",
       "center_wavelength": 0.56,
       "full_width_half_max": 0.06
     },
-  "sr_red": {
+  "red": {
       "name": "SR_B4",
       "common_name": "red",
       "center_wavelength": 0.65,
       "full_width_half_max": 0.04
     },
-  "sr_nir08": {
+  "nir08": {
       "name": "SR_B5",
       "common_name": "nir08",
       "center_wavelength": 0.86,
       "full_width_half_max": 0.03
     },
-  "sr_swir16": {
+  "swir16": {
       "name": "SR_B6",
       "common_name": "swir16",
       "center_wavelength": 1.6,
       "full_width_half_max": 0.08
     },
-  "sr_swir22": {
+  "swir22": {
     "name": "SR_B7",
     "common_name": "swir22",
     "center_wavelength": 2.2,
