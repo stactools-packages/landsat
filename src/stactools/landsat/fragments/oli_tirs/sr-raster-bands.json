@@ -1,64 +1,64 @@
 {
-  "qa_pixel": {
-    "data_type": "uint16",
-    "unit": "bit index"
-  },
-  "qa_radsat": {
-    "data_type": "uint16",
-    "unit": "bit index"
-  },
-  "coastal": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "blue": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "green": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "red": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "nir08": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "swir16": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "swir22": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "qa_aerosol": {
-    "data_type": "uint8",
-    "nodata": 1,
-    "unit": "bit index"
-  }
+    "qa_pixel": {
+        "data_type": "uint16",
+        "unit": "bit index"
+    },
+    "qa_radsat": {
+        "data_type": "uint16",
+        "unit": "bit index"
+    },
+    "coastal": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "blue": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "green": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "red": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "nir08": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir16": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir22": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "",
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "qa_aerosol": {
+        "data_type": "uint8",
+        "nodata": 1,
+        "unit": "bit index"
+    }
 }

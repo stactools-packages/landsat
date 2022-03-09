@@ -8,7 +8,7 @@
       "oli",
       "tirs"
     ],
-    "created": "2022-03-09T14:41:25.399107Z",
+    "created": "2022-03-09T15:07:41.677815Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 21.12,
@@ -206,7 +206,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -232,7 +232,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -258,7 +258,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -284,7 +284,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -310,7 +310,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -336,7 +336,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -362,7 +362,7 @@
         {
           "nodata": 0,
           "data_type": "uint16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 2.75e-05,
           "offset": -0.2
         }
@@ -423,7 +423,7 @@
         {
           "nodata": -9999,
           "data_type": "int16",
-          "unit": "unitless",
+          "unit": "",
           "scale": 0.0001
         }
       ],

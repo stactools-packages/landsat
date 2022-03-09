@@ -1,61 +1,55 @@
 {
-  "qa_pixel": {
-    "data_type": "uint16",
-    "unit": "bit index"
-  },
-  "qa_radsat": {
-    "data_type": "uint16",
-    "unit": "bit index"
-  },
-  "blue": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "green": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "red": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "nir08": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "swir16": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "swir22": {
-    "data_type": "uint16",
-    "nodata": 0,
-    "unit": "unitless",
-    "scale": 0.0000275,
-    "offset": -0.2
-  },
-  "atmos_opacity": {
-    "data_type": "int16",
-    "nodata": -9999,
-    "scale": 0.001
-  },
-  "cloud_qa": {
-    "data_type": "uint8",
-    "unit": "bit index"
-  }
+    "qa_pixel": {
+        "data_type": "uint16",
+        "unit": "bit index"
+    },
+    "qa_radsat": {
+        "data_type": "uint16",
+        "unit": "bit index"
+    },
+    "blue": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "green": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "red": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "nir08": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir16": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir22": {
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "atmos_opacity": {
+        "data_type": "int16",
+        "nodata": -9999,
+        "scale": 0.001
+    },
+    "cloud_qa": {
+        "data_type": "uint8",
+        "unit": "bit index"
+    }
 }
