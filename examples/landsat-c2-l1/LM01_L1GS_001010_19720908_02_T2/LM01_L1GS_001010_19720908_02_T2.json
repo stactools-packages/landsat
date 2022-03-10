@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-09T22:37:34.614323Z",
+    "created": "2022-03-10T14:05:15.683124Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 43.0,
@@ -190,9 +190,7 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer",
-          "scale": 0.95591,
-          "offset": -18.55591
+          "unit": "watt/steradian/square_meter/micrometer"
         }
       ],
       "roles": [
@@ -217,9 +215,7 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer",
-          "scale": 0.64843,
-          "offset": -0.74843
+          "unit": "watt/steradian/square_meter/micrometer"
         }
       ],
       "roles": [
@@ -244,9 +240,7 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer",
-          "scale": 0.65236,
-          "offset": -0.75236
+          "unit": "watt/steradian/square_meter/micrometer"
         }
       ],
       "roles": [
@@ -271,9 +265,7 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer",
-          "scale": 0.60866,
-          "offset": -0.60866
+          "unit": "watt/steradian/square_meter/micrometer"
         }
       ],
       "roles": [
