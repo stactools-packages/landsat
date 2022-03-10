@@ -110,6 +110,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Pixel Quality Assessment Band",
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
       "roles": [
         "cloud",
         "cloud-shadow",
@@ -121,6 +128,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Radiometric Saturation Quality Assessment Band",
       "description": "Collection 2 Level-1 Radiometric Saturation Quality Assessment Band",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
       "roles": [
         "saturation"
       ]
@@ -132,6 +146,15 @@
       "eo:bands": [
         {
           "common_name": "coastal"
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
         }
       ],
       "roles": [
@@ -147,6 +170,15 @@
           "common_name": "blue"
         }
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
       "roles": [
         "reflectance"
       ]
@@ -158,6 +190,15 @@
       "eo:bands": [
         {
           "common_name": "green"
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
         }
       ],
       "roles": [
@@ -173,6 +214,15 @@
           "common_name": "red"
         }
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
       "roles": [
         "reflectance"
       ]
@@ -184,6 +234,15 @@
       "eo:bands": [
         {
           "common_name": "nir08"
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
         }
       ],
       "roles": [
@@ -199,6 +258,15 @@
           "common_name": "swir16"
         }
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
       "roles": [
         "reflectance"
       ]
@@ -212,6 +280,15 @@
           "common_name": "swir22"
         }
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
       "roles": [
         "reflectance"
       ]
@@ -220,6 +297,14 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Opacity Band",
       "description": "Collection 2 Level-2 Atmospheric Opacity Band Surface Reflectance Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "scale": 0.001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -228,6 +313,13 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Quality Assessment Band",
       "description": "Collection 2 Level-2 Cloud Quality Assessment Band Surface Reflectance Product",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
       "roles": [
         "cloud",
         "cloud-shadow",
@@ -239,6 +331,14 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Aerosol Quality Assessment Band",
       "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
+      "raster:bands": [
+        {
+          "nodata": 1,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
       "roles": [
         "data-mask",
         "water-mask"
@@ -253,7 +353,16 @@
           "common_name": "lwir11"
         }
       ],
-      "gsd": 100,
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "kelvin",
+          "scale": 0.00341802,
+          "offset": 149.0
+        }
+      ],
       "roles": [
         "temperature"
       ]
@@ -267,7 +376,16 @@
           "common_name": "lwir"
         }
       ],
-      "gsd": 120,
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "kelvin",
+          "scale": 0.00341802,
+          "offset": 149.0
+        }
+      ],
       "roles": [
         "temperature"
       ]
@@ -276,6 +394,14 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Atmospheric Transmittance Band",
       "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "scale": 0.0001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -284,6 +410,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Distance Band",
       "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "kilometer",
+          "scale": 0.01
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -292,6 +427,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Downwelled Radiance Band",
       "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -300,6 +444,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Upwelled Radiance Band",
       "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -308,6 +461,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Thermal Radiance Band",
       "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -316,6 +478,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Band",
       "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "emissivity coefficient",
+          "scale": 0.0001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -324,6 +495,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Emissivity Standard Deviation Band",
       "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "emissivity coefficient",
+          "scale": 0.0001
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -332,6 +512,15 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Quality Assessment Band",
       "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "kelvin",
+          "scale": 0.01
+        }
+      ],
       "roles": [
         "data"
       ]

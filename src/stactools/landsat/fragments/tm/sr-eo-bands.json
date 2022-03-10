@@ -27,7 +27,7 @@
     "name": "SR_B5",
     "common_name": "swir16",
     "center_wavelength": 1.65,
-    "full_width_half_max": 0.2
+    "full_width_half_max": 0.20
   },
   "swir22": {
     "name": "SR_B7",

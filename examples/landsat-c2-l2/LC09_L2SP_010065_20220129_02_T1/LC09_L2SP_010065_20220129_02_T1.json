@@ -8,7 +8,7 @@
       "oli",
       "tirs"
     ],
-    "created": "2022-03-09T22:37:47.443816Z",
+    "created": "2022-03-10T22:53:43.702716Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 21.12,
@@ -304,7 +304,7 @@
         {
           "name": "SR_B5",
           "common_name": "nir08",
-          "center_wavelength": 0.86,
+          "center_wavelength": 0.87,
           "full_width_half_max": 0.03
         }
       ],
@@ -330,8 +330,8 @@
         {
           "name": "SR_B6",
           "common_name": "swir16",
-          "center_wavelength": 1.6,
-          "full_width_half_max": 0.08
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.09
         }
       ],
       "raster:bands": [
@@ -357,7 +357,7 @@
           "name": "SR_B7",
           "common_name": "swir22",
           "center_wavelength": 2.2,
-          "full_width_half_max": 0.2
+          "full_width_half_max": 0.19
         }
       ],
       "raster:bands": [
@@ -401,7 +401,7 @@
           "name": "ST_B10",
           "common_name": "lwir11",
           "center_wavelength": 10.9,
-          "full_width_half_max": 0.6
+          "full_width_half_max": 0.59
         }
       ],
       "raster:bands": [
