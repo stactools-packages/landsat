@@ -1,6 +1,6 @@
 {
   "lwir": {
-    "name": "ST_B6",
+    "name": "ETM+_B6",
     "common_name": "lwir",
     "center_wavelength": 11.34,
     "full_width_half_max": 2.05

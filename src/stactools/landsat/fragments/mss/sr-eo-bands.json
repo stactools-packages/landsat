@@ -2,24 +2,28 @@
   "green": {
     "name": "B1",
     "common_name": "green",
+    "description": "Landsat 4-5 Band B1",
     "center_wavelength": 0.55,
     "full_width_half_max": 0.1
   },
   "red": {
     "name": "B2",
     "common_name": "red",
+    "description": "Landsat 4-5 Band B2",
     "center_wavelength": 0.65,
     "full_width_half_max": 0.1
   },
   "nir08": {
     "name": "B3",
     "common_name": "nir08",
+    "description": "Landsat 4-5 Band B3",
     "center_wavelength": 0.75,
     "full_width_half_max": 0.1
   },
   "nir09": {
     "name": "B4",
     "common_name": "nir09",
+    "description": "Landsat 4-5 Band B4",
     "center_wavelength": 0.95,
     "full_width_half_max": 0.3
   }

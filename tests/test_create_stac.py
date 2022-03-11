@@ -224,3 +224,18 @@ def test_southern_hemisphere_epsg() -> None:
 
     # northern hemisphere UTM zone for southern hemisphere scene
     assert item_dict["properties"]["proj:epsg"] == 32617
+
+
+def test_mss_scale_offset() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    # MSS should grab scale and offset values (to convert DN to TOA radiance)
+    # for the optical data bands from the MTL metadata
+    asset_keys = ["green", "red", "nir08", "nir09"]
+    for key in asset_keys:
+        raster_bands = item_dict["assets"][key]["raster:bands"][0]
+        assert "scale" in raster_bands
+        assert "offset" in raster_bands

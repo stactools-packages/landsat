@@ -23,7 +23,7 @@ SENSORS: Dict[str, Any] = {
     "MSS": {
         "instruments": ["mss"],
         "doi": "10.5066/P9AF14YV",
-        "doi_title": "Landsat 1-5 MSS Collection 2 Level 1",
+        "doi_title": "Landsat 1-5 MSS Collection 2 Level-1",
         "reflective_gsd": 79
     },
     "TM": {
@@ -34,7 +34,7 @@ SENSORS: Dict[str, Any] = {
         "thermal_gsd": 120
     },
     "ETM": {
-        "instruments": ["etm"],
+        "instruments": ["etm+"],
         "doi": "10.5066/P9C7I13B",
         "doi_title": "Landsat 7 ETM+ Collection 2 Level-2",
         "reflective_gsd": 30,

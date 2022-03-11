@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "landsat-c2-l1",
   "stac_version": "1.0.0",
-  "description": "The Landsat program provides a comprehensive, continuous archive of the Earth's surface. Landsat Collection 2 Level-1 data products consist of quantized and calibrated scaled Digital Numbers (DN) representing the multispectral image data. This dataset contains global Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.",
+  "description": "Global Landsat Collection 2 Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.",
   "links": [
     {
       "rel": "root",
@@ -13,7 +13,7 @@
     {
       "rel": "cite-as",
       "href": "https://doi.org/10.5066/P9AF14YV",
-      "title": "Landsat 1-5 MSS Collection 2 Level 1"
+      "title": "Landsat 1-5 MSS Collection 2 Level-1"
     },
     {
       "rel": "license",
@@ -96,7 +96,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -111,7 +111,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -122,13 +122,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band",
       "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
-      "eo:bands": [
-        {
-          "common_name": "green",
-          "center_wavelength": 0.55,
-          "full_width_half_max": 0.1
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -145,13 +138,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band",
       "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
-      "eo:bands": [
-        {
-          "common_name": "red",
-          "center_wavelength": 0.65,
-          "full_width_half_max": 0.1
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -168,13 +154,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8",
       "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
-      "eo:bands": [
-        {
-          "common_name": "nir08",
-          "center_wavelength": 0.75,
-          "full_width_half_max": 0.1
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -191,13 +170,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.9",
       "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
-      "eo:bands": [
-        {
-          "common_name": "nir09",
-          "center_wavelength": 0.95,
-          "full_width_half_max": 0.3
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -286,6 +258,64 @@
     ],
     "sci_doi": [
       "10.5066/P9AF14YV"
+    ],
+    "eo:bands": [
+      {
+        "name": "B4",
+        "common_name": "green",
+        "description": "Landsat 1-3 Band B4",
+        "center_wavelength": 0.55,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B5",
+        "common_name": "red",
+        "description": "Landsat 1-3 Band B5",
+        "center_wavelength": 0.65,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B6",
+        "common_name": "nir08",
+        "description": "Landsat 1-3 Band B6",
+        "center_wavelength": 0.75,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B7",
+        "common_name": "nir09",
+        "description": "Landsat 1-3 Band B7",
+        "center_wavelength": 0.95,
+        "full_width_half_max": 0.3
+      },
+      {
+        "name": "B1",
+        "common_name": "green",
+        "description": "Landsat 4-5 Band B1",
+        "center_wavelength": 0.55,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B2",
+        "common_name": "red",
+        "description": "Landsat 4-5 Band B2",
+        "center_wavelength": 0.65,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B3",
+        "common_name": "nir08",
+        "description": "Landsat 4-5 Band B3",
+        "center_wavelength": 0.75,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B4",
+        "common_name": "nir09",
+        "description": "Landsat 4-5 Band B4",
+        "center_wavelength": 0.95,
+        "full_width_half_max": 0.3
+      }
     ]
   }
 }

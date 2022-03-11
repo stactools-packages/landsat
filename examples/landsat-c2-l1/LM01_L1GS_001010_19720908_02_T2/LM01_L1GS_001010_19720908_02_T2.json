@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-10T22:53:30.360025Z",
+    "created": "2022-03-11T19:39:19.938262Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 43.0,
@@ -69,7 +69,7 @@
     {
       "rel": "cite-as",
       "href": "https://doi.org/10.5066/P9AF14YV",
-      "title": "Landsat 1-5 MSS Collection 2 Level 1"
+      "title": "Landsat 1-5 MSS Collection 2 Level-1"
     },
     {
       "rel": "via",
@@ -149,7 +149,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -165,7 +165,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -181,6 +181,7 @@
         {
           "name": "B4",
           "common_name": "green",
+          "description": "Landsat 1-3 Band B4",
           "center_wavelength": 0.55,
           "full_width_half_max": 0.1
         }
@@ -190,7 +191,9 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer"
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.95591,
+          "offset": -18.55591
         }
       ],
       "roles": [
@@ -206,6 +209,7 @@
         {
           "name": "B5",
           "common_name": "red",
+          "description": "Landsat 1-3 Band B5",
           "center_wavelength": 0.65,
           "full_width_half_max": 0.1
         }
@@ -215,7 +219,9 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer"
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.64843,
+          "offset": -0.74843
         }
       ],
       "roles": [
@@ -231,6 +237,7 @@
         {
           "name": "B6",
           "common_name": "nir08",
+          "description": "Landsat 1-3 Band B6",
           "center_wavelength": 0.75,
           "full_width_half_max": 0.1
         }
@@ -240,7 +247,9 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer"
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.65236,
+          "offset": -0.75236
         }
       ],
       "roles": [
@@ -256,6 +265,7 @@
         {
           "name": "B7",
           "common_name": "nir09",
+          "description": "Landsat 1-3 Band B7",
           "center_wavelength": 0.95,
           "full_width_half_max": 0.3
         }
@@ -265,7 +275,9 @@
           "nodata": 0,
           "data_type": "uint8",
           "spatial_resolution": 60,
-          "unit": "watt/steradian/square_meter/micrometer"
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.60866,
+          "offset": -0.60866
         }
       ],
       "roles": [

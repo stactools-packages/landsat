@@ -1,6 +1,6 @@
 {
   "lwir11": {
-    "name": "ST_B10",
+    "name": "TIRS_B10",
     "common_name": "lwir11",
     "center_wavelength": 10.90,
     "full_width_half_max": 0.59

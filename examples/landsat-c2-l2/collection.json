@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "landsat-c2-l2",
   "stac_version": "1.0.0",
-  "description": "The Landsat program provides a comprehensive, continuous archive of the Earth's surface. Landsat Collection 2 Level-2 data products consist of atmospherically corrected surface reflectance and surface temperature image data. This dataset contains global Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.",
+  "description": "Atmospherically corrected global Landsat Collection 2 Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.",
   "links": [
     {
       "rel": "root",
@@ -114,7 +114,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -132,7 +132,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -143,11 +143,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Coastal/Aerosol Band",
       "description": "Collection 2 Level-2 Coastal/Aerosol Band Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "coastal"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -165,11 +160,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Blue Band",
       "description": "Collection 2 Level-2 Blue Band Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "blue"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -187,11 +177,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band",
       "description": "Collection 2 Level-2 Green Band Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "green"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -209,11 +194,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band",
       "description": "Collection 2 Level-2 Red Band Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "red"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -231,11 +211,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8",
       "description": "Collection 2 Level-2 Near Infrared Band 0.8 Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "nir08"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -253,11 +228,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 1.6",
       "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "swir16"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -275,11 +245,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 2.2",
       "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 Surface Reflectance",
-      "eo:bands": [
-        {
-          "common_name": "swir22"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -317,7 +282,7 @@
         {
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -336,7 +301,7 @@
           "nodata": 1,
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -348,11 +313,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Band",
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
-      "eo:bands": [
-        {
-          "common_name": "lwir11"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -371,11 +331,6 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Temperature Band",
       "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
-      "eo:bands": [
-        {
-          "common_name": "lwir"
-        }
-      ],
       "raster:bands": [
         {
           "nodata": 0,
@@ -574,7 +529,7 @@
         "processor",
         "licensor"
       ],
-      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data"
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
     },
     {
       "name": "Microsoft",
@@ -594,7 +549,7 @@
     ],
     "instruments": [
       "tm",
-      "etm",
+      "etm+",
       "oli",
       "tirs"
     ],
@@ -608,6 +563,140 @@
       "10.5066/P9IAXOVV",
       "10.5066/P9C7I13B",
       "10.5066/P9OGBGM6"
+    ],
+    "eo:bands": [
+      {
+        "name": "TM_B1",
+        "common_name": "blue",
+        "center_wavelength": 0.49,
+        "full_width_half_max": 0.07
+      },
+      {
+        "name": "TM_B2",
+        "common_name": "green",
+        "center_wavelength": 0.56,
+        "full_width_half_max": 0.08
+      },
+      {
+        "name": "TM_B3",
+        "common_name": "red",
+        "center_wavelength": 0.66,
+        "full_width_half_max": 0.06
+      },
+      {
+        "name": "TM_B4",
+        "common_name": "nir08",
+        "center_wavelength": 0.83,
+        "full_width_half_max": 0.14
+      },
+      {
+        "name": "TM_B5",
+        "common_name": "swir16",
+        "center_wavelength": 1.65,
+        "full_width_half_max": 0.2
+      },
+      {
+        "name": "TM_B6",
+        "common_name": "lwir",
+        "center_wavelength": 11.45,
+        "full_width_half_max": 2.1
+      },
+      {
+        "name": "TM_B7",
+        "common_name": "swir22",
+        "center_wavelength": 2.22,
+        "full_width_half_max": 0.27
+      },
+      {
+        "name": "ETM+_B1",
+        "common_name": "blue",
+        "center_wavelength": 0.48,
+        "full_width_half_max": 0.07
+      },
+      {
+        "name": "ETM+_B2",
+        "common_name": "green",
+        "center_wavelength": 0.56,
+        "full_width_half_max": 0.08
+      },
+      {
+        "name": "ETM+_B3",
+        "common_name": "red",
+        "center_wavelength": 0.66,
+        "full_width_half_max": 0.06
+      },
+      {
+        "name": "ETM+_B4",
+        "common_name": "nir08",
+        "center_wavelength": 0.84,
+        "full_width_half_max": 0.13
+      },
+      {
+        "name": "ETM+_B5",
+        "common_name": "swir16",
+        "center_wavelength": 1.65,
+        "full_width_half_max": 0.2
+      },
+      {
+        "name": "ETM+_B6",
+        "common_name": "lwir",
+        "center_wavelength": 11.34,
+        "full_width_half_max": 2.05
+      },
+      {
+        "name": "ETM+_B7",
+        "common_name": "swir22",
+        "center_wavelength": 2.2,
+        "full_width_half_max": 0.28
+      },
+      {
+        "name": "OLI_B1",
+        "common_name": "coastal",
+        "center_wavelength": 0.44,
+        "full_width_half_max": 0.02
+      },
+      {
+        "name": "OLI_B2",
+        "common_name": "blue",
+        "center_wavelength": 0.48,
+        "full_width_half_max": 0.06
+      },
+      {
+        "name": "OLI_B3",
+        "common_name": "green",
+        "center_wavelength": 0.56,
+        "full_width_half_max": 0.06
+      },
+      {
+        "name": "OLI_B4",
+        "common_name": "red",
+        "center_wavelength": 0.65,
+        "full_width_half_max": 0.04
+      },
+      {
+        "name": "OLI_B5",
+        "common_name": "nir08",
+        "center_wavelength": 0.87,
+        "full_width_half_max": 0.03
+      },
+      {
+        "name": "OLI_B6",
+        "common_name": "swir16",
+        "center_wavelength": 1.61,
+        "full_width_half_max": 0.09
+      },
+      {
+        "name": "OLI_B7",
+        "common_name": "swir22",
+        "center_wavelength": 2.2,
+        "full_width_half_max": 0.19
+      },
+      {
+        "name": "TIRS_B10",
+        "common_name": "lwir11",
+        "center_wavelength": 10.9,
+        "full_width_half_max": 0.59
+      }
     ],
     "view:off_nadir": {
       "minimum": 0,

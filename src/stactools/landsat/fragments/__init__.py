@@ -157,12 +157,13 @@ class Fragments:
         mss_str = mss_str.replace("B3", "B6")
         mss_str = mss_str.replace("B2", "B5")
         mss_str = mss_str.replace("B1", "B4")
+        mss_str = mss_str.replace("4-5", "1-3")
         return json.loads(mss_str)
 
     def _update_mss_raster(self, mss_raster_dict: Dict[str,
                                                        Any]) -> Dict[str, Any]:
         for key, value in mss_raster_dict.items():
-            rad_key = value.pop("name", None)
+            rad_key = value.pop("temp_name", None)
             if rad_key:
                 mss_raster_dict[key]["scale"] = self.level1_radiance[rad_key][
                     "mult"]

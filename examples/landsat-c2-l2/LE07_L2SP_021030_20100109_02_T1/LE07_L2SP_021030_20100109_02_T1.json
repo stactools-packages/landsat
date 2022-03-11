@@ -5,9 +5,9 @@
   "properties": {
     "platform": "landsat-7",
     "instruments": [
-      "etm"
+      "etm+"
     ],
-    "created": "2022-03-10T22:53:42.975766Z",
+    "created": "2022-03-11T19:48:15.840472Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 8.0,
@@ -164,7 +164,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -183,7 +183,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -197,7 +197,7 @@
       "description": "Collection 2 Level-2 Blue Band (B1) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B1",
+          "name": "ETM+_B1",
           "common_name": "blue",
           "center_wavelength": 0.48,
           "full_width_half_max": 0.07
@@ -223,7 +223,7 @@
       "description": "Collection 2 Level-2 Green Band (B2) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B2",
+          "name": "ETM+_B2",
           "common_name": "green",
           "center_wavelength": 0.56,
           "full_width_half_max": 0.08
@@ -249,7 +249,7 @@
       "description": "Collection 2 Level-2 Red Band (B3) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B3",
+          "name": "ETM+_B3",
           "common_name": "red",
           "center_wavelength": 0.66,
           "full_width_half_max": 0.06
@@ -275,7 +275,7 @@
       "description": "Collection 2 Level-2 Near Infrared Band 0.8 (B4) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B4",
+          "name": "ETM+_B4",
           "common_name": "nir08",
           "center_wavelength": 0.84,
           "full_width_half_max": 0.13
@@ -301,7 +301,7 @@
       "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B6) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B5",
+          "name": "ETM+_B5",
           "common_name": "swir16",
           "center_wavelength": 1.65,
           "full_width_half_max": 0.2
@@ -327,7 +327,7 @@
       "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 (B7) Surface Reflectance",
       "eo:bands": [
         {
-          "name": "SR_B7",
+          "name": "ETM+_B7",
           "common_name": "swir22",
           "center_wavelength": 2.2,
           "full_width_half_max": 0.28
@@ -372,7 +372,7 @@
         {
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit index"
+          "unit": "bit_index"
         }
       ],
       "roles": [
@@ -389,7 +389,7 @@
       "description": "Collection 2 Level-2 Thermal Infrared Band (B6) Surface Temperature",
       "eo:bands": [
         {
-          "name": "ST_B6",
+          "name": "ETM+_B6",
           "common_name": "lwir",
           "center_wavelength": 11.34,
           "full_width_half_max": 2.05
