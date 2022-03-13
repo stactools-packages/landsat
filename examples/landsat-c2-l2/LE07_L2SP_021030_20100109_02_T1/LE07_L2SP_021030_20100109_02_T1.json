@@ -7,7 +7,7 @@
     "instruments": [
       "etm+"
     ],
-    "created": "2022-03-11T19:48:15.840472Z",
+    "created": "2022-03-13T12:20:46.563409Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 8.0,
@@ -298,7 +298,7 @@
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Short-wave Infrared Band 1.6 (B5)",
-      "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B6) Surface Reflectance",
+      "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B5) Surface Reflectance",
       "eo:bands": [
         {
           "name": "ETM+_B5",

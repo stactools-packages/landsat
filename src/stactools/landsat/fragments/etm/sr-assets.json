@@ -35,7 +35,7 @@
   },
   "swir16": {
     "title": "Short-wave Infrared Band 1.6 (B5)",
-    "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B6) Surface Reflectance",
+    "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B5) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B5.TIF"
   },
