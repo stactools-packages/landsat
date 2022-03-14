@@ -7,7 +7,7 @@
     "instruments": [
       "etm+"
     ],
-    "created": "2022-03-13T12:20:46.563409Z",
+    "created": "2022-03-14T12:33:40.840684Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 8.0,
@@ -158,13 +158,14 @@
     "qa_pixel": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Pixel Quality Assessment Band",
+      "title": "Pixel Quality Assessment Band (QA_PIXEL)",
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
       "raster:bands": [
         {
+          "nodata": 1,
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -177,13 +178,13 @@
     "qa_radsat": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_QA_RADSAT.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band (QA_RADSAT)",
       "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
       "raster:bands": [
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -193,11 +194,11 @@
     "blue": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B1.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Blue Band (B1)",
-      "description": "Collection 2 Level-2 Blue Band (B1) Surface Reflectance",
+      "title": "Blue Band (SR_B1)",
+      "description": "Collection 2 Level-2 Blue Band Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B1",
+          "name": "ETM-SR_B1",
           "common_name": "blue",
           "center_wavelength": 0.48,
           "full_width_half_max": 0.07
@@ -219,11 +220,11 @@
     "green": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B2.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Green Band (B2)",
-      "description": "Collection 2 Level-2 Green Band (B2) Surface Reflectance",
+      "title": "Green Band (SR_B2)",
+      "description": "Collection 2 Level-2 Green Band Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B2",
+          "name": "ETM-SR_B2",
           "common_name": "green",
           "center_wavelength": 0.56,
           "full_width_half_max": 0.08
@@ -245,11 +246,11 @@
     "red": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B3.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Red Band (B3)",
-      "description": "Collection 2 Level-2 Red Band (B3) Surface Reflectance",
+      "title": "Red Band (SR_B3)",
+      "description": "Collection 2 Level-2 Red Band Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B3",
+          "name": "ETM-SR_B3",
           "common_name": "red",
           "center_wavelength": 0.66,
           "full_width_half_max": 0.06
@@ -271,11 +272,11 @@
     "nir08": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near Infrared Band 0.8 (B4)",
-      "description": "Collection 2 Level-2 Near Infrared Band 0.8 (B4) Surface Reflectance",
+      "title": "Near Infrared Band 0.8 (SR_B4)",
+      "description": "Collection 2 Level-2 Near Infrared Band 0.8 Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B4",
+          "name": "ETM-SR_B4",
           "common_name": "nir08",
           "center_wavelength": 0.84,
           "full_width_half_max": 0.13
@@ -297,11 +298,11 @@
     "swir16": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Short-wave Infrared Band 1.6 (B5)",
-      "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B5) Surface Reflectance",
+      "title": "Short-wave Infrared Band 1.6 (SR_B5)",
+      "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B5",
+          "name": "ETM-SR_B5",
           "common_name": "swir16",
           "center_wavelength": 1.65,
           "full_width_half_max": 0.2
@@ -323,11 +324,11 @@
     "swir22": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_B7.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Short-wave Infrared Band 2.2 (B7)",
-      "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 (B7) Surface Reflectance",
+      "title": "Short-wave Infrared Band 2.2 (SR_B7)",
+      "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 Surface Reflectance",
       "eo:bands": [
         {
-          "name": "ETM+_B7",
+          "name": "ETM-SR_B7",
           "common_name": "swir22",
           "center_wavelength": 2.2,
           "full_width_half_max": 0.28
@@ -349,7 +350,7 @@
     "atmos_opacity": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_ATMOS_OPACITY.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Atmospheric Opacity Band",
+      "title": "Atmospheric Opacity Band (SR_ATMOS_OPACITY)",
       "description": "Collection 2 Level-2 Atmospheric Opacity Band Surface Reflectance Product",
       "raster:bands": [
         {
@@ -366,13 +367,13 @@
     "cloud_qa": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_SR_CLOUD_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Cloud Quality Assessment Band",
+      "title": "Cloud Quality Assessment Band (SR_CLOUD_QA)",
       "description": "Collection 2 Level-2 Cloud Quality Assessment Band Surface Reflectance Product",
       "raster:bands": [
         {
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -385,11 +386,11 @@
     "lwir": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_B6.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Surface Temperature Band (B6)",
-      "description": "Collection 2 Level-2 Thermal Infrared Band (B6) Surface Temperature",
+      "title": "Surface Temperature Band (ST_B6)",
+      "description": "Collection 2 Level-2 Thermal Infrared Band Surface Temperature",
       "eo:bands": [
         {
-          "name": "ETM+_B6",
+          "name": "ETM-ST_B6",
           "common_name": "lwir",
           "center_wavelength": 11.34,
           "full_width_half_max": 2.05
@@ -413,7 +414,7 @@
     "atran": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_ATRAN.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Atmospheric Transmittance Band",
+      "title": "Atmospheric Transmittance Band (ST_ATRAN)",
       "description": "Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -430,7 +431,7 @@
     "cdist": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_CDIST.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Cloud Distance Band",
+      "title": "Cloud Distance Band (ST_CDIST)",
       "description": "Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -448,7 +449,7 @@
     "drad": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_DRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Downwelled Radiance Band",
+      "title": "Downwelled Radiance Band (ST_DRAD)",
       "description": "Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -466,7 +467,7 @@
     "urad": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_URAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Upwelled Radiance Band",
+      "title": "Upwelled Radiance Band (ST_URAD)",
       "description": "Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -484,7 +485,7 @@
     "trad": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_TRAD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Thermal Radiance Band",
+      "title": "Thermal Radiance Band (ST_TRAD)",
       "description": "Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -502,7 +503,7 @@
     "emis": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_EMIS.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Emissivity Band",
+      "title": "Emissivity Band (ST_EMIS)",
       "description": "Collection 2 Level-2 Emissivity Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -520,7 +521,7 @@
     "emsd": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_EMSD.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Emissivity Standard Deviation Band",
+      "title": "Emissivity Standard Deviation Band (ST_EMSD)",
       "description": "Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
       "raster:bands": [
         {
@@ -538,7 +539,7 @@
     "qa": {
       "href": "../../../tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_ST_QA.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Surface Temperature Quality Assessment Band",
+      "title": "Surface Temperature Quality Assessment Band (ST_QA)",
       "description": "Collection 2 Level-2 Quality Assessment Band Surface Temperature Product",
       "raster:bands": [
         {

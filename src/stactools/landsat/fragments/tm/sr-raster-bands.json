@@ -2,12 +2,13 @@
   "qa_pixel": {
     "spatial_resolution": 30,
     "data_type": "uint16",
-    "unit": "bit_index"
+    "nodata": 1,
+    "unit": "bit index"
   },
   "qa_radsat": {
     "spatial_resolution": 30,
     "data_type": "uint16",
-    "unit": "bit_index"
+    "unit": "bit index"
   },
   "blue": {
     "spatial_resolution": 30,
@@ -60,6 +61,6 @@
   "cloud_qa": {
     "spatial_resolution": 30,
     "data_type": "uint8",
-    "unit": "bit_index"
+    "unit": "bit index"
   }
 }

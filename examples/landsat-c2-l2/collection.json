@@ -112,9 +112,10 @@
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
       "raster:bands": [
         {
+          "nodata": 1,
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -132,7 +133,7 @@
         {
           "data_type": "uint16",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -282,7 +283,7 @@
         {
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -301,7 +302,7 @@
           "nodata": 1,
           "data_type": "uint8",
           "spatial_resolution": 30,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -566,133 +567,133 @@
     ],
     "eo:bands": [
       {
-        "name": "TM_B1",
+        "name": "TM-SR_B1",
         "common_name": "blue",
         "center_wavelength": 0.49,
         "full_width_half_max": 0.07
       },
       {
-        "name": "TM_B2",
+        "name": "TM-SR_B2",
         "common_name": "green",
         "center_wavelength": 0.56,
         "full_width_half_max": 0.08
       },
       {
-        "name": "TM_B3",
+        "name": "TM-SR_B3",
         "common_name": "red",
         "center_wavelength": 0.66,
         "full_width_half_max": 0.06
       },
       {
-        "name": "TM_B4",
+        "name": "TM-SR_B4",
         "common_name": "nir08",
         "center_wavelength": 0.83,
         "full_width_half_max": 0.14
       },
       {
-        "name": "TM_B5",
+        "name": "TM-SR_B5",
         "common_name": "swir16",
         "center_wavelength": 1.65,
         "full_width_half_max": 0.2
       },
       {
-        "name": "TM_B6",
+        "name": "TM-ST_B6",
         "common_name": "lwir",
         "center_wavelength": 11.45,
         "full_width_half_max": 2.1
       },
       {
-        "name": "TM_B7",
+        "name": "TM-SR_B7",
         "common_name": "swir22",
         "center_wavelength": 2.22,
         "full_width_half_max": 0.27
       },
       {
-        "name": "ETM+_B1",
+        "name": "ETM-SR_B1",
         "common_name": "blue",
         "center_wavelength": 0.48,
         "full_width_half_max": 0.07
       },
       {
-        "name": "ETM+_B2",
+        "name": "ETM-SR_B2",
         "common_name": "green",
         "center_wavelength": 0.56,
         "full_width_half_max": 0.08
       },
       {
-        "name": "ETM+_B3",
+        "name": "ETM-SR_B3",
         "common_name": "red",
         "center_wavelength": 0.66,
         "full_width_half_max": 0.06
       },
       {
-        "name": "ETM+_B4",
+        "name": "ETM-SR_B4",
         "common_name": "nir08",
         "center_wavelength": 0.84,
         "full_width_half_max": 0.13
       },
       {
-        "name": "ETM+_B5",
+        "name": "ETM-SR_B5",
         "common_name": "swir16",
         "center_wavelength": 1.65,
         "full_width_half_max": 0.2
       },
       {
-        "name": "ETM+_B6",
+        "name": "ETM-ST_B6",
         "common_name": "lwir",
         "center_wavelength": 11.34,
         "full_width_half_max": 2.05
       },
       {
-        "name": "ETM+_B7",
+        "name": "ETM-SR_B7",
         "common_name": "swir22",
         "center_wavelength": 2.2,
         "full_width_half_max": 0.28
       },
       {
-        "name": "OLI_B1",
+        "name": "OLI-SR_B1",
         "common_name": "coastal",
         "center_wavelength": 0.44,
         "full_width_half_max": 0.02
       },
       {
-        "name": "OLI_B2",
+        "name": "OLI-SR_B2",
         "common_name": "blue",
         "center_wavelength": 0.48,
         "full_width_half_max": 0.06
       },
       {
-        "name": "OLI_B3",
+        "name": "OLI-SR_B3",
         "common_name": "green",
         "center_wavelength": 0.56,
         "full_width_half_max": 0.06
       },
       {
-        "name": "OLI_B4",
+        "name": "OLI-SR_B4",
         "common_name": "red",
         "center_wavelength": 0.65,
         "full_width_half_max": 0.04
       },
       {
-        "name": "OLI_B5",
+        "name": "OLI-SR_B5",
         "common_name": "nir08",
         "center_wavelength": 0.87,
         "full_width_half_max": 0.03
       },
       {
-        "name": "OLI_B6",
+        "name": "OLI-SR_B6",
         "common_name": "swir16",
         "center_wavelength": 1.61,
         "full_width_half_max": 0.09
       },
       {
-        "name": "OLI_B7",
+        "name": "OLI-SR_B7",
         "common_name": "swir22",
         "center_wavelength": 2.2,
         "full_width_half_max": 0.19
       },
       {
-        "name": "TIRS_B10",
+        "name": "TIRS-ST_B10",
         "common_name": "lwir11",
         "center_wavelength": 10.9,
         "full_width_half_max": 0.59

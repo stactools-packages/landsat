@@ -2,12 +2,13 @@
   "qa_pixel": {
     "spatial_resolution": 60,
     "data_type": "uint16",
-    "unit": "bit_index"
+    "nodata": 1,
+    "unit": "bit index"
   },
   "qa_radsat": {
     "spatial_resolution": 60,
     "data_type": "uint16",
-    "unit": "bit_index"
+    "unit": "bit index"
   },
   "green": {
     "temp_name": "B1",

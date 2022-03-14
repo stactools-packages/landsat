@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-13T12:21:48.327697Z",
+    "created": "2022-03-14T12:33:46.007805Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 58.0,
@@ -143,13 +143,14 @@
     "qa_pixel": {
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Pixel Quality Assessment Band",
+      "title": "Pixel Quality Assessment Band (QA_PIXEL)",
       "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
       "raster:bands": [
         {
+          "nodata": 1,
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -159,13 +160,13 @@
     "qa_radsat": {
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_QA_RADSAT.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band (QA_RADSAT)",
       "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
       "raster:bands": [
         {
           "data_type": "uint16",
           "spatial_resolution": 60,
-          "unit": "bit_index"
+          "unit": "bit index"
         }
       ],
       "roles": [
@@ -176,7 +177,7 @@
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Green Band (B4)",
-      "description": "Collection 2 Level-1 Green Band (B4) Top of Atmosphere Radiance",
+      "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B4",
@@ -204,7 +205,7 @@
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_B5.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Red Band (B5)",
-      "description": "Collection 2 Level-1 Red Band (B5) Top of Atmosphere Radiance",
+      "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B5",
@@ -232,7 +233,7 @@
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_B6.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8 (B6)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.7 (B6) Top of Atmosphere Radiance",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B6",
@@ -260,7 +261,7 @@
       "href": "../../../tests/data-files/mss/LM03_L1GS_001001_19780510_20200907_02_T2_B7.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.9 (B7)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B7) Top of Atmosphere Radiance",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B7",
