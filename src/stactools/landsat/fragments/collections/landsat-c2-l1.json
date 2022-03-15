@@ -91,58 +91,30 @@
         ],
         "eo:bands": [
             {
-                "name": "B4",
+                "name": "B1 or B4",
                 "common_name": "green",
-                "description": "Landsat 1-3 Band B4",
+                "description": "Visible green (Landsat 4-5 Band B1; Landsat 1-3 Band B4)",
                 "center_wavelength": 0.55,
                 "full_width_half_max": 0.1
             },
             {
-                "name": "B5",
+                "name": "B2 or B5",
                 "common_name": "red",
-                "description": "Landsat 1-3 Band B5",
+                "description": "Visible red (Landsat 4-5 Band B2; Landsat 1-3 Band B5)",
                 "center_wavelength": 0.65,
                 "full_width_half_max": 0.1
             },
             {
-                "name": "B6",
+                "name": "B3 or B6",
                 "common_name": "nir08",
-                "description": "Landsat 1-3 Band B6",
+                "description": "Near infrared 0.8 (Landsat 4-5 Band B3; Landsat 1-3 Band B6)",
                 "center_wavelength": 0.75,
                 "full_width_half_max": 0.1
             },
             {
-                "name": "B7",
+                "name": "B4 or B7",
                 "common_name": "nir09",
-                "description": "Landsat 1-3 Band B7",
-                "center_wavelength": 0.95,
-                "full_width_half_max": 0.3
-            },
-            {
-                "name": "B1",
-                "common_name": "green",
-                "description": "Landsat 4-5 Band B1",
-                "center_wavelength": 0.55,
-                "full_width_half_max": 0.1
-            },
-            {
-                "name": "B2",
-                "common_name": "red",
-                "description": "Landsat 4-5 Band B2",
-                "center_wavelength": 0.65,
-                "full_width_half_max": 0.1
-            },
-            {
-                "name": "B3",
-                "common_name": "nir08",
-                "description": "Landsat 4-5 Band B3",
-                "center_wavelength": 0.75,
-                "full_width_half_max": 0.1
-            },
-            {
-                "name": "B4",
-                "common_name": "nir09",
-                "description": "Landsat 4-5 Band B4",
+                "description": "Near infrared 0.9 (Landsat 4-5 Band B4; Landsat 1-3 Band B7)",
                 "center_wavelength": 0.95,
                 "full_width_half_max": 0.3
             }

@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-14T12:33:46.928372Z",
+    "created": "2022-03-15T14:28:12.978991Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 29.0,
@@ -143,8 +143,8 @@
     "qa_pixel": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_QA_PIXEL.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Pixel Quality Assessment Band (QA_PIXEL)",
-      "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+      "title": "Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Pixel Quality Assessment Band (QA_PIXEL)",
       "raster:bands": [
         {
           "nodata": 1,
@@ -160,8 +160,8 @@
     "qa_radsat": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_QA_RADSAT.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band (QA_RADSAT)",
-      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band (QA_RADSAT)",
       "raster:bands": [
         {
           "data_type": "uint16",
@@ -176,13 +176,13 @@
     "green": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_B1.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Green Band (B1)",
-      "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
+      "title": "Green Band",
+      "description": "Collection 2 Level-1 Green Band (B1) Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B1",
           "common_name": "green",
-          "description": "Landsat 4-5 Band B1",
+          "description": "Visible green",
           "center_wavelength": 0.55,
           "full_width_half_max": 0.1
         }
@@ -204,13 +204,13 @@
     "red": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_B2.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Red Band (B2)",
-      "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
+      "title": "Red Band",
+      "description": "Collection 2 Level-1 Red Band (B2) Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B2",
           "common_name": "red",
-          "description": "Landsat 4-5 Band B2",
+          "description": "Visible red",
           "center_wavelength": 0.65,
           "full_width_half_max": 0.1
         }
@@ -232,13 +232,13 @@
     "nir08": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_B3.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near Infrared Band 0.8 (B3)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
+      "title": "Near Infrared Band 0.8",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.8 (B3) Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B3",
           "common_name": "nir08",
-          "description": "Landsat 4-5 Band B3",
+          "description": "Near infrared 0.8",
           "center_wavelength": 0.75,
           "full_width_half_max": 0.1
         }
@@ -260,13 +260,13 @@
     "nir09": {
       "href": "../../../tests/data-files/mss/LM05_L1GS_001001_19850524_20210918_02_T2_B4.TIF",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near Infrared Band 0.9 (B4)",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
+      "title": "Near Infrared Band 0.9",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B4) Top of Atmosphere Radiance",
       "eo:bands": [
         {
           "name": "B4",
           "common_name": "nir09",
-          "description": "Landsat 4-5 Band B4",
+          "description": "Near infrared 0.9",
           "center_wavelength": 0.95,
           "full_width_half_max": 0.3
         }
