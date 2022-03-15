@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-15T14:28:12.970942Z",
+    "created": "2022-03-15T16:15:38.420585Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 32.0,
@@ -238,7 +238,7 @@
         {
           "name": "B3",
           "common_name": "nir08",
-          "description": "Near infrared 0.8",
+          "description": "Near infrared",
           "center_wavelength": 0.75,
           "full_width_half_max": 0.1
         }
@@ -266,7 +266,7 @@
         {
           "name": "B4",
           "common_name": "nir09",
-          "description": "Near infrared 0.9",
+          "description": "Near infrared",
           "center_wavelength": 0.95,
           "full_width_half_max": 0.3
         }

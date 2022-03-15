@@ -154,7 +154,7 @@
     "nir08": {
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Near Infrared Band 0.8",
-      "description": "Collection 2 Level-1 Near Infrared Band 0.7 Top of Atmosphere Radiance",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.8 Top of Atmosphere Radiance",
       "raster:bands": [
         {
           "nodata": 0,
@@ -278,14 +278,14 @@
       {
         "name": "B3 or B6",
         "common_name": "nir08",
-        "description": "Near infrared 0.8 (Landsat 4-5 Band B3; Landsat 1-3 Band B6)",
+        "description": "Near infrared (Landsat 4-5 Band B3; Landsat 1-3 Band B6)",
         "center_wavelength": 0.75,
         "full_width_half_max": 0.1
       },
       {
         "name": "B4 or B7",
         "common_name": "nir09",
-        "description": "Near infrared 0.9 (Landsat 4-5 Band B4; Landsat 1-3 Band B7)",
+        "description": "Near infrared (Landsat 4-5 Band B4; Landsat 1-3 Band B7)",
         "center_wavelength": 0.95,
         "full_width_half_max": 0.3
       }

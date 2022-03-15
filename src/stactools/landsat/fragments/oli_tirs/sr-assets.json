@@ -1,59 +1,59 @@
 {
   "qa_pixel": {
-    "title": "Pixel Quality Assessment Band (QA_PIXEL)",
-    "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+    "title": "Pixel Quality Assessment Band",
+    "description": "Collection 2 Level-1 Pixel Quality Assessment Band (QA_PIXEL)",
     "roles": ["cloud", "cloud-shadow", "snow-ice", "water-mask"]
   },
   "qa_radsat": {
-    "title": "Radiometric Saturation and Terrain Occlusion Quality Assessment Band (QA_RADSAT)",
-    "description": "Collection 2 Level-1 Radiometric Saturation and Terrain Occlusion Quality Assessment Band",
+    "title": "Radiometric Saturation and Terrain Occlusion Quality Assessment Band",
+    "description": "Collection 2 Level-1 Radiometric Saturation and Terrain Occlusion Quality Assessment Band (QA_RADSAT)",
     "roles": ["saturation"]
   },
   "coastal": {
-    "title": "Coastal/Aerosol Band (SR_B1)",
-    "description": "Collection 2 Level-2 Coastal/Aerosol Band Surface Reflectance",
+    "title": "Coastal/Aerosol Band",
+    "description": "Collection 2 Level-2 Coastal/Aerosol Band (SR_B1) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B1.TIF"
   },
   "blue": {
-    "title": "Blue Band (SR_B2)",
-    "description": "Collection 2 Level-2 Blue Band Surface Reflectance",
+    "title": "Blue Band",
+    "description": "Collection 2 Level-2 Blue Band (SR_B2) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B2.TIF"
   },
   "green": {
-    "title": "Green Band (SR_B3)",
-    "description": "Collection 2 Level-2 Green Band Surface Reflectance",
+    "title": "Green Band",
+    "description": "Collection 2 Level-2 Green Band (SR_B3) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B3.TIF"
   },
   "red": {
-    "title": "Red Band (SR_B4)",
-    "description": "Collection 2 Level-2 Red Band Surface Reflectance",
+    "title": "Red Band",
+    "description": "Collection 2 Level-2 Red Band (SR_B4) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B4.TIF"
   },
   "nir08": {
-    "title": "Near Infrared Band 0.8 (SR_B5)",
-    "description": "Collection 2 Level-2 Near Infrared Band 0.8 Surface Reflectance",
+    "title": "Near Infrared Band 0.8",
+    "description": "Collection 2 Level-2 Near Infrared Band 0.8 (SR_B5) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B5.TIF"
   },
   "swir16": {
-    "title": "Short-wave Infrared Band 1.6 (SR_B6)",
-    "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 Surface Reflectance",
+    "title": "Short-wave Infrared Band 1.6",
+    "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (SR_B6) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B6.TIF"
   },
   "swir22": {
-    "title": "Short-wave Infrared Band 2.2 (SR_B7)",
-    "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 Surface Reflectance",
+    "title": "Short-wave Infrared Band 2.2",
+    "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 (SR_B7) Surface Reflectance",
     "roles": ["reflectance"],
     "href_suffix": "SR_B7.TIF"
   },
   "qa_aerosol": {
-    "title": "Aerosol Quality Assessment Band (SR_QA_AEROSOL)",
-    "description": "Collection 2 Level-2 Aerosol Quality Assessment Band Surface Reflectance Product",
+    "title": "Aerosol Quality Assessment Band",
+    "description": "Collection 2 Level-2 Aerosol Quality Assessment Band (SR_QA_AEROSOL) Surface Reflectance Product",
     "roles": ["data-mask", "water-mask"],
     "href_suffix": "SR_QA_AEROSOL.TIF"
   }
