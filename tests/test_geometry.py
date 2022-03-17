@@ -2,6 +2,7 @@ import unittest
 
 import vcr
 
+from stactools.landsat.constants import Antimeridian
 from stactools.landsat.stac import create_stac_item
 from tests.data import TEST_GEOMETRY_PATHS
 
@@ -75,3 +76,30 @@ class GeometryTest(unittest.TestCase):
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
             self.assertAlmostEqual(e[1], i[1], 7)
+
+    def test_antimeridian(self):
+        """Test that a scene spanning the antimeridian is normalized."""
+        mtl_xml_href = TEST_GEOMETRY_PATHS["antimeridian"]
+        crosssing_geometry = {
+            "type":
+            "Polygon",
+            "coordinates": [[[-179.70358951407547, 52.750507455036264],
+                             [179.96672360880183, 52.00163609753924],
+                             [-177.89334479610974, 50.62805205289558],
+                             [-179.9847165338706, 51.002602948712465],
+                             [-179.70358951407547, 52.750507455036264]]]
+        }
+        crossing_coords = crosssing_geometry["coordinates"][0]
+        crossing_lons = [lon for lon, lat in crossing_coords]
+        item = create_stac_item(mtl_xml_href,
+                                legacy_l8=False,
+                                use_usgs_geometry=True,
+                                antimeridian_strategy=Antimeridian.NORMALIZE)
+        item_coords = item.geometry["coordinates"][0]
+        item_lons = [lon for lon, lat in item_coords]
+        self.assertFalse(
+            all(lon >= 0 for lon in crossing_lons)
+            or all(lon <= 0 for lon in crossing_lons))
+        self.assertTrue(
+            all(lon >= 0 for lon in item_lons)
+            or all(lon <= 0 for lon in item_lons))

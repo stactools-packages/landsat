@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 from typing import Any, Dict
 
 from pystac.extensions.eo import Band
@@ -9,6 +9,11 @@ class Sensor(Enum):
     TM = "T"
     ETM = "E"
     OLI_TIRS = "C"
+
+
+class Antimeridian(Enum):
+    NORMALIZE = auto()
+    SPLIT = auto()
 
 
 LANDSAT_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
