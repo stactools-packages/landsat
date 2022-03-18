@@ -45,7 +45,7 @@ def create_stac_item(
         use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
             stored alongside the XML metadata file or pulled from the USGS STAC
             API.
-        antimeridian_strategy (AntimeridianStrategy): Either split on -180 or
+        antimeridian_strategy (Antimeridian): Either split on -180 or
             normalize geometries so all longitudes are either positive or
             negative.
         read_href_modifier (Callable[[str], str]): An optional function to

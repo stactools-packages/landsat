@@ -4,6 +4,7 @@ import click
 from click import Command, Group
 from pystac import CatalogType, Item
 
+from stactools.landsat.constants import Antimeridian
 from stactools.landsat.stac import create_collection, create_stac_item
 from stactools.landsat.utils import transform_stac_to_stac
 
@@ -39,6 +40,13 @@ def create_landsat_command(cli: Group) -> Command:
                   "--legacy_l8",
                   is_flag=True,
                   help="Create legacy Landsat 8 STAC Item")
+    @click.option("-a",
+                  "--antimeridian_strategy",
+                  type=click.Choice(["normalize", "split"],
+                                    case_sensitive=False),
+                  default="normalize",
+                  show_default=True,
+                  help="geometry strategy for antimeridian scenes")
     @click.option("--level",
                   type=click.Choice(['level-1', 'level-2'],
                                     case_sensitive=False),
@@ -46,7 +54,7 @@ def create_landsat_command(cli: Group) -> Command:
                   show_default=True,
                   help="Product level to process. Unused.")
     def create_item_cmd(level: str, mtl: str, output: str, usgs_geometry: bool,
-                        legacy_l8) -> None:
+                        legacy_l8: bool, antimeridian_strategy: str) -> None:
         """\b
         Creates a STAC Item for a Landsat Collection 2 scene based on metadata
         from a Landsat MTL xml file.
@@ -74,12 +82,17 @@ def create_landsat_command(cli: Group) -> Command:
                 queried from the USGS STAC API.
             legacy_l8: Flag to use the legacy method for creating a Landsat 8
                 STAC Item.
+            antimeridian_strategy (str): Choice of 'normalize' or 'split' to
+                either split on -180 longitude or normalize geometries so all
+                longitudes are either positive or negative.
             level (str): Choice of 'level-1' or 'level-2'. This is not used
                 and has no effect.
         """
+        antimeridian = Antimeridian[antimeridian_strategy.upper()]
         item = create_stac_item(mtl_xml_href=mtl,
                                 use_usgs_geometry=usgs_geometry,
-                                legacy_l8=legacy_l8)
+                                legacy_l8=legacy_l8,
+                                antimeridian_strategy=antimeridian)
         item.set_self_href(os.path.join(output, f'{item.id}.json'))
         item.save_object()
 
@@ -107,8 +120,16 @@ def create_landsat_command(cli: Group) -> Command:
                   "--usgs_geometry",
                   is_flag=True,
                   help="Use USGS STAC Item geometry")
+    @click.option("-a",
+                  "--antimeridian_strategy",
+                  type=click.Choice(["normalize", "split"],
+                                    case_sensitive=False),
+                  default="normalize",
+                  show_default=True,
+                  help="geometry strategy for antimeridian scenes")
     def create_collection_cmd(file_list: str, output: str, id: str,
-                              usgs_geometry: bool) -> None:
+                              usgs_geometry: bool,
+                              antimeridian_strategy: str) -> None:
         """\b
         Creates a STAC Collection for Items defined by the hrefs in file_list.
 
@@ -121,7 +142,11 @@ def create_landsat_command(cli: Group) -> Command:
             usgs_geometry: Flag to use the geometry from a USGS STAC Item that
                 resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
+            antimeridian_strategy (str): Choice of 'normalize' or 'split' to
+                either split on -180 longitude or normalize geometries so all
+                longitudes are either positive or negative.
         """
+        antimeridian = Antimeridian[antimeridian_strategy.upper()]
         with open(file_list) as file:
             hrefs = [line.strip() for line in file.readlines()]
 
@@ -131,7 +156,8 @@ def create_landsat_command(cli: Group) -> Command:
         for href in hrefs:
             item = create_stac_item(href,
                                     use_usgs_geometry=usgs_geometry,
-                                    legacy_l8=False)
+                                    legacy_l8=False,
+                                    antimeridian_strategy=antimeridian)
             collection.add_item(item)
         collection.make_all_asset_hrefs_relative()
         collection.validate_all()
