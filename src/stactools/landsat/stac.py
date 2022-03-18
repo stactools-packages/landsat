@@ -284,5 +284,9 @@ def create_collection(collection_id: str) -> Collection:
     item_assets.item_assets = fragment["item_assets"]
 
     ItemAssetsExtension.add_to(collection)
+    ViewExtension.add_to(collection)
+    ScientificExtension.add_to(collection)
+    RasterExtension.add_to(collection)
+    EOExtension.add_to(collection)
 
     return collection
