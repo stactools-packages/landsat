@@ -23,7 +23,8 @@ def create_landsat_command(cli: Group) -> Command:
 
     @landsat.command(
         "create-item",
-        short_help="Creates a STAC Item from Landsat Collection 2 scene metadata.")
+        short_help=(
+            "Creates a STAC Item from Landsat Collection 2 scene metadata."))
     @click.option("-m",
                   "--mtl",
                   required=True,

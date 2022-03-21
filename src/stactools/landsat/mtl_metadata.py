@@ -117,7 +117,7 @@ class MtlMetadata:
 
     @property
     def bbox(self) -> List[float]:
-        # Might be cleaner to transfrom the proj bbox to WGS84.
+        # Might be cleaner to just transform the proj bbox to WGS84.
         lons = [
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UL_LON_PRODUCT"),
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UR_LON_PRODUCT"),

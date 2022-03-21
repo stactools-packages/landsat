@@ -222,7 +222,7 @@ def test_southern_hemisphere_epsg() -> None:
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
-    # northern hemisphere UTM zone for southern hemisphere scene
+    # northern hemisphere UTM zone is used for southern hemisphere scene
     assert item_dict["properties"]["proj:epsg"] == 32617
 
 
