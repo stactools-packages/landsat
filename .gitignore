@@ -1,6 +1,3 @@
-tests/data-files/external
-z-dev
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
