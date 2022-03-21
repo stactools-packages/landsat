@@ -23,7 +23,7 @@ def create_landsat_command(cli: Group) -> Command:
 
     @landsat.command(
         "create-item",
-        short_help="Creates a STAC Item from Collection 2 scene metadata.")
+        short_help="Creates a STAC Item from Landsat Collection 2 scene metadata.")
     @click.option("-m",
                   "--mtl",
                   required=True,
@@ -66,25 +66,26 @@ def create_landsat_command(cli: Group) -> Command:
                 - Landsat 1-5 Multi Spectral Scanner (MSS)
             Level-2
                 - Landat 4-5 Thematic Mapper (TM)
-                - Landsat 7 Enhanced Thematic Mapper (ETM)
+                - Landsat 7 Enhanced Thematic Mapper Plus (ETM+)
                 - Landsat 8-9 Operational Land Imager - Thermal Infrared Sensor
                   (OLI-TIRS)
 
-        All assets (COGs, metadata files) must reside in the same directory /
-        blob prefix / etc. as the MTL xml metadata file.
+        All assets (COGs, metadata files) must reside in the same
+        directory/blob prefix/etc. as the MTL xml metadata file.
 
         \b
         Args:
             mtl (str): HREF to the source MTL metadata xml file
             output (str): Directory that will contain the STAC Item
-            usgs_geometry: Flag to use the geometry from a USGS STAC Item that
-                resides in the same directory as the MTL xml file or can be
+            usgs_geometry (bool): Flag to use the geometry from a USGS STAC Item
+                that resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
-            legacy_l8: Flag to use the legacy method for creating a Landsat 8
-                STAC Item.
+            legacy_l8 (bool): Flag to use the legacy method for creating a
+                Landsat 8 STAC Item.
             antimeridian_strategy (str): Choice of 'normalize' or 'split' to
-                either split on -180 longitude or normalize geometries so all
-                longitudes are either positive or negative.
+                either split the Item geometry on -180 longitude or normalize
+                the Item geometry so all longitudes are either positive or
+                negative.
             level (str): Choice of 'level-1' or 'level-2'. This is not used
                 and has no effect.
         """
@@ -98,8 +99,8 @@ def create_landsat_command(cli: Group) -> Command:
 
     @landsat.command(
         "create-collection",
-        short_help="Creates a STAC Collection with contents defined by hrefs "
-        "in a text file.")
+        short_help="Creates a STAC Collection with contents defined by a list "
+        " of metadata file hrefs in a text file.")
     @click.option("-f",
                   "--file_list",
                   required=True,
@@ -139,12 +140,13 @@ def create_landsat_command(cli: Group) -> Command:
                 should point to XML MTL metadata files.
             output (str): Directory that will contain the collection.
             id (str): Choice of 'landsat-c2-l1' or 'landsat-c2-l2'.
-            usgs_geometry: Flag to use the geometry from a USGS STAC Item that
-                resides in the same directory as the MTL xml file or can be
+            usgs_geometry (bool): Flag to use the geometry from a USGS STAC Item
+                that resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
             antimeridian_strategy (str): Choice of 'normalize' or 'split' to
-                either split on -180 longitude or normalize geometries so all
-                longitudes are either positive or negative.
+                either split the Item geometry on -180 longitude or normalize
+                the Item geometry so all longitudes are either positive or
+                negative.
         """
         antimeridian = Antimeridian[antimeridian_strategy.upper()]
         with open(file_list) as file:

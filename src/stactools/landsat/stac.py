@@ -53,7 +53,7 @@ def create_stac_item(
     Returns:
         pystac.Item: A STAC Item representing the Landsat scene.
     """
-    base_href = '_'.join(mtl_xml_href.split('_')[:-1])  # Remove the _MTL.txt
+    base_href = '_'.join(mtl_xml_href.split('_')[:-1])
 
     mtl_metadata = MtlMetadata.from_file(mtl_xml_href,
                                          read_href_modifier,
