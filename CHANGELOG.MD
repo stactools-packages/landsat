@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). This project attempts to match the major and minor versions of [stactools](https://github.com/stac-utils/stactools) and increments the patch number as needed.
 
+
 ## [Unreleased]
+
+Nothing.
+
+
+## [0.2.1] - 2022-03-22
 
 NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed headings below are ignored for Landsat 8 scenes unless `legacy_l8=False` is passed to the `create_stac_item` function.
 
@@ -22,7 +28,6 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 - Option to use Item geometry from the corresponding USGS STAC Item in lieu of computation from the ANG.txt metadata file
 - `raster extension`
 
-
 ### Changed
 
 - Decrease Asset verbosity by moving redundant `projection` extension and `gsd` information from the Assets to Item properties.
@@ -31,7 +36,6 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 - Include non-zero `off_nadir` angles for Landsat 8-9
 - Switch to [common EO band names](https://github.com/stac-extensions/eo#common-band-names) for Asset keys to address existence of different band numbers for the same EO band between instruments or platforms
 - Update repository to the stactools-packages [template contents](https://github.com/stac-extensions/template/commit/7dfc84fd70c4cf15d6035968323c0baf8da06dd8).
-
 
 ### Fixed
 
@@ -45,5 +49,6 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
-[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.0..main>
+[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.1..main>
+[0.2.1]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.1>
 [0.2.0]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.0>
