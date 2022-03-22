@@ -1,0 +1,5 @@
+tests/data-files/tm/LT04_L2SP_002026_19830110_20200918_02_T1_MTL.xml
+tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml
+tests/data-files/etm/LE07_L2SP_021030_20100109_20200911_02_T1_MTL.xml
+tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml
+tests/data-files/oli-tirs/LC09_L2SP_010065_20220129_20220131_02_T1_MTL.xml

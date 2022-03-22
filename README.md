@@ -27,16 +27,23 @@ Source: https://pubs.usgs.gov/fs/2015/3081/fs20153081_ver1.2.pdf
 
 ## Examples
 
-### STAC objects
+### STAC Collections and Items
 
-- [Item](examples/item/LC08_L2SP_005009_20150710_02_T2.json)
+- [Collection](examples/landsat-c2-l2/collection.json)
+- [Item](examples/landsat-c2-l1/LM01_L1GS_001010_19720908_02_T2/LM01_L1GS_001010_19720908_02_T2.json)
 
 ### Command-line usage
 
-To create the example STAC `Item`:
+To create a STAC `Item`:
 
 ```bash
-$ stac landsat create-item "tests/data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml" "examples/item/LC08_L2SP_005009_20150710_02_T2.json"
+$ stac landsat create-item --mtl tests/data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml --output examples --usgs_geometry
 ```
 
-Use `stac landsat --help` to see all subcommands and options.
+To create a STAC `Collection` from a text file containing a list of Landsat scene XML metadata files:
+
+```bash
+$ stac landsat create-collection --file_list examples/c2-l2-file-list.txt --output examples/landsat-c2-l2 --id landsat-c2-l2 --usgs_geometry
+```
+
+The above `create-collection` command is exactly how the contents of the `examples/landsat-c2-l2` directory are generated.

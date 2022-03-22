@@ -1,4 +1,5 @@
 import datetime
+from typing import Any, Dict, Optional
 
 import dateutil.parser
 import rasterio
@@ -6,11 +7,15 @@ from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
+from pystac_client import Client
 from rasterio import RasterioIOError
 from shapely.geometry import box, mapping, shape
+from stactools.core.io import ReadHrefModifier
+from stactools.core.utils import href_exists
 
 from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
-                                         OLD_L8_EXTENSION_SCHEMA)
+                                         OLD_L8_EXTENSION_SCHEMA, USGS_API,
+                                         USGS_C2L1, USGS_C2L2_SR, Sensor)
 
 
 def _parse_date(in_date: str) -> datetime.datetime:
@@ -168,3 +173,55 @@ def stac_api_to_stac(uri: str) -> Item:
     return transform_stac_to_stac(item=Item.from_file(uri),
                                   source_link=uri,
                                   enable_proj=False)
+
+
+def get_usgs_geometry(
+    base_href: str,
+    sensor: Sensor,
+    product_id: str,
+    read_href_modifier: Optional[ReadHrefModifier] = None
+) -> Optional[Dict[str, Any]]:
+    """Attempts to get scene geometry from a USGS STAC Item.
+
+    Args:
+        base_href (str): Base href to a STAC storage location
+        sensor (Sensor): Enum of MSS, TM, ETM, or OLI-TIRS
+        product_id (str): Scene product id from mtl metadata
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify the storage href (e.g. to add a token to a url)
+    Returns:
+        Optional[Dict[str, Any]]: Either a GeoJSON geometry or None
+    """
+    # Check data storage first
+    if sensor is Sensor.MSS:
+        stac_href = f"{base_href}_stac.json"
+    else:
+        stac_href = f"{base_href}_SR_stac.json"
+
+    if read_href_modifier is not None:
+        stac_href = read_href_modifier(stac_href)
+
+    if href_exists(stac_href):
+        item = Item.from_file(stac_href)
+    else:
+        item = None
+
+    # If not found, check the USGS STAC API
+    if item is None:
+        if sensor is Sensor.MSS:
+            collection = USGS_C2L1
+        else:
+            collection = USGS_C2L2_SR
+            product_id = f"{product_id}_SR"
+
+        catalog = Client.open(USGS_API)
+        search = catalog.search(collections=[collection], ids=[product_id])
+        if search.matched() == 1:
+            item = next(search.get_items())
+        else:
+            item = None
+
+    if item is not None:
+        return item.geometry
+    else:
+        return None

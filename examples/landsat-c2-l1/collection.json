@@ -1,0 +1,326 @@
+{
+  "type": "Collection",
+  "id": "landsat-c2-l1",
+  "stac_version": "1.0.0",
+  "description": "Global Landsat Collection 2 Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "Landsat Collection 2 Level-1"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9AF14YV",
+      "title": "Landsat 1-5 MSS Collection 2 Level-1"
+    },
+    {
+      "rel": "license",
+      "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+      "title": "Public Domain"
+    },
+    {
+      "rel": "item",
+      "href": "./LM01_L1GS_001010_19720908_02_T2/LM01_L1GS_001010_19720908_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM02_L1GS_001004_19750411_02_T2/LM02_L1GS_001004_19750411_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM03_L1GS_001001_19780510_02_T2/LM03_L1GS_001001_19780510_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM04_L1GS_001001_19830527_02_T2/LM04_L1GS_001001_19830527_02_T2.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./LM05_L1GS_001001_19850524_02_T2/LM05_L1GS_001001_19850524_02_T2.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "thumbnail": {
+      "type": "image/jpeg",
+      "title": "Thumbnail image",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "reduced_resolution_browse": {
+      "type": "image/jpeg",
+      "title": "Reduced resolution browse image",
+      "roles": [
+        "overview"
+      ]
+    },
+    "mtl.json": {
+      "type": "application/json",
+      "title": "Product Metadata File (json)",
+      "description": "Collection 2 Level-1 Product Metadata File (json)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.txt": {
+      "type": "text/plain",
+      "title": "Product Metadata File (txt)",
+      "description": "Collection 2 Level-1 Product Metadata File (txt)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.xml": {
+      "type": "application/xml",
+      "title": "Product Metadata File (xml)",
+      "description": "Collection 2 Level-1 Product Metadata File (xml)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "qa_pixel": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+      "raster:bands": [
+        {
+          "nodata": 1,
+          "data_type": "uint16",
+          "spatial_resolution": 60,
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "cloud"
+      ]
+    },
+    "qa_radsat": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 60,
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "saturation"
+      ]
+    },
+    "green": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Green Band",
+      "description": "Collection 2 Level-1 Green Band Top of Atmosphere Radiance",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 60,
+          "unit": "watt/steradian/square_meter/micrometer"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "red": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Red Band",
+      "description": "Collection 2 Level-1 Red Band Top of Atmosphere Radiance",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 60,
+          "unit": "watt/steradian/square_meter/micrometer"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "nir08": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.8",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.8 Top of Atmosphere Radiance",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 60,
+          "unit": "watt/steradian/square_meter/micrometer"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "nir09": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.9",
+      "description": "Collection 2 Level-1 Near Infrared Band 0.9 Top of Atmosphere Radiance",
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 60,
+          "unit": "watt/steradian/square_meter/micrometer"
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "title": "Landsat Collection 2 Level-1",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1972-07-25T00:00:00Z",
+          "2013-01-07T23:23:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "Landsat",
+    "USGS",
+    "NASA",
+    "Satellite",
+    "Global",
+    "Imagery"
+  ],
+  "providers": [
+    {
+      "name": "NASA",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://landsat.gsfc.nasa.gov/"
+    },
+    {
+      "name": "USGS",
+      "roles": [
+        "producer",
+        "processor",
+        "licensor"
+      ],
+      "url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data"
+    },
+    {
+      "name": "Microsoft",
+      "roles": [
+        "host"
+      ],
+      "url": "https://planetarycomputer.microsoft.com"
+    }
+  ],
+  "summaries": {
+    "platform": [
+      "landsat-1",
+      "landsat-2",
+      "landsat-3",
+      "landsat-4",
+      "landsat-5"
+    ],
+    "instruments": [
+      "mss"
+    ],
+    "gsd": [
+      79
+    ],
+    "view:off_nadir": [
+      0
+    ],
+    "sci:doi": [
+      "10.5066/P9AF14YV"
+    ],
+    "eo:bands": [
+      {
+        "name": "B4",
+        "common_name": "green",
+        "description": "Visible green (Landsat 1-3 Band B4)",
+        "center_wavelength": 0.55,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B5",
+        "common_name": "red",
+        "description": "Visible red (Landsat 1-3 Band B5)",
+        "center_wavelength": 0.65,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B6",
+        "common_name": "nir08",
+        "description": "Near infrared (Landsat 1-3 Band B6)",
+        "center_wavelength": 0.75,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B7",
+        "common_name": "nir09",
+        "description": "Near infrared (Landsat 1-3 Band B7)",
+        "center_wavelength": 0.95,
+        "full_width_half_max": 0.3
+      },
+      {
+        "name": "B1",
+        "common_name": "green",
+        "description": "Visible green (Landsat 4-5 Band B1)",
+        "center_wavelength": 0.55,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B2",
+        "common_name": "red",
+        "description": "Visible red (Landsat 4-5 Band B2)",
+        "center_wavelength": 0.65,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B3",
+        "common_name": "nir08",
+        "description": "Near infrared (Landsat 4-5 Band B3)",
+        "center_wavelength": 0.75,
+        "full_width_half_max": 0.1
+      },
+      {
+        "name": "B4",
+        "common_name": "nir09",
+        "description": "Near infrared (Landsat 4-5 Band B4)",
+        "center_wavelength": 0.95,
+        "full_width_half_max": 0.3
+      }
+    ]
+  }
+}

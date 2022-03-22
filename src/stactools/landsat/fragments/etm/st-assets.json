@@ -1,0 +1,56 @@
+{
+  "lwir": {
+    "title": "Surface Temperature Band",
+    "description": "Collection 2 Level-2 Thermal Infrared Band (ST_B6) Surface Temperature",
+    "roles": ["temperature"],
+    "href_suffix": "ST_B6.TIF"
+  },
+  "atran": {
+    "title": "Atmospheric Transmittance Band",
+    "description": "Collection 2 Level-2 Atmospheric Transmittance Band (ST_ATRAN) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_ATRAN.TIF"
+  },
+  "cdist": {
+    "title": "Cloud Distance Band",
+    "description": "Collection 2 Level-2 Cloud Distance Band (ST_CDIST) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_CDIST.TIF"
+  },
+  "drad": {
+    "title": "Downwelled Radiance Band",
+    "description": "Collection 2 Level-2 Downwelled Radiance Band (ST_DRAD) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_DRAD.TIF"
+  },
+  "urad": {
+    "title": "Upwelled Radiance Band",
+    "description": "Collection 2 Level-2 Upwelled Radiance Band (ST_URAD) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_URAD.TIF"
+  },
+  "trad": {
+    "title": "Thermal Radiance Band",
+    "description": "Collection 2 Level-2 Thermal Radiance Band (ST_TRAD) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_TRAD.TIF"
+  },
+  "emis": {
+    "title": "Emissivity Band",
+    "description": "Collection 2 Level-2 Emissivity Band (ST_EMIS) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_EMIS.TIF"
+  },
+  "emsd": {
+    "title": "Emissivity Standard Deviation Band",
+    "description": "Collection 2 Level-2 Emissivity Standard Deviation Band (ST_EMSD) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_EMSD.TIF"
+  },
+  "qa": {
+    "title": "Surface Temperature Quality Assessment Band",
+    "description": "Collection 2 Level-2 Quality Assessment Band (ST_QA) Surface Temperature Product",
+    "roles": ["data"],
+    "href_suffix": "ST_QA.TIF"
+  }
+}

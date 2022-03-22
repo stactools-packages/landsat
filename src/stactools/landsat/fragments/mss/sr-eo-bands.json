@@ -1,0 +1,30 @@
+{
+  "green": {
+    "name": "B1",
+    "common_name": "green",
+    "description": "Visible green",
+    "center_wavelength": 0.55,
+    "full_width_half_max": 0.1
+  },
+  "red": {
+    "name": "B2",
+    "common_name": "red",
+    "description": "Visible red",
+    "center_wavelength": 0.65,
+    "full_width_half_max": 0.1
+  },
+  "nir08": {
+    "name": "B3",
+    "common_name": "nir08",
+    "description": "Near infrared",
+    "center_wavelength": 0.75,
+    "full_width_half_max": 0.1
+  },
+  "nir09": {
+    "name": "B4",
+    "common_name": "nir09",
+    "description": "Near infrared",
+    "center_wavelength": 0.95,
+    "full_width_half_max": 0.3
+  }
+}

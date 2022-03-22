@@ -1,0 +1,328 @@
+{
+    "type": "Feature",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json",
+        "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/alternate-assets/v1.1.0/schema.json",
+        "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
+    ],
+    "id": "LM03_L1GS_001001_19780510_20200907_02_T2",
+    "description": "Landsat Collection 2 Level-1 Product",
+    "bbox": [
+        -1.4963885861793036,
+        78.85095986958085,
+        11.239331339979085,
+        81.05336502723549
+    ],
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    7.738555980320523,
+                    81.05336502723549
+                ],
+                [
+                    -1.4963885861793036,
+                    80.29244773524437
+                ],
+                [
+                    2.9935143118359253,
+                    78.85095986958085
+                ],
+                [
+                    11.239331339979085,
+                    79.50784182403861
+                ],
+                [
+                    7.738555980320523,
+                    81.05336502723549
+                ]
+            ]
+        ]
+    },
+    "properties": {
+        "datetime": "1978-05-10T13:28:09.003000Z",
+        "eo:cloud_cover": 58.0,
+        "view:sun_azimuth": -150.00380628,
+        "view:sun_elevation": 26.41213243,
+        "platform": "LANDSAT_3",
+        "instruments": [
+            "MSS"
+        ],
+        "view:off_nadir": 0,
+        "landsat:cloud_cover_land": 85.0,
+        "landsat:wrs_type": "1",
+        "landsat:wrs_path": "001",
+        "landsat:wrs_row": "001",
+        "landsat:scene_id": "LM30010011978130XXX00",
+        "landsat:collection_category": "T2",
+        "landsat:collection_number": "02",
+        "landsat:correction": "L1GS",
+        "proj:epsg": 32631,
+        "proj:shape": [
+            4183,
+            4219
+        ],
+        "proj:transform": [
+            60.0,
+            0.0,
+            414210.0,
+            0.0,
+            -60.0,
+            9003150.0
+        ]
+    },
+    "assets": {
+        "thumbnail": {
+            "title": "Thumbnail image",
+            "type": "image/jpeg",
+            "roles": [
+                "thumbnail"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_thumb_small.jpeg",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_thumb_small.jpeg"
+                }
+            },
+            "file:checksum": "13404d13a8ba511259d53281c3d110fedbcb7beb6a016285ae3e36eb216ea5059f68be8b6819f55305136ebdc1316f73f4dfbf838f5a1f7ae9a08f17ec7085d078a6"
+        },
+        "reduced_resolution_browse": {
+            "title": "Reduced resolution browse image",
+            "type": "image/jpeg",
+            "roles": [
+                "overview"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_thumb_large.jpeg",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_thumb_large.jpeg"
+                }
+            },
+            "file:checksum": "1340aeea2d27f8463d408709c89dbe8ed833ddb8fd330feaccab1727d14283c1aaa415d7a67c3cd4f016f5439494629387149524fecef8c2de3243a2bfaa90359e1b"
+        },
+        "index": {
+            "title": "HTML index page",
+            "type": "text/html",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/stac-browser/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2"
+        },
+        "green": {
+            "title": "Green Band (B4)",
+            "description": "Collection 2 Level-1 Green Band (B4) Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "eo:bands": [
+                {
+                    "name": "B4",
+                    "common_name": "green",
+                    "gsd": 60,
+                    "center_wavelength": 0.55
+                }
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B4.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B4.TIF"
+                }
+            },
+            "file:checksum": "1340003cb38317cc04c02cf8b240533ce891be42605765e658bfa900a3e002079583228b51daa95cab69b52d2c0ba09cbe9a0ccd2ff2313461bce8b6dc23a4ab2fb7"
+        },
+        "red": {
+            "title": "Red Band (B5)",
+            "description": "Collection 2 Level-1 Red Band (B5) Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data"
+            ],
+            "eo:bands": [
+                {
+                    "name": "B5",
+                    "common_name": "red",
+                    "gsd": 60,
+                    "center_wavelength": 0.65
+                }
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B5.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B5.TIF"
+                }
+            },
+            "file:checksum": "134034f64a8d5ac535ce8ec9d49f61ac18b9d13192011f1e45a075db049d26a60a6de48b9fe56cf5cef27784c5716a371e21b7546d5f9f4034f5e30a85f6b756c880"
+        },
+        "nir08": {
+            "title": "Near Infrared Band 0.7 (B6)",
+            "description": "Collection 2 Level-1 Near Infrared Band 0.7 (B6) Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data",
+                "reflectance"
+            ],
+            "eo:bands": [
+                {
+                    "name": "B6",
+                    "common_name": "nir08",
+                    "gsd": 60,
+                    "center_wavelength": 0.75
+                }
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B6.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B6.TIF"
+                }
+            },
+            "file:checksum": "1340596b966085b3c5ca55cf26c54f8de5e5d4ab003abfd25b1840fb77567bce008217b936c8b268cfd1169446c77516c003b9868c8652320481ee38ddc98996c58c"
+        },
+        "nir09": {
+            "title": "Near Infrared Band 0.9 (B7)",
+            "description": "Collection 2 Level-1 Near Infrared Band 0.9 (B7) Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "data",
+                "reflectance"
+            ],
+            "eo:bands": [
+                {
+                    "name": "B7",
+                    "common_name": "nir09",
+                    "gsd": 60,
+                    "center_wavelength": 0.95
+                }
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B7.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_B7.TIF"
+                }
+            },
+            "file:checksum": "13408ea12432cd8ff267541dc8a3866d4026c7b146b0847f083609d055a4776aad275331cfbfee99cfbf24cccb1118cc3ddfb92e575e083aa7d6d290eecfd82a318b"
+        },
+        "MTL.txt": {
+            "title": "Product Metadata File",
+            "description": "Collection 2 Level-1 Product Metadata File (MTL)",
+            "type": "text/plain",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.txt",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.txt"
+                }
+            },
+            "file:checksum": "13405a1ca2b63208f6de2a05e7070f5790595b54b77a079954bc22a4c443db1f5a231bb5f7684b4f2d44c8696430f95821d97dc154171b37970da88284dccd8b3949"
+        },
+        "MTL.xml": {
+            "title": "Product Metadata File (xml)",
+            "description": "Collection 2 Level-1 Product Metadata File (xml)",
+            "type": "application/xml",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.xml",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.xml"
+                }
+            },
+            "file:checksum": "134038b5c4bcd35f44e6cc921302961020310f14d37c1c1361a762794084bc161cf35bded26f9f15f47251fb574fc8d2febf1a3e248c22c55c0d905002220c9670a8"
+        },
+        "MTL.json": {
+            "title": "Product Metadata File (json)",
+            "description": "Collection 2 Level-1 Product Metadata File (json)",
+            "type": "application/json",
+            "roles": [
+                "metadata"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.json",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_MTL.json"
+                }
+            },
+            "file:checksum": "134015867af6bfabc718d836c5d2b31186195556734e8c4e52759d93b1fc220024fac408a4e844d2a8dd19ce0cde4df2e9227c15b0bf7752bfe5191f665237641eb1"
+        },
+        "qa_pixel": {
+            "title": "Quality Assessment Band",
+            "description": "Collection 2 Level-1 Quality Assessment Band (QA_PIXEL) Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "cloud"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_QA_PIXEL.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_QA_PIXEL.TIF"
+                }
+            },
+            "file:checksum": "13401f18755ae422aa49223f085a51a9d86d24d0df83dd072f2e275a27e6540812e3fef917ebeb3f2e8c9c03dd1934d9c4c6f6db87b6e5676bee0161dd03deea5b23"
+        },
+        "qa_radsat": {
+            "title": "Radiometric Saturation Quality Assessment Band",
+            "description": "Radiometric Saturation Quality Assessment Band Top of Atmosphere Radiance",
+            "type": "image/vnd.stac.geotiff; cloud-optimized=true",
+            "roles": [
+                "saturation"
+            ],
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_QA_RADSAT.TIF",
+            "alternate": {
+                "s3": {
+                    "storage:platform": "AWS",
+                    "storage:requester_pays": true,
+                    "href": "s3://usgs-landsat/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_QA_RADSAT.TIF"
+                }
+            },
+            "file:checksum": "13402568410dc916e62b96eeb2b06cf8af7d791dcf64fe803a02011327a318445c61c22feaf110de60fdc715648fab61e6a7d7850478cfa7d91c82b583f3a6096798"
+        }
+    },
+    "links": [
+        {
+            "rel": "root",
+            "href": "https://landsatlook.usgs.gov/data/catalog.json"
+        },
+        {
+            "rel": "parent",
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/catalog.json"
+        },
+        {
+            "rel": "collection",
+            "href": "https://landsatlook.usgs.gov/data/collection02/landsat-c2l1.json"
+        },
+        {
+            "rel": "self",
+            "href": "https://landsatlook.usgs.gov/data/collection02/level-1/standard/mss/1978/001/001/LM03_L1GS_001001_19780510_20200907_02_T2/LM03_L1GS_001001_19780510_20200907_02_T2_stac.json"
+        }
+    ],
+    "collection": "landsat-c2l1"
+}

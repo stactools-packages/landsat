@@ -24,5 +24,8 @@ TEST_GEOMETRY_PATHS = {
     test_data.get_path(
         "data-files/assets5/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"),
     "vcr_cassette":
-    test_data.get_path("fixtures/usgs_stac_api.yml")
+    test_data.get_path("fixtures/usgs_stac_api.yml"),
+    "antimeridian":
+    test_data.get_path(
+        "data-files/oli-tirs/LC08_L2SR_084024_20160111_20201016_02_T1_MTL.xml")
 }

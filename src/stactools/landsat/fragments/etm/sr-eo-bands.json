@@ -1,0 +1,44 @@
+{
+  "blue": {
+    "name": "ETM_B1",
+    "common_name": "blue",
+    "description": "Visible blue",
+    "center_wavelength": 0.48,
+    "full_width_half_max": 0.07
+  },
+  "green": {
+    "name": "ETM_B2",
+    "common_name": "green",
+    "description": "Visible green",
+    "center_wavelength": 0.56,
+    "full_width_half_max": 0.08
+  },
+  "red": {
+    "name": "ETM_B3",
+    "common_name": "red",
+    "description": "Visible red",
+    "center_wavelength": 0.66,
+    "full_width_half_max": 0.06
+  },
+  "nir08": {
+    "name": "ETM_B4",
+    "common_name": "nir08",
+    "description": "Near infrared",
+    "center_wavelength": 0.84,
+    "full_width_half_max": 0.13
+  },
+  "swir16": {
+    "name": "ETM_B5",
+    "common_name": "swir16",
+    "description": "Short-wave infrared",
+    "center_wavelength": 1.65,
+    "full_width_half_max": 0.20
+  },
+  "swir22": {
+    "name": "ETM_B7",
+    "common_name": "swir22",
+    "description": "Short-wave infrared",
+    "center_wavelength": 2.20,
+    "full_width_half_max": 0.28
+  }
+}

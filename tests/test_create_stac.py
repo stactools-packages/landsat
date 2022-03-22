@@ -14,6 +14,8 @@ from stactools.landsat.assets import (SR_ASSET_DEFS, ST_B10_ASSET_DEF,
                                       THERMAL_ASSET_DEFS)
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
+from stactools.landsat.stac import create_stac_item
+from tests import test_data
 from tests.data import TEST_MTL_PATHS
 
 
@@ -48,7 +50,7 @@ class CreateItemTest(CliTestCase):
                 with TemporaryDirectory() as tmp_dir:
                     cmd = [
                         'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', tmp_dir
+                        '--output', tmp_dir, '--legacy_l8'
                     ]
                     self.run_command(cmd)
 
@@ -132,7 +134,7 @@ class CreateItemTest(CliTestCase):
 
                     create_cmd = [
                         'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', create_dir
+                        '--output', create_dir, '--legacy_l8'
                     ]
                     self.run_command(create_cmd)
 
@@ -174,3 +176,66 @@ class CreateItemTest(CliTestCase):
                     #     msg=
                     #     f"{set(converted_item.assets.keys()) - set(created_item.assets.keys())}"
                     # )
+
+
+def test_nonlegacyl8_item() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False)
+    item_dict = item.to_dict()
+
+    # nonlegacy uses v1.1.1 landsat extension
+    ext = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+    assert ext in item.stac_extensions
+
+    # nonlegacy handles non-zero roll
+    assert item_dict["properties"]["view:off_nadir"] != 0
+
+    # nonlegacy has doi link
+    assert len(item.get_links("cite-as")) == 1
+
+    # nonlegacy has via link(s) to usgs stac-server
+    usgs_stac_links = item.get_links(rel="via")
+    assert len(usgs_stac_links) > 0
+
+
+def test_read_href_modifier() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+
+    did_it = False
+
+    def read_href_modifier(href: str) -> str:
+        nonlocal did_it
+        did_it = True
+        return href
+
+    _ = create_stac_item(mtl_path,
+                         legacy_l8=False,
+                         read_href_modifier=read_href_modifier)
+    assert did_it
+
+
+def test_southern_hemisphere_epsg() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    # northern hemisphere UTM zone is used for southern hemisphere scene
+    assert item_dict["properties"]["proj:epsg"] == 32617
+
+
+def test_mss_scale_offset() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    # MSS should grab scale and offset values (to convert DN to TOA radiance)
+    # for the optical data bands from the MTL metadata
+    asset_keys = ["green", "red", "nir08", "nir09"]
+    for key in asset_keys:
+        raster_bands = item_dict["assets"][key]["raster:bands"][0]
+        assert "scale" in raster_bands
+        assert "offset" in raster_bands

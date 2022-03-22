@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
@@ -19,9 +20,13 @@ class MtlMetadata:
     References https://github.com/sat-utils/sat-stac-landsat/blob/f2263485043a827b4153aecc12f45a3d1363e9e2/satstac/landsat/main.py#L157
     """  # noqa
 
-    def __init__(self, root: XmlElement, href: Optional[str] = None):
+    def __init__(self,
+                 root: XmlElement,
+                 href: Optional[str] = None,
+                 legacy_l8: bool = True):
         self._root = root
         self.href = href
+        self.legacy_l8 = legacy_l8
 
     def _xml_error(self, item: str) -> MTLError:
         return MTLError(f"Cannot find {item} in MTL metadata" +
@@ -37,12 +42,17 @@ class MtlMetadata:
         return int(self._get_text(xpath))
 
     @property
+    def satellite_num(self) -> int:
+        """Return the Landsat satellite number."""
+        return int(self.product_id[2:4])
+
+    @property
     def product_id(self) -> str:
+        """Return the Landsat product ID."""
         return self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
 
     @property
-    def scene_id(self) -> str:
-        product_id = self._get_text("PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID")
+    def item_id(self) -> str:
         # Remove the processing date, as products IDs
         # that only vary by processing date represent the
         # same scene
@@ -51,10 +61,15 @@ class MtlMetadata:
 
         # ID format: LXSS_LLLL_PPPRRR_YYYYMMDD_yyyymmdd_CX_TX
         # remove yyyymmdd
-        id_parts = product_id.split('_')
+        id_parts = self.product_id.split('_')
         id = '_'.join(id_parts[:4] + id_parts[-2:])
 
         return id
+
+    @property
+    def scene_id(self) -> str:
+        """"Return the Landsat scene ID."""
+        return self._get_text("LEVEL1_PROCESSING_RECORD/LANDSAT_SCENE_ID")
 
     @property
     def processing_level(self) -> str:
@@ -71,10 +86,19 @@ class MtlMetadata:
     def epsg(self) -> int:
         utm_zone = self._root.find_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
         if utm_zone:
-            bbox = self.bbox
-            utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
-            center_lat = (bbox[1] + bbox[3]) / 2.0
-            return int(f"{326 if center_lat > 0 else 327}{utm_zone}")
+            if self.satellite_num == 8 and self.legacy_l8:
+                # Keep current STAC Item content consistent for Landsat 8
+                bbox = self.bbox
+                utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
+                center_lat = (bbox[1] + bbox[3]) / 2.0
+                return int(f"{326 if center_lat > 0 else 327}{utm_zone}")
+            else:
+                # The projection transforms in the COGs provided by the USGS are
+                # always for UTM North zones. The EPSG codes should therefore
+                # be UTM north zones (326XX, where XX is the UTM zone number).
+                # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
+                utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
+                return int(f"326{utm_zone}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,
@@ -93,6 +117,7 @@ class MtlMetadata:
 
     @property
     def bbox(self) -> List[float]:
+        # Might be cleaner to just transform the proj bbox to WGS84.
         lons = [
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UL_LON_PRODUCT"),
             self._get_float("PROJECTION_ATTRIBUTES/CORNER_UR_LON_PRODUCT"),
@@ -171,7 +196,7 @@ class MtlMetadata:
 
     @property
     def thermal_shape(self) -> Optional[List[int]]:
-        """Shape for thermal bands (Bands 10–11).
+        """Shape for thermal bands.
 
         None if thermal bands not present.
         Used for proj:shape. In [row, col] order"""
@@ -198,7 +223,7 @@ class MtlMetadata:
     @property
     def sr_gsd(self) -> float:
         return self._get_float(
-            "LEVEL1_PROJECTION_PARAMETERS/GRID_CELL_SIZE_THERMAL")
+            "LEVEL1_PROJECTION_PARAMETERS/GRID_CELL_SIZE_REFLECTIVE")
 
     @property
     def thermal_gsd(self) -> Optional[float]:
@@ -220,7 +245,18 @@ class MtlMetadata:
 
     @property
     def sun_azimuth(self) -> float:
-        return self._get_float("IMAGE_ATTRIBUTES/SUN_AZIMUTH")
+        """Returns the sun azimuth in STAC form.
+
+        Converts from Landsat metadata form (-180 to 180 from north, west being
+        negative) to STAC form (0 to 360 clockwise from north).
+
+        Returns:
+            float: Sun azimuth, 0 to 360 clockwise from north.
+        """
+        azimuth = self._get_float("IMAGE_ATTRIBUTES/SUN_AZIMUTH")
+        if azimuth < 0.0:
+            azimuth += 360
+        return azimuth
 
     @property
     def sun_elevation(self) -> float:
@@ -228,10 +264,24 @@ class MtlMetadata:
 
     @property
     def off_nadir(self) -> Optional[float]:
-        if self._get_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "NADIR":
-            return 0
+        if self.satellite_num == 8 and self.legacy_l8:
+            # Keep current STAC Item content consistent for Landsat 8
+            if self._get_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "NADIR":
+                return 0
+            else:
+                return None
         else:
-            return None
+            # NADIR_OFFNADIR and ROLL_ANGLE xml entries do not exist prior to
+            # landsat 8. Therefore, we perform a soft check for NADIR_OFFNADIR.
+            # If exists and is equal to "OFFNADIR", then a non-zero ROLL_ANGLE
+            # exists. We force this ROLL_ANGLE to be positive to conform with
+            # the stac View Geometry extension. We return 0 otherwise since
+            # off-nadir views are only an option on Landsat 8-9.
+            if self._root.find_text(
+                    "IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "OFFNADIR":
+                return abs(self._get_float("IMAGE_ATTRIBUTES/ROLL_ANGLE"))
+            else:
+                return 0
 
     @property
     def wrs_path(self) -> str:
@@ -242,8 +292,8 @@ class MtlMetadata:
         return self._get_text("IMAGE_ATTRIBUTES/WRS_ROW").zfill(3)
 
     @property
-    def additional_metadata(self) -> Dict[str, Any]:
-        return {
+    def landsat_metadata(self) -> Dict[str, Any]:
+        landsat_meta = {
             "landsat:cloud_cover_land":
             self._get_float("IMAGE_ATTRIBUTES/CLOUD_COVER_LAND"),
             "landsat:wrs_type":
@@ -256,13 +306,44 @@ class MtlMetadata:
             self._get_text("PRODUCT_CONTENTS/COLLECTION_CATEGORY"),
             "landsat:collection_number":
             self._get_text("PRODUCT_CONTENTS/COLLECTION_NUMBER"),
-            "landsat:processing_level":
-            self.processing_level
+            "landsat:correction":
+            self.processing_level,
+            "landsat:scene_id":
+            self.scene_id
         }
+        if self.satellite_num == 8 and self.legacy_l8:
+            landsat_meta["landsat:processing_level"] = landsat_meta.pop(
+                "landsat:correction")
+        return landsat_meta
+
+    @property
+    def level1_radiance(self) -> Dict[str, Any]:
+        """Gets the scale (mult) and offset (add) values for generating TOA
+        radiance from Level-1 DNs.
+
+        This is relevant to MSS data, which is only processed to Level-1.
+
+        Returns:
+            Dict[str, Any]: Dict of scale and offset dicts, keyed by band
+                number.
+        """
+        node = self._root.find_or_throw("LEVEL1_RADIOMETRIC_RESCALING",
+                                        self._xml_error)
+        mult_add: Dict[str, Any] = defaultdict(dict)
+        for item in node.element:
+            if item.tag.startswith("RADIANCE_MULT_BAND"):
+                band = f'B{item.tag.split("_")[-1]}'
+                mult_add[band]["mult"] = float(str(item.text))
+            elif item.tag.startswith("RADIANCE_ADD_BAND"):
+                band = f'B{item.tag.split("_")[-1]}'
+                mult_add[band]["add"] = float(str(item.text))
+        return mult_add
 
     @classmethod
     def from_file(cls,
-                  href,
-                  read_href_modifier: Optional[ReadHrefModifier] = None
-                  ) -> "MtlMetadata":
-        return cls(XmlElement.from_file(href, read_href_modifier), href=href)
+                  href: str,
+                  read_href_modifier: Optional[ReadHrefModifier] = None,
+                  legacy_l8: bool = True) -> "MtlMetadata":
+        return cls(XmlElement.from_file(href, read_href_modifier),
+                   href=href,
+                   legacy_l8=legacy_l8)

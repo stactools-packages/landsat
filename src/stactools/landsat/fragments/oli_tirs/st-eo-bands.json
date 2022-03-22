@@ -1,0 +1,9 @@
+{
+  "lwir11": {
+    "name": "TIRS_B10",
+    "common_name": "lwir11",
+    "description": "Long-wave infrared",
+    "center_wavelength": 10.90,
+    "full_width_half_max": 0.59
+  }
+}

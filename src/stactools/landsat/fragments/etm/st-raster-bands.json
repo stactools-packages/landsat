@@ -1,0 +1,65 @@
+{
+    "lwir": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "unit": "kelvin",
+        "scale": 0.00341802,
+        "offset": 149.0
+    },
+    "atran": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "scale": 0.0001
+    },
+    "cdist": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "kilometer",
+        "scale": 0.01
+    },
+    "drad": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "watt/steradian/square_meter/micrometer",
+        "scale": 0.001
+    },
+    "urad": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "watt/steradian/square_meter/micrometer",
+        "scale": 0.001
+    },
+    "trad": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "watt/steradian/square_meter/micrometer",
+        "scale": 0.001
+    },
+    "emis": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "emissivity coefficient",
+        "scale": 0.0001
+    },
+    "emsd": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "emissivity coefficient",
+        "scale": 0.0001
+    },
+    "qa": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "unit": "kelvin",
+        "scale": 0.01
+    }
+}

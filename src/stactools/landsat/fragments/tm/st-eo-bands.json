@@ -1,0 +1,9 @@
+{
+  "lwir": {
+    "name": "TM_B6",
+    "common_name": "lwir",
+    "description": "Long-wave infrared",
+    "center_wavelength": 11.45,
+    "full_width_half_max": 2.10
+  }
+}

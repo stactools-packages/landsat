@@ -1,0 +1,66 @@
+{
+    "qa_pixel": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 1,
+        "unit": "bit index"
+    },
+    "qa_radsat": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "unit": "bit index"
+    },
+    "blue": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "green": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "red": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "nir08": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir16": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "swir22": {
+        "spatial_resolution": 30,
+        "data_type": "uint16",
+        "nodata": 0,
+        "scale": 0.0000275,
+        "offset": -0.2
+    },
+    "atmos_opacity": {
+        "spatial_resolution": 30,
+        "data_type": "int16",
+        "nodata": -9999,
+        "scale": 0.001
+    },
+    "cloud_qa": {
+        "spatial_resolution": 30,
+        "data_type": "uint8",
+        "unit": "bit index"
+    }
+}

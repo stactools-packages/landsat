@@ -1,0 +1,41 @@
+{
+  "qa_pixel": {
+    "spatial_resolution": 60,
+    "data_type": "uint16",
+    "nodata": 1,
+    "unit": "bit index"
+  },
+  "qa_radsat": {
+    "spatial_resolution": 60,
+    "data_type": "uint16",
+    "unit": "bit index"
+  },
+  "green": {
+    "temp_name": "B1",
+    "spatial_resolution": 60,
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "red": {
+    "temp_name": "B2",
+    "spatial_resolution": 60,
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "nir08": {
+    "temp_name": "B3",
+    "spatial_resolution": 60,
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  },
+  "nir09": {
+    "temp_name": "B4",
+    "spatial_resolution": 60,
+    "data_type": "uint8",
+    "nodata": 0,
+    "unit": "watt/steradian/square_meter/micrometer"
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "LT05_L2SP_010067_19860424_02_T2",
+  "properties": {
+    "platform": "landsat-5",
+    "instruments": [
+      "tm"
+    ],
+    "created": "2022-03-18T14:15:28.438630Z",
+    "gsd": 30,
+    "description": "Landsat Collection 2 Level-2",
+    "eo:cloud_cover": 23.0,
+    "view:off_nadir": 0,
+    "view:sun_elevation": 46.93006922,
+    "view:sun_azimuth": 58.47866092,
+    "proj:epsg": 32617,
+    "proj:shape": [
+      6911,
+      7761
+    ],
+    "proj:transform": [
+      30.0,
+      0.0,
+      416685.0,
+      0.0,
+      -30.0,
+      -1014285.0
+    ],
+    "landsat:cloud_cover_land": 0.0,
+    "landsat:wrs_type": "2",
+    "landsat:wrs_path": "010",
+    "landsat:wrs_row": "067",
+    "landsat:collection_category": "T2",
+    "landsat:collection_number": "02",
+    "landsat:correction": "L2SP",
+    "landsat:scene_id": "LT50100671986114XXX02",
+    "sci:doi": "10.5066/P9IAXOVV",
+    "datetime": "1986-04-24T14:54:18.179094Z"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -81.3606491977221,
+          -9.187665789119775
+        ],
+        [
+          -81.71420384083501,
+          -10.78601272561492
+        ],
+        [
+          -80.03622374833672,
+          -11.031664122545472
+        ],
+        [
+          -79.6954257591751,
+          -9.42855735849459
+        ],
+        [
+          -81.3606491977221,
+          -9.187665789119775
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5066/P9IAXOVV",
+      "title": "Landsat 4-5 TM Collection 2 Level-2"
+    },
+    {
+      "rel": "via",
+      "href": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr/items/LT05_L2SP_010067_19860424_20200918_02_T2_SR",
+      "type": "application/json",
+      "title": "USGS STAC Item"
+    },
+    {
+      "rel": "via",
+      "href": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-st/items/LT05_L2SP_010067_19860424_20200918_02_T2_ST",
+      "type": "application/json",
+      "title": "USGS STAC Item"
+    },
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Landsat Collection 2 Level-2"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Landsat Collection 2 Level-2"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Landsat Collection 2 Level-2"
+    }
+  ],
+  "assets": {
+    "thumbnail": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_thumb_small.jpeg",
+      "type": "image/jpeg",
+      "title": "Thumbnail image",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "reduced_resolution_browse": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_thumb_large.jpeg",
+      "type": "image/jpeg",
+      "title": "Reduced resolution browse image",
+      "roles": [
+        "overview"
+      ]
+    },
+    "mtl.json": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.json",
+      "type": "application/json",
+      "title": "Product Metadata File (json)",
+      "description": "Collection 2 Level-2 Product Metadata File (json)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.txt": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.txt",
+      "type": "text/plain",
+      "title": "Product Metadata File (txt)",
+      "description": "Collection 2 Level-2 Product Metadata File (txt)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "mtl.xml": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml",
+      "type": "application/xml",
+      "title": "Product Metadata File (xml)",
+      "description": "Collection 2 Level-2 Product Metadata File (xml)",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "ang": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ANG.txt",
+      "type": "text/plain",
+      "title": "Angle Coefficients File",
+      "description": "Collection 2 Level-1 Angle Coefficients File",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "qa_pixel": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Pixel Quality Assessment Band (QA_PIXEL)",
+      "raster:bands": [
+        {
+          "nodata": 1,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "cloud",
+        "cloud-shadow",
+        "snow-ice",
+        "water-mask"
+      ]
+    },
+    "qa_radsat": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_QA_RADSAT.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Radiometric Saturation and Dropped Pixel Quality Assessment Band",
+      "description": "Collection 2 Level-1 Radiometric Saturation and Dropped Pixel Quality Assessment Band (QA_RADSAT)",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "saturation"
+      ]
+    },
+    "blue": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B1.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Blue Band",
+      "description": "Collection 2 Level-2 Blue Band (SR_B1) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B1",
+          "common_name": "blue",
+          "description": "Visible blue",
+          "center_wavelength": 0.49,
+          "full_width_half_max": 0.07
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "green": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B2.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Green Band",
+      "description": "Collection 2 Level-2 Green Band (SR_B2) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B2",
+          "common_name": "green",
+          "description": "Visible green",
+          "center_wavelength": 0.56,
+          "full_width_half_max": 0.08
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "red": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Red Band",
+      "description": "Collection 2 Level-2 Red Band (SR_B3) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B3",
+          "common_name": "red",
+          "description": "Visible red",
+          "center_wavelength": 0.66,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "nir08": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Near Infrared Band 0.8",
+      "description": "Collection 2 Level-2 Near Infrared Band 0.8 (SR_B4) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B4",
+          "common_name": "nir08",
+          "description": "Near infrared",
+          "center_wavelength": 0.83,
+          "full_width_half_max": 0.14
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "swir16": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Short-wave Infrared Band 1.6",
+      "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (SR_B5) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B5",
+          "common_name": "swir16",
+          "description": "Short-wave infrared",
+          "center_wavelength": 1.65,
+          "full_width_half_max": 0.2
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "swir22": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_B7.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Short-wave Infrared Band 2.2",
+      "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 (SR_B7) Surface Reflectance",
+      "eo:bands": [
+        {
+          "name": "TM_B7",
+          "common_name": "swir22",
+          "description": "Short-wave infrared",
+          "center_wavelength": 2.22,
+          "full_width_half_max": 0.27
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "scale": 2.75e-05,
+          "offset": -0.2
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "atmos_opacity": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_ATMOS_OPACITY.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Atmospheric Opacity Band",
+      "description": "Collection 2 Level-2 Atmospheric Opacity Band (SR_ATMOS_OPACITY) Surface Reflectance Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "scale": 0.001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cloud_qa": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_SR_CLOUD_QA.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Cloud Quality Assessment Band",
+      "description": "Collection 2 Level-2 Cloud Quality Assessment Band (SR_CLOUD_QA) Surface Reflectance Product",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "unit": "bit index"
+        }
+      ],
+      "roles": [
+        "cloud",
+        "cloud-shadow",
+        "snow-ice",
+        "water-mask"
+      ]
+    },
+    "lwir": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_B6.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Temperature Band",
+      "description": "Collection 2 Level-2 Thermal Infrared Band (ST_B6) Surface Temperature",
+      "eo:bands": [
+        {
+          "name": "TM_B6",
+          "common_name": "lwir",
+          "description": "Long-wave infrared",
+          "center_wavelength": 11.45,
+          "full_width_half_max": 2.1
+        }
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 30,
+          "unit": "kelvin",
+          "scale": 0.00341802,
+          "offset": 149.0
+        }
+      ],
+      "gsd": 120,
+      "roles": [
+        "temperature"
+      ]
+    },
+    "atran": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_ATRAN.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Atmospheric Transmittance Band",
+      "description": "Collection 2 Level-2 Atmospheric Transmittance Band (ST_ATRAN) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "scale": 0.0001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "cdist": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_CDIST.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Cloud Distance Band",
+      "description": "Collection 2 Level-2 Cloud Distance Band (ST_CDIST) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "kilometer",
+          "scale": 0.01
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "drad": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_DRAD.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Downwelled Radiance Band",
+      "description": "Collection 2 Level-2 Downwelled Radiance Band (ST_DRAD) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "urad": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_URAD.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Upwelled Radiance Band",
+      "description": "Collection 2 Level-2 Upwelled Radiance Band (ST_URAD) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "trad": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_TRAD.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Thermal Radiance Band",
+      "description": "Collection 2 Level-2 Thermal Radiance Band (ST_TRAD) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "watt/steradian/square_meter/micrometer",
+          "scale": 0.001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "emis": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_EMIS.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Emissivity Band",
+      "description": "Collection 2 Level-2 Emissivity Band (ST_EMIS) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "emissivity coefficient",
+          "scale": 0.0001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "emsd": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_EMSD.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Emissivity Standard Deviation Band",
+      "description": "Collection 2 Level-2 Emissivity Standard Deviation Band (ST_EMSD) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "emissivity coefficient",
+          "scale": 0.0001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "qa": {
+      "href": "../../../tests/data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_ST_QA.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Temperature Quality Assessment Band",
+      "description": "Collection 2 Level-2 Quality Assessment Band (ST_QA) Surface Temperature Product",
+      "raster:bands": [
+        {
+          "nodata": -9999,
+          "data_type": "int16",
+          "spatial_resolution": 30,
+          "unit": "kelvin",
+          "scale": 0.01
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -81.7627572754399,
+    -11.050005612946427,
+    -79.63126351815944,
+    -9.173214387053573
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "collection": "landsat-c2-l2"
+}
