@@ -1,8 +1,8 @@
 import unittest
 
 import vcr
+from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.constants import Antimeridian
 from stactools.landsat.stac import create_stac_item
 from tests.data import TEST_GEOMETRY_PATHS
 
@@ -94,7 +94,7 @@ class GeometryTest(unittest.TestCase):
         item = create_stac_item(mtl_xml_href,
                                 legacy_l8=False,
                                 use_usgs_geometry=True,
-                                antimeridian_strategy=Antimeridian.NORMALIZE)
+                                antimeridian_strategy=Strategy.NORMALIZE)
         item_coords = item.geometry["coordinates"][0]
         item_lons = [lon for lon, lat in item_coords]
         self.assertFalse(

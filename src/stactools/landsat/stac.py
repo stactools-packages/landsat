@@ -2,7 +2,6 @@ import logging
 from datetime import datetime, timezone
 from typing import Optional
 
-import shapely
 from pystac import Collection, Item, Link, MediaType
 from pystac.extensions.eo import Band, EOExtension
 from pystac.extensions.item_assets import ItemAssetsExtension
@@ -13,6 +12,7 @@ from pystac.extensions.view import ViewExtension
 from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils import antimeridian
+from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.assets import (ANG_ASSET_DEF, COMMON_ASSET_DEFS,
@@ -22,7 +22,7 @@ from stactools.landsat.constants import (COLLECTION_IDS, L8_EXTENSION_SCHEMA,
                                          L8_PLATFORM, LANDSAT_EXTENSION_SCHEMA,
                                          SENSORS, USGS_API, USGS_BROWSER_C2,
                                          USGS_C2L1, USGS_C2L2_SR, USGS_C2L2_ST,
-                                         Antimeridian, Sensor)
+                                         Sensor)
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import get_usgs_geometry
@@ -34,7 +34,7 @@ def create_stac_item(
         mtl_xml_href: str,
         legacy_l8: bool = True,
         use_usgs_geometry: bool = False,
-        antimeridian_strategy: Antimeridian = Antimeridian.NORMALIZE,
+        antimeridian_strategy: Strategy = Strategy.NORMALIZE,
         read_href_modifier: Optional[ReadHrefModifier] = None) -> Item:
     """Creates a STAC Item for Landsat 1-5 Collection 2 Level-1 or Landsat
     4-5, 7-9 Collection 2 Level-2 scene data.
@@ -81,20 +81,12 @@ def create_stac_item(
             logger.warning(
                 f"Using bbox for geometry for {mtl_metadata.product_id}.")
 
-    geometry_shape = shapely.geometry.shape(geometry)
-    if antimeridian_strategy == Antimeridian.SPLIT:
-        split = antimeridian.split(geometry_shape)
-        if split:
-            geometry = shapely.geometry.mapping(split)
-    elif antimeridian_strategy == Antimeridian.NORMALIZE:
-        geometry = shapely.geometry.mapping(
-            antimeridian.normalize(geometry_shape))
-
     item = Item(id=mtl_metadata.item_id,
                 bbox=mtl_metadata.bbox,
                 geometry=geometry,
                 datetime=mtl_metadata.scene_datetime,
                 properties={})
+    antimeridian.fix_item(item, antimeridian_strategy)
 
     if satellite == 8 and legacy_l8:
         item.common_metadata.platform = L8_PLATFORM

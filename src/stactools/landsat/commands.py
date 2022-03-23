@@ -3,8 +3,8 @@ import os
 import click
 from click import Command, Group
 from pystac import CatalogType, Item
+from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.constants import Antimeridian
 from stactools.landsat.stac import create_collection, create_stac_item
 from stactools.landsat.utils import transform_stac_to_stac
 
@@ -90,11 +90,11 @@ def create_landsat_command(cli: Group) -> Command:
             level (str): Choice of 'level-1' or 'level-2'. This is not used
                 and has no effect.
         """
-        antimeridian = Antimeridian[antimeridian_strategy.upper()]
+        strategy = Strategy[antimeridian_strategy.upper()]
         item = create_stac_item(mtl_xml_href=mtl,
                                 use_usgs_geometry=usgs_geometry,
                                 legacy_l8=legacy_l8,
-                                antimeridian_strategy=antimeridian)
+                                antimeridian_strategy=strategy)
         item.set_self_href(os.path.join(output, f'{item.id}.json'))
         item.save_object()
 
@@ -149,7 +149,7 @@ def create_landsat_command(cli: Group) -> Command:
                 the Item geometry so all longitudes are either positive or
                 negative.
         """
-        antimeridian = Antimeridian[antimeridian_strategy.upper()]
+        strategy = Strategy[antimeridian_strategy.upper()]
         with open(file_list) as file:
             hrefs = [line.strip() for line in file.readlines()]
 
@@ -160,7 +160,7 @@ def create_landsat_command(cli: Group) -> Command:
             item = create_stac_item(href,
                                     use_usgs_geometry=usgs_geometry,
                                     legacy_l8=False,
-                                    antimeridian_strategy=antimeridian)
+                                    antimeridian_strategy=strategy)
             collection.add_item(item)
         collection.make_all_asset_hrefs_relative()
         collection.validate_all()
