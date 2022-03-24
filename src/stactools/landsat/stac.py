@@ -34,7 +34,7 @@ def create_stac_item(
         mtl_xml_href: str,
         legacy_l8: bool = True,
         use_usgs_geometry: bool = False,
-        antimeridian_strategy: Strategy = Strategy.NORMALIZE,
+        antimeridian_strategy: Strategy = Strategy.SPLIT,
         read_href_modifier: Optional[ReadHrefModifier] = None) -> Item:
     """Creates a STAC Item for Landsat 1-5 Collection 2 Level-1 or Landsat
     4-5, 7-9 Collection 2 Level-2 scene data.

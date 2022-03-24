@@ -45,7 +45,7 @@ def create_landsat_command(cli: Group) -> Command:
                   "--antimeridian_strategy",
                   type=click.Choice(["normalize", "split"],
                                     case_sensitive=False),
-                  default="normalize",
+                  default="split",
                   show_default=True,
                   help="geometry strategy for antimeridian scenes")
     @click.option("--level",
@@ -126,7 +126,7 @@ def create_landsat_command(cli: Group) -> Command:
                   "--antimeridian_strategy",
                   type=click.Choice(["normalize", "split"],
                                     case_sensitive=False),
-                  default="normalize",
+                  default="split",
                   show_default=True,
                   help="geometry strategy for antimeridian scenes")
     def create_collection_cmd(file_list: str, output: str, id: str,
