@@ -47,7 +47,7 @@ def create_stac_item(
             API.
         antimeridian_strategy (Antimeridian): Either split on -180 or
             normalize geometries so all longitudes are either positive or
-            negative.
+            negative. Has no effect if legacy_l8=True.
         read_href_modifier (Callable[[str], str]): An optional function to
             modify the MTL and USGS STAC hrefs (e.g. to add a token to a url).
     Returns:
@@ -86,7 +86,6 @@ def create_stac_item(
                 geometry=geometry,
                 datetime=mtl_metadata.scene_datetime,
                 properties={})
-    antimeridian.fix_item(item, antimeridian_strategy)
 
     if satellite == 8 and legacy_l8:
         item.common_metadata.platform = L8_PLATFORM
@@ -143,6 +142,8 @@ def create_stac_item(
                  media_type="text/html"))
 
     else:
+        antimeridian.fix_item(item, antimeridian_strategy)
+
         item.common_metadata.platform = f"landsat-{satellite}"
         item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]
         item.common_metadata.created = datetime.now(tz=timezone.utc)

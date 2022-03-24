@@ -86,7 +86,7 @@ def create_landsat_command(cli: Group) -> Command:
             antimeridian_strategy (str): Choice of 'normalize' or 'split' to
                 either split the Item geometry on -180 longitude or normalize
                 the Item geometry so all longitudes are either positive or
-                negative.
+                negative. Has no effect if legacy_l8=True.
             level (str): Choice of 'level-1' or 'level-2'. This is not used
                 and has no effect.
         """
