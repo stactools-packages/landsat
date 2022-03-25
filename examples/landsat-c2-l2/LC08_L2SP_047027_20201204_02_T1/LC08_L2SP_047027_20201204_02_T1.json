@@ -8,7 +8,7 @@
       "oli",
       "tirs"
     ],
-    "created": "2022-03-18T14:15:28.445062Z",
+    "created": "2022-03-25T15:07:30.528996Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 1.55,
@@ -216,6 +216,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -243,6 +244,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -270,6 +272,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -297,6 +300,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -324,6 +328,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -351,6 +356,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -378,6 +384,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -425,6 +432,7 @@
       ],
       "gsd": 100,
       "roles": [
+        "data",
         "temperature"
       ]
     },
