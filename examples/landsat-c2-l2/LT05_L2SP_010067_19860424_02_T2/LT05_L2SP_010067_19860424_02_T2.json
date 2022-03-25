@@ -7,7 +7,7 @@
     "instruments": [
       "tm"
     ],
-    "created": "2022-03-18T14:15:28.438630Z",
+    "created": "2022-03-25T15:07:30.524160Z",
     "gsd": 30,
     "description": "Landsat Collection 2 Level-2",
     "eo:cloud_cover": 23.0,
@@ -215,6 +215,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -242,6 +243,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -269,6 +271,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -296,6 +299,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -323,6 +327,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -350,6 +355,7 @@
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -415,6 +421,7 @@
       ],
       "gsd": 120,
       "roles": [
+        "data",
         "temperature"
       ]
     },
