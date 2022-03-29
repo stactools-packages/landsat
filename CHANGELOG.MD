@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Nothing.
 
 
-## [0.2.1] - 2022-03-22
+## [0.2.1] - 2022-03-29
 
 NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed headings below are ignored for Landsat 8 scenes unless `legacy_l8=False` is passed to the `create_stac_item` function.
 
