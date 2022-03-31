@@ -96,6 +96,7 @@ def create_landsat_command(cli: Group) -> Command:
                                 legacy_l8=legacy_l8,
                                 antimeridian_strategy=strategy)
         item.set_self_href(os.path.join(output, f'{item.id}.json'))
+        item.validate()
         item.save_object()
 
     @landsat.command(

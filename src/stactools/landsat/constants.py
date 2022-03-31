@@ -12,6 +12,7 @@ class Sensor(Enum):
 
 
 LANDSAT_EXTENSION_SCHEMA = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+CLASSIFICATION_EXTENSION_SCHEMA = "https://stac-extensions.github.io/classification/v1.0.0/schema.json"  # noqa
 USGS_API = "https://landsatlook.usgs.gov/stac-server"
 USGS_BROWSER_C2 = "https://landsatlook.usgs.gov/stac-browser/collection02"
 USGS_C2L1 = "landsat-c2l1"
