@@ -239,3 +239,25 @@ def test_mss_scale_offset() -> None:
         raster_bands = item_dict["assets"][key]["raster:bands"][0]
         assert "scale" in raster_bands
         assert "offset" in raster_bands
+
+
+def test_l1_bitfields_exist() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    qa_pixel = item_dict["assets"]["qa_pixel"]
+    assert "classification:bitfields" in qa_pixel
+
+
+def test_l2_bitfields_exist() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    asset_keys = ["qa_pixel", "qa_radsat", "qa_aerosol"]
+    for key in asset_keys:
+        bitfield_band = item_dict["assets"][key]
+        assert "classification:bitfields" in bitfield_band
