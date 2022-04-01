@@ -1,5 +1,6 @@
 # stactools-landsat
 
+[![PyPI](https://img.shields.io/pypi/v/stactools-landsat)](https://pypi.org/project/stactools-landsat/)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/stactools-packages/landsat/main?filepath=docs/installation_and_basic_usage.ipynb)
 
 - Name: landsat
