@@ -16,10 +16,10 @@
 - STAC extensions used:
   - [classification](https://github.com/stac-extensions/classification)
   - [eo](https://github.com/stac-extensions/eo)
-  - [landsat](https://landsat.usgs.gov/stac/landsat-extension)
+  - [landsat](https://landsat.usgs.gov/stac/landsat-extension/v1.1.0/schema.json)
   - [proj](https://github.com/stac-extensions/projection/)
-  - [raster](https://stac-extensions.github.io/raster)
-  - [scientific](https://stac-extensions.github.io/scientific)
+  - [raster](https://github.com/stac-extensions/raster)
+  - [scientific](https://github.com/stac-extensions/scientific)
   - [view](https://github.com/stac-extensions/view)
 
 This repository will assist you in the generation of STAC files for Landsat datasets. The table below provides an overview on Landsat Mission's sensors and band wavelengths.
