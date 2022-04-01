@@ -13,7 +13,7 @@ Nothing.
 
 ### Added
 
-- Classification extension (`classification:bitfields`) added to Item QA Bands.
+- Classification extension (`classification:bitfields`) added to Item QA Bands ([#23](https://github.com/stactools-packages/landsat/pull/23))
 
 ## [0.2.1] - 2022-03-29
 
@@ -55,6 +55,6 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
 [Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.2..main>
-[0.2.2]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.2>
-[0.2.1]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.1>
+[0.2.2]: <https://github.com/stactools-packages/landsat/compare/v0.2.1..v0.2.2>
+[0.2.1]: <https://github.com/stactools-packages/landsat/compare/v0.2.0..v0.2.1>
 [0.2.0]: <https://github.com/stactools-packages/landsat/releases/tag/v0.2.0>
