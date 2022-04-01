@@ -17,12 +17,13 @@ from stactools.core.utils.antimeridian import Strategy
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.assets import (ANG_ASSET_DEF, COMMON_ASSET_DEFS,
                                       SR_ASSET_DEFS, THERMAL_ASSET_DEFS)
-from stactools.landsat.constants import (COLLECTION_IDS, L8_EXTENSION_SCHEMA,
+from stactools.landsat.constants import Sensor  # yapf: disable
+from stactools.landsat.constants import (CLASSIFICATION_EXTENSION_SCHEMA,
+                                         COLLECTION_IDS, L8_EXTENSION_SCHEMA,
                                          L8_INSTRUMENTS, L8_ITEM_DESCRIPTION,
                                          L8_PLATFORM, LANDSAT_EXTENSION_SCHEMA,
                                          SENSORS, USGS_API, USGS_BROWSER_C2,
-                                         USGS_C2L1, USGS_C2L2_SR, USGS_C2L2_ST,
-                                         Sensor)
+                                         USGS_C2L1, USGS_C2L2_SR, USGS_C2L2_ST)
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import get_usgs_geometry
@@ -216,6 +217,8 @@ def create_stac_item(
 
         item.stac_extensions.append(LANDSAT_EXTENSION_SCHEMA)
         item.properties.update(**mtl_metadata.landsat_metadata)
+
+        item.stac_extensions.append(CLASSIFICATION_EXTENSION_SCHEMA)
 
         scientific = ScientificExtension.ext(item, add_if_missing=True)
         scientific.doi = SENSORS[sensor.name]["doi"]

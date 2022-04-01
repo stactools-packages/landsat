@@ -7,8 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-Nothing.
+### Added
 
+- Classification extension (`classification:bitfields`) added to Item QA Bands.
 
 ## [0.2.1] - 2022-03-29
 
