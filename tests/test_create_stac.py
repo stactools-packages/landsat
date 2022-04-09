@@ -261,3 +261,15 @@ def test_l2_bitfields_exist() -> None:
     for key in asset_keys:
         bitfield_band = item_dict["assets"][key]
         assert "classification:bitfields" in bitfield_band
+
+
+def test_no_cloud_cover() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_005037_19720823_20200909_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item.validate()
+
+    # When cloud cover percentage is not computed (assigned a value of -1), the
+    # eo:cloud_cover property should not exist
+    eo_cloud_cover = item.properties.pop("eo:cloud_cover", None)
+    assert eo_cloud_cover is None

@@ -202,8 +202,9 @@ def create_stac_item(
                     asset.common_metadata.gsd = SENSORS[
                         sensor.name]["thermal_gsd"]
 
-        eo_item = EOExtension.ext(item, add_if_missing=True)
-        eo_item.cloud_cover = mtl_metadata.cloud_cover
+        if mtl_metadata.cloud_cover >= 0:
+            eo_item = EOExtension.ext(item, add_if_missing=True)
+            eo_item.cloud_cover = mtl_metadata.cloud_cover
 
         view = ViewExtension.ext(item, add_if_missing=True)
         view.off_nadir = mtl_metadata.off_nadir
