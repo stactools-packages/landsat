@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-Nothing.
+### Fixed
+
+- `eo:cloud_cover` is not added to Item properties when it was not computed (indicated by a value of -1) during scene processing ([#28](https://github.com/stactools-packages/landsat/pull/28))
 
 ## [0.2.3] - 2022-04-01
 
