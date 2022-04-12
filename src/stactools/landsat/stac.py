@@ -11,7 +11,6 @@ from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
 from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
-from stactools.core.utils import antimeridian
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.ang_metadata import AngMetadata
@@ -26,7 +25,7 @@ from stactools.landsat.constants import (CLASSIFICATION_EXTENSION_SCHEMA,
                                          USGS_C2L1, USGS_C2L2_SR, USGS_C2L2_ST)
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
-from stactools.landsat.utils import get_usgs_geometry
+from stactools.landsat.utils import get_usgs_geometry, handle_antimeridian
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +142,7 @@ def create_stac_item(
                  media_type="text/html"))
 
     else:
-        antimeridian.fix_item(item, antimeridian_strategy)
+        handle_antimeridian(item, antimeridian_strategy)
 
         item.common_metadata.platform = f"landsat-{satellite}"
         item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]

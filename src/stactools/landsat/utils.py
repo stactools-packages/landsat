@@ -3,15 +3,18 @@ from typing import Any, Dict, Optional
 
 import dateutil.parser
 import rasterio
+import shapely.affinity
+import shapely.ops
 from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
 from pystac_client import Client
 from rasterio import RasterioIOError
-from shapely.geometry import box, mapping, shape
+from shapely.geometry import MultiPolygon, Polygon, box, mapping, shape
 from stactools.core.io import ReadHrefModifier
-from stactools.core.utils import href_exists
+from stactools.core.utils import antimeridian, href_exists
+from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
                                          OLD_L8_EXTENSION_SCHEMA, USGS_API,
@@ -225,3 +228,61 @@ def get_usgs_geometry(
         return item.geometry
     else:
         return None
+
+
+def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
+    """Handles some quirks of the antimeridian.
+
+    Applies the requested SPLIT or NORMALIZE strategy via the stactools
+    antimeridian utility. If the geometry is already SPLIT (a MultiPolygon,
+    which can occur when using USGS geometry), a merged polygon with different
+    longitude signs is created, as this is what the stactools antimeridian
+    utility expects/requires.
+
+    Args:
+        item (Item): STAC Item
+        antimeridian_strategy (Antimeridian): Either split on +/-180 or
+            normalize geometries so all longitudes are either positive or
+            negative.
+    """
+    geometry = shape(item.geometry)
+    if isinstance(geometry, MultiPolygon):
+        if len(geometry.geoms) != 2:
+            raise ValueError(
+                "MultiPolygon geometry must consist of two Polygons.")
+
+        poly1, poly2 = geometry.geoms
+        if poly1.centroid.x < 0:
+            poly1 = shapely.affinity.translate(poly1, xoff=+360)
+        if poly2.centroid.x < 0:
+            poly2 = shapely.affinity.translate(poly2, xoff=+360)
+
+        coords1 = list(poly1.exterior.coords)
+        coords2 = list(poly2.exterior.coords)
+
+        lons1 = [coord[0] for coord in coords1]
+        lons2 = [coord[0] for coord in coords2]
+        if 180 not in lons1 or 180 not in lons2:
+            raise ValueError(
+                "MultiPolygon geometry must split on the antimeridian.")
+
+        num_common_coords = len(set(coords1) & set(coords2))
+        if num_common_coords == 2:
+            merged_geometry = shapely.ops.unary_union([poly1, poly2])
+            merged_coords = list(merged_geometry.exterior.coords)
+            del_index = []
+            for index, coord in enumerate(merged_coords):
+                if coord[0] == 180:
+                    del_index.append(index)
+                if coord[0] > 180:
+                    merged_coords[index] = (coord[0] - 360, coord[1])
+            for index in sorted(del_index, reverse=True):
+                del merged_coords[index]
+            spanning_geometry = Polygon(merged_coords)
+            item.geometry = spanning_geometry
+        else:
+            raise ValueError(
+                "MultiPolygon polygons must share two coordinates on the antimeridian."
+            )
+
+    antimeridian.fix_item(item, antimeridian_strategy)

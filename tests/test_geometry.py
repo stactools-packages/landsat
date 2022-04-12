@@ -103,3 +103,27 @@ class GeometryTest(unittest.TestCase):
         self.assertTrue(
             all(lon >= 0 for lon in item_lons)
             or all(lon <= 0 for lon in item_lons))
+
+    def test_presplit_antimeridian_normalize(self):
+        """Test that an item with geometry already split along the antimeridian
+        does not trigger the stactools antimeridian MultiPolygon value error.
+        Use the NORMALIZE strategy.
+        """
+        mtl_xml_href = TEST_GEOMETRY_PATHS["presplit_antimeridian"]
+        item = create_stac_item(mtl_xml_href,
+                                use_usgs_geometry=True,
+                                legacy_l8=False,
+                                antimeridian_strategy=Strategy.NORMALIZE)
+        self.assertEqual(item.geometry["type"], "Polygon")
+
+    def test_presplit_antimeridian_split(self):
+        """Test that an item with geometry already split along the antimeridian
+        does not trigger the stactools antimeridian MultiPolygon value error.
+        Use the SPLIT strategy.
+        """
+        mtl_xml_href = TEST_GEOMETRY_PATHS["presplit_antimeridian"]
+        item = create_stac_item(mtl_xml_href,
+                                use_usgs_geometry=True,
+                                legacy_l8=False,
+                                antimeridian_strategy=Strategy.SPLIT)
+        self.assertEqual(item.geometry["type"], "MultiPolygon")
