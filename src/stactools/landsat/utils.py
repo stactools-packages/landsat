@@ -236,8 +236,8 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
     Applies the requested SPLIT or NORMALIZE strategy via the stactools
     antimeridian utility. If the geometry is already SPLIT (a MultiPolygon,
     which can occur when using USGS geometry), a merged polygon with different
-    longitude signs is created, as this is what the stactools antimeridian
-    utility expects/requires.
+    longitude signs is created to match the expected input of the fix_item
+    function.
 
     Args:
         item (Item): STAC Item
@@ -247,42 +247,18 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
     """
     geometry = shape(item.geometry)
     if isinstance(geometry, MultiPolygon):
-        if len(geometry.geoms) != 2:
-            raise ValueError(
-                "MultiPolygon geometry must consist of two Polygons.")
+        # force all positive lons so we can merge on an antimeridian split
+        polys = list(geometry.geoms)
+        for index, poly in enumerate(polys):
+            if poly.centroid.x < 0:
+                polys[index] = shapely.affinity.translate(poly, xoff=+360)
+        merged_geometry = shapely.ops.unary_union(polys)
 
-        poly1, poly2 = geometry.geoms
-        if poly1.centroid.x < 0:
-            poly1 = shapely.affinity.translate(poly1, xoff=+360)
-        if poly2.centroid.x < 0:
-            poly2 = shapely.affinity.translate(poly2, xoff=+360)
-
-        coords1 = list(poly1.exterior.coords)
-        coords2 = list(poly2.exterior.coords)
-
-        lons1 = [coord[0] for coord in coords1]
-        lons2 = [coord[0] for coord in coords2]
-        if 180 not in lons1 or 180 not in lons2:
-            raise ValueError(
-                "MultiPolygon geometry must split on the antimeridian.")
-
-        num_common_coords = len(set(coords1) & set(coords2))
-        if num_common_coords == 2:
-            merged_geometry = shapely.ops.unary_union([poly1, poly2])
-            merged_coords = list(merged_geometry.exterior.coords)
-            del_index = []
-            for index, coord in enumerate(merged_coords):
-                if coord[0] == 180:
-                    del_index.append(index)
-                if coord[0] > 180:
-                    merged_coords[index] = (coord[0] - 360, coord[1])
-            for index in sorted(del_index, reverse=True):
-                del merged_coords[index]
-            spanning_geometry = Polygon(merged_coords)
-            item.geometry = spanning_geometry
-        else:
-            raise ValueError(
-                "MultiPolygon polygons must share two coordinates on the antimeridian."
-            )
+        # revert back to + and - lon signs for fix_item's expected input
+        merged_coords = list(merged_geometry.exterior.coords)
+        for index, coord in enumerate(merged_coords):
+            if coord[0] > 180:
+                merged_coords[index] = (coord[0] - 360, coord[1])
+        item.geometry = Polygon(merged_coords)
 
     antimeridian.fix_item(item, antimeridian_strategy)
