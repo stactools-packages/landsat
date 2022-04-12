@@ -1,6 +1,7 @@
 import unittest
 
 import vcr
+from shapely.geometry import shape
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.stac import create_stac_item
@@ -103,3 +104,54 @@ class GeometryTest(unittest.TestCase):
         self.assertTrue(
             all(lon >= 0 for lon in item_lons)
             or all(lon <= 0 for lon in item_lons))
+
+    def test_presplit_antimeridian_normalize(self):
+        """Test that an item with geometry already split along the antimeridian
+        does not trigger the stactools antimeridian MultiPolygon value error.
+        Use the NORMALIZE strategy.
+        """
+        mtl_xml_href = TEST_GEOMETRY_PATHS["presplit_antimeridian"]
+        expected_geometry = shape({
+            "type":
+            "Polygon",
+            "coordinates": [[[-180.09482763892856, 60.95119752303177],
+                             [-180.0, 60.93687820884834],
+                             [-176.7016565170453, 60.43881649233896],
+                             [-175.51498801955913, 61.95528671380596],
+                             [-179.06386088310478, 62.491727331163695],
+                             [-180.0, 61.09289443379927],
+                             [-180.09482763892856, 60.95119752303177]]]
+        })
+        item = create_stac_item(mtl_xml_href,
+                                use_usgs_geometry=True,
+                                legacy_l8=False,
+                                antimeridian_strategy=Strategy.NORMALIZE)
+        item_geometry = shape(item.geometry)
+        self.assertEqual(item_geometry, expected_geometry)
+
+    def test_presplit_antimeridian_split(self):
+        """Test that an item with geometry already split along the antimeridian
+        does not trigger the stactools antimeridian MultiPolygon value error.
+        Use the SPLIT strategy.
+        """
+        mtl_xml_href = TEST_GEOMETRY_PATHS["presplit_antimeridian"]
+        expected_geometry = shape({
+            "type":
+            "MultiPolygon",
+            "coordinates": [[[[180.0, 60.93687820884834],
+                              [180.0, 61.09289443379927],
+                              [179.90517236107144, 60.95119752303177],
+                              [180.0, 60.93687820884834]]],
+                            [[[-180.0, 61.09289443379927],
+                              [-180.0, 60.93687820884834],
+                              [-176.7016565170453, 60.43881649233896],
+                              [-175.51498801955913, 61.95528671380596],
+                              [-179.06386088310478, 62.491727331163695],
+                              [-180.0, 61.09289443379927]]]]
+        })
+        item = create_stac_item(mtl_xml_href,
+                                use_usgs_geometry=True,
+                                legacy_l8=False,
+                                antimeridian_strategy=Strategy.SPLIT)
+        item_geometry = shape(item.geometry)
+        self.assertEqual(item_geometry, expected_geometry)

@@ -3,15 +3,18 @@ from typing import Any, Dict, Optional
 
 import dateutil.parser
 import rasterio
+import shapely.affinity
+import shapely.ops
 from pystac import Item, Link, MediaType, STACError
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.view import ViewExtension
 from pystac_client import Client
 from rasterio import RasterioIOError
-from shapely.geometry import box, mapping, shape
+from shapely.geometry import MultiPolygon, Polygon, box, mapping, shape
 from stactools.core.io import ReadHrefModifier
-from stactools.core.utils import href_exists
+from stactools.core.utils import antimeridian, href_exists
+from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
                                          OLD_L8_EXTENSION_SCHEMA, USGS_API,
@@ -225,3 +228,39 @@ def get_usgs_geometry(
         return item.geometry
     else:
         return None
+
+
+def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
+    """Handles some quirks of the antimeridian.
+
+    Applies the requested SPLIT or NORMALIZE strategy via the stactools
+    antimeridian utility. If the geometry is already SPLIT (a MultiPolygon,
+    which can occur when using USGS geometry), a merged polygon with different
+    longitude signs is created to match the expected input of the fix_item
+    function.
+
+    Args:
+        item (Item): STAC Item
+        antimeridian_strategy (Antimeridian): Either split on +/-180 or
+            normalize geometries so all longitudes are either positive or
+            negative.
+    """
+    geometry = shape(item.geometry)
+    if isinstance(geometry, MultiPolygon):
+        # force all positive lons so we can merge on an antimeridian split
+        polys = list(geometry.geoms)
+        for index, poly in enumerate(polys):
+            coords = list(poly.exterior.coords)
+            lons = [coord[0] for coord in coords]
+            if min(lons) < 0:
+                polys[index] = shapely.affinity.translate(poly, xoff=+360)
+        merged_geometry = shapely.ops.unary_union(polys)
+
+        # revert back to + and - lon signs for fix_item's expected input
+        merged_coords = list(merged_geometry.exterior.coords)
+        for index, coord in enumerate(merged_coords):
+            if coord[0] > 180:
+                merged_coords[index] = (coord[0] - 360, coord[1])
+        item.geometry = Polygon(merged_coords)
+
+    antimeridian.fix_item(item, antimeridian_strategy)
