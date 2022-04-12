@@ -250,7 +250,9 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
         # force all positive lons so we can merge on an antimeridian split
         polys = list(geometry.geoms)
         for index, poly in enumerate(polys):
-            if poly.centroid.x < 0:
+            coords = list(poly.exterior.coords)
+            lons = [coord[0] for coord in coords]
+            if min(lons) < 0:
                 polys[index] = shapely.affinity.translate(poly, xoff=+360)
         merged_geometry = shapely.ops.unary_union(polys)
 
