@@ -241,6 +241,29 @@ def test_mss_scale_offset() -> None:
         assert "offset" in raster_bands
 
 
+def test_mss_null_scale_offset() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_007019_19771009_20200907_02_T2_MTL.xml")
+    item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
+    item.validate()
+
+    item_dict = item.to_dict()
+    # Check that unit, scale, and offset do not exist in the band with null
+    # values for scale and/or offset
+    raster_bands = item_dict["assets"]["green"]["raster:bands"][0]
+    assert "unit" not in raster_bands
+    assert "scale" not in raster_bands
+    assert "offset" not in raster_bands
+
+    # Check that unit, scale, and offset do exist in other bands
+    asset_keys = ["red", "nir08", "nir09"]
+    for key in asset_keys:
+        raster_bands = item_dict["assets"][key]["raster:bands"][0]
+        assert "unit" in raster_bands
+        assert "scale" in raster_bands
+        assert "offset" in raster_bands
+
+
 def test_l1_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
         "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")

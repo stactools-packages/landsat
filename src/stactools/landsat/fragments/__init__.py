@@ -55,7 +55,7 @@ class Fragments:
     """Class for accessing asset and extension data."""
 
     def __init__(self, sensor: Sensor, satellite: int, base_href: str,
-                 level1_radiance: Dict[str, Dict[str, float]]):
+                 level1_radiance: Dict[str, Dict[str, Optional[float]]]):
         """Initialize a new group of fragments for the provided Sensor."""
         self._sensor = sensor
         self._satellite = satellite
@@ -165,10 +165,14 @@ class Fragments:
         for key, value in mss_raster_dict.items():
             rad_key = value.pop("temp_name", None)
             if rad_key:
-                mss_raster_dict[key]["scale"] = self.level1_radiance[rad_key][
-                    "mult"]
-                mss_raster_dict[key]["offset"] = self.level1_radiance[rad_key][
-                    "add"]
+                if not self.level1_radiance[rad_key][
+                        "mult"] or not self.level1_radiance[rad_key]["add"]:
+                    mss_raster_dict[key].pop("unit")
+                else:
+                    mss_raster_dict[key]["scale"] = self.level1_radiance[
+                        rad_key]["mult"]
+                    mss_raster_dict[key]["offset"] = self.level1_radiance[
+                        rad_key]["add"]
 
         return mss_raster_dict
 
