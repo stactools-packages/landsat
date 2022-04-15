@@ -55,7 +55,7 @@ class Fragments:
     """Class for accessing asset and extension data."""
 
     def __init__(self, sensor: Sensor, satellite: int, base_href: str,
-                 level1_radiance: Dict[str, Dict[str, Any]]):
+                 level1_radiance: Dict[str, Dict[str, Optional[float]]]):
         """Initialize a new group of fragments for the provided Sensor."""
         self._sensor = sensor
         self._satellite = satellite

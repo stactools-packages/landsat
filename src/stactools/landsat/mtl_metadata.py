@@ -322,7 +322,7 @@ class MtlMetadata:
         return landsat_meta
 
     @property
-    def level1_radiance(self) -> Dict[str, Dict[str, Any]]:
+    def level1_radiance(self) -> Dict[str, Dict[str, Optional[float]]]:
         """Gets the scale (mult) and offset (add) values for generating TOA
         radiance from Level-1 DNs.
 
