@@ -338,12 +338,13 @@ class MtlMetadata:
                                         self._xml_error)
         mult_add: Dict[str, Any] = defaultdict(dict)
         for item in node.element:
+            value = str(item.text)
             if item.tag.startswith("RADIANCE_MULT_BAND"):
                 band = f'B{item.tag.split("_")[-1]}'
-                mult_add[band]["mult"] = self._float_or_none(item.text)
+                mult_add[band]["mult"] = self._float_or_none(value)
             elif item.tag.startswith("RADIANCE_ADD_BAND"):
                 band = f'B{item.tag.split("_")[-1]}'
-                mult_add[band]["add"] = self._float_or_none(item.text)
+                mult_add[band]["add"] = self._float_or_none(value)
         return mult_add
 
     @classmethod
