@@ -24,9 +24,9 @@
 
 This repository will assist you in the generation of STAC files for Landsat datasets. The table below provides an overview on Landsat Mission's sensors and band wavelengths.
 
-<img width="1147" alt="Landsat Missions - Sensors and Band Wavelengths" src="https://user-images.githubusercontent.com/91917800/155609794-4cdb98aa-36f3-4452-93cd-c6193416e3a4.png">
+<img width="1147" alt="Landsat Missions - Sensors and Band Wavelengths" src="https://user-images.githubusercontent.com/1312546/190440352-0b6e2c81-f1b4-48ff-bcf1-5b5addba1bd9.png">
 
-Source: https://pubs.usgs.gov/fs/2015/3081/fs20153081_ver1.2.pdf
+Source: https://pubs.usgs.gov/fs/2015/3081/fs20153081.pdf
 
 
 ## Examples
