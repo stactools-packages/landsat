@@ -38,9 +38,6 @@ def create_landsat_command(cli: Group) -> Command:
         "-u", "--usgs_geometry", is_flag=True, help="Use USGS STAC Item geometry"
     )
     @click.option(
-        "-l", "--legacy_l8", is_flag=True, help="Create legacy Landsat 8 STAC Item"
-    )
-    @click.option(
         "-a",
         "--antimeridian_strategy",
         type=click.Choice(["normalize", "split"], case_sensitive=False),
@@ -60,7 +57,6 @@ def create_landsat_command(cli: Group) -> Command:
         mtl: str,
         output: str,
         usgs_geometry: bool,
-        legacy_l8: bool,
         antimeridian_strategy: str,
     ) -> None:
         """\b
@@ -88,12 +84,10 @@ def create_landsat_command(cli: Group) -> Command:
             usgs_geometry (bool): Flag to use the geometry from a USGS STAC Item
                 that resides in the same directory as the MTL xml file or can be
                 queried from the USGS STAC API.
-            legacy_l8 (bool): Flag to use the legacy method for creating a
-                Landsat 8 STAC Item.
             antimeridian_strategy (str): Choice of 'normalize' or 'split' to
                 either split the Item geometry on -180 longitude or normalize
                 the Item geometry so all longitudes are either positive or
-                negative. Has no effect if legacy_l8=True.
+                negative.
             level (str): Choice of 'level-1' or 'level-2'. This is not used
                 and has no effect.
         """
@@ -101,7 +95,6 @@ def create_landsat_command(cli: Group) -> Command:
         item = create_stac_item(
             mtl_xml_href=mtl,
             use_usgs_geometry=usgs_geometry,
-            legacy_l8=legacy_l8,
             antimeridian_strategy=strategy,
         )
         item.set_self_href(os.path.join(output, f"{item.id}.json"))
@@ -177,7 +170,6 @@ def create_landsat_command(cli: Group) -> Command:
             item = create_stac_item(
                 href,
                 use_usgs_geometry=usgs_geometry,
-                legacy_l8=False,
                 antimeridian_strategy=strategy,
             )
             collection.add_item(item)

@@ -11,15 +11,10 @@ from tests import test_data
 class AngMetadataTest(unittest.TestCase):
     def test_parses(self) -> None:
         ang_path = test_data.get_path(
-            "data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_ANG.txt"
-        )
-        ang_path = test_data.get_path(
             "data-files/assets3/LC08_L2SP_008059_20191201_20200825_02_T1_ANG.txt"
         )
 
         ang_metadata = AngMetadata.from_file(ang_path)
-
-        # self.assertEqual(ang_metadata.scene_id, "LC80050092015191LGN01")
 
         # Check that the proj_bbox from the MTL lines up with
         # the derived geometry.

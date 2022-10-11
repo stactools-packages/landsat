@@ -14,6 +14,7 @@ from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.utils import (
     _parse_date,
     stac_api_to_stac,
+    transform_mtl_to_stac,
     transform_stac_to_stac,
 )
 from tests import test_data
@@ -89,13 +90,13 @@ class LandsatTest(CliTestCase):
         item = stac_api_to_stac(self.landsat_stac_files[0])
         item.validate()
 
-    # def test_transform_mtl(self) -> None:
-    #     """Convert a JSON MTL to a STAC 1.0.0.beta.2.
-    #     This is not fully implemented, so it fails"""
-    #     item = transform_mtl_to_stac(self.landsat_mtl)
-    #     # We expect failure until it is fully implemented
-    #     with self.assertRaises(pystac.STACValidationError):
-    #         item.validate()
+    def test_transform_mtl(self) -> None:
+        """Convert a JSON MTL to a STAC 1.0.0.beta.2.
+        This is not fully implemented, so it fails"""
+        item = transform_mtl_to_stac(self.landsat_mtl)
+        # We expect failure until it is fully implemented
+        with self.assertRaises(pystac.STACValidationError):
+            item.validate()
 
     def test_date_parse(self) -> None:
         """Can we parse a simple date string?"""
@@ -127,7 +128,7 @@ class LandsatTest(CliTestCase):
             projection = ProjectionExtension.ext(item)
             self.assertEqual(projection.epsg, 3031)
 
-    def test_create_nonlegacyl8_item(self) -> None:
+    def test_create_item(self) -> None:
         infile = test_data.get_path(
             "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
         )

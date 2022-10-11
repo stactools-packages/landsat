@@ -19,12 +19,9 @@ class MtlMetadata:
     References https://github.com/sat-utils/sat-stac-landsat/blob/f2263485043a827b4153aecc12f45a3d1363e9e2/satstac/landsat/main.py#L157
     """  # noqa
 
-    def __init__(
-        self, root: XmlElement, href: Optional[str] = None, legacy_l8: bool = True
-    ):
+    def __init__(self, root: XmlElement, href: Optional[str] = None):
         self._root = root
         self.href = href
-        self.legacy_l8 = legacy_l8
 
     def _xml_error(self, item: str) -> MTLError:
         return MTLError(
@@ -91,19 +88,12 @@ class MtlMetadata:
     def epsg(self) -> int:
         utm_zone = self._root.find_text("PROJECTION_ATTRIBUTES/UTM_ZONE")
         if utm_zone:
-            if self.satellite_num == 8 and self.legacy_l8:
-                # Keep current STAC Item content consistent for Landsat 8
-                bbox = self.bbox
-                utm_zone_integer = int(self._get_text("PROJECTION_ATTRIBUTES/UTM_ZONE"))
-                center_lat = (bbox[1] + bbox[3]) / 2.0
-                return int(f"{326 if center_lat > 0 else 327}{utm_zone_integer:02d}")
-            else:
-                # The projection transforms in the COGs provided by the USGS are
-                # always for UTM North zones. The EPSG codes should therefore
-                # be UTM north zones (326XX, where XX is the UTM zone number).
-                # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
-                utm_zone_integer = int(self._get_text("PROJECTION_ATTRIBUTES/UTM_ZONE"))
-                return int(f"326{utm_zone_integer:02d}")
+            # The projection transforms in the COGs provided by the USGS are
+            # always for UTM North zones. The EPSG codes should therefore
+            # be UTM north zones (326XX, where XX is the UTM zone number).
+            # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
+            utm_zone_integer = int(self._get_text("PROJECTION_ATTRIBUTES/UTM_ZONE"))
+            return int(f"326{utm_zone_integer:02d}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,
@@ -260,23 +250,16 @@ class MtlMetadata:
 
     @property
     def off_nadir(self) -> Optional[float]:
-        if self.satellite_num == 8 and self.legacy_l8:
-            # Keep current STAC Item content consistent for Landsat 8
-            if self._get_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "NADIR":
-                return 0
-            else:
-                return None
+        # NADIR_OFFNADIR and ROLL_ANGLE xml entries do not exist prior to
+        # landsat 8. Therefore, we perform a soft check for NADIR_OFFNADIR.
+        # If exists and is equal to "OFFNADIR", then a non-zero ROLL_ANGLE
+        # exists. We force this ROLL_ANGLE to be positive to conform with
+        # the stac View Geometry extension. We return 0 otherwise since
+        # off-nadir views are only an option on Landsat 8-9.
+        if self._root.find_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "OFFNADIR":
+            return abs(self._get_float("IMAGE_ATTRIBUTES/ROLL_ANGLE"))
         else:
-            # NADIR_OFFNADIR and ROLL_ANGLE xml entries do not exist prior to
-            # landsat 8. Therefore, we perform a soft check for NADIR_OFFNADIR.
-            # If exists and is equal to "OFFNADIR", then a non-zero ROLL_ANGLE
-            # exists. We force this ROLL_ANGLE to be positive to conform with
-            # the stac View Geometry extension. We return 0 otherwise since
-            # off-nadir views are only an option on Landsat 8-9.
-            if self._root.find_text("IMAGE_ATTRIBUTES/NADIR_OFFNADIR") == "OFFNADIR":
-                return abs(self._get_float("IMAGE_ATTRIBUTES/ROLL_ANGLE"))
-            else:
-                return 0
+            return 0
 
     @property
     def wrs_path(self) -> str:
@@ -288,7 +271,7 @@ class MtlMetadata:
 
     @property
     def landsat_metadata(self) -> Dict[str, Any]:
-        landsat_meta = {
+        return {
             "landsat:cloud_cover_land": self._get_float(
                 "IMAGE_ATTRIBUTES/CLOUD_COVER_LAND"
             ),
@@ -304,11 +287,6 @@ class MtlMetadata:
             "landsat:correction": self.processing_level,
             "landsat:scene_id": self.scene_id,
         }
-        if self.satellite_num == 8 and self.legacy_l8:
-            landsat_meta["landsat:processing_level"] = landsat_meta.pop(
-                "landsat:correction"
-            )
-        return landsat_meta
 
     @property
     def level1_radiance(self) -> Dict[str, Dict[str, Optional[float]]]:
@@ -340,10 +318,8 @@ class MtlMetadata:
         cls,
         href: str,
         read_href_modifier: Optional[ReadHrefModifier] = None,
-        legacy_l8: bool = True,
     ) -> "MtlMetadata":
         return cls(
             XmlElement.from_file(href, read_href_modifier),
             href=href,
-            legacy_l8=legacy_l8,
         )

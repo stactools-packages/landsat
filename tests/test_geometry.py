@@ -106,7 +106,6 @@ class GeometryTest(unittest.TestCase):
         crossing_lons = [lon for lon, lat in crossing_coords]
         item = create_stac_item(
             mtl_xml_href,
-            legacy_l8=False,
             use_usgs_geometry=True,
             antimeridian_strategy=Strategy.NORMALIZE,
         )
@@ -145,7 +144,6 @@ class GeometryTest(unittest.TestCase):
         item = create_stac_item(
             mtl_xml_href,
             use_usgs_geometry=True,
-            legacy_l8=False,
             antimeridian_strategy=Strategy.NORMALIZE,
         )
         item_geometry = shape(item.geometry)
@@ -185,7 +183,6 @@ class GeometryTest(unittest.TestCase):
         item = create_stac_item(
             mtl_xml_href,
             use_usgs_geometry=True,
-            legacy_l8=False,
             antimeridian_strategy=Strategy.SPLIT,
         )
         item_geometry = shape(item.geometry)

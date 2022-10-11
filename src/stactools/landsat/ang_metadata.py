@@ -21,12 +21,9 @@ class AngMetadata:
     def __init__(self, ang_txt: str, href: Optional[str] = None):
         self._sz = []
         self._coords = []
-        scene_id = None
 
         try:
             for line in ang_txt.split("\n"):
-                if "LANDSAT_SCENE_ID" in line:
-                    scene_id = line.split("=")[1].strip(' "')
                 if "BAND01_NUM_L1T_LINES" in line or "BAND01_NUM_L1T_SAMPS" in line:
                     self._sz.append(float(line.split("=")[1]))
                 if (
@@ -44,12 +41,6 @@ class AngMetadata:
         except Exception as e:
             href_msg = "" if href is None else f" from {href}"
             raise AngError(f"Could not parse ANG file{href_msg}") from e
-
-        if scene_id is None:
-            href_msg = "" if href is None else f" from {href}"
-            raise AngError(f"Could not get scene id {href_msg}")
-
-        self.scene_id = scene_id
 
     def get_scene_geometry(self, bbox: List[float]) -> Dict[str, Any]:
         """Get the scene geometry from the ANG file based on the
