@@ -1,17 +1,18 @@
 import os
 from tempfile import TemporaryDirectory
+from typing import Any, Callable, List
 
 import pystac
 import rasterio
+from click import Command, Group
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.utils import is_absolute_href
 from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_geom
-from stactools.testing import CliTestCase
+from stactools.testing.cli_test import CliTestCase
 
-from stactools.landsat.assets import (SR_ASSET_DEFS, ST_B10_ASSET_DEF,
-                                      THERMAL_ASSET_DEFS)
+from stactools.landsat.assets import SR_ASSET_DEFS, ST_B10_ASSET_DEF, THERMAL_ASSET_DEFS
 from stactools.landsat.commands import create_landsat_command
 from stactools.landsat.constants import L8_SP_BANDS, L8_SR_BANDS
 from stactools.landsat.stac import create_stac_item
@@ -20,13 +21,11 @@ from tests.data import TEST_MTL_PATHS
 
 
 class CreateItemTest(CliTestCase):
-
-    def create_subcommand_functions(self):
+    def create_subcommand_functions(self) -> List[Callable[[Group], Command]]:
         return [create_landsat_command]
 
-    def test_create_item(self):
-
-        def check_proj_bbox(item, tif_bounds):
+    def test_create_item(self) -> None:
+        def check_proj_bbox(item: pystac.Item, tif_bounds: Any) -> None:
             bbox = item.bbox
             bbox_shp = box(*bbox)
             projection = ProjectionExtension.ext(item)
@@ -35,11 +34,14 @@ class CreateItemTest(CliTestCase):
             self.assertEqual(proj_bbox, list(tif_bounds))
             proj_bbox_shp = box(*proj_bbox)
             reproj_bbox_shp = shape(
-                reproject_geom(f"epsg:{projection.epsg}", "epsg:4326",
-                               mapping(proj_bbox_shp)))
+                reproject_geom(
+                    f"epsg:{projection.epsg}", "epsg:4326", mapping(proj_bbox_shp)
+                )
+            )
 
-            self.assertLess((reproj_bbox_shp - bbox_shp).area,
-                            0.0001 * reproj_bbox_shp.area)
+            self.assertLess(
+                (reproj_bbox_shp - bbox_shp).area, 0.0001 * reproj_bbox_shp.area
+            )
 
         for item_id, mtl_path in TEST_MTL_PATHS.items():
             with self.subTest(mtl_path):
@@ -48,15 +50,13 @@ class CreateItemTest(CliTestCase):
                 with rasterio.open(tif_path) as dataset:
                     tif_bounds = dataset.bounds
                 with TemporaryDirectory() as tmp_dir:
-                    cmd = [
-                        'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', tmp_dir, '--legacy_l8'
-                    ]
+                    cmd = (
+                        f"landsat create-item --mtl {mtl_path} --output "
+                        f"{tmp_dir} --legacy_l8"
+                    )
                     self.run_command(cmd)
 
-                    jsons = [
-                        p for p in os.listdir(tmp_dir) if p.endswith('.json')
-                    ]
+                    jsons = [p for p in os.listdir(tmp_dir) if p.endswith(".json")]
                     self.assertEqual(len(jsons), 1)
                     fname = jsons[0]
 
@@ -66,8 +66,8 @@ class CreateItemTest(CliTestCase):
                     # property.
                     item.collection_id = "landsat-8-c2-l2"
                     item.links.append(
-                        pystac.Link(rel="collection",
-                                    target="http://example.com"))
+                        pystac.Link(rel="collection", target="http://example.com")
+                    )
                     item.validate()
                     self.assertEqual(item.id, item_id)
 
@@ -77,12 +77,11 @@ class CreateItemTest(CliTestCase):
                     # Ensure gsd is correctly set for band 10
                     if ST_B10_ASSET_DEF.key in item.assets:
                         self.assertIn(
-                            'gsd',
-                            item.assets[ST_B10_ASSET_DEF.key].extra_fields)
+                            "gsd", item.assets[ST_B10_ASSET_DEF.key].extra_fields
+                        )
                         self.assertEqual(
-                            item.assets[
-                                ST_B10_ASSET_DEF.key].extra_fields['gsd'],
-                            100.0)
+                            item.assets[ST_B10_ASSET_DEF.key].extra_fields["gsd"], 100.0
+                        )
 
                     bands_seen = set()
 
@@ -94,21 +93,21 @@ class CreateItemTest(CliTestCase):
                             bands_seen |= set(b.name for b in eo.bands)
 
                             # Ensure gsd is set
-                            self.assertIn('gsd', asset.extra_fields)
+                            self.assertIn("gsd", asset.extra_fields)
 
-                    if item.properties['landsat:processing_level'] == 'L2SP':
+                    if item.properties["landsat:processing_level"] == "L2SP":
                         self.assertEqual(
                             bands_seen,
-                            set(L8_SR_BANDS.keys()) | set(L8_SP_BANDS.keys()))
+                            set(L8_SR_BANDS.keys()) | set(L8_SP_BANDS.keys()),
+                        )
                     else:
                         self.assertEqual(bands_seen, set(L8_SR_BANDS.keys()))
 
                     check_proj_bbox(item, tif_bounds)
 
-    def test_convert_and_create_agree(self):
-
+    def test_convert_and_create_agree(self) -> None:
         def get_item(output_dir: str) -> pystac.Item:
-            jsons = [p for p in os.listdir(output_dir) if p.endswith('.json')]
+            jsons = [p for p in os.listdir(output_dir) if p.endswith(".json")]
             self.assertEqual(len(jsons), 1)
 
             fname = jsons[0]
@@ -117,7 +116,8 @@ class CreateItemTest(CliTestCase):
             # landsat schema lists "collection" as a required property.
             item.collection_id = "landsat-8-c2-l2"
             item.links.append(
-                pystac.Link(rel="collection", target="http://example.com"))
+                pystac.Link(rel="collection", target="http://example.com")
+            )
             item.validate()
 
             return item
@@ -125,29 +125,29 @@ class CreateItemTest(CliTestCase):
         for mtl_path in TEST_MTL_PATHS.values():
             with self.subTest(mtl_path):
                 with TemporaryDirectory() as tmp_dir:
-                    create_dir = os.path.join(tmp_dir, 'create')
-                    convert_dir = os.path.join(tmp_dir, 'convert')
-                    original_dir = os.path.join(tmp_dir, 'original')
+                    create_dir = os.path.join(tmp_dir, "create")
+                    convert_dir = os.path.join(tmp_dir, "convert")
+                    original_dir = os.path.join(tmp_dir, "original")
                     os.makedirs(create_dir, exist_ok=True)
                     os.makedirs(convert_dir, exist_ok=True)
                     os.makedirs(original_dir, exist_ok=True)
 
-                    create_cmd = [
-                        'landsat', 'create-item', '--mtl', mtl_path,
-                        '--output', create_dir, '--legacy_l8'
-                    ]
+                    create_cmd = (
+                        f"landsat create-item --mtl {mtl_path} --output "
+                        f"{create_dir} --legacy_l8"
+                    )
                     self.run_command(create_cmd)
 
-                    stac_path = mtl_path.replace('_MTL.xml', '_SR_stac.json')
+                    stac_path = mtl_path.replace("_MTL.xml", "_SR_stac.json")
                     import shutil
+
                     shutil.copy(
                         stac_path,
-                        os.path.join(original_dir,
-                                     os.path.basename(stac_path)))
-                    convert_cmd = [
-                        'landsat', 'convert', '--stac', stac_path, '--dst',
-                        convert_dir
-                    ]
+                        os.path.join(original_dir, os.path.basename(stac_path)),
+                    )
+                    convert_cmd = (
+                        f"landsat convert --stac {stac_path} --dst {convert_dir}"
+                    )
                     self.run_command(convert_cmd)
 
                     created_item = get_item(create_dir)
@@ -158,8 +158,7 @@ class CreateItemTest(CliTestCase):
 
                     for asset_def in SR_ASSET_DEFS:
                         self.assertIn(asset_def.key, created_item.assets)
-                    if created_item.properties[
-                            'landsat:processing_level'] == 'L2SP':
+                    if created_item.properties["landsat:processing_level"] == "L2SP":
                         for asset_def in THERMAL_ASSET_DEFS:
                             self.assertIn(asset_def.key, created_item.assets)
 
@@ -180,7 +179,8 @@ class CreateItemTest(CliTestCase):
 
 def test_nonlegacyl8_item() -> None:
     mtl_path = test_data.get_path(
-        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False)
     item_dict = item.to_dict()
 
@@ -201,7 +201,8 @@ def test_nonlegacyl8_item() -> None:
 
 def test_read_href_modifier() -> None:
     mtl_path = test_data.get_path(
-        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml")
+        "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
+    )
 
     did_it = False
 
@@ -210,15 +211,16 @@ def test_read_href_modifier() -> None:
         did_it = True
         return href
 
-    _ = create_stac_item(mtl_path,
-                         legacy_l8=False,
-                         read_href_modifier=read_href_modifier)
+    _ = create_stac_item(
+        mtl_path, legacy_l8=False, read_href_modifier=read_href_modifier
+    )
     assert did_it
 
 
 def test_southern_hemisphere_epsg() -> None:
     mtl_path = test_data.get_path(
-        "data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml")
+        "data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
@@ -228,7 +230,8 @@ def test_southern_hemisphere_epsg() -> None:
 
 def test_mss_scale_offset() -> None:
     mtl_path = test_data.get_path(
-        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")
+        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
@@ -243,7 +246,8 @@ def test_mss_scale_offset() -> None:
 
 def test_mss_null_scale_offset() -> None:
     mtl_path = test_data.get_path(
-        "data-files/mss/LM01_L1GS_007019_19771009_20200907_02_T2_MTL.xml")
+        "data-files/mss/LM01_L1GS_007019_19771009_20200907_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item.validate()
 
@@ -266,7 +270,8 @@ def test_mss_null_scale_offset() -> None:
 
 def test_l1_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
-        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml")
+        "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
@@ -276,7 +281,8 @@ def test_l1_bitfields_exist() -> None:
 
 def test_l2_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
-        "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml")
+        "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
@@ -288,7 +294,8 @@ def test_l2_bitfields_exist() -> None:
 
 def test_no_cloud_cover() -> None:
     mtl_path = test_data.get_path(
-        "data-files/mss/LM01_L1GS_005037_19720823_20200909_02_T2_MTL.xml")
+        "data-files/mss/LM01_L1GS_005037_19720823_20200909_02_T2_MTL.xml"
+    )
     item = create_stac_item(mtl_path, legacy_l8=False, use_usgs_geometry=True)
     item.validate()
 

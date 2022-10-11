@@ -16,20 +16,25 @@ from stactools.core.io import ReadHrefModifier
 from stactools.core.utils import antimeridian, href_exists
 from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.constants import (L8_EXTENSION_SCHEMA,
-                                         OLD_L8_EXTENSION_SCHEMA, USGS_API,
-                                         USGS_C2L1, USGS_C2L2_SR, Sensor)
+from stactools.landsat.constants import (
+    L8_EXTENSION_SCHEMA,
+    OLD_L8_EXTENSION_SCHEMA,
+    USGS_API,
+    USGS_C2L1,
+    USGS_C2L2_SR,
+    Sensor,
+)
 
 
 def _parse_date(in_date: str) -> datetime.datetime:
     """
     Try to parse a date and return it as a datetime object with no timezone
     """
-    parsed_date = dateutil.parser.parse(in_date)
+    parsed_date: datetime.datetime = dateutil.parser.parse(in_date)
     return parsed_date.replace(tzinfo=datetime.timezone.utc)
 
 
-def transform_mtl_to_stac(metadata: dict) -> Item:
+def transform_mtl_to_stac(metadata: Dict[str, Any]) -> Item:
     """
     Handle USGS MTL as a dict and return a STAC item.
 
@@ -48,22 +53,23 @@ def transform_mtl_to_stac(metadata: dict) -> Item:
     scene_id = product["LANDSAT_PRODUCT_ID"]
 
     xmin, xmax = float(projection["CORNER_LL_LON_PRODUCT"]), float(
-        projection["CORNER_UR_LON_PRODUCT"])
+        projection["CORNER_UR_LON_PRODUCT"]
+    )
     ymin, ymax = float(projection["CORNER_LL_LAT_PRODUCT"]), float(
-        projection["CORNER_UR_LAT_PRODUCT"])
+        projection["CORNER_UR_LAT_PRODUCT"]
+    )
     geom = mapping(box(xmin, ymin, xmax, ymax))
     bounds = shape(geom).bounds
 
     # Like: "2020-01-01" for date and  "23:08:52.6773140Z" for time
     acquired_date = _parse_date(
-        f"{image['DATE_ACQUIRED']}T{image['SCENE_CENTER_TIME']}")
+        f"{image['DATE_ACQUIRED']}T{image['SCENE_CENTER_TIME']}"
+    )
     created = _parse_date(proessing_record["DATE_PRODUCT_GENERATED"])
 
-    item = Item(id=scene_id,
-                geometry=geom,
-                bbox=bounds,
-                datetime=acquired_date,
-                properties={})
+    item = Item(
+        id=scene_id, geometry=geom, bbox=bounds, datetime=acquired_date, properties={}
+    )
 
     # Common metadata
     item.common_metadata.created = created
@@ -80,10 +86,12 @@ def transform_mtl_to_stac(metadata: dict) -> Item:
     return item
 
 
-def transform_stac_to_stac(item: Item,
-                           enable_proj: bool = True,
-                           self_link: str = None,
-                           source_link: str = None) -> Item:
+def transform_stac_to_stac(
+    item: Item,
+    enable_proj: bool = True,
+    self_link: Optional[str] = None,
+    source_link: Optional[str] = None,
+) -> Item:
     """
     Handle a 0.7.0 item and convert it to a 1.0.0.beta2 item.
     If `enable_proj` is true, the assets' geotiff files must be accessible.
@@ -100,20 +108,20 @@ def transform_stac_to_stac(item: Item,
         item.links.append(Link(rel="self", target=self_link))
     if source_link:
         item.links.append(
-            Link(rel="derived_from",
-                 target=source_link,
-                 media_type="application/json"))
+            Link(rel="derived_from", target=source_link, media_type="application/json")
+        )
 
     # Add some common fields
     item.common_metadata.constellation = "Landsat"
 
     # Handle view extension
     view = ViewExtension.ext(item, add_if_missing=True)
-    if (item.properties.get("eo:off_nadir")
-            or item.properties.get("eo:off_nadir") == 0):
+    if item.properties.get("eo:off_nadir") or item.properties.get("eo:off_nadir") == 0:
         view.off_nadir = item.properties.pop("eo:off_nadir")
-    elif (item.properties.get("view:off_nadir")
-          or item.properties.get("view:off_nadir") == 0):
+    elif (
+        item.properties.get("view:off_nadir")
+        or item.properties.get("view:off_nadir") == 0
+    ):
         view.off_nadir = item.properties.pop("view:off_nadir")
     else:
         STACError("eo:off_nadir or view:off_nadir is a required property")
@@ -155,8 +163,7 @@ def transform_stac_to_stac(item: Item,
 
     # Remove .TIF from asset names
     item.assets = {
-        name.replace(".TIF", ""): asset
-        for name, asset in item.assets.items()
+        name.replace(".TIF", ""): asset for name, asset in item.assets.items()
     }
 
     try:
@@ -173,16 +180,16 @@ def stac_api_to_stac(uri: str) -> Item:
     Takes in a URI and uses that to feed the STAC transform
     """
 
-    return transform_stac_to_stac(item=Item.from_file(uri),
-                                  source_link=uri,
-                                  enable_proj=False)
+    return transform_stac_to_stac(
+        item=Item.from_file(uri), source_link=uri, enable_proj=False
+    )
 
 
 def get_usgs_geometry(
     base_href: str,
     sensor: Sensor,
     product_id: str,
-    read_href_modifier: Optional[ReadHrefModifier] = None
+    read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> Optional[Dict[str, Any]]:
     """Attempts to get scene geometry from a USGS STAC Item.
 
