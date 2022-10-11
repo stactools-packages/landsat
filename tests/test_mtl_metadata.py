@@ -72,3 +72,11 @@ class MtlMetadataTest(unittest.TestCase):
 
         self.assertLess((reproj_bbox_shp - bbox_shp).area,
                         0.0001 * reproj_bbox_shp.area)
+
+    def test_utm_zone(self):
+        mtl_path = test_data.get_path(
+            "data-files/tm/LT05_L2SP_058014_20110312_20200823_02_T1_MTL.xml")
+        mtl_metadata_legacy = MtlMetadata.from_file(mtl_path, legacy_l8=True)
+        self.assertEqual(mtl_metadata_legacy.epsg, 32609)
+        mtl_metadata = MtlMetadata.from_file(mtl_path, legacy_l8=False)
+        self.assertEqual(mtl_metadata.epsg, 32609)
