@@ -94,16 +94,19 @@ class MtlMetadata:
             if self.satellite_num == 8 and self.legacy_l8:
                 # Keep current STAC Item content consistent for Landsat 8
                 bbox = self.bbox
-                utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
+                utm_zone_integer = int(
+                    self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE'))
                 center_lat = (bbox[1] + bbox[3]) / 2.0
-                return int(f"{326 if center_lat > 0 else 327}{utm_zone}")
+                return int(
+                    f"{326 if center_lat > 0 else 327}{utm_zone_integer:02d}")
             else:
                 # The projection transforms in the COGs provided by the USGS are
                 # always for UTM North zones. The EPSG codes should therefore
                 # be UTM north zones (326XX, where XX is the UTM zone number).
                 # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
-                utm_zone = self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE')
-                return int(f"326{utm_zone}")
+                utm_zone_integer = int(
+                    self._get_text('PROJECTION_ATTRIBUTES/UTM_ZONE'))
+                return int(f"326{utm_zone_integer:02d}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,
