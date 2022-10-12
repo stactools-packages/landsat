@@ -220,7 +220,7 @@ def get_usgs_geometry(
         catalog = Client.open(USGS_API)
         search = catalog.search(collections=[collection], ids=[product_id])
         if search.matched() == 1:
-            item = next(search.get_items())
+            item = next(search.items())
         else:
             item = None
 

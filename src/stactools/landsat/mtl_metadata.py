@@ -3,11 +3,10 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from pyproj import Geod
-from pystac.utils import str_to_datetime
+from pystac.utils import map_opt, str_to_datetime
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
 from stactools.core.projection import transform_from_bbox
-from stactools.core.utils import map_opt
 
 
 class MTLError(Exception):
