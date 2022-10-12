@@ -9,11 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Change function/method calls to remove warnings ([#42](https://github.com/stactools-packages/landsat/pull/42))
+- Fixed issue where EPSG codes were missing `0` values ([#39](https://github.com/stactools-packages/landsat/pull/39))
 - Remove the `unit`, `scale`, and `offset` properties from `raster:bands` when "NULL" values for `mult` and `add` are encountered in the metadata. This applies to Collection 2 Level-1 data only ([#33](https://github.com/stactools-packages/landsat/pull/33))
 - Handle MultiPolygon geometries before applying the stactools antimeridian `fix_item` utility function ([#30](https://github.com/stactools-packages/landsat/pull/30))
 - `eo:cloud_cover` is not added to Item properties when it was not computed (indicated by a value of -1) during scene processing ([#28](https://github.com/stactools-packages/landsat/pull/28))
-- Fixed issue where EPSG codes were missing `0` values ([#39](https://github.com/stactools-packages/landsat/pull/39))
-- Change function/method calls to remove warnings ([#42](https://github.com/stactools-packages/landsat/pull/42))
 
 ## [0.2.3] - 2022-04-01
 
