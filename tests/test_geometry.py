@@ -5,7 +5,7 @@ import vcr
 from shapely.geometry import shape
 from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.stac import create_stac_item
+from stactools.landsat.stac import create_item
 from tests.data import TEST_GEOMETRY_PATHS
 
 
@@ -29,7 +29,7 @@ class GeometryTest(unittest.TestCase):
             ],
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_geometry=True)
+        item = create_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
@@ -55,7 +55,7 @@ class GeometryTest(unittest.TestCase):
             ],
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_geometry=True)
+        item = create_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
@@ -81,7 +81,7 @@ class GeometryTest(unittest.TestCase):
             ],
         }
         expected_coords = expected_geometry["coordinates"][0]
-        item = create_stac_item(mtl_xml_href, use_usgs_geometry=False)
+        item = create_item(mtl_xml_href, use_usgs_geometry=False)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
             self.assertAlmostEqual(e[0], i[0], 7)
@@ -104,7 +104,7 @@ class GeometryTest(unittest.TestCase):
         }
         crossing_coords = crosssing_geometry["coordinates"][0]
         crossing_lons = [lon for lon, lat in crossing_coords]
-        item = create_stac_item(
+        item = create_item(
             mtl_xml_href,
             use_usgs_geometry=True,
             antimeridian_strategy=Strategy.NORMALIZE,
@@ -141,7 +141,7 @@ class GeometryTest(unittest.TestCase):
                 ],
             }
         )
-        item = create_stac_item(
+        item = create_item(
             mtl_xml_href,
             use_usgs_geometry=True,
             antimeridian_strategy=Strategy.NORMALIZE,
@@ -180,7 +180,7 @@ class GeometryTest(unittest.TestCase):
                 ],
             }
         )
-        item = create_stac_item(
+        item = create_item(
             mtl_xml_href,
             use_usgs_geometry=True,
             antimeridian_strategy=Strategy.SPLIT,

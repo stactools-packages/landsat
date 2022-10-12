@@ -55,11 +55,9 @@ class MtlMetadata:
 
     @property
     def item_id(self) -> str:
-        # Remove the processing date, as products IDs
-        # that only vary by processing date represent the
-        # same scene
-        # See "Section 5 - Product Packaging" at
-        # https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1619_Landsat8-C2-L2-ScienceProductGuide-v2.pdf  # noqa
+        # Remove the processing date, as products IDs that only vary by
+        # processing date represent the same scene. See "Section 5 - Product
+        # Packaging" at https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1619_Landsat8-C2-L2-ScienceProductGuide-v2.pdf  # noqa
 
         # ID format: LXSS_LLLL_PPPRRR_YYYYMMDD_yyyymmdd_CX_TX
         # remove yyyymmdd
@@ -92,8 +90,8 @@ class MtlMetadata:
             # always for UTM North zones. The EPSG codes should therefore
             # be UTM north zones (326XX, where XX is the UTM zone number).
             # See: https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values  # noqa
-            utm_zone_integer = int(self._get_text("PROJECTION_ATTRIBUTES/UTM_ZONE"))
-            return int(f"326{utm_zone_integer:02d}")
+            utm_zone_integer = self._get_text("PROJECTION_ATTRIBUTES/UTM_ZONE").zfill(2)
+            return int(f"326{utm_zone_integer}")
         else:
             # Polar Stereographic
             # Based on Landsat 8-9 OLI/TIRS Collection 2 Level 1 Data Format Control Book,

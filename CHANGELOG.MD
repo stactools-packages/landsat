@@ -36,6 +36,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Handle MultiPolygon geometries before applying the stactools antimeridian `fix_item` utility function ([#30](https://github.com/stactools-packages/landsat/pull/30))
 - `eo:cloud_cover` is not added to Item properties when it was not computed (indicated by a value of -1) during scene processing ([#28](https://github.com/stactools-packages/landsat/pull/28))
 
+### Changed
+
+- Renamed `create_stac_item` function to `create_item` ([#40](https://github.com/stactools-packages/landsat/pull/40))
+
+### Removed
+
+- `legacy_l8` option from Item creation ([#40](https://github.com/stactools-packages/landsat/pull/40))
+- Outdated `convert` command ([#40](https://github.com/stactools-packages/landsat/pull/40))
+- Unused utility functions: `_parse_date`, `transform_mtl_to_stac`, `transform_stac_to_stac`, `stac_api_to_stac` ([#40](https://github.com/stactools-packages/landsat/pull/40))
+- Unused test data files ([#40](https://github.com/stactools-packages/landsat/pull/40))
+
+
 ## [0.2.3] - 2022-04-01
 
 ### Fixed

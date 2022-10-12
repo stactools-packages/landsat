@@ -14,8 +14,6 @@ from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.ang_metadata import AngMetadata
-from stactools.landsat.assets import ANG_ASSET_DEF
-from stactools.landsat.constants import Sensor  # yapf: disable
 from stactools.landsat.constants import (
     CLASSIFICATION_EXTENSION_SCHEMA,
     COLLECTION_IDS,
@@ -25,6 +23,7 @@ from stactools.landsat.constants import (
     USGS_C2L1,
     USGS_C2L2_SR,
     USGS_C2L2_ST,
+    Sensor,
 )
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
@@ -33,7 +32,7 @@ from stactools.landsat.utils import get_usgs_geometry, handle_antimeridian
 logger = logging.getLogger(__name__)
 
 
-def create_stac_item(
+def create_item(
     mtl_xml_href: str,
     use_usgs_geometry: bool = True,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
@@ -72,7 +71,7 @@ def create_stac_item(
         )
     if geometry is None:
         if sensor is Sensor.OLI_TIRS:
-            ang_href = ANG_ASSET_DEF.get_href(base_href)
+            ang_href = f"{base_href}_ANG.txt"
             ang_metadata = AngMetadata.from_file(ang_href, read_href_modifier)
             geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
         else:

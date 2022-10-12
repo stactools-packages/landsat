@@ -1,4 +1,4 @@
-from stactools.landsat.stac import create_stac_item
+from stactools.landsat.stac import create_item
 from tests import test_data
 
 
@@ -6,7 +6,7 @@ def test_item() -> None:
     mtl_path = test_data.get_path(
         "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path)
+    item = create_item(mtl_path)
     item_dict = item.to_dict()
 
     # v1.1.1 landsat extension
@@ -38,7 +38,7 @@ def test_read_href_modifier() -> None:
         did_it = True
         return href
 
-    _ = create_stac_item(mtl_path, read_href_modifier=read_href_modifier)
+    _ = create_item(mtl_path, read_href_modifier=read_href_modifier)
     assert did_it
 
 
@@ -46,7 +46,7 @@ def test_southern_hemisphere_epsg() -> None:
     mtl_path = test_data.get_path(
         "data-files/tm/LT05_L2SP_010067_19860424_20200918_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     # northern hemisphere UTM zone is used for southern hemisphere scene
@@ -57,7 +57,7 @@ def test_mss_scale_offset() -> None:
     mtl_path = test_data.get_path(
         "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     # MSS should grab scale and offset values (to convert DN to TOA radiance)
@@ -73,7 +73,7 @@ def test_mss_null_scale_offset() -> None:
     mtl_path = test_data.get_path(
         "data-files/mss/LM01_L1GS_007019_19771009_20200907_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item.validate()
 
     item_dict = item.to_dict()
@@ -97,7 +97,7 @@ def test_l1_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
         "data-files/mss/LM01_L1GS_001010_19720908_20200909_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     qa_pixel = item_dict["assets"]["qa_pixel"]
@@ -108,7 +108,7 @@ def test_l2_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
         "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     asset_keys = ["qa_pixel", "qa_radsat", "qa_aerosol"]
@@ -121,7 +121,7 @@ def test_no_cloud_cover() -> None:
     mtl_path = test_data.get_path(
         "data-files/mss/LM01_L1GS_005037_19720823_20200909_02_T2_MTL.xml"
     )
-    item = create_stac_item(mtl_path, use_usgs_geometry=True)
+    item = create_item(mtl_path, use_usgs_geometry=True)
     item.validate()
 
     # When cloud cover percentage is not computed (assigned a value of -1), the

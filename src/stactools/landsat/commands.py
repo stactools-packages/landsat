@@ -2,11 +2,10 @@ import os
 
 import click
 from click import Command, Group
-from pystac import CatalogType, Item
+from pystac import CatalogType
 from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.stac import create_collection, create_stac_item
-from stactools.landsat.utils import transform_stac_to_stac
+from stactools.landsat.stac import create_collection, create_item
 
 
 def create_landsat_command(cli: Group) -> Command:
@@ -92,7 +91,7 @@ def create_landsat_command(cli: Group) -> Command:
                 and has no effect.
         """
         strategy = Strategy[antimeridian_strategy.upper()]
-        item = create_stac_item(
+        item = create_item(
             mtl_xml_href=mtl,
             use_usgs_geometry=usgs_geometry,
             antimeridian_strategy=strategy,
@@ -167,7 +166,7 @@ def create_landsat_command(cli: Group) -> Command:
         collection.set_self_href(os.path.join(output, "collection.json"))
         collection.catalog_type = CatalogType.SELF_CONTAINED
         for href in hrefs:
-            item = create_stac_item(
+            item = create_item(
                 href,
                 use_usgs_geometry=usgs_geometry,
                 antimeridian_strategy=strategy,
@@ -176,33 +175,5 @@ def create_landsat_command(cli: Group) -> Command:
         collection.make_all_asset_hrefs_relative()
         collection.validate_all()
         collection.save()
-
-    @landsat.command(
-        "convert", short_help="Convert a USGS STAC 0.7.0 Item to an updated STAC Item"
-    )
-    @click.option("-s", "--stac", required=True, help="HREF to the source STAC file.")
-    @click.option(
-        "-p",
-        "--enable-proj",
-        is_flag=True,
-        help="Enable the proj extension. Requires access to blue band.",
-    )
-    @click.option("-d", "--dst", help="Output directory")
-    def convert_cmd(stac: str, enable_proj: bool, dst: str) -> None:
-        """Converts a USGS STAC 0.7.0 Item to an updated STAC Item.
-
-        \b
-        Args:
-            stac (str): href to the source STAC file
-            dst (str): Directory that will contain the STAC Item
-            enable_proj: Flag to include the proj extension in the created STAC
-                Item
-        """
-        in_item = Item.from_file(stac)
-        item = transform_stac_to_stac(in_item, enable_proj=enable_proj)
-
-        item_path = os.path.join(dst, "{}.json".format(item.id))
-        item.set_self_href(item_path)
-        item.save_object()
 
     return landsat
