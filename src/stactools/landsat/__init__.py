@@ -10,4 +10,4 @@ def register_plugin(registry: Registry) -> None:
     registry.register_subcommand(commands.create_landsat_command)
 
 
-__version__ = '0.2.4'
+__version__ = "0.2.4"
