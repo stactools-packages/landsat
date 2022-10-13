@@ -4,13 +4,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). This project attempts to match the major and minor versions of [stactools](https://github.com/stac-utils/stactools) and increments the patch number as needed.
 
-
 ## [Unreleased]
+
+### Added
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+## [0.2.4] - 2022-10-12
 
 ### Fixed
 
 - Change function/method calls to remove warnings ([#42](https://github.com/stactools-packages/landsat/pull/42))
-- Fixed issue where EPSG codes were missing `0` values ([#39](https://github.com/stactools-packages/landsat/pull/39))
+- Fixed issue where EPSG codes were missing the second to last digit when the digit is `0` ([#39](https://github.com/stactools-packages/landsat/pull/39))
 - Remove the `unit`, `scale`, and `offset` properties from `raster:bands` when "NULL" values for `mult` and `add` are encountered in the metadata. This applies to Collection 2 Level-1 data only ([#33](https://github.com/stactools-packages/landsat/pull/33))
 - Handle MultiPolygon geometries before applying the stactools antimeridian `fix_item` utility function ([#30](https://github.com/stactools-packages/landsat/pull/30))
 - `eo:cloud_cover` is not added to Item properties when it was not computed (indicated by a value of -1) during scene processing ([#28](https://github.com/stactools-packages/landsat/pull/28))
@@ -59,14 +80,14 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 - Correct EPSG code for southern hemisphere scenes to [always use northern hemisphere codes](https://www.usgs.gov/faqs/why-do-landsat-scenes-southern-hemisphere-display-negative-utm-values)
 - Remove incorrect link to USGS STAC browser page
 
-
 ## [0.2.0] - 2021-07-20
 
 ### Changed
 
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
-[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.3..main>
+[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.4..main>
+[0.2.4]: <https://github.com/stactools-packages/landsat/compare/v0.2.3..v0.2.4>
 [0.2.3]: <https://github.com/stactools-packages/landsat/compare/v0.2.2..v0.2.3>
 [0.2.2]: <https://github.com/stactools-packages/landsat/compare/v0.2.1..v0.2.2>
 [0.2.1]: <https://github.com/stactools-packages/landsat/compare/v0.2.0..v0.2.1>
