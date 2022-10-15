@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Outdated `convert` command ([#40](https://github.com/stactools-packages/landsat/pull/40))
 - Unused utility functions: `_parse_date`, `transform_mtl_to_stac`, `transform_stac_to_stac`, `stac_api_to_stac` ([#40](https://github.com/stactools-packages/landsat/pull/40))
 - Unused test data files ([#40](https://github.com/stactools-packages/landsat/pull/40))
+- Unused docs directory ([#40](https://github.com/stactools-packages/landsat/pull/40))
 
 ### Changed
 
