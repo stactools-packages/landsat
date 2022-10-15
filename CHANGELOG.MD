@@ -8,10 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- Nothing.
+- "emissivity" to `roles` list on the `emis` and `emsd` assets ([#47](https://github.com/stactools-packages/landsat/pull/47))
 
 ### Removed
 
+- `unit` from the `emis` and `emsd` assets (emissivity coefficient is unitless) ([#47](https://github.com/stactools-packages/landsat/pull/47))
 - `legacy_l8` option from Item creation ([#40](https://github.com/stactools-packages/landsat/pull/40))
 - Outdated `convert` command ([#40](https://github.com/stactools-packages/landsat/pull/40))
 - Unused utility functions: `_parse_date`, `transform_mtl_to_stac`, `transform_stac_to_stac`, `stac_api_to_stac` ([#40](https://github.com/stactools-packages/landsat/pull/40))
