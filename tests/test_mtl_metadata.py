@@ -8,10 +8,9 @@ from tests import test_data
 
 
 class MtlMetadataTest(unittest.TestCase):
-
-    def test_parses_xml_utm(self):
+    def test_parses_xml_utm(self) -> None:
         mtl_path = test_data.get_path(
-            'data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml'
+            "data-files/assets/LC08_L2SP_005009_20150710_20200908_02_T2_MTL.xml"
         )
 
         mtl_metadata = MtlMetadata.from_file(mtl_path)
@@ -31,11 +30,12 @@ class MtlMetadataTest(unittest.TestCase):
         proj_bbox = mtl_metadata.proj_bbox
         proj_bbox_shp = box(*proj_bbox)
         reproj_bbox_shp = shape(
-            reproject_geom(f"epsg:{epsg}", "epsg:4326",
-                           mapping(proj_bbox_shp)))
+            reproject_geom(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
+        )
 
-        self.assertLess((reproj_bbox_shp - bbox_shp).area,
-                        0.0001 * reproj_bbox_shp.area)
+        self.assertLess(
+            (reproj_bbox_shp - bbox_shp).area, 0.0001 * reproj_bbox_shp.area
+        )
 
         # Cloud Cover
         cloud_cover = mtl_metadata.cloud_cover
@@ -51,9 +51,9 @@ class MtlMetadataTest(unittest.TestCase):
         sun_elevation = mtl_metadata.sun_elevation
         self.assertEqual(sun_elevation, 40.0015903)
 
-    def test_parses_xml_ps(self):
+    def test_parses_xml_ps(self) -> None:
         mtl_path = test_data.get_path(
-            'data-files/assets2/LC08_L2SR_099120_20191129_20201016_02_T2_MTL.xml'
+            "data-files/assets2/LC08_L2SR_099120_20191129_20201016_02_T2_MTL.xml"
         )
         mtl_metadata = MtlMetadata.from_file(mtl_path)
 
@@ -67,16 +67,16 @@ class MtlMetadataTest(unittest.TestCase):
         proj_bbox = mtl_metadata.proj_bbox
         proj_bbox_shp = box(*proj_bbox)
         reproj_bbox_shp = shape(
-            reproject_geom(f"epsg:{epsg}", "epsg:4326",
-                           mapping(proj_bbox_shp)))
+            reproject_geom(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
+        )
 
-        self.assertLess((reproj_bbox_shp - bbox_shp).area,
-                        0.0001 * reproj_bbox_shp.area)
+        self.assertLess(
+            (reproj_bbox_shp - bbox_shp).area, 0.0001 * reproj_bbox_shp.area
+        )
 
-    def test_utm_zone(self):
+    def test_utm_zone(self) -> None:
         mtl_path = test_data.get_path(
-            "data-files/tm/LT05_L2SP_058014_20110312_20200823_02_T1_MTL.xml")
-        mtl_metadata_legacy = MtlMetadata.from_file(mtl_path, legacy_l8=True)
-        self.assertEqual(mtl_metadata_legacy.epsg, 32609)
-        mtl_metadata = MtlMetadata.from_file(mtl_path, legacy_l8=False)
+            "data-files/tm/LT05_L2SP_058014_20110312_20200823_02_T1_MTL.xml"
+        )
+        mtl_metadata = MtlMetadata.from_file(mtl_path)
         self.assertEqual(mtl_metadata.epsg, 32609)

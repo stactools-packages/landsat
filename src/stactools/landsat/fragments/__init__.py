@@ -24,7 +24,7 @@ class CollectionFragments:
         Returns:
             Dict[str, Any]: Dict from parsed JSON with some converted fields.
         """
-        data = self._load()
+        data: Dict[str, Any] = self._load()
         data["extent"] = Extent.from_dict(data["extent"])
         data["providers"] = [
             Provider.from_dict(provider) for provider in data["providers"]
@@ -44,8 +44,8 @@ class CollectionFragments:
     def _load(self) -> Any:
         try:
             with pkg_resources.resource_stream(
-                    "stactools.landsat.fragments",
-                    f"collections/{self._id}.json") as stream:
+                "stactools.landsat.fragments", f"collections/{self._id}.json"
+            ) as stream:
                 return json.load(stream)
         except FileNotFoundError as e:
             raise e
@@ -54,8 +54,13 @@ class CollectionFragments:
 class Fragments:
     """Class for accessing asset and extension data."""
 
-    def __init__(self, sensor: Sensor, satellite: int, base_href: str,
-                 level1_radiance: Dict[str, Dict[str, Optional[float]]]):
+    def __init__(
+        self,
+        sensor: Sensor,
+        satellite: int,
+        base_href: str,
+        level1_radiance: Dict[str, Dict[str, Optional[float]]],
+    ):
         """Initialize a new group of fragments for the provided Sensor."""
         self._sensor = sensor
         self._satellite = satellite
@@ -99,7 +104,7 @@ class Fragments:
         Returns:
             Dict[str, Dict]: Dict of Assets keys and EO Extension dicts.
         """
-        eo = self._load("sr-eo-bands.json")
+        eo: Dict[str, Any] = self._load("sr-eo-bands.json")
         if self._satellite < 4:
             eo = self._update_mss_num(eo)
         return eo
@@ -114,7 +119,7 @@ class Fragments:
         Returns:
             Dict[str, Dict]: Dict of Assets keys and Raster Extension dicts.
         """
-        raster = self._load("sr-raster-bands.json")
+        raster: Dict[str, Any] = self._load("sr-raster-bands.json")
         if self._satellite < 4:
             raster = self._update_mss_num(raster)
         if self._sensor is Sensor.MSS:
@@ -139,7 +144,7 @@ class Fragments:
         Returns:
             Dict[str, Dict]: Dict of Assets keys and EO Extension dicts.
         """
-        eo = self._load("st-eo-bands.json")
+        eo: Dict[str, Any] = self._load("st-eo-bands.json")
         return eo
 
     def st_raster_bands(self) -> Dict[str, Any]:
@@ -148,10 +153,10 @@ class Fragments:
         Returns:
             Dict[str, Dict]: Dict of Assets keys and Raster Extension dicts.
         """
-        raster = self._load("st-raster-bands.json")
+        raster: Dict[str, Any] = self._load("st-raster-bands.json")
         return raster
 
-    def _update_mss_num(self, mss_dict: Dict[str, Any]) -> Dict[str, Any]:
+    def _update_mss_num(self, mss_dict: Dict[str, Any]) -> Any:
         mss_str = json.dumps(mss_dict)
         mss_str = mss_str.replace("B4", "B7")
         mss_str = mss_str.replace("B3", "B6")
@@ -160,19 +165,22 @@ class Fragments:
         mss_str = mss_str.replace("4-5", "1-3")
         return json.loads(mss_str)
 
-    def _update_mss_raster(self, mss_raster_dict: Dict[str,
-                                                       Any]) -> Dict[str, Any]:
+    def _update_mss_raster(self, mss_raster_dict: Dict[str, Any]) -> Dict[str, Any]:
         for key, value in mss_raster_dict.items():
             rad_key = value.pop("temp_name", None)
             if rad_key:
-                if not self.level1_radiance[rad_key][
-                        "mult"] or not self.level1_radiance[rad_key]["add"]:
+                if (
+                    not self.level1_radiance[rad_key]["mult"]
+                    or not self.level1_radiance[rad_key]["add"]
+                ):
                     mss_raster_dict[key].pop("unit")
                 else:
-                    mss_raster_dict[key]["scale"] = self.level1_radiance[
-                        rad_key]["mult"]
-                    mss_raster_dict[key]["offset"] = self.level1_radiance[
-                        rad_key]["add"]
+                    mss_raster_dict[key]["scale"] = self.level1_radiance[rad_key][
+                        "mult"
+                    ]
+                    mss_raster_dict[key]["offset"] = self.level1_radiance[rad_key][
+                        "add"
+                    ]
 
         return mss_raster_dict
 
@@ -185,7 +193,7 @@ class Fragments:
             else:
                 asset_dict["type"] = MediaType.COG
 
-            href_suffix = asset_dict.pop('href_suffix', None)
+            href_suffix = asset_dict.pop("href_suffix", None)
             if href_suffix is not None:
                 href = f"{self.base_href}_{href_suffix}"
             else:
@@ -200,8 +208,8 @@ class Fragments:
             dir_name = self._sensor.name.lower()
         try:
             with pkg_resources.resource_stream(
-                    "stactools.landsat.fragments",
-                    f"{dir_name}/{file_name}") as stream:
+                "stactools.landsat.fragments", f"{dir_name}/{file_name}"
+            ) as stream:
                 return json.load(stream)
         except FileNotFoundError as e:
             raise e
