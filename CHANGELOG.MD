@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Item geometry and bbox coordinates rounded to six decimal places ([#45](https://github.com/stactools-packages/landsat/pull/45))
 - Renamed `create_stac_item` function to `create_item` ([#40](https://github.com/stactools-packages/landsat/pull/40))
 
 ### Fixed
