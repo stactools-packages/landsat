@@ -32,8 +32,8 @@ class GeometryTest(unittest.TestCase):
         item = create_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
-            self.assertAlmostEqual(e[0], i[0], 7)
-            self.assertAlmostEqual(e[1], i[1], 7)
+            self.assertAlmostEqual(e[0], i[0], 6)
+            self.assertAlmostEqual(e[1], i[1], 6)
 
     @vcr.use_cassette(TEST_GEOMETRY_PATHS["vcr_cassette"])  # type:ignore
     def test_api_stac(self) -> None:
@@ -58,8 +58,8 @@ class GeometryTest(unittest.TestCase):
         item = create_item(mtl_xml_href, use_usgs_geometry=True)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
-            self.assertAlmostEqual(e[0], i[0], 7)
-            self.assertAlmostEqual(e[1], i[1], 7)
+            self.assertAlmostEqual(e[0], i[0], 6)
+            self.assertAlmostEqual(e[1], i[1], 6)
 
     def test_ang(self) -> None:
         """Test geometry is generated from the "ANG.txt" file data when
@@ -84,8 +84,8 @@ class GeometryTest(unittest.TestCase):
         item = create_item(mtl_xml_href, use_usgs_geometry=False)
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         for e, i in zip(expected_coords, item_coords):
-            self.assertAlmostEqual(e[0], i[0], 7)
-            self.assertAlmostEqual(e[1], i[1], 7)
+            self.assertAlmostEqual(e[0], i[0], 6)
+            self.assertAlmostEqual(e[1], i[1], 6)
 
     def test_antimeridian(self) -> None:
         """Test that a scene spanning the antimeridian is normalized."""
@@ -130,13 +130,13 @@ class GeometryTest(unittest.TestCase):
                 "type": "Polygon",
                 "coordinates": [
                     [
-                        [-180.09482763892856, 60.95119752303177],
-                        [-180.0, 60.93687820884834],
-                        [-176.7016565170453, 60.43881649233896],
-                        [-175.51498801955913, 61.95528671380596],
-                        [-179.06386088310478, 62.491727331163695],
-                        [-180.0, 61.09289443379927],
-                        [-180.09482763892856, 60.95119752303177],
+                        [-180.094828, 60.951198],
+                        [-180.0, 60.936878],
+                        [-176.701657, 60.438816],
+                        [-175.514988, 61.955287],
+                        [-179.063861, 62.491727],
+                        [-180.0, 61.092894],
+                        [-180.094828, 60.951198],
                     ]
                 ],
             }
@@ -161,20 +161,20 @@ class GeometryTest(unittest.TestCase):
                 "coordinates": [
                     [
                         [
-                            [180.0, 60.93687820884834],
-                            [180.0, 61.09289443379927],
-                            [179.90517236107144, 60.95119752303177],
-                            [180.0, 60.93687820884834],
+                            [180.0, 60.936878],
+                            [180.0, 61.092894],
+                            [179.905172, 60.951198],
+                            [180.0, 60.936878],
                         ]
                     ],
                     [
                         [
-                            [-180.0, 61.09289443379927],
-                            [-180.0, 60.93687820884834],
-                            [-176.7016565170453, 60.43881649233896],
-                            [-175.51498801955913, 61.95528671380596],
-                            [-179.06386088310478, 62.491727331163695],
-                            [-180.0, 61.09289443379927],
+                            [-180.0, 61.092894],
+                            [-180.0, 60.936878],
+                            [-176.701657, 60.438816],
+                            [-175.514988, 61.955287],
+                            [-179.063861, 62.491727],
+                            [-180.0, 61.092894],
                         ]
                     ],
                 ],

@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional
 
 import shapely.affinity
 import shapely.ops
@@ -111,20 +111,21 @@ def round_coordinates(item: Item, precision: int = 6) -> None:
             which is approximately 1 cm at the equator.
     """
 
-    def recursive_round(
-        coordinates: Union[List[Any], Tuple[Any]], precision: int
-    ) -> None:
-        coordinates = list(coordinates)  # guard against tuples
+    def recursive_round(coordinates: List[Any], precision: int) -> List[Any]:
         for idx, _item in enumerate(coordinates):
             if isinstance(_item, (list, tuple)):
-                _item = list(_item)  # guard against tuples
-                recursive_round(_item, precision)
+                coordinates[idx] = list(_item)  # handle any tuples
+                coordinates[idx] = recursive_round(coordinates[idx], precision)
             elif isinstance(_item, (int, float)):
                 coordinates[idx] = round(_item, precision)
             else:
                 raise ValueError(f"Unexpected type: {_item} encountered.")
+        return coordinates
 
     if item.geometry is not None:
-        recursive_round(item.geometry["coordinates"], precision)
+        item.geometry["coordinates"] = recursive_round(
+            list(item.geometry["coordinates"]), precision
+        )
+
     if item.bbox is not None:
-        recursive_round(item.bbox, precision)
+        item.bbox = recursive_round(list(item.bbox), precision)
