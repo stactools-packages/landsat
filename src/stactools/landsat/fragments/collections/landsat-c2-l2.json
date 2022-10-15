@@ -647,12 +647,12 @@
           "nodata": -9999,
           "data_type": "int16",
           "spatial_resolution": 30,
-          "unit": "emissivity coefficient",
           "scale": 0.0001
         }
       ],
       "roles": [
-        "data"
+        "data",
+        "emissivity"
       ]
     },
     "emsd": {
@@ -664,12 +664,12 @@
           "nodata": -9999,
           "data_type": "int16",
           "spatial_resolution": 30,
-          "unit": "emissivity coefficient",
           "scale": 0.0001
         }
       ],
       "roles": [
-        "data"
+        "data",
+        "emissivity"
       ]
     },
     "qa": {
