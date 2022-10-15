@@ -9,11 +9,9 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
-from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
-from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.constants import (
     CLASSIFICATION_EXTENSION_SCHEMA,
     COLLECTION_IDS,
@@ -25,13 +23,14 @@ from stactools.landsat.constants import (
     USGS_C2L2_SR,
     USGS_C2L2_ST,
     Sensor,
+    GeometrySource,
 )
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import (
-    get_usgs_geometry,
     handle_antimeridian,
     round_coordinates,
+    get_geometry
 )
 
 logger = logging.getLogger(__name__)
@@ -39,7 +38,8 @@ logger = logging.getLogger(__name__)
 
 def create_item(
     mtl_xml_href: str,
-    use_usgs_geometry: bool = True,
+    geometry_source: Optional[GeometrySource] = None,
+    footprint_asset_href: Optional[str] = None,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
     read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> Item:
@@ -51,6 +51,9 @@ def create_item(
         use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
             stored alongside the XML metadata file or pulled from the USGS STAC
             API.
+
+
+
         antimeridian_strategy (Antimeridian): Either split on -180 or
             normalize geometries so all longitudes are either positive or
             negative.
@@ -69,19 +72,14 @@ def create_item(
     level = int(mtl_metadata.item_id[6])
     correction = mtl_metadata.item_id[7:9]
 
-    geometry = None
-    if use_usgs_geometry:
-        geometry = get_usgs_geometry(
-            base_href, sensor, mtl_metadata.product_id, read_href_modifier
-        )
-    if geometry is None:
-        if sensor is Sensor.OLI_TIRS:
-            ang_href = f"{base_href}_ANG.txt"
-            ang_metadata = AngMetadata.from_file(ang_href, read_href_modifier)
-            geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
-        else:
-            geometry = mapping(box(*mtl_metadata.bbox))
-            logger.warning(f"Using bbox for geometry for {mtl_metadata.product_id}.")
+    geometry = get_geometry(
+        base_href,
+        sensor,
+        mtl_metadata,
+        geometry_source,
+        footprint_asset_href,
+        read_href_modifier,
+    )
 
     item = Item(
         id=mtl_metadata.item_id,
