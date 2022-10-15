@@ -198,12 +198,14 @@ class GeometryTest(unittest.TestCase):
         )
 
         # default precision should be six decimal places
-        coordinates = item.geometry["coordinates"]
+        item_dict = item.to_dict()
+        coordinates = item_dict["geometry"]["coordinates"]
         self.assertEqual(coordinates[0][0][0][1], 60.936878)
-        self.assertEqual(item.bbox[0], 179.905172)
+        self.assertEqual(item_dict["bbox"][0], 179.905172)
 
         # check again
         round_coordinates(item, precision=4)
-        coordinates = item.geometry["coordinates"]
+        item_dict = item.to_dict()
+        coordinates = item_dict["geometry"]["coordinates"]
         self.assertEqual(coordinates[0][0][0][1], 60.9369)
-        self.assertEqual(item.bbox[0], 179.9052)
+        self.assertEqual(item_dict["bbox"][0], 179.9052)
