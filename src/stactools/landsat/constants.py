@@ -51,3 +51,5 @@ SENSORS: Dict[str, Any] = {
         "thermal_gsd": 100,
     },
 }
+
+COORD_PRECISION = 6

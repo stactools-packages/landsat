@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import shapely.affinity
 import shapely.ops
@@ -98,3 +98,33 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
         item.geometry = Polygon(merged_coords)
 
     antimeridian.fix_item(item, antimeridian_strategy)
+
+
+def round_coordinates(item: Item, precision: int = 6) -> None:
+    """Rounds an Item's geometry and bbox geographic coordinates.
+
+    Any tuples encountered will be converted to lists.
+
+    Args:
+        item (Item): pystac Item.
+        precision (int): Number of decimal places for rounding. Defaults to 6,
+            which is approximately 1 cm at the equator.
+    """
+
+    def recursive_round(
+        coordinates: Union[List[Any], Tuple[Any]], precision: int
+    ) -> None:
+        coordinates = list(coordinates)  # guard against tuples
+        for idx, _item in enumerate(coordinates):
+            if isinstance(_item, (list, tuple)):
+                _item = list(_item)  # guard against tuples
+                recursive_round(_item, precision)
+            elif isinstance(_item, (int, float)):
+                coordinates[idx] = round(_item, precision)
+            else:
+                raise ValueError(f"Unexpected type: {_item} encountered.")
+
+    if item.geometry is not None:
+        recursive_round(item.geometry["coordinates"], precision)
+    if item.bbox is not None:
+        recursive_round(item.bbox, precision)
