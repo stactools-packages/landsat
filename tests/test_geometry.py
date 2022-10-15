@@ -6,6 +6,7 @@ from shapely.geometry import shape
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.stac import create_item
+from stactools.landsat.utils import round_coordinates
 from tests.data import TEST_GEOMETRY_PATHS
 
 
@@ -187,3 +188,22 @@ class GeometryTest(unittest.TestCase):
         )
         item_geometry = shape(item.geometry)
         self.assertEqual(item_geometry, expected_geometry)
+
+    def test_coordinate_rounding(self) -> None:
+        mtl_xml_href = TEST_GEOMETRY_PATHS["presplit_antimeridian"]
+        item = create_item(
+            mtl_xml_href,
+            use_usgs_geometry=True,
+            antimeridian_strategy=Strategy.SPLIT,
+        )
+
+        # default precision should be six decimal places
+        coordinates = item.geometry["coordinates"]
+        self.assertEqual(coordinates[0][0][0][1], 60.936878)
+        self.assertEqual(item.bbox[0], 179.905172)
+
+        # check again
+        round_coordinates(item, precision=4)
+        coordinates = item.geometry["coordinates"]
+        self.assertEqual(coordinates[0][0][0][1], 60.9369)
+        self.assertEqual(item.bbox[0], 179.9052)
