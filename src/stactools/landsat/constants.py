@@ -52,4 +52,4 @@ SENSORS: Dict[str, Any] = {
     },
 }
 
-COORD_PRECISION = 6
+COORDINATE_PRECISION = 6
