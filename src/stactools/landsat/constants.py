@@ -9,6 +9,13 @@ class Sensor(Enum):
     OLI_TIRS = "C"
 
 
+class GeometrySource(Enum):
+    USGS = "usgs"
+    FOOTPRINT = "footprint"
+    ANG = "ang"
+    BBOX = "bbox"
+
+
 LANDSAT_EXTENSION_SCHEMA = (
     "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
 )
@@ -53,3 +60,5 @@ SENSORS: Dict[str, Any] = {
 }
 
 COORDINATE_PRECISION = 6
+DENSIFICATION_FACTOR = 10
+SIMPLIFY_TOLERANCE = 0.0005
