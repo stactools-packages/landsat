@@ -8,8 +8,23 @@ from shapely.geometry import MultiPolygon, Polygon, shape
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils import antimeridian, href_exists
 from stactools.core.utils.antimeridian import Strategy
+from stactools.core.utils.raster_footprint import update_geometry_from_asset_footprint
 
-from stactools.landsat.constants import USGS_API, USGS_C2L1, USGS_C2L2_SR, Sensor
+from stactools.landsat.ang_metadata import AngMetadata
+from stactools.landsat.constants import (
+    DENSIFICATION_FACTOR,
+    SIMPLIFY_TOLERANCE,
+    USGS_API,
+    USGS_C2L1,
+    USGS_C2L2_SR,
+    GeometrySource,
+    Sensor,
+)
+from stactools.landsat.mtl_metadata import MtlMetadata
+
+
+class GeometryError(Exception):
+    pass
 
 
 def get_usgs_geometry(
@@ -132,5 +147,70 @@ def round_coordinates(item: Item, precision: int) -> Item:
 
     if item.bbox is not None:
         item.bbox = recursive_round(list(item.bbox), precision)
+
+    return item
+
+
+def _update_geometry(
+    item: Item,
+    geometry_source: GeometrySource,
+    base_href: str,
+    sensor: Sensor,
+    mtl_metadata: MtlMetadata,
+    footprint_asset_name: Optional[str] = None,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+) -> Item:
+    """Updates the Item geometry using the specified geometry source.
+    Args:
+        item (Item): PySTAC Item to be updated.
+        geometry_source (GeometrySource): Source for Item geometry. Choices:
+            USGS: Use USGS STAC Item geometry. The USGS STAC Item must exist in
+                same directory as the MTL XML file.
+            FOOTPRINT: Use the data footprint derived from one of the Item
+                assets, which can be specified in `footprint_asset_name` option.
+                The asset file must exist in the same directory as the MTL XML
+                file. If the `footprint_asset_name` option is not specified,
+                the first asset from which a footprint can be successfully
+                created will be used.
+            ANG: Use the ANG metadata file. Only valid for Landsat 8 and 9. The
+                ANG text file must exist in the same directory as the MTL XML file.
+            BBOX: Use the bounding box derived from the MTL XML metadata.
+        base_href (str): Base HREF from which HREFs to other files can be generated.
+        sensor (Sensor): Enum of MSS, TM, ETM, or OLI-TIRS sensors.
+        mtl_metadata (MtlMetadata): MTL MetaData class.
+        footprint_asset_name (Optional[str]): Name of asset to use if the
+            'footprint' option is selected for the `geometry_source` argument.
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify an HREF (e.g., to add a token to the HREF).
+    Returns:
+        Item: The original PySTAC Item, with updated geometry.
+    """
+    if geometry_source is GeometrySource.USGS:
+        item.geometry = get_usgs_geometry(
+            base_href, sensor, mtl_metadata.product_id, read_href_modifier
+        )
+        if item.geometry is None:
+            raise GeometryError("Unable to use USGS STAC Item geometry.")
+
+    elif geometry_source is GeometrySource.FOOTPRINT:
+        asset_name = [footprint_asset_name] if footprint_asset_name else []
+        result = update_geometry_from_asset_footprint(
+            item,
+            asset_names=asset_name,
+            densification_factor=DENSIFICATION_FACTOR,
+            simplify_tolerance=SIMPLIFY_TOLERANCE,
+        )
+        if not result:
+            raise GeometryError("Unable to generate geometry from the raster data.")
+
+    elif geometry_source is GeometrySource.ANG:
+        if geometry_source is GeometrySource.ANG and sensor is not Sensor.OLI_TIRS:
+            raise GeometryError(
+                "The 'ANG' metadata file can only be used as the geometry source "
+                "for scenes collected by the OLI-TIRS sensor on Landsat 8 and 9."
+            )
+        ang_href = f"{base_href}_ANG.txt"
+        ang_metadata = AngMetadata.from_file(ang_href, read_href_modifier)
+        item.geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
 
     return item

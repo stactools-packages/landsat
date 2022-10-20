@@ -6,6 +6,7 @@ from pystac import CatalogType
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.landsat.stac import create_collection, create_item
+from stactools.landsat.constants import GeometrySource
 
 
 def create_landsat_command(cli: Group) -> Command:
@@ -24,43 +25,38 @@ def create_landsat_command(cli: Group) -> Command:
         "create-item",
         short_help=("Creates a STAC Item from Landsat Collection 2 scene metadata."),
     )
-    @click.option(
-        "-m", "--mtl", required=True, help="HREF to the source MTL metadata xml file."
+    @click.argument("infile")
+    @click.argument("destination")
+    @click.argument(
+        "geometry",
+        type=click.Choice(
+            [source.name for source in GeometrySource], case_sensitive=False
+        ),
     )
     @click.option(
-        "-o",
-        "--output",
-        required=True,
-        help="HREF of directory in which to write the item.",
-    )
-    @click.option(
-        "-u", "--usgs_geometry", is_flag=True, help="Use USGS STAC Item geometry"
+        "-n",
+        "--asset-name",
+        type=str,
+        help="Asset name in created Item to use for data footprint geometry computation",
     )
     @click.option(
         "-a",
-        "--antimeridian_strategy",
+        "--antimeridian-strategy",
         type=click.Choice(["normalize", "split"], case_sensitive=False),
         default="split",
         show_default=True,
         help="geometry strategy for antimeridian scenes",
     )
-    @click.option(
-        "--level",
-        type=click.Choice(["level-1", "level-2"], case_sensitive=False),
-        default="level-2",
-        show_default=True,
-        help="Product level to process. Unused.",
-    )
     def create_item_cmd(
-        level: str,
-        mtl: str,
-        output: str,
-        usgs_geometry: bool,
+        infile: str,
+        destination: str,
+        geometry: str,
+        asset_name: str,
         antimeridian_strategy: str,
     ) -> None:
         """\b
         Creates a STAC Item for a Landsat Collection 2 scene based on metadata
-        from a Landsat MTL xml file.
+        from a Landsat MTL XML metadata file.
 
         \b
         The following Landsat Collection 2 processing Levels and sensors are
@@ -73,30 +69,30 @@ def create_landsat_command(cli: Group) -> Command:
                 - Landsat 8-9 Operational Land Imager - Thermal Infrared Sensor
                   (OLI-TIRS)
 
-        All assets (COGs, metadata files) must reside in the same
-        directory/blob prefix/etc. as the MTL xml metadata file.
-
         \b
         Args:
-            mtl (str): HREF to the source MTL metadata xml file
-            output (str): Directory that will contain the STAC Item
-            usgs_geometry (bool): Flag to use the geometry from a USGS STAC Item
-                that resides in the same directory as the MTL xml file or can be
-                queried from the USGS STAC API.
+            infile (str): HREF to the source MTL metadata xml file.
+            destination (str): Directory that will contain the STAC Item.
+            geometry (str): Method to use for Item geometry creation. One of
+                'usgs', 'footprint', 'ang', or 'bbox'.
+            asset_name (str): Name of asset in created Item that should be used
+                for generating geometry from a raster data footprint. This option
+                only has effect when 'footprint' is specified for the geometry
+                argument.
             antimeridian_strategy (str): Choice of 'normalize' or 'split' to
                 either split the Item geometry on -180 longitude or normalize
                 the Item geometry so all longitudes are either positive or
                 negative.
-            level (str): Choice of 'level-1' or 'level-2'. This is not used
-                and has no effect.
         """
         strategy = Strategy[antimeridian_strategy.upper()]
+        geometry_source = GeometrySource[geometry.upper()]
         item = create_item(
-            mtl_xml_href=mtl,
-            use_usgs_geometry=usgs_geometry,
+            mtl_xml_href=infile,
+            geometry_source=geometry_source,
+            footprint_asset_name=asset_name,
             antimeridian_strategy=strategy,
         )
-        item.set_self_href(os.path.join(output, f"{item.id}.json"))
+        item.set_self_href(os.path.join(destination, f"{item.id}.json"))
         item.save_object()
 
     @landsat.command(
@@ -104,41 +100,38 @@ def create_landsat_command(cli: Group) -> Command:
         short_help="Creates a STAC Collection with contents defined by a list "
         " of metadata file hrefs in a text file.",
     )
-    @click.option(
-        "-f",
-        "--file_list",
-        required=True,
-        help="Text file of HREFs to Landsat scene XML MTL metadata " "files.",
+    @click.argument("infile")
+    @click.argument("destination")
+    @click.argument(
+        "collection",
+        type=click.Choice(["landsat-c2-l1", "landsat-c2-l2"], case_sensitive=False),
+    )
+    @click.argument(
+        "geometry",
+        type=click.Choice(
+            [source.name for source in GeometrySource], case_sensitive=False
+        ),
     )
     @click.option(
-        "-o",
-        "--output",
-        required=True,
-        help="HREF of directory in which to write the collection.",
-    )
-    @click.option(
-        "-i",
-        "--id",
-        type=click.Choice(["landsat-c2-l1", "landsat-c2-l2"], case_sensitive=True),
-        required=True,
-        help="Landsat collection type. Choice of 'landsat-c2-l1' " "'landsat-c2-l2'",
-    )
-    @click.option(
-        "-u", "--usgs_geometry", is_flag=True, help="Use USGS STAC Item geometry"
+        "-n",
+        "--asset-name",
+        type=str,
+        help="Asset name in created Item to use for data footprint geometry computation",
     )
     @click.option(
         "-a",
-        "--antimeridian_strategy",
+        "--antimeridian-strategy",
         type=click.Choice(["normalize", "split"], case_sensitive=False),
         default="split",
         show_default=True,
         help="geometry strategy for antimeridian scenes",
     )
     def create_collection_cmd(
-        file_list: str,
-        output: str,
-        id: str,
-        usgs_geometry: bool,
+        infile: str,
+        destination: str,
+        collection: str,
+        geometry: bool,
+        asset_name: str,
         antimeridian_strategy: str,
     ) -> None:
         """\b
@@ -159,16 +152,18 @@ def create_landsat_command(cli: Group) -> Command:
                 negative.
         """
         strategy = Strategy[antimeridian_strategy.upper()]
-        with open(file_list) as file:
+        collection_id = collection.lower()
+        with open(infile) as file:
             hrefs = [line.strip() for line in file.readlines()]
 
-        collection = create_collection(id)
-        collection.set_self_href(os.path.join(output, "collection.json"))
+        collection = create_collection(collection_id)
+        collection.set_self_href(os.path.join(destination, "collection.json"))
         collection.catalog_type = CatalogType.SELF_CONTAINED
         for href in hrefs:
             item = create_item(
-                href,
-                use_usgs_geometry=usgs_geometry,
+                mtl_xml_href=href,
+                geometry_source=geometry,
+                footprint_asset_name=asset_name,
                 antimeridian_strategy=strategy,
             )
             collection.add_item(item)
