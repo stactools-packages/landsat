@@ -1,19 +1,15 @@
-<<<<<<< HEAD
-from typing import Any, Dict, List, Optional
-=======
 import logging
-from typing import Any, Dict, Optional
->>>>>>> 1cca142 (rework item geometry, including raster data footprint option)
+from typing import Any, Dict, List, Optional
 
 import shapely.affinity
 import shapely.ops
 from pystac import Item
 from pystac_client import Client
-from shapely.geometry import MultiPolygon, Polygon, box, mapping, shape
+from shapely.geometry import MultiPolygon, Polygon, shape
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils import antimeridian, href_exists
 from stactools.core.utils.antimeridian import Strategy
-from stactools.core.utils.raster_footprint import data_footprint
+from stactools.core.utils.raster_footprint import update_geometry_from_asset_footprint
 
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.constants import (
@@ -27,11 +23,12 @@ from stactools.landsat.constants import (
 )
 from stactools.landsat.mtl_metadata import MtlMetadata
 
-logger = logging.getLogger(__name__)
-
 
 class GeometryError(Exception):
     pass
+
+
+logger = logging.getLogger(__name__)
 
 
 def get_usgs_geometry(
@@ -158,48 +155,69 @@ def round_coordinates(item: Item, precision: int) -> Item:
     return item
 
 
-def get_geometry(
+def update_geometry(
+    item: Item,
+    geometry_source: GeometrySource,
     base_href: str,
     sensor: Sensor,
     mtl_metadata: MtlMetadata,
-    geometry_source: GeometrySource,
-    footprint_asset_href: Optional[str] = None,
+    footprint_asset_name: Optional[str] = None,
     read_href_modifier: Optional[ReadHrefModifier] = None,
-) -> Dict[str, Any]:
-    if geometry_source is GeometrySource.FOOTPRINT and not footprint_asset_href:
-        raise GeometryError(
-            "A footprint_assset_href is required when 'FOOTPRINT' is selected "
-            "as the geometry source."
-        )
-    if geometry_source is GeometrySource.ANG and sensor is not Sensor.OLI_TIRS:
-        raise GeometryError(
-            "The 'ANG' metadata file can only be used as the geometry source "
-            "for scenes collected by the OLI-TIRS sensor on Landsat 8 and 9."
-        )
+) -> Item:
+    """Updates the Item geometry using the specified geometry source.
 
-    geometry = None
+    Args:
+        item (Item): PySTAC Item to be updated.
+        geometry_source (GeometrySource): Source for Item geometry. Choices:
+            USGS: Use USGS STAC Item geometry. The USGS STAC Item must exist in
+                same directory as the MTL XML file.
+            FOOTPRINT: Use the data footprint derived from one of the Item
+                assets, which can be specified in `footprint_asset_name` option.
+                The asset file must exist in the same directory as the MTL XML
+                file. If the `footprint_asset_name` option is not specified,
+                the first asset from which a footprint can be successfully
+                created will be used.
+            ANG: Use the ANG metadata file. Only valid for Landsat 8 and 9. The
+                ANG text file must exist in the same directory as the MTL XML file.
+            BBOX: Use the bounding box derived from the MTL XML metadata.
+        base_href (str): Base HREF from which HREFs to other files can be generated.
+        sensor (Sensor): Enum of MSS, TM, ETM, or OLI-TIRS sensors.
+        mtl_metadata (MtlMetadata): MTL MetaData class.
+        footprint_asset_name (Optional[str]): Name of asset to use if the
+            'footprint' option is selected for the `geometry_source` argument.
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify an HREF (e.g., to add a token to the HREF).
+
+    Returns:
+        Item: The original PySTAC Item, with updated geometry.
+    """
+
     if geometry_source is GeometrySource.USGS:
-        geometry = get_usgs_geometry(
+        item.geometry = get_usgs_geometry(
             base_href, sensor, mtl_metadata.product_id, read_href_modifier
         )
+        if item.geometry is None:
+            raise GeometryError("Unable to use USGS STAC Item geometry.")
+
     elif geometry_source is GeometrySource.FOOTPRINT:
-        geometry = data_footprint(
-            footprint_asset_href,
+        asset_name = [footprint_asset_name] if footprint_asset_name else []
+        result = update_geometry_from_asset_footprint(
+            item,
+            asset_names=asset_name,
             densification_factor=DENSIFICATION_FACTOR,
             simplify_tolerance=SIMPLIFY_TOLERANCE,
         )
+        if not result:
+            raise GeometryError("Unable to generate geometry from the raster data.")
+
     elif geometry_source is GeometrySource.ANG:
+        if geometry_source is GeometrySource.ANG and sensor is not Sensor.OLI_TIRS:
+            raise GeometryError(
+                "The 'ANG' metadata file can only be used as the geometry source "
+                "for scenes collected by the OLI-TIRS sensor on Landsat 8 and 9."
+            )
         ang_href = f"{base_href}_ANG.txt"
         ang_metadata = AngMetadata.from_file(ang_href, read_href_modifier)
-        geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
-    elif geometry_source is GeometrySource.BBOX:
-        geometry = mapping(box(*mtl_metadata.bbox))
+        item.geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
 
-    if not geometry:
-        logger.warning(
-            f"Unable to extract geometry from the selected geometry_source. "
-            f"Using bbox for geometry for {mtl_metadata.product_id}."
-        )
-        geometry = mapping(box(*mtl_metadata.bbox))
-
-    return geometry
+    return item

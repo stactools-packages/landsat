@@ -9,6 +9,7 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
+from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
@@ -22,15 +23,15 @@ from stactools.landsat.constants import (
     USGS_C2L1,
     USGS_C2L2_SR,
     USGS_C2L2_ST,
-    Sensor,
     GeometrySource,
+    Sensor,
 )
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import (
     handle_antimeridian,
     round_coordinates,
-    get_geometry
+    update_geometry,
 )
 
 logger = logging.getLogger(__name__)
@@ -38,8 +39,8 @@ logger = logging.getLogger(__name__)
 
 def create_item(
     mtl_xml_href: str,
-    geometry_source: Optional[GeometrySource] = None,
-    footprint_asset_href: Optional[str] = None,
+    geometry_source: GeometrySource,
+    footprint_asset_name: Optional[str] = None,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
     read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> Item:
@@ -51,14 +52,25 @@ def create_item(
         use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
             stored alongside the XML metadata file or pulled from the USGS STAC
             API.
-
-
-
-        antimeridian_strategy (Antimeridian): Either split on -180 or
-            normalize geometries so all longitudes are either positive or
+        geometry_source (GeometrySource): Source for Item geometry. Choices:
+            USGS: Use USGS STAC Item geometry. The USGS STAC Item must exist in
+                same directory as the MTL XML file.
+            FOOTPRINT: Use the data footprint derived from one of the Item
+                assets, which can be specified in `footprint_asset_name` option.
+                The asset file must exist in the same directory as the MTL XML
+                file. If the `footprint_asset_name` option is not specified,
+                the first asset from which a footprint can be successfully
+                created will be used.
+            ANG: Use the ANG metadata file. Only valid for Landsat 8 and 9. The
+                ANG text file must exist in the same directory as the MTL XML file.
+            BBOX: Use the bounding box derived from the MTL XML metadata.
+        footprint_asset_name (Optional[str]): Name of asset to use if the
+            'footprint' option is selected for the `geometry_source` argument.
+        antimeridian_strategy (Antimeridian): Either SPLIT on -180 or
+            NORMALIZE geometries so all longitudes are either positive or
             negative.
         read_href_modifier (Callable[[str], str]): An optional function to
-            modify the MTL and USGS STAC hrefs (e.g., to add a token to a url).
+            modify the MTL and USGS STAC hrefs (e.g., to add a token to their urls).
 
     Returns:
         Item: A STAC Item representing the Landsat scene.
@@ -72,23 +84,23 @@ def create_item(
     level = int(mtl_metadata.item_id[6])
     correction = mtl_metadata.item_id[7:9]
 
-    geometry = get_geometry(
-        base_href,
-        sensor,
-        mtl_metadata,
-        geometry_source,
-        footprint_asset_href,
-        read_href_modifier,
-    )
-
     item = Item(
         id=mtl_metadata.item_id,
         bbox=mtl_metadata.bbox,
-        geometry=geometry,
+        geometry=mapping(box(*mtl_metadata.bbox)),
         datetime=mtl_metadata.scene_datetime,
         properties={},
     )
 
+    item = update_geometry(
+        item,
+        geometry_source,
+        base_href,
+        sensor,
+        mtl_metadata,
+        footprint_asset_name,
+        read_href_modifier,
+    )
     item = handle_antimeridian(item, antimeridian_strategy)
     item = round_coordinates(item, COORDINATE_PRECISION)
 
