@@ -151,7 +151,7 @@ def round_coordinates(item: Item, precision: int) -> Item:
     return item
 
 
-def update_geometry(
+def _update_geometry(
     item: Item,
     geometry_source: GeometrySource,
     base_href: str,
@@ -185,7 +185,6 @@ def update_geometry(
     Returns:
         Item: The original PySTAC Item, with updated geometry.
     """
-
     if geometry_source is GeometrySource.USGS:
         item.geometry = get_usgs_geometry(
             base_href, sensor, mtl_metadata.product_id, read_href_modifier

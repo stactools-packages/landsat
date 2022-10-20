@@ -31,7 +31,7 @@ from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import (
     handle_antimeridian,
     round_coordinates,
-    update_geometry,
+    _update_geometry,
 )
 
 logger = logging.getLogger(__name__)
@@ -48,9 +48,6 @@ def create_item(
     4-5, 7-9 Collection 2 Level-2 scene data.
     Args:
         mtl_xml_href (str): An href to an MTL XML metadata file.
-        use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
-            stored alongside the XML metadata file or pulled from the USGS STAC
-            API.
         geometry_source (GeometrySource): Source for Item geometry. Choices:
             USGS: Use USGS STAC Item geometry. The USGS STAC Item must exist in
                 same directory as the MTL XML file.
@@ -90,7 +87,7 @@ def create_item(
         properties={},
     )
 
-    item = update_geometry(
+    item = _update_geometry(
         item,
         geometry_source,
         base_href,

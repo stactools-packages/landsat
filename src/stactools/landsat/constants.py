@@ -10,6 +10,7 @@ class Sensor(Enum):
 
 
 class GeometrySource(Enum):
+    """See `create_item` function documentation in stac.py for enum descriptions."""
     USGS = "usgs"
     FOOTPRINT = "footprint"
     ANG = "ang"
