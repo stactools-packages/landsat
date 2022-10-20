@@ -91,8 +91,8 @@ def create_item(
         properties={},
     )
 
-    handle_antimeridian(item, antimeridian_strategy)
-    round_coordinates(item, COORDINATE_PRECISION)
+    item = handle_antimeridian(item, antimeridian_strategy)
+    item = round_coordinates(item, COORDINATE_PRECISION)
 
     item.common_metadata.platform = f"landsat-{satellite}"
     item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]
