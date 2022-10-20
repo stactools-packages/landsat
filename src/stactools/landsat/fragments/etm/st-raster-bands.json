@@ -45,14 +45,12 @@
         "spatial_resolution": 30,
         "data_type": "int16",
         "nodata": -9999,
-        "unit": "emissivity coefficient",
         "scale": 0.0001
     },
     "emsd": {
         "spatial_resolution": 30,
         "data_type": "int16",
         "nodata": -9999,
-        "unit": "emissivity coefficient",
         "scale": 0.0001
     },
     "qa": {

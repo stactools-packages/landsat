@@ -7,7 +7,7 @@
     "instruments": [
       "mss"
     ],
-    "created": "2022-03-31T18:24:59.859591Z",
+    "created": "2022-10-15T16:44:21.395737Z",
     "gsd": 79,
     "description": "Landsat Collection 2 Level-1",
     "eo:cloud_cover": 58.0,
@@ -505,7 +505,7 @@
     81.05631789666461
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
     "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/view/v1.0.0/schema.json",
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",

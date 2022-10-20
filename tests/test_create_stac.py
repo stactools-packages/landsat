@@ -128,3 +128,15 @@ def test_no_cloud_cover() -> None:
     # eo:cloud_cover property should not exist
     eo_cloud_cover = item.properties.pop("eo:cloud_cover", None)
     assert eo_cloud_cover is None
+
+
+def test_no_emis_coefficient() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"
+    )
+    item = create_item(mtl_path, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+    assert "emissivity" in item_dict["assets"]["emis"]["roles"]
+    assert "emissivity" in item_dict["assets"]["emsd"]["roles"]
+    assert item_dict["assets"]["emis"]["raster:bands"][0].pop("unit", None) is None
+    assert item_dict["assets"]["emsd"]["raster:bands"][0].pop("unit", None) is None

@@ -38,13 +38,13 @@
   "emis": {
     "title": "Emissivity Band",
     "description": "Collection 2 Level-2 Emissivity Band (ST_EMIS) Surface Temperature Product",
-    "roles": ["data"],
+    "roles": ["data", "emissivity"],
     "href_suffix": "ST_EMIS.TIF"
   },
   "emsd": {
     "title": "Emissivity Standard Deviation Band",
     "description": "Collection 2 Level-2 Emissivity Standard Deviation Band (ST_EMSD) Surface Temperature Product",
-    "roles": ["data"],
+    "roles": ["data", "emissivity"],
     "href_suffix": "ST_EMSD.TIF"
   },
   "qa": {
