@@ -17,6 +17,7 @@ from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.constants import (
     CLASSIFICATION_EXTENSION_SCHEMA,
     COLLECTION_IDS,
+    COORDINATE_PRECISION,
     LANDSAT_EXTENSION_SCHEMA,
     SENSORS,
     USGS_API,
@@ -27,7 +28,11 @@ from stactools.landsat.constants import (
 )
 from stactools.landsat.fragments import CollectionFragments, Fragments
 from stactools.landsat.mtl_metadata import MtlMetadata
-from stactools.landsat.utils import get_usgs_geometry, handle_antimeridian
+from stactools.landsat.utils import (
+    get_usgs_geometry,
+    handle_antimeridian,
+    round_coordinates,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -86,7 +91,8 @@ def create_item(
         properties={},
     )
 
-    handle_antimeridian(item, antimeridian_strategy)
+    item = handle_antimeridian(item, antimeridian_strategy)
+    item = round_coordinates(item, COORDINATE_PRECISION)
 
     item.common_metadata.platform = f"landsat-{satellite}"
     item.common_metadata.instruments = SENSORS[sensor.name]["instruments"]

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import shapely.affinity
 import shapely.ops
@@ -64,7 +64,7 @@ def get_usgs_geometry(
         return None
 
 
-def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
+def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> Item:
     """Handles some quirks of the antimeridian.
 
     Applies the requested SPLIT or NORMALIZE strategy via the stactools
@@ -78,6 +78,9 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
         antimeridian_strategy (Antimeridian): Either split on +/-180 or
             normalize geometries so all longitudes are either positive or
             negative.
+
+    Returns:
+        Item: The original PySTAC Item, with updated antimeridian geometry.
     """
     geometry = shape(item.geometry)
     if isinstance(geometry, MultiPolygon):
@@ -97,4 +100,37 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> None:
                 merged_coords[index] = (coord[0] - 360, coord[1])
         item.geometry = Polygon(merged_coords)
 
-    antimeridian.fix_item(item, antimeridian_strategy)
+    return antimeridian.fix_item(item, antimeridian_strategy)
+
+
+def round_coordinates(item: Item, precision: int) -> Item:
+    """Rounds an Item's geometry and bbox geographic coordinates.
+
+    Any tuples encountered will be converted to lists.
+
+    Args:
+        item (Item): A pystac Item.
+        precision (int): Number of decimal places for rounding.
+
+    Returns:
+        Item: The original PySTAC Item, with rounded coordinates.
+    """
+
+    def recursive_round(coordinates: List[Any], precision: int) -> List[Any]:
+        for idx, value in enumerate(coordinates):
+            if isinstance(value, (int, float)):
+                coordinates[idx] = round(value, precision)
+            else:
+                coordinates[idx] = list(value)  # handle any tuples
+                coordinates[idx] = recursive_round(coordinates[idx], precision)
+        return coordinates
+
+    if item.geometry is not None:
+        item.geometry["coordinates"] = recursive_round(
+            list(item.geometry["coordinates"]), precision
+        )
+
+    if item.bbox is not None:
+        item.bbox = recursive_round(list(item.bbox), precision)
+
+    return item
