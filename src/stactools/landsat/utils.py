@@ -133,4 +133,4 @@ def round_coordinates(item: Item, precision: int) -> Item:
     if item.bbox is not None:
         item.bbox = recursive_round(list(item.bbox), precision)
 
-    return Item
+    return item
