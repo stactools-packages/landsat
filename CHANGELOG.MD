@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+Nothing.
+
+### Removed
+
+Nothing.
+
+### Changed
+
+Nothing.
+
+### Fixed
+
+Nothing.
+
+### Deprecated
+
+Nothing.
+
+## [0.3.0] - 2022-10-21
+
+### Added
+
 - "emissivity" to `roles` list on the `emis` and `emsd` assets ([#47](https://github.com/stactools-packages/landsat/pull/47))
 
 ### Removed
@@ -92,7 +114,8 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
-[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.2.4..main>
+[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.3.0..main>
+[0.3.0]: <https://github.com/stactools-packages/landsat/compare/v0.2.4..v0.3.0>
 [0.2.4]: <https://github.com/stactools-packages/landsat/compare/v0.2.3..v0.2.4>
 [0.2.3]: <https://github.com/stactools-packages/landsat/compare/v0.2.2..v0.2.3>
 [0.2.2]: <https://github.com/stactools-packages/landsat/compare/v0.2.1..v0.2.2>
