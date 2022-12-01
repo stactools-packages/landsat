@@ -4,7 +4,6 @@ from typing import Optional
 
 from pystac import Collection, Item, Link, MediaType
 from pystac.extensions.eo import Band, EOExtension
-from pystac.extensions.grid import GridExtension
 from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
@@ -28,6 +27,7 @@ from stactools.landsat.constants import (
     Sensor,
 )
 from stactools.landsat.fragments import CollectionFragments, Fragments
+from stactools.landsat.grid import GridExtension
 from stactools.landsat.mtl_metadata import MtlMetadata
 from stactools.landsat.utils import (
     get_usgs_geometry,
