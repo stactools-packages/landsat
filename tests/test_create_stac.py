@@ -1,3 +1,5 @@
+from pystac.extensions.grid import GridExtension
+
 from stactools.landsat.stac import create_item
 from tests import test_data
 
@@ -140,3 +142,18 @@ def test_no_emis_coefficient() -> None:
     assert "emissivity" in item_dict["assets"]["emsd"]["roles"]
     assert item_dict["assets"]["emis"]["raster:bands"][0].pop("unit", None) is None
     assert item_dict["assets"]["emsd"]["raster:bands"][0].pop("unit", None) is None
+
+
+def test_grid_extension() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/mss/LM01_L1GS_005037_19720823_20200909_02_T2_MTL.xml"
+    )
+    item = create_item(mtl_path, use_usgs_geometry=True)
+    assert item.properties.get("grid:code")
+
+    grid = GridExtension.ext(item)
+    assert (
+        grid.code
+        == f"WRS{item.properties['landsat:wrs_type']}"
+        + "-{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
+    )

@@ -15,6 +15,7 @@
 - STAC extensions used:
   - [classification](https://github.com/stac-extensions/classification)
   - [eo](https://github.com/stac-extensions/eo)
+  - [grid](https://github.com/stac-extensions/grid)
   - [landsat](https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json)
   - [proj](https://github.com/stac-extensions/projection/)
   - [raster](https://github.com/stac-extensions/raster)

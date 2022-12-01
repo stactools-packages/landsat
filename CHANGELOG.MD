@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Implement Grid Extension, adding `grid:code` to properties
 - "emissivity" to `roles` list on the `emis` and `emsd` assets ([#47](https://github.com/stactools-packages/landsat/pull/47))
 
 ### Removed

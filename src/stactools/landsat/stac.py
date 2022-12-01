@@ -4,6 +4,7 @@ from typing import Optional
 
 from pystac import Collection, Item, Link, MediaType
 from pystac.extensions.eo import Band, EOExtension
+from pystac.extensions.grid import GridExtension
 from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
@@ -164,6 +165,20 @@ def create_item(
     item.properties.update(**mtl_metadata.landsat_metadata)
 
     item.stac_extensions.append(CLASSIFICATION_EXTENSION_SCHEMA)
+
+    # Grid Extension
+
+    if (
+        (wrs_type := mtl_metadata.landsat_metadata.get("landsat:wrs_type"))
+        and (wrs_path := mtl_metadata.landsat_metadata.get("landsat:wrs_path"))
+        and (wrs_row := mtl_metadata.landsat_metadata.get("landsat:wrs_row"))
+    ):
+        grid = GridExtension.ext(item, add_if_missing=True)
+        grid.code = f"WRS{wrs_type}-{wrs_path}{wrs_row}"
+    else:
+        logger.error(
+            "Error populating Grid Extension field from WRS Type, Path, and Row"
+        )
 
     scientific = ScientificExtension.ext(item, add_if_missing=True)
     scientific.doi = SENSORS[sensor.name]["doi"]
