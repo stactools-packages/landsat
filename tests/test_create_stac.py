@@ -1,5 +1,4 @@
-from pystac.extensions.grid import GridExtension
-
+from stactools.landsat.grid import GridExtension
 from stactools.landsat.stac import create_item
 from tests import test_data
 
@@ -155,5 +154,5 @@ def test_grid_extension() -> None:
     assert (
         grid.code
         == f"WRS{item.properties['landsat:wrs_type']}"
-        + "-{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
+        + f"-{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
     )
