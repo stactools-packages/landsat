@@ -1,4 +1,4 @@
-## Contributing
+# Contributing
 
 Pull Requests are the primary method of contributing to stactools-packages. Everyone is welcome to submit a stactools-package to describe their data. The intent with this project to get data which can be described by [STAC](https://stacspec.org/) to be built in an open and interoperable manner.
 
@@ -23,8 +23,8 @@ of things.
 - Make a ticket in the stactools-package data specific repository which is tracked on the [project management board](https://github.com/orgs/stactools-packages/projects/1).
 - Highlight if the PR makes breaking changes to the code.
 
-
 ---
 Attribution:
-- https://docs.github.com/en/communities/
-- https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md
+
+- <https://docs.github.com/en/communities/>
+- <https://github.com/radiantearth/stac-spec/blob/master/CONTRIBUTING.md>

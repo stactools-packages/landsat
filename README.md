@@ -4,14 +4,14 @@
 
 - Name: landsat
 - Package: `stactools.landsat`
-- PyPI: https://pypi.org/project/stactools-landsat/
+- PyPI: <https://pypi.org/project/stactools-landsat/>
 - Owners:
   - @lossyrob
   - @pjhartzell
   - @gadomski
 - Dataset homepages:
-  - https://www.usgs.gov/landsat-missions
-  - https://landsat.gsfc.nasa.gov/
+  - <https://www.usgs.gov/landsat-missions>
+  - <https://landsat.gsfc.nasa.gov/>
 - STAC extensions used:
   - [classification](https://github.com/stac-extensions/classification)
   - [eo](https://github.com/stac-extensions/eo)
@@ -23,10 +23,11 @@
 
 This repository will assist you in the generation of STAC files for Landsat datasets. The table below provides an overview on Landsat Mission's sensors and band wavelengths.
 
+<!-- markdownlint-disable MD033 -->
 <img width="1147" alt="Landsat Missions - Sensors and Band Wavelengths" src="https://user-images.githubusercontent.com/1312546/190440352-0b6e2c81-f1b4-48ff-bcf1-5b5addba1bd9.png">
+<!-- markdownlint-enable MD033 -->
 
-Source: https://pubs.usgs.gov/fs/2015/3081/fs20153081.pdf
-
+Source: <https://pubs.usgs.gov/fs/2015/3081/fs20153081.pdf>
 
 ## Examples
 
