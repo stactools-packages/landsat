@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-Nothing.
+- Added support for the Grid Extension `grid:code` field ((#56)[https://github.com/stactools-packages/landsat/pull/56])
+- Added support for the Projection Extension `proj:centroid` field ((#56)[https://github.com/stactools-packages/landsat/pull/56])
 
 ### Removed
 
