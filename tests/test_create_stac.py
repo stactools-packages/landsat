@@ -1,3 +1,5 @@
+from pystac.extensions.grid import GridExtension
+
 from stactools.landsat.stac import create_item
 from tests import test_data
 
@@ -7,14 +9,19 @@ def test_item() -> None:
         "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
     )
     item = create_item(mtl_path)
-    item_dict = item.to_dict()
 
     # v1.1.1 landsat extension
     ext = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
     assert ext in item.stac_extensions
 
+    # grid extension
+
+    grid = GridExtension.ext(item)
+    assert grid.code == "WRS2-017036"
+    assert grid.code == f"WRS{item.properties['landsat:wrs_type']}-{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
+
     # non-zero roll handled
-    assert item_dict["properties"]["view:off_nadir"] != 0
+    assert item.to_dict()["properties"]["view:off_nadir"] != 0
 
     # doi link
     assert len(item.get_links("cite-as")) == 1
