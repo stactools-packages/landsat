@@ -2,14 +2,15 @@ import logging
 from datetime import datetime, timezone
 from typing import Optional
 
+import shapely
 from pystac import Collection, Item, Link, MediaType
 from pystac.extensions.eo import Band, EOExtension
+from pystac.extensions.grid import GridExtension
 from pystac.extensions.item_assets import ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
-from shapely.geometry import box, mapping
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
@@ -80,7 +81,9 @@ def create_item(
             ang_metadata = AngMetadata.from_file(ang_href, read_href_modifier)
             geometry = ang_metadata.get_scene_geometry(mtl_metadata.bbox)
         else:
-            geometry = mapping(box(*mtl_metadata.bbox))
+            geometry = shapely.geometry.mapping(
+                shapely.geometry.box(*mtl_metadata.bbox)
+            )
             logger.warning(f"Using bbox for geometry for {mtl_metadata.product_id}.")
 
     item = Item(
@@ -159,9 +162,19 @@ def create_item(
     projection.epsg = mtl_metadata.epsg
     projection.shape = mtl_metadata.sr_shape
     projection.transform = mtl_metadata.sr_transform
+    centroid = shapely.geometry.shape(item.geometry).centroid
+    projection.centroid = {"lat": round(centroid.y, 5), "lon": round(centroid.x, 5)}
 
     item.stac_extensions.append(LANDSAT_EXTENSION_SCHEMA)
     item.properties.update(**mtl_metadata.landsat_metadata)
+
+    if (
+        (wrs_type := item.properties.get("landsat:wrs_type"))
+        and (wrs_path := item.properties.get("landsat:wrs_path"))
+        and (wrs_row := item.properties.get("landsat:wrs_row"))
+    ):
+        grid = GridExtension.ext(item, add_if_missing=True)
+        grid.code = f"WRS{wrs_type}-{wrs_path}{wrs_row}"
 
     item.stac_extensions.append(CLASSIFICATION_EXTENSION_SCHEMA)
 
