@@ -18,7 +18,10 @@ def test_item() -> None:
 
     grid = GridExtension.ext(item)
     assert grid.code == "WRS2-017036"
-    assert grid.code == f"WRS{item.properties['landsat:wrs_type']}-{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
+    assert (
+        grid.code == f"WRS{item.properties['landsat:wrs_type']}-"
+        f"{item.properties['landsat:wrs_path']}{item.properties['landsat:wrs_row']}"
+    )
 
     # non-zero roll handled
     assert item.to_dict()["properties"]["view:off_nadir"] != 0
