@@ -1,10 +1,12 @@
 from collections import defaultdict
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple, Iterator
 
+from lxml import etree
+from lxml.etree import _Element as lxmlElement
 from pyproj import Geod
 from pystac.utils import map_opt, str_to_datetime
-from stactools.core.io import ReadHrefModifier
+from stactools.core.io import ReadHrefModifier, read_text
 from stactools.core.io.xml import XmlElement
 from stactools.core.projection import transform_from_bbox
 
@@ -321,3 +323,60 @@ class MtlMetadata:
             XmlElement.from_file(href, read_href_modifier),
             href=href,
         )
+
+    @classmethod
+    def from_text_file(
+        cls,
+        href: str,
+        read_href_modifier: Optional[ReadHrefModifier] = None,
+    ) -> "MtlMetadata":
+        text = read_text(href, read_href_modifier)
+        lines = text.split("\n")
+        mtl = _parse_mtl_group(lines)
+        return _mtl_group_to_element(
+            *next(iter(mtl.items()))
+        )
+
+
+def _parse_mtl_group(lines: Iterator[str]) -> dict:
+    group = {}
+    for line in lines:
+        key, value = _parse_mtl_line(line)
+        if not key or key == "END_GROUP":
+            break
+        elif key == "GROUP":
+            key = value
+            value = _parse_mtl_group(lines)
+        group[key] = value
+    return group
+
+
+def _parse_mtl_line(line: str) -> Tuple[str, str]:
+    line = line.strip()
+    if not line or line == "END":
+        return (None, None)
+
+    key, _, value = line.partition(" = ")
+    if value.startswith('"') and value.endswith('"'):
+        value = value[1:-1]
+
+    return key, value
+
+
+def _mtl_value_element(tag: str, value: str) -> lxmlElement:
+    element: lxmlElement = etree.Element(tag)
+    element.text = value
+    return element
+
+
+def _mtl_group_to_element(name: str, group: dict) -> lxmlElement:
+    element: lxmlElement = etree.Element(name)
+    element.extend(
+        [
+            _mtl_group_to_element(child_name, child)
+            if isinstance(child, dict) else
+            _mtl_value_element(child_name, child)
+            for child_name, child in group.items()
+        ]
+    )
+    return element

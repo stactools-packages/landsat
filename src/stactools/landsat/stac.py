@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime, timezone
 from typing import Optional
+from urllib.parse import urlparse
 
 import shapely
 from pystac import Collection, Item, Link, MediaType
@@ -63,7 +64,16 @@ def create_item(
     """
     base_href = "_".join(mtl_xml_href.split("_")[:-1])
 
-    mtl_metadata = MtlMetadata.from_file(mtl_xml_href, read_href_modifier)
+    mtl_metadata = None
+
+    if urlparse(mtl_xml_href).path.endswith(".txt"):
+        try:
+            mtl_metadata = MtlMetadata.from_text_file(mtl_xml_href, read_href_modifier)
+        except Exception as e:
+            pass
+
+    if mtl_metadata is None:
+        mtl_metadata = MtlMetadata.from_file(mtl_xml_href, read_href_modifier)
 
     sensor = Sensor(mtl_metadata.item_id[1])
     satellite = int(mtl_metadata.item_id[2:4])
