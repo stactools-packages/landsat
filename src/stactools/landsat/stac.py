@@ -70,7 +70,7 @@ def create_item(
         try:
             mtl_metadata = MtlMetadata.from_text_file(mtl_xml_href, read_href_modifier)
         except Exception as e:
-            pass
+            logger.warning(f"Failed to parse MTL from text: {e}")
 
     if mtl_metadata is None:
         mtl_metadata = MtlMetadata.from_file(mtl_xml_href, read_href_modifier)
