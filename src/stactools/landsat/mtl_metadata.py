@@ -331,10 +331,15 @@ class MtlMetadata:
         read_href_modifier: Optional[ReadHrefModifier] = None,
     ) -> "MtlMetadata":
         text = read_text(href, read_href_modifier)
-        lines = text.split("\n")
+        lines = iter(text.split("\n"))
         mtl = _parse_mtl_group(lines)
-        return _mtl_group_to_element(
-            *next(iter(mtl.items()))
+        return cls(
+            XmlElement(
+                _mtl_group_to_element(
+                    *next(iter(mtl.items()))
+                )
+            ),
+            href=href
         )
 
 
