@@ -202,7 +202,8 @@ class MtlMetadata:
     @property
     def thermal_transform(self) -> Optional[List[float]]:
         return map_opt(
-            lambda shape: transform_from_bbox(self.proj_bbox, shape), self.thermal_shape
+            lambda shape: transform_from_bbox(self.proj_bbox, shape),
+            self.thermal_shape,
         )
 
     @property
