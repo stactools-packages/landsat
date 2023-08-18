@@ -1,7 +1,7 @@
 import unittest
 
 from shapely.geometry import box, mapping, shape
-from stactools.core.projection import reproject_geom
+from stactools.core.projection import reproject_shape
 
 from stactools.landsat.mtl_metadata import MtlMetadata
 from tests import test_data
@@ -30,7 +30,7 @@ class MtlMetadataTest(unittest.TestCase):
         proj_bbox = mtl_metadata.proj_bbox
         proj_bbox_shp = box(*proj_bbox)
         reproj_bbox_shp = shape(
-            reproject_geom(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
+            reproject_shape(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
         )
 
         self.assertLess(
@@ -67,7 +67,7 @@ class MtlMetadataTest(unittest.TestCase):
         proj_bbox = mtl_metadata.proj_bbox
         proj_bbox_shp = box(*proj_bbox)
         reproj_bbox_shp = shape(
-            reproject_geom(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
+            reproject_shape(f"epsg:{epsg}", "epsg:4326", mapping(proj_bbox_shp))
         )
 
         self.assertLess(

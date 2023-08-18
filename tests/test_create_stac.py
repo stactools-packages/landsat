@@ -1,3 +1,5 @@
+import pytest
+from antimeridian import FixWindingWarning
 from pystac.extensions.grid import GridExtension
 
 from stactools.landsat.stac import create_item
@@ -8,7 +10,8 @@ def test_item() -> None:
     mtl_path = test_data.get_path(
         "data-files/assets4/LC08_L2SP_017036_20130419_20200913_02_T2_MTL.xml"
     )
-    item = create_item(mtl_path)
+    with pytest.warns(FixWindingWarning):
+        item = create_item(mtl_path)
 
     # v1.1.1 landsat extension
     ext = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
@@ -48,7 +51,8 @@ def test_read_href_modifier() -> None:
         did_it = True
         return href
 
-    _ = create_item(mtl_path, read_href_modifier=read_href_modifier)
+    with pytest.warns(FixWindingWarning):
+        _ = create_item(mtl_path, read_href_modifier=read_href_modifier)
     assert did_it
 
 
@@ -118,7 +122,8 @@ def test_l2_bitfields_exist() -> None:
     mtl_path = test_data.get_path(
         "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"
     )
-    item = create_item(mtl_path, use_usgs_geometry=True)
+    with pytest.warns(FixWindingWarning):
+        item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     asset_keys = ["qa_pixel", "qa_radsat", "qa_aerosol"]
@@ -144,7 +149,8 @@ def test_no_emis_coefficient() -> None:
     mtl_path = test_data.get_path(
         "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.xml"
     )
-    item = create_item(mtl_path, use_usgs_geometry=True)
+    with pytest.warns(FixWindingWarning):
+        item = create_item(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
     assert "emissivity" in item_dict["assets"]["emis"]["roles"]
     assert "emissivity" in item_dict["assets"]["emsd"]["roles"]
