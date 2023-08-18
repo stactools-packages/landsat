@@ -69,9 +69,9 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> Item:
 
     Applies the requested SPLIT or NORMALIZE strategy via the stactools
     antimeridian utility. If the geometry is already SPLIT (a MultiPolygon,
-    which can occur when using USGS geometry), a merged polygon with different
-    longitude signs is created to match the expected input of the fix_item
-    function.
+    which can occur when using USGS geometry) and we're requesting NORMALIZE, a
+    merged polygon with different longitude signs is created to match the
+    expected input of the fix_item function.
 
     Args:
         item (Item): STAC Item
@@ -83,7 +83,10 @@ def handle_antimeridian(item: Item, antimeridian_strategy: Strategy) -> Item:
         Item: The original PySTAC Item, with updated antimeridian geometry.
     """
     geometry = shape(item.geometry)
-    if isinstance(geometry, MultiPolygon):
+    if (
+        isinstance(geometry, MultiPolygon)
+        and antimeridian_strategy == Strategy.NORMALIZE
+    ):
         # force all positive lons so we can merge on an antimeridian split
         polys = list(geometry.geoms)
         for index, poly in enumerate(polys):
