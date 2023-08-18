@@ -1,7 +1,7 @@
 import unittest
 
 from shapely.geometry import box, mapping, shape
-from stactools.core.projection import reproject_geom
+from stactools.core.projection import reproject_shape
 
 from stactools.landsat.ang_metadata import AngMetadata
 from stactools.landsat.mtl_metadata import MtlMetadata
@@ -23,7 +23,7 @@ class AngMetadataTest(unittest.TestCase):
         proj_bbox = mtl_metadata.proj_bbox
         proj_bbox_shp = box(*proj_bbox)
         reproj_bbox_shp = shape(
-            reproject_geom(
+            reproject_shape(
                 f"epsg:{mtl_metadata.epsg}", "epsg:4326", mapping(proj_bbox_shp)
             )
         )

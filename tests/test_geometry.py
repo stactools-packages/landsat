@@ -1,7 +1,9 @@
 import unittest
 from typing import Any, Dict
 
+import pytest
 import vcr
+from antimeridian import FixWindingWarning
 from shapely.geometry import Polygon, shape
 from stactools.core.utils.antimeridian import Strategy
 
@@ -26,7 +28,8 @@ class GeometryTest(unittest.TestCase):
                 [70.70487567768816, -80.24577066106241],
             ]
         )
-        item = create_item(mtl_xml_href, use_usgs_geometry=True)
+        with pytest.warns(FixWindingWarning):
+            item = create_item(mtl_xml_href, use_usgs_geometry=True)
         assert expected_geometry.normalize().equals_exact(
             shape(item.geometry).normalize(), 7
         )
@@ -68,7 +71,8 @@ class GeometryTest(unittest.TestCase):
                 [77.41721421, -81.41837295],
             ]
         )
-        item = create_item(mtl_xml_href, use_usgs_geometry=False)
+        with pytest.warns(FixWindingWarning):
+            item = create_item(mtl_xml_href, use_usgs_geometry=False)
         assert expected_geometry.normalize().equals_exact(
             shape(item.geometry).normalize(), 7
         )
@@ -90,11 +94,12 @@ class GeometryTest(unittest.TestCase):
         }
         crossing_coords = crosssing_geometry["coordinates"][0]
         crossing_lons = [lon for lon, lat in crossing_coords]
-        item = create_item(
-            mtl_xml_href,
-            use_usgs_geometry=True,
-            antimeridian_strategy=Strategy.NORMALIZE,
-        )
+        with pytest.warns(DeprecationWarning):
+            item = create_item(
+                mtl_xml_href,
+                use_usgs_geometry=True,
+                antimeridian_strategy=Strategy.NORMALIZE,
+            )
         item_coords = item.to_dict()["geometry"]["coordinates"][0]
         item_lons = [lon for lon, lat in item_coords]
         self.assertFalse(
@@ -122,11 +127,12 @@ class GeometryTest(unittest.TestCase):
                 [-180.094828, 60.951198],
             ]
         )
-        item = create_item(
-            mtl_xml_href,
-            use_usgs_geometry=True,
-            antimeridian_strategy=Strategy.NORMALIZE,
-        )
+        with pytest.warns(DeprecationWarning):
+            item = create_item(
+                mtl_xml_href,
+                use_usgs_geometry=True,
+                antimeridian_strategy=Strategy.NORMALIZE,
+            )
         assert expected_geometry.normalize().equals_exact(
             shape(item.geometry).normalize(), 7
         )
