@@ -4,28 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). This project attempts to match the major and minor versions of [stactools](https://github.com/stac-utils/stactools) and increments the patch number as needed.
 
-## [Unreleased]
+## [0.4.0] - 2023-08-03
 
 ### Added
 
 - Added support for the Grid Extension `grid:code` field ([#56](https://github.com/stactools-packages/landsat/pull/56))
 - Added support for the Projection Extension `proj:centroid` field ([#56](https://github.com/stactools-packages/landsat/pull/56))
-
-### Removed
-
-Nothing.
-
-### Changed
-
-Nothing.
-
-### Fixed
-
-Nothing.
-
-### Deprecated
-
-Nothing.
 
 ## [0.3.0] - 2022-10-21
 
@@ -115,7 +99,7 @@ NOTE: For backwards compatibility, all items under the Added, Changed, and Fixed
 
 - Upgrade to stactools 0.2.1.a2 (supporting PySTAC 1.0.0)
 
-[Unreleased]: <https://github.com/stactools-packages/landsat/compare/v0.3.0..main>
+[0.4.0]: <https://github.com/stactools-packages/landsat/compare/v0.3.0..v0.4.0>
 [0.3.0]: <https://github.com/stactools-packages/landsat/compare/v0.2.4..v0.3.0>
 [0.2.4]: <https://github.com/stactools-packages/landsat/compare/v0.2.3..v0.2.4>
 [0.2.3]: <https://github.com/stactools-packages/landsat/compare/v0.2.2..v0.2.3>
