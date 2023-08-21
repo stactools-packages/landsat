@@ -148,9 +148,7 @@ def create_item_from_mtl_metadata(
             geometry = shapely.geometry.mapping(
                 shapely.geometry.box(*mtl_metadata.bbox)
             )
-            logger.warning(
-                f"Using bbox for geometry for {mtl_metadata.product_id}."
-            )
+            logger.warning(f"Using bbox for geometry for {mtl_metadata.product_id}.")
 
     item = Item(
         id=mtl_metadata.item_id,
@@ -169,9 +167,7 @@ def create_item_from_mtl_metadata(
     item.common_metadata.gsd = SENSORS[sensor.name]["reflective_gsd"]
     item.common_metadata.description = f"Landsat Collection 2 Level-{level}"
 
-    fragments = Fragments(
-        sensor, satellite, base_href, mtl_metadata.level1_radiance
-    )
+    fragments = Fragments(sensor, satellite, base_href, mtl_metadata.level1_radiance)
 
     # Common assets
     assets = fragments.common_assets()
@@ -181,9 +177,7 @@ def create_item_from_mtl_metadata(
             continue
         # MTL files are specific to the processing level
         if key.startswith("mtl"):
-            asset.description = asset.description.replace(
-                "Level-X", f"Level-{level}"
-            )
+            asset.description = asset.description.replace("Level-X", f"Level-{level}")
         item.add_asset(key, asset)
 
     # Optical assets

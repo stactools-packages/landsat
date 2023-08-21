@@ -1,6 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple, Iterator
+from typing import Any, Dict, Iterator, List, Optional, Tuple, Union, cast
 
 from lxml import etree
 from lxml.etree import _Element as lxmlElement
@@ -13,6 +13,9 @@ from stactools.core.projection import transform_from_bbox
 
 class MTLError(Exception):
     pass
+
+
+MTLGroup = Dict[str, Union[str, "MTLGroup"]]
 
 
 class MtlMetadata:
@@ -204,7 +207,8 @@ class MtlMetadata:
     @property
     def thermal_transform(self) -> Optional[List[float]]:
         return map_opt(
-            lambda shape: transform_from_bbox(self.proj_bbox, shape), self.thermal_shape
+            lambda shape: transform_from_bbox(self.proj_bbox, shape),
+            self.thermal_shape,
         )
 
     @property
@@ -333,21 +337,19 @@ class MtlMetadata:
         text = read_text(href, read_href_modifier)
         lines = iter(text.split("\n"))
         mtl = _parse_mtl_group(lines)
+        root_name, root_group = next(iter(mtl.items()))
         return cls(
-            XmlElement(
-                _mtl_group_to_element(
-                    *next(iter(mtl.items()))
-                )
-            ),
-            href=href
+            XmlElement(_mtl_group_to_element(root_name, cast(MTLGroup, root_group))),
+            href=href,
         )
 
 
-def _parse_mtl_group(lines: Iterator[str]) -> dict:
-    group = {}
+def _parse_mtl_group(lines: Iterator[str]) -> MTLGroup:
+    group: MTLGroup = {}
     for line in lines:
+        value: Union[str, MTLGroup]
         key, value = _parse_mtl_line(line)
-        if not key or key == "END_GROUP":
+        if not key or key in ("END", "END_GROUP"):
             break
         elif key == "GROUP":
             key = value
@@ -359,7 +361,7 @@ def _parse_mtl_group(lines: Iterator[str]) -> dict:
 def _parse_mtl_line(line: str) -> Tuple[str, str]:
     line = line.strip()
     if not line or line == "END":
-        return (None, None)
+        return ("END", "")
 
     key, _, value = line.partition(" = ")
     if value.startswith('"') and value.endswith('"'):
@@ -374,13 +376,13 @@ def _mtl_value_element(tag: str, value: str) -> lxmlElement:
     return element
 
 
-def _mtl_group_to_element(name: str, group: dict) -> lxmlElement:
+def _mtl_group_to_element(name: str, group: MTLGroup) -> lxmlElement:
     element: lxmlElement = etree.Element(name)
     element.extend(
         [
             _mtl_group_to_element(child_name, child)
-            if isinstance(child, dict) else
-            _mtl_value_element(child_name, child)
+            if isinstance(child, dict)
+            else _mtl_value_element(child_name, child)
             for child_name, child in group.items()
         ]
     )
