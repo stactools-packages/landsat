@@ -2,7 +2,7 @@ import pytest
 from antimeridian import FixWindingWarning
 from pystac.extensions.grid import GridExtension
 
-from stactools.landsat.stac import create_item
+from stactools.landsat.stac import create_item, create_item_from_mtl_text
 from tests import test_data
 
 
@@ -156,3 +156,16 @@ def test_no_emis_coefficient() -> None:
     assert "emissivity" in item_dict["assets"]["emsd"]["roles"]
     assert item_dict["assets"]["emis"]["raster:bands"][0].pop("unit", None) is None
     assert item_dict["assets"]["emsd"]["raster:bands"][0].pop("unit", None) is None
+
+
+def test_mtl_text() -> None:
+    mtl_path = test_data.get_path(
+        "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.txt"
+    )
+    item = create_item_from_mtl_text(mtl_path, use_usgs_geometry=True)
+    item_dict = item.to_dict()
+
+    asset_keys = ["qa_pixel", "qa_radsat", "qa_aerosol"]
+    for key in asset_keys:
+        bitfield_band = item_dict["assets"][key]
+        assert "classification:bitfields" in bitfield_band
