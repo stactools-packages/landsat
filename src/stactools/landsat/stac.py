@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime, timezone
 from typing import Optional
-from urllib.parse import urlparse
 
 import shapely
 from pystac import Collection, Item, Link, MediaType
@@ -63,18 +62,73 @@ def create_item(
         Item: A STAC Item representing the Landsat scene.
     """
     base_href = "_".join(mtl_xml_href.split("_")[:-1])
+    return create_item_from_mtl_metadata(
+        base_href,
+        MtlMetadata.from_file(mtl_xml_href, read_href_modifier),
+        use_usgs_geometry,
+        antimeridian_strategy,
+        read_href_modifier,
+    )
 
-    mtl_metadata = None
 
-    if urlparse(mtl_xml_href).path.endswith(".txt"):
-        try:
-            mtl_metadata = MtlMetadata.from_text_file(mtl_xml_href, read_href_modifier)
-        except Exception as e:
-            logger.warning(f"Failed to parse MTL from text: {e}")
+def create_item_from_mtl_text(
+    mtl_text_href: str,
+    use_usgs_geometry: bool = True,
+    antimeridian_strategy: Strategy = Strategy.SPLIT,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+) -> Item:
+    """Creates a STAC Item for Landsat 1-5 Collection 2 Level-1 or Landsat
+    4-5, 7-9 Collection 2 Level-2 scene data.
 
-    if mtl_metadata is None:
-        mtl_metadata = MtlMetadata.from_file(mtl_xml_href, read_href_modifier)
+    Args:
+        mtl_text_href (str): An href to an MTL text metadata file.
+        use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
+            stored alongside the text metadata file or pulled from the USGS STAC
+            API.
+        antimeridian_strategy (Antimeridian): Either split on -180 or
+            normalize geometries so all longitudes are either positive or
+            negative.
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify the MTL and USGS STAC hrefs (e.g., to add a token to a url).
 
+    Returns:
+        Item: A STAC Item representing the Landsat scene.
+    """
+    base_href = "_".join(mtl_text_href.split("_")[:-1])
+    return create_item_from_mtl_metadata(
+        base_href,
+        MtlMetadata.from_text_file(mtl_text_href, read_href_modifier),
+        use_usgs_geometry,
+        antimeridian_strategy,
+        read_href_modifier,
+    )
+
+
+def create_item_from_mtl_metadata(
+    base_href: str,
+    mtl_metadata: MtlMetadata,
+    use_usgs_geometry: bool = True,
+    antimeridian_strategy: Strategy = Strategy.SPLIT,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+) -> Item:
+    """Creates a STAC Item for Landsat 1-5 Collection 2 Level-1 or Landsat
+    4-5, 7-9 Collection 2 Level-2 scene data.
+
+    Args:
+        base_href (str):
+        mtl_metadata (MtlMetadata): The parsed MTL metadata.
+        use_usgs_geometry (bool): Use the geometry from a USGS STAC file that is
+            stored alongside the XML metadata file or pulled from the USGS STAC
+            API.
+        antimeridian_strategy (Antimeridian): Either split on -180 or
+            normalize geometries so all longitudes are either positive or
+            negative.
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify the MTL and USGS STAC hrefs (e.g., to add a token to a url).
+
+    Returns:
+        Item: A STAC Item representing the Landsat scene.
+    """
     sensor = Sensor(mtl_metadata.item_id[1])
     satellite = int(mtl_metadata.item_id[2:4])
     level = int(mtl_metadata.item_id[6])
@@ -94,7 +148,9 @@ def create_item(
             geometry = shapely.geometry.mapping(
                 shapely.geometry.box(*mtl_metadata.bbox)
             )
-            logger.warning(f"Using bbox for geometry for {mtl_metadata.product_id}.")
+            logger.warning(
+                f"Using bbox for geometry for {mtl_metadata.product_id}."
+            )
 
     item = Item(
         id=mtl_metadata.item_id,
@@ -113,7 +169,9 @@ def create_item(
     item.common_metadata.gsd = SENSORS[sensor.name]["reflective_gsd"]
     item.common_metadata.description = f"Landsat Collection 2 Level-{level}"
 
-    fragments = Fragments(sensor, satellite, base_href, mtl_metadata.level1_radiance)
+    fragments = Fragments(
+        sensor, satellite, base_href, mtl_metadata.level1_radiance
+    )
 
     # Common assets
     assets = fragments.common_assets()
@@ -123,7 +181,9 @@ def create_item(
             continue
         # MTL files are specific to the processing level
         if key.startswith("mtl"):
-            asset.description = asset.description.replace("Level-X", f"Level-{level}")
+            asset.description = asset.description.replace(
+                "Level-X", f"Level-{level}"
+            )
         item.add_asset(key, asset)
 
     # Optical assets
@@ -173,7 +233,10 @@ def create_item(
     projection.shape = mtl_metadata.sr_shape
     projection.transform = mtl_metadata.sr_transform
     centroid = shapely.geometry.shape(item.geometry).centroid
-    projection.centroid = {"lat": round(centroid.y, 5), "lon": round(centroid.x, 5)}
+    projection.centroid = {
+        "lat": round(centroid.y, 5),
+        "lon": round(centroid.x, 5),
+    }
 
     item.stac_extensions.append(LANDSAT_EXTENSION_SCHEMA)
     item.properties.update(**mtl_metadata.landsat_metadata)
