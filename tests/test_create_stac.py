@@ -162,7 +162,8 @@ def test_mtl_text() -> None:
     mtl_path = test_data.get_path(
         "data-files/oli-tirs/LC08_L2SP_047027_20201204_20210313_02_T1_MTL.txt"
     )
-    item = create_item_from_mtl_text(mtl_path, use_usgs_geometry=True)
+    with pytest.warns(FixWindingWarning):
+        item = create_item_from_mtl_text(mtl_path, use_usgs_geometry=True)
     item_dict = item.to_dict()
 
     asset_keys = ["qa_pixel", "qa_radsat", "qa_aerosol"]
