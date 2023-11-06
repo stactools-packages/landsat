@@ -11,6 +11,7 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.extensions.view import ViewExtension
+from pystac.utils import datetime_to_str
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
@@ -168,6 +169,16 @@ def create_item_from_mtl_metadata(
     item.common_metadata.description = f"Landsat Collection 2 Level-{level}"
 
     fragments = Fragments(sensor, satellite, base_href, mtl_metadata.level1_radiance)
+
+    if mtl_metadata.l1_product_generated:
+        item.properties["l1_product_generated"] = datetime_to_str(
+            mtl_metadata.l1_product_generated
+        )
+
+    if mtl_metadata.l2_product_generated:
+        item.properties["l2_product_generated"] = datetime_to_str(
+            mtl_metadata.l2_product_generated
+        )
 
     # Common assets
     assets = fragments.common_assets()

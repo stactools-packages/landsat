@@ -317,6 +317,21 @@ class MtlMetadata:
                 mult_add[band]["add"] = self._float_or_none(value)
         return mult_add
 
+    def _product_generated(self, path: str) -> Optional[datetime]:
+        v = self._root.find_text(f"{path}/DATE_PRODUCT_GENERATED")
+        if v:
+            return str_to_datetime(v)
+        else:
+            return None
+
+    @property
+    def l1_product_generated(self) -> Optional[datetime]:
+        return self._product_generated("LEVEL1_PROCESSING_RECORD")
+
+    @property
+    def l2_product_generated(self) -> Optional[datetime]:
+        return self._product_generated("LEVEL2_PROCESSING_RECORD")
+
     @classmethod
     def from_file(
         cls,
