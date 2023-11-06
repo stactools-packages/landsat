@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Populate item with Level 1 and 2 processing datetimes ([#63](https://github.com/stactools-packages/landsat/pull/63))
+
 ## [0.4.1] - 2023-08-20
 
 ### Added
