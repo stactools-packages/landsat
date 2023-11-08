@@ -5,7 +5,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple, Union, cast
 from lxml import etree
 from lxml.etree import _Element as lxmlElement
 from pyproj import Geod
-from pystac.utils import map_opt, str_to_datetime
+from pystac.utils import datetime_to_str, map_opt, str_to_datetime
 from stactools.core.io import ReadHrefModifier, read_text
 from stactools.core.io.xml import XmlElement
 from stactools.core.projection import transform_from_bbox
@@ -274,8 +274,14 @@ class MtlMetadata:
         return self._get_text("IMAGE_ATTRIBUTES/WRS_ROW").zfill(3)
 
     @property
+    def product_generated(self) -> Optional[datetime]:
+        return self._product_generated(
+            "LEVEL2_PROCESSING_RECORD"
+        ) or self._product_generated("LEVEL1_PROCESSING_RECORD")
+
+    @property
     def landsat_metadata(self) -> Dict[str, Any]:
-        return {
+        d = {
             "landsat:cloud_cover_land": self._get_float(
                 "IMAGE_ATTRIBUTES/CLOUD_COVER_LAND"
             ),
@@ -291,6 +297,12 @@ class MtlMetadata:
             "landsat:correction": self.processing_level,
             "landsat:scene_id": self.scene_id,
         }
+
+        pg = self.product_generated
+        if pg:
+            d["landsat:product_generated"] = datetime_to_str(pg)
+
+        return d
 
     @property
     def level1_radiance(self) -> Dict[str, Dict[str, Optional[float]]]:
@@ -323,14 +335,6 @@ class MtlMetadata:
             return str_to_datetime(v)
         else:
             return None
-
-    @property
-    def l1_product_generated(self) -> Optional[datetime]:
-        return self._product_generated("LEVEL1_PROCESSING_RECORD")
-
-    @property
-    def l2_product_generated(self) -> Optional[datetime]:
-        return self._product_generated("LEVEL2_PROCESSING_RECORD")
 
     @classmethod
     def from_file(

@@ -22,10 +22,7 @@ class MtlMetadataTest(unittest.TestCase):
         self.assertEqual(dt.minute, 34)
 
         self.assertEqual(
-            mtl_metadata.l1_product_generated, str_to_datetime("2020-09-08T20:20:42Z")
-        )
-        self.assertEqual(
-            mtl_metadata.l2_product_generated, str_to_datetime("2020-09-08T21:42:54Z")
+            mtl_metadata.product_generated, str_to_datetime("2020-09-08T21:42:54Z")
         )
 
         # epsg

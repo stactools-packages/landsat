@@ -14,7 +14,7 @@ def test_item() -> None:
         item = create_item(mtl_path)
 
     # v1.1.1 landsat extension
-    ext = "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+    ext = "https://stac-extensions.github.io/landsat/v2.0.0/schema.json"
     assert ext in item.stac_extensions
 
     # grid extension
