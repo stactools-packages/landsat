@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Deprecated
+
+- Support for Python 3.8 has been dropped.([#64](https://github.com/stactools-packages/landsat/pull/64))
+
 ## [0.4.1] - 2023-08-20
 
 ### Added
