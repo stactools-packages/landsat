@@ -13,12 +13,11 @@ def test_item() -> None:
     with pytest.warns(FixWindingWarning):
         item = create_item(mtl_path)
 
-    # v1.1.1 landsat extension
+    # landsat extension
     ext = "https://stac-extensions.github.io/landsat/v2.0.0/schema.json"
     assert ext in item.stac_extensions
 
     # grid extension
-
     grid = GridExtension.ext(item)
     assert grid.code == "WRS2-017036"
     assert (
