@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Populate item with processing datetime field `landsat:product_generated` ([#63](https://github.com/stactools-packages/landsat/pull/63))
+
+### Changed
+
+- Replace use of externally-hosted Landsat Extension <https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json> with community Landsat Extension <https://stac-extensions.github.io/landsat/v2.0.0/schema.json> ([#63](https://github.com/stactools-packages/landsat/pull/63))
+
 ## [0.4.1] - 2023-08-20
 
 ### Added

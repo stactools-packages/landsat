@@ -8,3 +8,6 @@ pytest
 pytest-cov
 vcrpy
 types-python-dateutil
+# AttributeError: module 'urllib3.connectionpool' has no attribute 'VerifiedHTTPSConnection'
+# if urllib3 2.x is installed on python 3.9
+urllib3<2 
