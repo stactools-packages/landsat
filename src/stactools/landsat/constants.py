@@ -10,8 +10,9 @@ class Sensor(Enum):
 
 
 LANDSAT_EXTENSION_SCHEMA = (
-    "https://landsat.usgs.gov/stac/landsat-extension/v1.1.1/schema.json"
+    "https://stac-extensions.github.io/landsat/v2.0.0/schema.json"
 )
+
 CLASSIFICATION_EXTENSION_SCHEMA = (
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json"  # noqa
 )

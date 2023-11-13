@@ -1,5 +1,6 @@
 import unittest
 
+from pystac.utils import str_to_datetime
 from shapely.geometry import box, mapping, shape
 from stactools.core.projection import reproject_shape
 
@@ -19,6 +20,10 @@ class MtlMetadataTest(unittest.TestCase):
         dt = mtl_metadata.scene_datetime
         self.assertEqual(dt.month, 7)
         self.assertEqual(dt.minute, 34)
+
+        self.assertEqual(
+            mtl_metadata.product_generated, str_to_datetime("2020-09-08T21:42:54Z")
+        )
 
         # epsg
         epsg = mtl_metadata.epsg
